@@ -3,8 +3,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is a part of [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://www.sciencedirect.com/science/article/abs/pii/S1084804521002137) paper.
-
+* This project is a part of [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://www.sciencedirect.com/science/article/abs/pii/S1084804521002137) paper.
+* In this part we try to improve the stages used in previous CREME into N stages and try to improve the labeling
 ### Built With
 
 * [Django](https://www.djangoproject.com/)
