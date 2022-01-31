@@ -19,9 +19,6 @@ def ip_scan():
         #     print(x + " : " + state + " -->" + str(nbt_scan))
 
 
-def netbios_scan():
-    print()
-
 
 if __name__ == "__main__":
     ip_scan()
