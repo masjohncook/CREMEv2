@@ -1,3 +1,6 @@
+## CREME reproduction scanning
+#  I this step the attacker server try to perform nmap scan to the target server
+
 import time, subprocess, os, sys
 from nmap import nmap
 
@@ -13,10 +16,10 @@ def ip_scan():
         nbt_command = nbt+" -e " + x #+ " |awk '{print $2}'"
         nbt_scan = str(os.system(nbt_command))
         print(x + " : " + nbt_scan)
-        # if nbt_scan == 0:
-        #     print(x + " : " + state + " --> Netbios name was not discovered")
-        # else:
-        #     print(x + " : " + state + " -->" + str(nbt_scan))
+        if nbt_scan == 0:
+            print(x + " : " + state + " --> Netbios name was not discovered")
+        else:
+            print(x + " : " + state + " -->" + str(nbt_scan))
 
 
 
