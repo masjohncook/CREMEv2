@@ -119,7 +119,7 @@ class IBenignReproduction(Interface):
         pass
 
 
-# ---------- attacks ----------
+# ---------- Scenario ----------
 class IAttack(Interface):
     """
     defining attack scenarios that should be implemented by Creme

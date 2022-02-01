@@ -205,7 +205,7 @@ class Creme:
         for non_vulnerable_client in self.non_vulnerable_clients:
             non_vulnerable_client.stop_benign_behaviors()
 
-    # ---------- attacks ----------
+    # ---------- Scenario ----------
     def attack_mirai(self):
         ProgressHelper.update_scenario("Mirai")
         stage = 2
