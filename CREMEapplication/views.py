@@ -179,7 +179,7 @@ def new_testbed(request):
 
             dict_forms = dict()
             dict_forms['Number of machines:'] = TestbedForm(request.POST)
-            dict_forms['Scenario:'] = AttackScenarioForm(request.POST)
+            dict_forms['02Scenario:'] = AttackScenarioForm(request.POST)
             dict_forms['Machine Learning model:'] = MachineLearningModelForm(request.POST)
             dict_forms['Skip Stage:'] = SkipStageForm(request.POST)
             return render(request, 'testbed/new_testbed.html', {'dict_forms': dict_forms})
@@ -191,7 +191,7 @@ def new_testbed(request):
     else:
         dict_forms = dict()
         dict_forms['Number of machines:'] = TestbedForm()
-        dict_forms['Scenario:'] = AttackScenarioForm()
+        dict_forms['02Scenario:'] = AttackScenarioForm()
         dict_forms['Machine Learning model:'] = MachineLearningModelForm()
         dict_forms['Skip Stage:'] = SkipStageForm()
     return render(request, 'testbed/new_testbed.html', {'dict_forms': dict_forms})

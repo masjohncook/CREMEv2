@@ -1,7 +1,7 @@
 from interface import Interface
 
 
-# ---------- configuration ----------
+# ---------- 00configuration ----------
 class IConfiguration(Interface):
     def configure(self):
         """
@@ -119,7 +119,7 @@ class IBenignReproduction(Interface):
         pass
 
 
-# ---------- Scenario ----------
+# ---------- 02Scenario ----------
 class IAttack(Interface):
     """
     defining attack scenarios that should be implemented by Creme

@@ -10,7 +10,7 @@ set controller_pass [lindex $argv 7]
 set controller_path [lindex $argv 8]
 set prepared_files [lindex $argv 9]
 
-#set prepared_files "CREME/CREME_backend_execution/scripts/configuration/prepared_files/disk_wipe/attacker_server"
+#set prepared_files "CREME/CREME_backend_execution/scripts/00configuration/prepared_files/disk_wipe/attacker_server"
 
 set timeout 1200
 
@@ -34,10 +34,9 @@ expect " password: "
 send "$controller_pass\r"
 
 expect "*:~# "
-send "chmod +x $path/* \r"
-
+send "chmod +x $path/*.py \r"
 expect "*:~# "
-send "mv $path/theft.sh /var/www/html/downloads\r"
+send "chmod +x $path/*.sh \r"
 
 expect "*:~# "
 send "exit\r"
