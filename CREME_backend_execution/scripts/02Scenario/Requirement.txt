@@ -1,1 +1,3 @@
-Naming of every scenario started with posisition number of step in design
+- Naming of every step in scenario started with posisition number of step in design and
+   - for the .sh file --> <position>_step_<machine>.sh e.g. 1st_step_AttackerServer.sh
+   - for the .py file --> <position>_step_<scenario>.py e.g. 1st_step_AllScenario.py
