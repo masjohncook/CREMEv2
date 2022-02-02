@@ -1,2 +1,0 @@
-# This step is the step tried to reach public facing application through password guessing/cracking
-# The password guessing in performed on the vulneratble and non vulnerable client for mirai scenarion and target server for other scenario
