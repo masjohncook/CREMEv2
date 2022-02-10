@@ -55,11 +55,11 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
                 abnormal_cmd_list = all_stage_abnormal_cmd_list[idx]
 
                 stage = df[(df['TIMESTAMP'] >= start_time) & (df['TIMESTAMP'] < end_time)]
-                idx = stage[stage['CMD'].isin(abnormal_cmd_list)].index
-                df.loc[idx, 'Label'] = 1
-                df.loc[idx, 'Tactic'] = tactic_name
-                df.loc[idx, 'Technique'] = technique_name
-                df.loc[idx, 'SubTechnique'] = sub_technique_name
+                tactic_num = stage[stage['CMD'].isin(abnormal_cmd_list)].index
+                df.loc[tactic_num, 'Label'] = idx + 1
+                df.loc[tactic_num, 'Tactic'] = tactic_name
+                df.loc[tactic_num, 'Technique'] = technique_name
+                df.loc[tactic_num, 'SubTechnique'] = sub_technique_name
 
             label_df_dict[filename] = df
             os.remove(filename)
