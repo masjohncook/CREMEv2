@@ -726,7 +726,7 @@ class Creme:
         # t = [t1, t2, t2, t3, t3, t4, t4, t5]
         t = [t1, t2, t2, t3, t3, t4]
 
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Valid Accounts', 'Non-Application Layer Protocol', 'Network Denial of Service']
         sub_technique_names = ['Local Accounts', 'Non-Application Layer Protocol', 'Direct Network Flood']
@@ -878,7 +878,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk wipe']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk Content Wipe']
@@ -897,7 +897,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Exfiltration']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Exfiltration Over C2 Channel']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Exfiltration Over C2 Channel']
@@ -912,7 +912,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
@@ -927,7 +927,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
@@ -945,7 +945,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
@@ -960,7 +960,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Persistence', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Create Account', 'Endpoint DoS']
         sub_technique_names = ['Exploit Public-Facing Application', 'Local Account', 'OS Exhaustion Flood']
