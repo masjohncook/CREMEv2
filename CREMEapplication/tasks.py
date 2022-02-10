@@ -90,7 +90,7 @@ def load_testbed_information():
             pass
     non_vulnerable_clients = []
     for idx, info_nvc in enumerate(info_list_nvc):
-        # 1/2 connects to benign_server, 1/2 connects to target_server
+        # 1/2 connects to BenignServer, 1/2 connects to target_server
         server_tmp = benign_server
         if idx >= len(info_list_nvc) // 2:
             server_tmp = target_server

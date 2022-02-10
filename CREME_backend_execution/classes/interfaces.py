@@ -1,7 +1,7 @@
 from interface import Interface
 
 
-# ---------- 00configuration ----------
+# ---------- 00_configuration ----------
 class IConfiguration(Interface):
     def configure(self):
         """
@@ -119,7 +119,7 @@ class IBenignReproduction(Interface):
         pass
 
 
-# ---------- 02Scenario ----------
+# ---------- 02_Scenario ----------
 class IAttack(Interface):
     """
     defining attack scenarios that should be implemented by Creme
@@ -158,13 +158,13 @@ class IMiraiAttackerServer(Interface):
 
     def mirai_transfer_and_start_malicious(self):
         """
-        cnc transfers malicious software (mirai) to new bots and run it (mirai)
+        cnc transfers malicious software (02_mirai) to new bots and run it (02_mirai)
         """
         pass
 
     def mirai_wait_for_finished_transfer(self):
         """
-        cnc waits to finish transferring malicious software (mirai) to new bots.
+        cnc waits to finish transferring malicious software (02_mirai) to new bots.
         Then, cnc sends ddos commands to bots.
         """
         pass
@@ -182,13 +182,13 @@ class IMiraiMaliciousClient(Interface):
     """
     def mirai_start_malicious(self):
         """
-        starting the malicious software (mirai) at malicious client and scanning to find new bots.
+        starting the malicious software (02_mirai) at malicious client and scanning to find new bots.
         """
         pass
 
     def mirai_stop_malicious(self):
         """
-        should stop the malicious software (mirai) before cnc transfers mirai to new bots.
+        should stop the malicious software (02_mirai) before cnc transfers 02_mirai to new bots.
         Otherwise, cnc may fail to telnet login to new bots. Because the ip range is small, the malicious client will
         continue to scan the bot even it already found the username and password.
         Contracting a list of existing bots may help to deal this problem.
