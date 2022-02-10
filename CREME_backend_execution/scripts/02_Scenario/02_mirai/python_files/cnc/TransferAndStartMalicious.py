@@ -14,7 +14,7 @@ def main(argv):
     pids_file = argv[4]
 
     single_load = "single_load"
-    mirai_exec_file = "./mirai.dbg"
+    mirai_exec_file = "./02_mirai.dbg"
 
     for input_file in glob.glob("{0}*.txt".format(input_bot)):
         bot_ip = ''

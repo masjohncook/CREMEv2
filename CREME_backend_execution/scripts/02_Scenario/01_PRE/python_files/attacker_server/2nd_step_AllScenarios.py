@@ -1,5 +1,5 @@
 # This step is the step tried to reach public facing application through password guessing/cracking
-# The password guessing in performed on the vulneratble and non vulnerable client for mirai scenarion and target server for other scenario
+# The password guessing in performed on the vulneratble and non vulnerable client for 02_mirai scenarion and target server for other scenario
 
 import time, subprocess, os, sys
 

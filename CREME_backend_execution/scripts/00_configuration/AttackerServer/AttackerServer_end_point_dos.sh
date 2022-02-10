@@ -10,7 +10,7 @@ set controller_pass [lindex $argv 7]
 set controller_path [lindex $argv 8]
 set prepared_files [lindex $argv 9]
 
-#set prepared_files "CREME/CREME_backend_execution/scripts/00configuration/prepared_files/disk_wipe/attacker_server"
+#set python_files "CREME/CREME_backend_execution/scripts/00_configuration/python_files/05_disk_wipe/attacker_server"
 
 set timeout 1200
 
@@ -34,16 +34,9 @@ expect " password: "
 send "$controller_pass\r"
 
 expect "*:~# "
-send "chmod +x $path/* \r"
+send "chmod +x $path/*.py \r"
 expect "*:~# "
-send "tar -xvzf $path/xmrig-6.5.0-linux-static-x64.tar.gz -C $path \r"
-
-expect "*:~# "
-send "mv $path/xmrig-6.5.0/xmrig /var/www/html/downloads\r"
-expect "*:~# "
-send "mv $path/xmrig-6.5.0/config.json /var/www/html/downloads\r"
-expect "*:~# "
-send "mv $path/xmrig-6.5.0/SHA256SUMS /var/www/html/downloads\r"
+send "chmod +x $path/*.sh \r"
 
 expect "*:~# "
 send "exit\r"

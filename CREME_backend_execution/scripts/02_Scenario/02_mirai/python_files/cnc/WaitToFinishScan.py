@@ -5,14 +5,14 @@ import time
 
 def main(argv):
     if len(argv) != 7:
-        print("Usage: {} Path ScanListenOutputFile.txt ScanFinishedFile.txt numOfNewBots Mirai-Source-Code/mirai/debug input_bot".format(argv[0]))
+        print("Usage: {} Path ScanListenOutputFile.txt ScanFinishedFile.txt numOfNewBots Mirai-Source-Code/02_mirai/debug input_bot".format(argv[0]))
 
     path = argv[1]
     scanListenOutputFile = os.path.join(path, argv[2])
     scanFinishedFile = os.path.join(path, argv[3])
     numOfNewBots = int(argv[4])
 
-    debug_path = argv[5]  # "Mirai-Source-Code/mirai/debug"
+    debug_path = argv[5]  # "Mirai-Source-Code/02_mirai/debug"
     input_bot = argv[6]  # "input_bot"
 
     with open(scanFinishedFile, 'w+') as fw:
