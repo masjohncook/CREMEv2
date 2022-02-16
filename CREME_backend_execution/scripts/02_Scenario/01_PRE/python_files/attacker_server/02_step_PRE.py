@@ -14,7 +14,7 @@ def record_timestamp(folder, output_time_file):
 def main(argv):
     # put the configuration
 
-    output_time_file = 'time_stage_1_start.txt'
+    output_time_file = 'time_step_2_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
     # print('Start 1')
@@ -25,7 +25,7 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(10)
-    output_time_file = 'time_stage_1_end.txt'
+    output_time_file = 'time_step_2_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
