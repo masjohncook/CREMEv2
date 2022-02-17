@@ -44,7 +44,7 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
             sub_technique = ['Normal'] * len(df)
             df['SubTechnique'] = sub_technique
 
-            for idx, stage_list in enumerate(labeling_list):
+            for stage_idx, stage_list in enumerate(labeling_list):
                 tactic_name = stage_list[0]
                 technique_name = stage_list[1]
                 sub_technique_name = stage_list[2]
@@ -52,14 +52,14 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
                 end_time = stage_list[4]
                 # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal
                 #  processes have the same cmd. Think about how to solve this problem???
-                abnormal_cmd_list = all_stage_abnormal_cmd_list[idx]
+                abnormal_cmd_list = all_stage_abnormal_cmd_list[stage_idx]
 
                 stage = df[(df['TIMESTAMP'] >= start_time) & (df['TIMESTAMP'] < end_time)]
-                tactic_num = stage[stage['CMD'].isin(abnormal_cmd_list)].index
-                df.loc[tactic_num, 'Label'] = idx + 1
-                df.loc[tactic_num, 'Tactic'] = tactic_name
-                df.loc[tactic_num, 'Technique'] = technique_name
-                df.loc[tactic_num, 'SubTechnique'] = sub_technique_name
+                abnormal_idx = stage[stage['CMD'].isin(abnormal_cmd_list)].index
+                df.loc[abnormal_idx, 'Label'] = stage_idx + 1
+                df.loc[abnormal_idx, 'Tactic'] = tactic_name
+                df.loc[abnormal_idx, 'Technique'] = technique_name
+                df.loc[abnormal_idx, 'SubTechnique'] = sub_technique_name
 
             label_df_dict[filename] = df
             os.remove(filename)
