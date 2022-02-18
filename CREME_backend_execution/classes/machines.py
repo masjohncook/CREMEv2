@@ -652,12 +652,18 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def mirai_start_cnc_and_login(self):
+        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        outputTime = "time_3_mirai_start_cnc_and_login.txt"
+
         filename_path = "02_Scenario/02_mirai/./03_step_AttackerServer_start_cnc_and_login.sh"
         parameters = [self.hostname, self.ip, self.username, self.password, self.path, self.cnc_pids_file,
                       self.num_of_new_bots, self.targeted_attack, self.DDoS_type, self.DDoS_duration]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def mirai_wait_for_finished_scan(self):
+        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        outputTime = "time_5_mirai_wait_finish_scan.txt"
+
         FinishedFile = "ScanFinishedFile.txt"
 
         filename_path = "02_Scenario/02_mirai/./05_step_AttackerServer_wait_for_finished_phase.sh"
@@ -668,7 +674,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         scan_flag = "0"
         input_bot = "input_bot"  # example: input_bot_192.168.1.112.txt
         logs_path = "CREME_backend_execution/logs/02_mirai/times"
-        output_time = "time_2_start_transfer.txt"
+        output_time = "time_7_start_transfer.txt"
 
         filename_path = "02_Scenario/02_mirai/./07_step_AttackerServer_transfer_and_start_malicious.sh"
         parameters = [self.ip, self.username, self.password, self.path, input_bot, scan_flag, self.transfer_pids_file,
@@ -676,6 +682,9 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def mirai_wait_for_finished_transfer(self):
+        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        outputTime = "time_5_mirai_wait_finish_transfer.txt"
+
         FinishedFile = "TransferFinishedFile.txt"
 
         filename_path = "02_Scenario/02_mirai/./05_step_AttackerServer_wait_for_finished_phase.sh"
@@ -683,6 +692,9 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def mirai_wait_for_finished_ddos(self):
+        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        outputTime = "time_5_mirai_wait_finish_ddos.txt"
+
         FinishedFile = "ddosFinishedFile.txt"
 
         filename_path = "02_Scenario/02_mirai/./05_step_AttackerServer_wait_for_finished_phase.sh"
@@ -690,6 +702,9 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_malicious(self):
+        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        outputTime = "time_8_mirai_stop_malicious.txt"
+
         filename_path = "02_Scenario/02_mirai/./08_step_AttackerServer_cnc_stop_malicious.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.transfer_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -935,7 +950,7 @@ class MaliciousClient(Machine, implements(IConfiguration), implements(IConfigura
 
     def mirai_start_malicious(self):
         logs_path = "CREME_backend_execution/logs/02_mirai/times"
-        outputTime = "time_1_kali_start_scan.txt"
+        outputTime = "time_4_kali_start_scan.txt"
 
         filename_path = "02_Scenario/02_mirai/./04_step_MaliciousClient_start_malicious.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.mirai_pids_file, logs_path, outputTime]
