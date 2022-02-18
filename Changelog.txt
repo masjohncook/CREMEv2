@@ -1,0 +1,4 @@
+V 1.1.beta.1
+- Update the Django versio to 4.0.2
+- Updates metasploit configuration code
+- Add several additional MITRE ATT&CK tactics & techniques
