@@ -1,4 +1,4 @@
-# CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection
+# CREME-N: A toolchain of automatic dataset collection for machine learning in intrusion detection
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
