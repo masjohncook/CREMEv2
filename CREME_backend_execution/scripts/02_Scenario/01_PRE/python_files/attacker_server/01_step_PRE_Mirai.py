@@ -25,7 +25,7 @@ def main(argv):
     time.sleep(2)
     # put the attack launch command
     nm = nmap.PortScanner()
-    nm.scan(hosts=target_ip, arguments='-O -A')
+    nm.scan(hosts=target_ip, arguments='-O -A -p 0-65535')
 
     while client.jobs.list:
         time.sleep(1)
