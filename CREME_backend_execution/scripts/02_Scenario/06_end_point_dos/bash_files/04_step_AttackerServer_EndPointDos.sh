@@ -21,7 +21,7 @@ send "$password\r"
 
 
 expect "*:~# "
-send "python3 $path/end_point_dos_SecondStage.py $path $ip $target_server_ip $new_user_account $new_user_password\r"
+send "python3 $path/04_step_EndPontDos.py $path $ip $target_server_ip $new_user_account $new_user_password\r"
 
 expect "*:~# "
 send "exit\r"
