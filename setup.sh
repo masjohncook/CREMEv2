@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create virtual environment
-virtualenv --python=python3.6 venv_CREME
+virtualenv --python=python3.5 venv_CREME
 
 # active venv
 source venv_CREME/bin/activate
