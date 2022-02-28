@@ -1,4 +1,4 @@
-Django~=4.0.2
+Django~=2.2.4
 djangorestframework
 python-interface
 paramiko
