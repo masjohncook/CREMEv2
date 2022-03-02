@@ -726,17 +726,17 @@ class Creme:
         # t = [t1, t2, t2, t3, t3, t4, t4, t5]
         t = [t1, t2, t2, t3, t3, t4]
 
-        labels = [1, 2, 3]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Valid Accounts', 'Non-Application Layer Protocol', 'Network Denial of Service']
-        sub_technique_names = ['Local Accounts', 'Non-Application Layer Protocol', 'Direct Network Flood']
-        
-        """Other possible labels
-        Tactic -> technique -> sub technique
-        Initial Access -> Valid Accounts -> Default Accounts
-        Lateral Movement -> Remote Services -> SSH
-        Resource Development -> Acquire Infrastructure -> Botnet
-        """
+        labels = [1, 3, 4, 5, 7, 9, 12, 14]  # only for syslog
+        tactic_names = ['Reconnaissance', 'Initial Access', 'Execution',
+                        'Persistence', 'Defense Evasion', 'Discovery',
+                        'Command and Control', 'Impact']
+        technique_names = ['Active Scanning', 'Exploit Public-Facing Application', 'Command and Scripting Interpreter',
+                           'External Remote Services', 'Indicator Removal on Host', 'Network Service Scanning',
+                           'Ingress Tool Transfer', 'Network Denial of Service']
+        sub_technique_names = ['Scanning IP Blocks', 'Exploit Public-Facing Application', 'Unix Shell',
+                               'External Remote Services', 'Clear Linux or Mac System Logs', 'Network Service Scanning',
+                               'Ingress Tool Transfer', 'Direct Network Flood']
+
         src_ips_1 = []
         des_ips_1 = []
         normal_ips_1 = []
@@ -878,16 +878,14 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 2, 3]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk wipe']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk Content Wipe']
-        """Other possible labels
-        Initial Access -> Exploit Public-Facing Application
-        Persistence
-        Impact -> Data Destruction or Disk Wipe -> Disk Content Wipe or Disk Structure Wipe
+        labels = [1, 3, 4, 5, 6, 14]  # only for syslog
+        tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
+                        'Persistence', 'Privilege Escalation', 'Impact']
+        technique_names = ['Active Scanning', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
+                           'Server Software Component', 'Create or Modify System Process', 'Data Destruction']
+        sub_technique_names = ['Scanning IP Blocks', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
+                               'Server Software Component', 'Create or Modify System Process', 'Data Destruction']
 
-        """
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names, sub_technique_names)
 
     def process_data_data_theft(self, log_folder):
@@ -927,14 +925,17 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 2, 3]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-        """Other possible labels
-        Initial Access -> Exploit Public-Facing Application
-        Persistence
-        """
+        labels = [1, 3, 4, 5, 6, 12, 14]  # only for syslog
+        tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
+                        'Persistence', 'Privilege Escalation', 'Command and Control', 
+                        'Impact']
+        technique_names = ['Active Scanning', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
+                           'Server Software Component', 'Create or Modify System Process', 'Ingress Tool Transfer', 
+                           'Data Encrypted for Impact']
+        sub_technique_names = ['Scanning IP Blocks', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
+                               'Server Software Component', 'Create or Modify System Process', 'Ingress Tool Transfer', 
+                               'Data Encrypted for Impact']
+
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
                                                   sub_technique_names)
 
@@ -945,10 +946,16 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 2, 3]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
+        labels = [1, 3, 4, 5, 6, 12, 14]  # only for syslog
+        tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
+                        'Persistence', 'Privilege Escalation', 'Command and Control', 
+                        'Impact']
+        technique_names = ['Active Scanning', 'Exploit Public-Facing Application', 'Command and Scripting Interpreter', 
+                           'Server Software Component', 'Create or Modify System Process', 'Ingress Tool Transfer', 
+                           'Resource Hijacking']
+        sub_technique_names = ['Scanning IP Blocks', 'Exploit Public-Facing Application', 'Unix Shell', 
+                               'Server Software Component', 'Create or Modify System Process', 'Ingress Tool Transfer', 
+                               'Resource Hijacking']
 
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
                                                   sub_technique_names)
@@ -960,14 +967,20 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 2, 3]  # only for syslog
-        tactic_names = ['Initial Access', 'Persistence', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Create Account', 'Endpoint DoS']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Local Account', 'OS Exhaustion Flood']
+        labels = [1, 3, 4, 6, 7, 12, 14]  # only for syslog
+        tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
+                        'Privilege Escalation', 'Defense Evasion', 'Command and Control', 
+                        'Impact']
+        technique_names = ['Active Scanning', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
+                           'Exploitation for Privilege Escalation', 'Valid Accounts', 'Ingress Tool Transfer', 
+                           'Endpoint Denial of Service']
+        sub_technique_names = ['Scanning IP Blocks', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
+                               'Exploitation for Privilege Escalation', 'Local Accounts', 'Ingress Tool Transfer', 
+                               'OS Exhaustion Flood']
 
         # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal processes
         #  have the same cmd. Think about how to solve this problem???
-        force_abnormal_cmd_list = [[],[],["<bash>"]]  # pattern of force bomb process
+        force_abnormal_cmd_list = [[], [], ["<bash>"]]  # pattern of force bomb process
 
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
                                                   sub_technique_names, force_abnormal_cmd_list)
