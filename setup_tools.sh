@@ -3,7 +3,7 @@
 # install python 3.5
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt-get update
-sudo apt-get install python3.5 -y
+sudo apt-get install python3.5 build-essential libssl-dev libffi-dev python3.5-dev -y
 
 sudo apt-get update
 sudo apt-get install expect -y
