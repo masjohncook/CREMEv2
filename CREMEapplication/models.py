@@ -114,13 +114,13 @@ class MaliciousClient(models.Model):
 
 
 class AttackScenario(models.Model):
-    02_mirai = models.BooleanField(default=True)
-    03_ransomware = models.BooleanField(default=True)
-    04_resource_hijacking = models.BooleanField(default=True)
-    05_disk_wipe = models.BooleanField(default=True)
-    06_end_point_dos = models.BooleanField(default=True)
-    07_data_theft = models.BooleanField(default=False)
-    08_rootkit_ransomware = models.BooleanField(default=False)
+    mirai = models.BooleanField(default=True)
+    ransomware = models.BooleanField(default=True)
+    resource_hijacking = models.BooleanField(default=True)
+    disk_wipe = models.BooleanField(default=True)
+    end_point_dos = models.BooleanField(default=True)
+    data_theft = models.BooleanField(default=False)
+    rootkit_ransomware = models.BooleanField(default=False)
 
 
 class MachineLearningModel(models.Model):
