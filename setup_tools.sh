@@ -1,9 +1,14 @@
 #!/bin/bash
 
-# install python 3.5
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt-get update
-sudo apt-get install python3.5 build-essential libssl-dev libffi-dev python3.5-dev -y
+# install python 3.6
+sudo apt install build-essential checkinstall -y
+sudo apt install libreadline-gplv2-dev libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
+wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz
+tar xvf Python-3.6.0.tar.xz	
+cd Python-3.6.0/	
+./configure
+sudo make altinstall
+cd ..
 
 sudo apt-get update
 sudo apt-get install expect -y
