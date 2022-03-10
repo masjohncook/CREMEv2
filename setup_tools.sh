@@ -3,14 +3,15 @@
 # install python 3.6
 sudo apt install build-essential checkinstall -y
 sudo apt install libreadline-gplv2-dev libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
+sudo apt install libssl-dev libncurses5-dev libreadline-dev libgdm-dev libdb4o-cil-dev -y
 wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
 tar xvf Python-3.6.2.tar.xz	
 cd Python-3.6.2/	
 ./configure
-sudo make altinstall
+sudo make
+sudo make install
 cd ..
 sudo update-alternatives --install /usr/bin/python python /usr/local/bin/python3.6 2
-
 
 
 sudo apt-get update
