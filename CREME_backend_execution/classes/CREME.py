@@ -726,7 +726,6 @@ class Creme:
         # t = [t1, t2, t2, t3, t3, t4, t4, t5]
         t = [t1, t2, t2, t3, t3, t4]
 
-        steps_num = 8
         labels = [1, 3, 4, 5, 7, 9, 12, 14]  # only for syslog
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution',
                         'Persistence', 'Defense Evasion', 'Discovery',
@@ -803,7 +802,7 @@ class Creme:
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-        ProcessDataHelper.make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names,
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
 
@@ -812,7 +811,7 @@ class Creme:
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names,\
             technique_names, sub_technique_names
 
-    # def process_data_general_scenario(steps_num, self, log_folder, labels, tactic_names, technique_names, sub_technique_names,
+    # def process_data_general_scenario(self, log_folder, labels, tactic_names, technique_names, sub_technique_names,
     #                                   force_abnormal_cmd_list=[[],[],[]]):
     #     """
     #     this function use to create labeling_file that contain information to label accounting and traffic data for
@@ -866,7 +865,7 @@ class Creme:
     #     # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
     #     #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
     #     #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
-    #     ProcessDataHelper.make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names,
+    #     ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
     #                                          sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
     #                                          abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
 
@@ -882,7 +881,6 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        steps_num = 6
         labels = [1, 3, 4, 5, 6, 14]  # only for syslog
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Persistence', 'Privilege Escalation', 'Impact']
@@ -941,7 +939,7 @@ class Creme:
         # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
         #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
         #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
-        ProcessDataHelper.make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names,
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
 
@@ -989,7 +987,6 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        steps_num = 7
         labels = [1, 3, 4, 5, 6, 12, 14]  # only for syslog
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Persistence', 'Privilege Escalation', 'Command and Control', 
@@ -1053,7 +1050,7 @@ class Creme:
         # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
         #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
         #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
-        ProcessDataHelper.make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names,
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
 
@@ -1069,7 +1066,6 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        steps_num = 7
         labels = [1, 3, 4, 5, 6, 12, 14]  # only for syslog
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Persistence', 'Privilege Escalation', 'Command and Control', 
@@ -1133,7 +1129,7 @@ class Creme:
         # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
         #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
         #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
-        ProcessDataHelper.make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names,
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
 
@@ -1149,7 +1145,6 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        steps_num = 7
         labels = [1, 3, 4, 6, 7, 12, 14]  # only for syslog
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Privilege Escalation', 'Defense Evasion', 'Command and Control', 
@@ -1214,7 +1209,7 @@ class Creme:
         # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
         #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
         #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
-        ProcessDataHelper.make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names,
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
 

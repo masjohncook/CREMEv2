@@ -189,7 +189,7 @@ class ProgressHelper:
 
 class ProcessDataHelper:
     @staticmethod
-    def make_labeling_file(steps_num, labeling_file_path, tactic_names, technique_names, sub_technique_names, t, src_ips, des_ips,
+    def make_labeling_file(labeling_file_path, tactic_names, technique_names, sub_technique_names, t, src_ips, des_ips,
                            normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list):
         """
         use to create a labeling file which is a parameter using to label data
@@ -201,7 +201,7 @@ class ProcessDataHelper:
 
         # each element is one stage in an attack scenario
         my_list = []
-        for i in range(steps_num):
+        for i in range(len(tactic_names)):
             my_list.append([tactic_names[i], technique_names[i], sub_technique_names[i], t[i*2], t[i*2+1] + 1, src_ips[i], des_ips[i],
                             normal_ips[i], normal_hostnames[i], abnormal_hostnames[i], pattern_normal_cmd_list[i],
                             force_abnormal_cmd_list[i]])
