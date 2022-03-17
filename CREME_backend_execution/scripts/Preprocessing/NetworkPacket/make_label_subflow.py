@@ -48,6 +48,7 @@ def main(argv):
         srcip_list = stage_list[5]
         dstip_list = stage_list[6]
         normalip_list = stage_list[7]
+        step_num = stage_list[11]
 
         stage = df[(df['StartTime'] >= start_time) & (df['StartTime'] < end_time)]
         normal_idx = stage[stage['SrcAddr'].isin(normalip_list) | stage['DstAddr'].isin(normalip_list)].index
@@ -57,7 +58,7 @@ def main(argv):
         # df.loc[normal_idx, 'SubTechnique'] = 'Normal'
 
         abnormal_idx = stage[((stage['SrcAddr'].isin(srcip_list)) & (stage['DstAddr'].isin(dstip_list))) | ((stage['SrcAddr'].isin(dstip_list)) & (stage['DstAddr'].isin(srcip_list)))].index
-        df.loc[abnormal_idx, 'Label'] = stage_idx + 1
+        df.loc[abnormal_idx, 'Label'] = step_num
         df.loc[abnormal_idx, 'Tactic'] = tactic_name
         df.loc[abnormal_idx, 'Technique'] = technique_name
         df.loc[abnormal_idx, 'SubTechnique'] = sub_technique_name
