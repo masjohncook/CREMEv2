@@ -726,7 +726,7 @@ class Creme:
         # t = [t1, t2, t2, t3, t3, t4, t4, t5]
         t = [t1, t2, t2, t3, t3, t4]
 
-        labels = [1, 3, 4, 5, 7, 9, 12, 14]  # only for syslog
+        labels = [1, 3, 4, 5, 7, 9, 12, 14]
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution',
                         'Persistence', 'Defense Evasion', 'Discovery',
                         'Command and Control', 'Impact']
@@ -804,7 +804,7 @@ class Creme:
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t2, t3], [t3, t4]]
 
@@ -862,9 +862,6 @@ class Creme:
 
     #     labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-    #     # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-    #     #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-    #     #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
     #     ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
     #                                          sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
     #                                          abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
@@ -881,7 +878,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 3, 4, 5, 6, 14]  # only for syslog
+        labels = [1, 3, 4, 5, 6, 14]
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Persistence', 'Privilege Escalation', 'Impact']
         technique_names = ['Active Scanning', 'Exploit Public-Facing Application', 'Exploitation for Client Execution', 
@@ -936,12 +933,9 @@ class Creme:
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-        # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-        #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-        #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
 
@@ -987,7 +981,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 3, 4, 5, 6, 12, 14]  # only for syslog
+        labels = [1, 3, 4, 5, 6, 12, 14]
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Persistence', 'Privilege Escalation', 'Command and Control', 
                         'Impact']
@@ -1047,12 +1041,9 @@ class Creme:
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-        # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-        #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-        #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
 
@@ -1066,7 +1057,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 3, 4, 5, 6, 12, 14]  # only for syslog
+        labels = [1, 3, 4, 5, 6, 12, 14]
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Persistence', 'Privilege Escalation', 'Command and Control', 
                         'Impact']
@@ -1126,12 +1117,9 @@ class Creme:
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-        # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-        #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-        #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
 
@@ -1145,7 +1133,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 3, 4, 6, 7, 12, 14]  # only for syslog
+        labels = [1, 3, 4, 6, 7, 12, 14]
         tactic_names = ['Reconnaissance', 'Initial Access', 'Execution', 
                         'Privilege Escalation', 'Defense Evasion', 'Command and Control', 
                         'Impact']
@@ -1206,12 +1194,9 @@ class Creme:
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-        # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-        #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-        #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
 
