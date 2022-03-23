@@ -371,7 +371,7 @@ class Creme:
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
                                     5, new_stage=True)
         self.attacker_server.end_point_dos_fourth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation,
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
