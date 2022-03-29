@@ -254,13 +254,25 @@ class IEndPointDosAttackerServer(Interface):
     def end_point_dos_start_metasploit(self):
         pass
 
-    def end_point_dos_first_stage(self):
+    def nonmirai_first_stage(self):
         pass
 
-    def end_point_dos_second_stage(self):
+    def nonmirai_second_stage(self):
         pass
 
     def end_point_dos_third_stage(self):
+        pass
+
+    def end_point_dos_fourth_stage(self):
+        pass
+
+    def end_point_dos_fifth_stage(self):
+        pass
+
+    def end_point_dos_sixth_stage(self):
+        pass
+
+    def end_point_dos_seventh_stage(self):
         pass
 
 
