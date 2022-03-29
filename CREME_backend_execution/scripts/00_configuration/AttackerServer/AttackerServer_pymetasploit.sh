@@ -111,7 +111,7 @@ send "bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /u
 
 ## Configure Postgresql
 expect "$path# "
-send "cp database.yml.example database.yml"
+send "cp /opt/metasploit-framework/config/database.yml.example /opt/metasploit-framework/config/database.yml"
 expect "$path# "
 send "sed -i -e 's/database: metasploit_framework_development/database: msf/' /opt/metasploit-framework/config/database.yml \r"
 expect "$path# "
