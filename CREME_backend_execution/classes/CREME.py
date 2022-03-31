@@ -1394,16 +1394,16 @@ class Creme:
         if not Creme.skip_configuration:
             self.configure()
         # if not Creme.skip_reproduction:
-        #     if Creme.mirai:
-        #         self.run_mirai()
+            if Creme.mirai:
+                self.run_mirai()
         #     if Creme.disk_wipe:
         #         self.run_disk_wipe()
         #     if Creme.ransomware:
         #         self.run_ransomware()
         #     if Creme.resource_hijacking:
         #         self.run_resource_hijacking()
-        #     if Creme.end_point_dos:
-        #         self.run_end_point_dos()
+            if Creme.end_point_dos:
+                self.run_end_point_dos()
         #     if Creme.data_theft:
         #         self.run_data_theft()
         #     if Creme.rootkit_ransomware:
