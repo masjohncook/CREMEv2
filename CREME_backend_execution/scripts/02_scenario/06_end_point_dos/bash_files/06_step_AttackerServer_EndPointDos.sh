@@ -18,7 +18,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-
+set timeout 60
 
 expect "*:~# "
 send "python3 $path/06_step_EndPontDos.py $path $ip $target_server_ip $new_user_account $new_user_password\r"

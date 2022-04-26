@@ -20,6 +20,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # Record time_kali_start_scan.txt
 set DATE [exec date +%s]

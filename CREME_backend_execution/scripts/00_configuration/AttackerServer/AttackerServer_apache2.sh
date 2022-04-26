@@ -15,6 +15,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 expect "*:~# "
 send "sudo apt install apache2 -y\r"

@@ -22,6 +22,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # update time
 expect "*:~# "
@@ -37,11 +38,12 @@ send "sudo ntpdate ntp.ubuntu.com\r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_user@$controller_ip:$controller_path/CREME/CREME_backend_execution/scripts/configuration/prepared_files/benign_server/* $folder\r"
+send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignServer/* $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 expect "*:~# "
 send "chmod +x *.sh\r"
@@ -75,6 +77,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 # restart rsyslog
 expect "*:~# "

@@ -22,6 +22,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # download files
 expect "*:~# "
@@ -32,6 +33,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 expect "*:~# "
 send "chmod +x $path/*.py \r"
