@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# prevent error
-sudo rm /var/lib/dpkg/lock-frontend
-sudo rm /var/lib/dpkg/lock
-sudo rm /var/cache/apt/archives/lock
-
 # install python 3.6
 sudo apt install build-essential checkinstall -y
 sudo apt install libreadline-gplv2-dev libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
