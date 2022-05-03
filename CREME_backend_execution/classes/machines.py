@@ -410,7 +410,7 @@ class TargetServer(DataLoggerClient, implements(IConfiguration), implements(ICon
         pass
 
     def reboot(self):
-        filename_path = "04_General/./reboot.sh"
+        filename_path = "04_general/./reboot.sh"
         parameters = [self.ip, self.username, self.password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
         time.sleep(90)
