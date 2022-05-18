@@ -24,6 +24,7 @@ expect "*:~# "
 send "apt -y install ntpdate\r"
 expect "*:~# "
 send "sudo ntpdate ntp.ubuntu.com\r"
+set timeout 60
 
 # exit
 expect "*:~# "

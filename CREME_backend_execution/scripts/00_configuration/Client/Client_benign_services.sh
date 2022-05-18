@@ -36,8 +36,10 @@ expect "*:~# "
 send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignClient/*  $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
+set timeout 30
 expect " password: "
 send "$controller_pass\r"
+set timeout 30
 # add executable permission
 expect "*:~# "
 send "chmod +x *.sh\r"
