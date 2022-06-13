@@ -20,13 +20,14 @@ send "yes\r"
 expect " password: "
 send "$password\r"
 
-# update time
+## update time
 expect "*:~# "
-send "apt -y install ntp\r"
+send "timedatectl set-timezone Asia/Taipei\r"
 expect "*:~# "
-send "apt -y install ntpdate\r"
-expect "*:~# "
-send "sudo ntpdate ntp.ubuntu.com\r"
+send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
+
+
 
 # config new dns
 expect "*:~# "
