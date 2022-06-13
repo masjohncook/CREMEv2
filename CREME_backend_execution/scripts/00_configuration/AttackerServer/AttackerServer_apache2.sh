@@ -1,4 +1,5 @@
 #!/usr/bin/expect -f
+#OK for Kali
 set delKnownHosts [lindex $argv 0]
 set ip [lindex $argv 1]
 set username [lindex $argv 2]
