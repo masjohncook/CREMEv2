@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create virtual environment
-python3.6 -m venv venv_CREME-N
+python -m venv venv_CREME-N
 
 # active venv
 source venv_CREME-N/bin/activate
@@ -21,4 +21,5 @@ python manage.py migrate
 chmod -R 775 ./CREME_backend_execution/scripts
 
 # create supper user
-# runserver
+python manage.py createsuperuser
+
