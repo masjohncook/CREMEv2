@@ -112,6 +112,84 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
 
     def clean_data_collection(self):
         self.restart_rsyslog()
+                       implements(ICleaningDataCollection)):
+    """
+
+    """
+    def __init__(self, hostname, ip, username, password, path, network_interface, tcp_file="traffic.pcap",
+                 tcp_pids_file="tcp_pids.txt", atop_interval=1, time_window_traffic=1):
+        super().__init__(hostname, ip, username, password, path)
+        self.path = path
+        self.network_interface = network_interface
+        self.tcp_file = tcp_file
+        self.tcp_pids_file = tcp_pids_file
+        self.atop_interval = atop_interval
+        self.time_window_traffic = time_window_traffic
+
+    def configure(self):
+        self.configure_base()
+        self.configure_data_collection()
+
+    def configure_base(self):
+        filename_path = "00_configuration/DataLogger/DataLoggerServer_base.sh"
+        parameters = [self.ip, self.username, self.password]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def configure_data_collection(self):
+        filename_path = "00_configuration/DataLogger/DataLoggerServer_data_collection.sh"
+        parameters = [self.ip, self.username, self.password, self.controller_ip, self.controller_username,
+                      self.controller_password, self.controller_path]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def start_collect_data(self):
+        filename_path = "01_data_collection/start_packet.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.tcp_file, self.network_interface,
+                      self.tcp_pids_file]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def stop_collect_data(self):
+        filename_path = "04_General/kill_pids.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.tcp_pids_file]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def download_atop_data(self, data_logger_client):
+        filename_path = "01_data_collection/download_atop_data.sh"
+        parameters = [self.ip, self.username, self.password, data_logger_client.ip, data_logger_client.username,
+                      data_logger_client.password, data_logger_client.path, data_logger_client.atop_file, self.path]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def download_log_data(self, data_logger_client, remote_path, remote_log, new_log):
+        filename_path = "01_data_collection/download_log_data.sh"
+        parameters = [self.ip, self.username, self.password, data_logger_client.ip, data_logger_client.username,
+                      data_logger_client.password, remote_path, remote_log, self.path, new_log]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def download_time_file(self, data_logger_client, time_file):
+        filename_path = "01_data_collection/download_atop_data.sh"
+        parameters = [self.ip, self.username, self.password, data_logger_client.ip, data_logger_client.username,
+                      data_logger_client.password, data_logger_client.path, time_file, self.path]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def centralize_data(self, data_logger_client, other_data=False, remote_paths=[], remote_files=[]):
+        self.download_atop_data(data_logger_client)
+        if other_data:  # download apache continuum's log
+            for index, remote_path in enumerate(remote_paths):
+                remote_file = remote_files[index]
+                new_file = '{0}_{1}'.format(data_logger_client.hostname, remote_file)
+                self.download_log_data(data_logger_client, remote_path, remote_file, new_file)
+
+    def centralize_time_files(self, data_logger_client, time_files):
+        for time_file in time_files:
+            self.download_time_file(data_logger_client, time_file)
+
+    def restart_rsyslog(self):
+        filename_path = "04_General/restart_service.sh"
+        service_name = "rsyslog"
+        parameters = [self.ip, self.username, self.password, service_name]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def clean_data_collection(self):
+        self.restart_rsyslog()
 
 
 class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDataCollection)):
