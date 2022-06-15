@@ -112,10 +112,14 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
 
     def clean_data_collection(self):
         self.restart_rsyslog()
-                       implements(ICleaningDataCollection)):
+
     """
 
     """
+
+class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDataCollection)):
+    dls = None  # store information of data logger server
+
     def __init__(self, hostname, ip, username, password, path, network_interface, tcp_file="traffic.pcap",
                  tcp_pids_file="tcp_pids.txt", atop_interval=1, time_window_traffic=1):
         super().__init__(hostname, ip, username, password, path)
