@@ -18,6 +18,11 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 8. Router(**provided**)
 
 ### Provided OVA's
+1. [Router](https://drive.google.com/file/d/1IT0w5QxJlWIou4cPKWEOSIxhbEmAkrmE/view?usp=sharing)
+2. [Attacker Machine](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
+3. [Malicious Client](https://drive.google.com/file/d/1XNrXRrvk_iuqcQ2f0RLz9kHkoJ-vbnWs/view)
+4. [Target Machine](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
+5. [Benign Machine](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
 
 ### System Requirements
 1. 6 Cores of CPU
@@ -29,12 +34,7 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 <!-- GETTING STARTED -->
 ## How To's
 You need to prepare 5 VMs of [Ubuntu Server 20.04](https://ubuntu.com/download/server) by yourself that are for Controller Machine, Data Logger, 2 Non Vulnerable Clients, and 1 Vulnerable Clients. 
-### Provided OVA's
-1. [Router](https://drive.google.com/file/d/1IT0w5QxJlWIou4cPKWEOSIxhbEmAkrmE/view?usp=sharing)
-2. [Attacker Machine](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
-3. [Malicious Client](https://drive.google.com/file/d/1XNrXRrvk_iuqcQ2f0RLz9kHkoJ-vbnWs/view)
-4. [Target Machine](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
-5. [Benign Machine](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
+
 ### VM Setting
 1. You need to import all provided VMs and install the other 5 VMs
 2. Set the **root** password of all machines with `qsefthuk`(by default the password of all provided machines `qsefthuk`)
