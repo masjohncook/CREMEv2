@@ -1,11 +1,4 @@
 #!/bin/bash
-#install redis
-wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
-cd redis-stable
-make
-cd -
-
 # create virtual environment
 python -m venv venv_CREME-N
 
