@@ -26,7 +26,7 @@ tmux send-key -t 1 "celery -A CREME.celery worker --loglevel=info" Enter
 #terminal 2
 tmux send-key -t 2 "cd ~/CREME-N" Enter
 tmux send-key -t 2 "source venv_CREME-N/bin/activate" Enter
-tmux send-key -t 2 "python manage.py runserver" Enter
+tmux send-key -t 2 "python manage.py runserver 0.0.0.0:8000" Enter
 
 
 tmux -2 attach-session -t ${SESSION}
