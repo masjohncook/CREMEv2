@@ -11,7 +11,7 @@ fi
 tmux new-session -d -s ${SESSION} -n CREME
 tmux set remain-on-exit on
 tmux split-window -h
-tmux split-windown -v -t 0
+tmux split-window -v -t 0
 
 
 #terminal 0
