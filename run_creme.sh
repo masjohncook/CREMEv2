@@ -12,7 +12,7 @@ tmux new-session -d -s ${SESSION} -n CREME
 tmux set remain-on-exit on
 tmux split-window -h
 tmux split-windown -v -t 0
-tmux split-windown -v -t 1
+
 
 #terminal 0
 tmux send-key -t 0 "cd ~/redis-stable/src" Enter
@@ -28,8 +28,6 @@ tmux send-key -t 2 "cd ~/CREME-N" Enter
 tmux send-key -t 2 "source venv_CREME-N/bin/activate" Enter
 tmux send-key -t 2 "python manage.py runserver" Enter
 
-#unused
-tmux send-key -t 3 "" Enter
 
 tmux -2 attach-session -t ${SESSION}
 
