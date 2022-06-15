@@ -2,7 +2,7 @@
 
 sudo apt-get update
 sudo apt-get install expect -y
-
+sudo apt-get install python-pip -y
 # virtual environment
 sudo apt-get install python3-venv -y
 
