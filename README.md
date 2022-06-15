@@ -59,10 +59,9 @@ You need to prepare 5 VMs of [Ubuntu Server 20.04](https://ubuntu.com/download/s
 
 
 <!-- Dataset -->
-## Generated Dataset
+<!--## Generated Dataset
 
-The dataset can be found at [here](https://drive.google.com/drive/folders/1bEsx64H2vogJKgI_OTVQ8n71VahtLxz5?usp=sharing)
-
+The dataset can be found at [here](https://drive.google.com/drive/folders/1bEsx64H2vogJKgI_OTVQ8n71VahtLxz5?usp=sharing)-->
 
 ## Publications
 1. [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://www.sciencedirect.com/science/article/abs/pii/S1084804521002137)
