@@ -11,7 +11,7 @@
 This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environtment. You need install the Virtualbox first. In pricipal, we need 10 vm to be launched to run this tool. The VMs are:
 1. Controller Machine
 2. Data Logger Machine
-3. Attacker Machine
+3. Attacker Machine(**provided**)
 4. 4 Clients (1 Vulnerable Client, 2 Non Vulnerable Client, 1 Malicious Client(**provided**)) 
 6. Target Machine(**provided**)
 7. Benign Machine(**provided**)
