@@ -35,7 +35,7 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 
 <!-- GETTING STARTED -->
 ## How To's
-You need to prepare belowing 5 VMs of [Ubuntu Server 20.04](https://ubuntu.com/download/server) by yourself follow [this](https://docs.google.com/document/d/1RJ2kCqVoS9TZtRMELRRKbjcuih4vC6Tv/edit) tutorial.
+You need to prepare belowing **5 VMs** of [Ubuntu Server 20.04](https://ubuntu.com/download/server) and set **NAT network** by yourself follow [this](https://docs.google.com/document/d/1RJ2kCqVoS9TZtRMELRRKbjcuih4vC6Tv/edit) tutorial.
 * Controller Machine
 * Data Logger Machine
 * Non Vulnerable Client * 2
