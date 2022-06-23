@@ -10,21 +10,21 @@
 ## Basic Info
 This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environtment. You need install the Virtualbox first. In pricipal, we need 10 vm to be launched to run this tool. The VMs are:
 * Controller Machine
-* Data Logger Machine
+* Data Logger Server
 * Vulnerable Client
 * Non Vulnerable Client * 2
-* Attacker Machine(**provided**)
+* Attacker Server(**provided**)
 * Malicious Client(**provided**) 
-* Target Machine(**provided**)
-* Benign Machine(**provided**)
+* Target Server(**provided**)
+* Benign Server(**provided**)
 * Router(**provided**)
 
 ### Provided OVA's
 * [Router](https://drive.google.com/file/d/1IT0w5QxJlWIou4cPKWEOSIxhbEmAkrmE/view?usp=sharing)
-* [Attacker Machine](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
+* [Attacker Server](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
 * [Malicious Client](https://drive.google.com/file/d/1XNrXRrvk_iuqcQ2f0RLz9kHkoJ-vbnWs/view)
-* [Target Machine](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
-* [Benign Machine](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
+* [Target Server](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
+* [Benign Server](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
 
 ### System Requirements
 * 6 Cores of CPU
@@ -41,7 +41,7 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 * Controller Machine
    * `IP`: 192.168.56.111
    * `hostname`: controller-machine
-* Data Logger Machine
+* Data Logger Server
    * `IP`: 192.168.56.121
    * `hostname`: data-logger-machine
 * Vulnerable Client
@@ -53,16 +53,16 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 * Non Vulnerable Client 2
    * `IP`: 
    * `hostname`: 
-* Attacker Machine(**provided**)
+* Attacker Server(**provided**)
    * `IP`: 192.168.56.131
    * `hostname`: attacker-server
 * Malicious Client(**provided**)
    * `IP`: 192.168.56.161
    * `hostname`: malicious-client
-* Target Machine(**provided**)
+* Target Server(**provided**)
    * `IP`: 192.168.56.181
    * `hostname`: metasploitable3-ub1404
-* Benign Machine(**provided**)
+* Benign Server(**provided**)
    * `IP`: 192.168.56.171
    * `hostname`: metasploitable3-ub1404
 
