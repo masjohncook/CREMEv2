@@ -21,7 +21,7 @@ tmux send-key -t 0 "./redis-server" Enter
 #terminal 1
 tmux send-key -t 1 "cd ~/CREME-N" Enter
 tmux send-key -t 1 "source venv_CREME-N/bin/activate" Enter
-tmux send-key -t 1 "celery -A CREME.celery worker --loglevel=info" Enter
+tmux send-key -t 1 "celery -A CREME.celery worker --loglevel=info > celery.log" Enter
 
 #terminal 2
 tmux send-key -t 2 "cd ~/CREME-N" Enter
