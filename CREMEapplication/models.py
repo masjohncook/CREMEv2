@@ -45,16 +45,16 @@ class Testbed(models.Model):
 
 
 class Controller(models.Model):
-    hostname = models.CharField(max_length=255,default="controller-VirtualBox")
-    ip = models.CharField(max_length=255,default="192.168.1.35")
-    username = models.CharField(max_length=255,default="controller")
-    password = models.CharField(max_length=255,default="qsefthuk")
-    path = models.CharField(max_length=255,default="/home/controller")
+    hostname = models.CharField(max_length=255,default="controller-machine")
+    ip = models.CharField(max_length=255,default="192.168.56.111")
+    username = models.CharField(max_length=255,default="user")
+    password = models.CharField(max_length=255,default="qwerty")
+    path = models.CharField(max_length=255,default="/home/user")
 
 
 class DataLoggerServer(models.Model):
-    hostname = models.CharField(max_length=255,default="data-logger-server")
-    ip = models.CharField(max_length=255,default="192.168.1.5")
+    hostname = models.CharField(max_length=255,default="data-logger-machine")
+    ip = models.CharField(max_length=255,default="192.168.56.121")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
@@ -63,32 +63,32 @@ class DataLoggerServer(models.Model):
 
 
 class TargetServer(models.Model):
-    hostname = models.CharField(max_length=255,default="target-server-1")
-    ip = models.CharField(max_length=255,default="192.168.1.11")
+    hostname = models.CharField(max_length=255,default="metasploitable3-ub1404")
+    ip = models.CharField(max_length=255,default="192.168.56.181")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
 
 
 class BenignServer(models.Model):
-    hostname = models.CharField(max_length=255,default="benign-server-1")
-    ip = models.CharField(max_length=255,default="192.168.1.21")
+    hostname = models.CharField(max_length=255,default="metasploitable3-ub1404")
+    ip = models.CharField(max_length=255,default="192.168.56.171")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
 
 
 class VulnerableClient(models.Model):
-    hostname = models.CharField(max_length=255)
-    ip = models.CharField(max_length=255)
+    hostname = models.CharField(max_length=255, default="vulnerable-machine")
+    ip = models.CharField(max_length=255, default="192.168.56.151")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
 
 
 class NonVulnerableClient(models.Model):
-    hostname = models.CharField(max_length=255)
-    ip = models.CharField(max_length=255)
+    hostname = models.CharField(max_length=255, default="non-vulnerable-machine-1")
+    ip = models.CharField(max_length=255, default="192.168.56.141")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
@@ -96,7 +96,7 @@ class NonVulnerableClient(models.Model):
 
 class AttackerServer(models.Model):
     hostname = models.CharField(max_length=255,default="attacker-server")
-    ip = models.CharField(max_length=255,default="192.168.1.36")
+    ip = models.CharField(max_length=255,default="192.168.56.131")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/home/attacker-server/Desktop/reinstall")
@@ -107,7 +107,7 @@ class AttackerServer(models.Model):
 
 class MaliciousClient(models.Model):
     hostname = models.CharField(max_length=255,default="malicious-client")
-    ip = models.CharField(max_length=255,default="192.168.1.103")
+    ip = models.CharField(max_length=255,default="192.168.56.161")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
