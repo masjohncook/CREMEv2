@@ -10,21 +10,21 @@
 ## Basic Info
 This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environtment. You need install the Virtualbox first. In pricipal, we need 10 vm to be launched to run this tool. The VMs are:
 * Controller Machine
-* Data Logger Machine
+* Data Logger Server
 * Vulnerable Client
 * Non Vulnerable Client * 2
-* Attacker Machine(**provided**)
+* Attacker Server(**provided**)
 * Malicious Client(**provided**) 
-* Target Machine(**provided**)
-* Benign Machine(**provided**)
+* Target Server(**provided**)
+* Benign Server(**provided**)
 * Router(**provided**)
 
 ### Provided OVA's
 * [Router](https://drive.google.com/file/d/1IT0w5QxJlWIou4cPKWEOSIxhbEmAkrmE/view?usp=sharing)
-* [Attacker Machine](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
+* [Attacker Server](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
 * [Malicious Client](https://drive.google.com/file/d/1XNrXRrvk_iuqcQ2f0RLz9kHkoJ-vbnWs/view)
-* [Target Machine](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
-* [Benign Machine](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
+* [Target Server](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
+* [Benign Server](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
 
 ### System Requirements
 * 6 Cores of CPU
@@ -35,18 +35,43 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 
 <!-- GETTING STARTED -->
 ## How To's
-You need to prepare belowing **5 VMs** of [Ubuntu Server 20.04](https://ubuntu.com/download/server) and set **NAT network** by yourself follow [this](https://docs.google.com/document/d/1RJ2kCqVoS9TZtRMELRRKbjcuih4vC6Tv/edit) tutorial.
+1. You need to prepare belowing **5 VMs** and set **NAT network** by yourself following [this](https://docs.google.com/document/d/1RJ2kCqVoS9TZtRMELRRKbjcuih4vC6Tv/edit) tutorial.
+2. OS version of the **5 VMs** should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download).
+3. `IP` and `hostname` of each VM are below.
 * Controller Machine
-* Data Logger Machine
-* Non Vulnerable Client * 2
+   * `IP`: 192.168.56.111
+   * `hostname`: controller-machine
+* Data Logger Server
+   * `IP`: 192.168.56.121
+   * `hostname`: data-logger-machine
 * Vulnerable Client
+   * `IP`: 192.168.56.151
+   * `hostname`: vulnerable-machine
+* Non Vulnerable Client 1
+   * `IP`: 192.168.56.141
+   * `hostname`: non-vulnerable-machine-1
+* Non Vulnerable Client 2
+   * `IP`: 
+   * `hostname`: 
+* Attacker Server(**provided**)
+   * `IP`: 192.168.56.131
+   * `hostname`: attacker-server
+* Malicious Client(**provided**)
+   * `IP`: 192.168.56.161
+   * `hostname`: malicious-client
+* Target Server(**provided**)
+   * `IP`: 192.168.56.181
+   * `hostname`: metasploitable3-ub1404
+* Benign Server(**provided**)
+   * `IP`: 192.168.56.171
+   * `hostname`: metasploitable3-ub1404
 
 ### VM Setting
 * You need to import all provided VMs and install the other 5 VMs
 * Set all VMs:
     * Set the **root** password with `qsefthuk`(by default the password of all provided machines `qsefthuk`)
     * Network Adapter 1 to **Host-Only** except Router (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`)
-    * Network Adapter 2 to **NAT**
+    * Network Adapter 2 to **NAT network**
 
 
 
