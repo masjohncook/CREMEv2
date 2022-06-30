@@ -79,9 +79,18 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 ![](https://i.imgur.com/R4FWhjS.png)
 
 ### Setup
+1. Turn on all or your machines(10 Machines)
+2. Login to your controller
+3. Clone this repository `git clone https://github.com/masjohncook/CREME-N.git`
+4. Run `sudo chown -R user:user CREME-N/` then `sudo chmod -R 777 CREME-N`
+5. Change to the CREME directory `cd CREME-N`
+6. Run `chmod +x setup.sh setup_tool.sh run_creme.sh` then `sudo ./setup_tool.sh` then `./setup.sh`
+7. Wait till all processes is finished
+
+
 ### Run
 1. Login to your Controller Machine 
-2. run  `~# chmod +x ./run_creme.sh` then `~# ./run_creme.sh`
+2. run  `cd CREME-N/` then `~# ./run_creme.sh`
 3. Access the web interface using your Host OS Browser `http://<your controller IP>:8000`
 
 ##### Example of Web Interface
