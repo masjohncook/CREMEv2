@@ -35,7 +35,7 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 
 <!-- GETTING STARTED -->
 ## How To's
-1. You need to prepare belowing **5 VMs** and set **NAT network** by yourself following [this](https://docs.google.com/document/d/1RJ2kCqVoS9TZtRMELRRKbjcuih4vC6Tv/edit) tutorial.
+1. You need to prepare following **5 VMs** and set **Host-Only** by yourself following [this](https://docs.google.com/document/d/1RJ2kCqVoS9TZtRMELRRKbjcuih4vC6Tv/edit) tutorial.
 2. OS version of the **5 VMs** should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download).
 3. `IP` and `hostname` of each VM are below.
 * Controller Machine
@@ -51,8 +51,8 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
    * `IP`: 192.168.56.141
    * `hostname`: non-vulnerable-machine-1
 * Non Vulnerable Client 2
-   * `IP`: 
-   * `hostname`: 
+   * `IP`: 192.168.56.142
+   * `hostname`: non-vulnerable-machine-2
 * Attacker Server(**provided**)
    * `IP`: 192.168.56.131
    * `hostname`: attacker-server
