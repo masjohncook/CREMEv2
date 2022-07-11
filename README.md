@@ -43,7 +43,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 ##### VMs on Virtual Box
 ![](https://i.imgur.com/R4FWhjS.png)
 
-### VMs Setting
+### VMs_Information
 * Not provided:
   * Controller Machine (more than 4GB of RAM, 8GB if possible)
      * `IP`: 192.168.56.111
@@ -88,15 +88,15 @@ You need to prepare follow [Setup](#Setup) tutorial:
 1. `Create a Nat network`:\
     Open VirtualBox 🡪 File 🡪 Preferences… 🡪 Network 🡪 Add a new NatNetwork 🡪 Right click on the new network 🡪 Edit NAT Network 🡪 Update Network CIDR to 192.168.56.0/24 🡪 OK 🡪 OK
 2. `Import 5 provided VMs into VirtualBox`:\
-    Import from [Provided](#Provided) and check the informations are all correct([VMs Setting](#VMs Setting)).
+    Import from [Provided](#Provided) and check the informations are all correct([VMs_Information](#VMs_Information)).
 3. `Install 5 VMs we didn't provide`:\
-    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs Setting](#VMs Setting).
+    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs_Information](#VMs_Information).
 4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
     * Set Network Adapter 1 to **Host-Only** except Router (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
     * Set Network Adapter 2 to **NAT network you created in step1**
 5. `Set 5 VMs you created in step3`: Open VM 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet enp0s3 wired botton 🡪 IPv4 🡪 Manual
-        * Address: follow [VMs Setting](#VMs Setting)
+        * Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 24
         * Gateway: 192.168.56.1
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
