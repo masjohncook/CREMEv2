@@ -5,7 +5,7 @@
 
 * This tool is an extended part of [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://github.com/buihuukhoi/CREME).
 * In this part we try to:
-  1. improve the stages from original 3 stages into N stages(follow [MITRE ATT&CK](https://attack.mitre.org/))
+  1. improve the stages from original 3 stages into N stages (follow [MITRE ATT&CK](https://attack.mitre.org/))
   2. improve the labeling
 
 
@@ -88,17 +88,17 @@ You need to prepare follow [Setup](#Setup) tutorial:
 1. `Create a Nat network`:\
     Open VirtualBox 🡪 File 🡪 Preferences… 🡪 Network 🡪 Add a new NatNetwork 🡪 Right click on the new network 🡪 Edit NAT Network 🡪 Update Network CIDR to 192.168.56.0/24 🡪 OK 🡪 OK
 2. `Import 5 provided VMs into VirtualBox`:\
-    Import from [Provided](#Provided) and check the informations are all correct([VMs_Information](#VMs_Information)).
+    Import from [Provided](#Provided) and check the informations are all correct ([VMs_Information](#VMs_Information)).
 3. `Install 5 VMs we didn't provide`:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs_Information](#VMs_Information).
 4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
-    * Set Network Adapter 1 to **Host-Only** except Router (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
+    * Set Network Adapter 1 to **Host-Only** (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
     * Set Network Adapter 2 to **NAT network you created in step1**
 5. `Set 5 VMs you created in step3`: Open VM 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet enp0s3 wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 24
-        * Gateway: 192.168.56.1
+        * Gateway: 192.168.56.2
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
 6. `Continue to set 5 VMs you created`: Open terminal and do the followings
