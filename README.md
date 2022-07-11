@@ -108,7 +108,8 @@ You need to prepare follow [Setup](#Setup) tutorial:
 6. `Continue to set 5 VMs you created`: Open terminal and do the followings
     * `sudo passwd root` 🡪 Set passwd to **qsefthuk**
     * `sudo apt update` 🡪 `sudo apt install openssh-server` 🡪 `sudo apt install vim`
-    * `sudo vim /etc/ssh/sshd_config` 🡪 Find the line contains **PermitRootLogin** 🡪 Updates it to `PermitRootLogin yes` 🡪 save and quit
+    * `sudo vim /etc/ssh/sshd_config` 🡪 Find the line contains **PermitRootLogin** 🡪    
+    Updates it to `PermitRootLogin yes` 🡪 save and quit
     * `systemctl restart sshd`
 7. `Clone and set the Repository`:    
     `git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪    
