@@ -89,11 +89,12 @@ You need to prepare follow [Setup](#Setup) tutorial:
 
 ### Setup
 0. You should use a **local network** in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
-1. **Create a Nat network**:  
+1. **Create a Nat network**:
     Open VirtualBox 🡪 File 🡪 Preferences… 🡪 Network 🡪 Add a new NatNetwork 🡪 Right click on the new network 🡪 Edit NAT Network 🡪 Update Network CIDR to 192.168.56.0/24 🡪 OK 🡪 OK
-2. **Import 5 provided VMs into VirtualBox**:    Import from [Provided](#Provided) and check the informations are all correct([#VMs Setting](#VMs Setting)).
+2. **Import 5 provided VMs into VirtualBox**:
+    Import from [Provided](#Provided) and check the informations are all correct([#VMs Setting](#VMs Setting)).
 3. **install 5 VMs we didn't provide**:    
-OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs Setting](#VMs Setting).
+    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs Setting](#VMs Setting).
 4. **Set network adapters of each VM**(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪
     * Set Network Adapter 1 to **Host-Only** except Router (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
     * Set Network Adapter 2 to **NAT network you created in step1**
@@ -110,7 +111,9 @@ OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download)
     * `sudo vim /etc/ssh/sshd_config` 🡪 Find the line contains **PermitRootLogin** 🡪 Updates it to `PermitRootLogin yes` 🡪 save and quit
     * `systemctl restart sshd`
 7. **Clone and set the Repository**:    
-`git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪 `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tool.sh run_creme.sh` 🡪 `sudo ./setup_tool.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
+    `git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪 
+    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tool.sh run_creme.sh` 🡪 
+    `sudo ./setup_tool.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
 
 
 
