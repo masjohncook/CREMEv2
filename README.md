@@ -32,7 +32,7 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 
 <!-- GETTING STARTED -->
 ## How To's
-You need to prepare follow [Setup](#Setup) tutorial.
+You need to prepare follow [Setup](#Setup) tutorial:
   * Nat network
   * 5 VMs we didn't provide
   * 5 VMs we provide
