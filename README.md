@@ -11,12 +11,14 @@
 
 ## Basic Info
 This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environtment. You need install the Virtualbox first. In pricipal, we need 10 vm to be launched to run this tool. The VMs are:
-### Not provided:
+
+### Not provided
   * Controller Machine
   * Data Logger Server
   * Vulnerable Client
   * Non Vulnerable Client * 2
-### Provided:
+
+### Provided
   * [Attacker Server](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
   * [Malicious Client](https://drive.google.com/file/d/1XNrXRrvk_iuqcQ2f0RLz9kHkoJ-vbnWs/view)
   * [Target Server](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
@@ -38,12 +40,8 @@ You need to prepare follow [Setup](#Setup) tutorial:
   * 5 VMs we provide
   * 2 network adapters of each VM
 
-
-
 ##### VMs on Virtual Box
 ![](https://i.imgur.com/R4FWhjS.png)
-
-
 
 ### VMs Setting
 * Not provided:
@@ -85,8 +83,6 @@ You need to prepare follow [Setup](#Setup) tutorial:
      * `hostname`: metasploitable3-ub1404
      * `passwd`: qsefthuk
 
-
-
 ### Setup
 0. You should use a `local network` in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
 1. `Create a Nat network`:\
@@ -116,8 +112,6 @@ You need to prepare follow [Setup](#Setup) tutorial:
     `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tool.sh run_creme.sh` 🡪\
     `sudo ./setup_tool.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
 
-
-
 ### Run
 1. Turn on all or your machines(10 Machines)
 2. Login to your controller
@@ -126,7 +120,6 @@ You need to prepare follow [Setup](#Setup) tutorial:
 
 ##### Example of Web Interface
 ![](https://i.imgur.com/5xTMXRn.png)
-
 
 
 
