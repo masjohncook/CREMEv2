@@ -88,7 +88,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 1. `Create a Nat network`:\
     Open VirtualBox 🡪 File 🡪 Preferences… 🡪 Network 🡪 Add a new NatNetwork 🡪 Right click on the new network 🡪 Edit NAT Network 🡪 Update Network CIDR to 192.168.56.0/24 🡪 OK 🡪 OK
 2. `Import 5 provided VMs into VirtualBox`:\
-    Import from [Provided](#Provided) and check the informations are all correct([#VMs Setting](#VMs Setting)).
+    Import from [Provided](#Provided) and check the informations are all correct([VMs Setting](#VMs Setting)).
 3. `Install 5 VMs we didn't provide`:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs Setting](#VMs Setting).
 4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
