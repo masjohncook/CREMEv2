@@ -49,7 +49,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
      * `IP`: 192.168.56.111
      * `hostname`: controller-machine
      * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter(set host OS Virtualbox Interface IP to `192.168.56.1`)
+     * `Adapter 1`: Host-Only adapter (set host OS Virtualbox Interface IP to `192.168.56.1`)
      * `Adapter 2`: Nat network you created
   * Data Logger Server
      * `IP`: 192.168.56.121
