@@ -95,7 +95,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
     * Set Network Adapter 1 to **Host-Only** (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
     * Set Network Adapter 2 to **NAT network you created in step1**
 5. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
-    * Network 🡪 Choose Ethernet enp0s3 wired botton 🡪 IPv4 🡪 Manual
+    * Network 🡪 Choose Ethernet enp0s8(adapter2) wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 24
         * Gateway: 192.168.56.2
