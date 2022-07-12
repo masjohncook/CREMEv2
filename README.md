@@ -94,7 +94,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
     * Set Network Adapter 1 to **Host-Only** (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
     * Set Network Adapter 2 to **NAT network you created in step1**
-5. `Set 5 VMs you created in step3`: Open VM 🡪 Settings 🡪
+5. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet enp0s3 wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 24
