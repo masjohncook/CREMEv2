@@ -49,39 +49,55 @@ You need to prepare follow [Setup](#Setup) tutorial:
      * `IP`: 192.168.56.111
      * `hostname`: controller-machine
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter(set host OS Virtualbox Interface IP to `192.168.56.1`)
+     * `Adapter 2`: Nat network you created
   * Data Logger Server
      * `IP`: 192.168.56.121
      * `hostname`: data-logger-machine
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
   * Vulnerable Client
      * `IP`: 192.168.56.151
      * `hostname`: vulnerable-machine
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
   * Non Vulnerable Client 1
      * `IP`: 192.168.56.141
      * `hostname`: non-vulnerable-machine-1
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
   * Non Vulnerable Client 2
      * `IP`: 192.168.56.142
      * `hostname`: non-vulnerable-machine-2
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
 * Provided:
   * Attacker Server
      * `IP`: 192.168.56.131
      * `hostname`: attacker-server
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
   * Malicious Client
      * `IP`: 192.168.56.161
      * `hostname`: malicious-client
      * `passwd`: qsefthuk
+     * `Adapter 1`: Nat network
   * Target Server
      * `IP`: 192.168.56.181
      * `hostname`: metasploitable3-ub1404
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
   * Benign Server
      * `IP`: 192.168.56.171
      * `hostname`: metasploitable3-ub1404
      * `passwd`: qsefthuk
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
 
 ### Setup
 0. You should use a `local network` in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
@@ -92,8 +108,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 3. `Install 5 VMs we didn't provide`:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs_Information](#VMs_Information).
 4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
-    * Set Network Adapter 1 to **Host-Only** (Don't forget to set you host OS Virtualbox Interface IP to `192.168.56.1`):
-    * Set Network Adapter 2 to **NAT network you created in step1**
+    Follow [VMs_Information](#VMs_Information) to set adapters of each VM.
 5. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet enp0s8(adapter2) wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
