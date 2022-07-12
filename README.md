@@ -103,7 +103,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
 6. `Continue to set 5 VMs you created`: Open terminal and do the followings
     * `sudo passwd root` 🡪 Set passwd to **qsefthuk**
-    * `sudo apt update` 🡪 `sudo apt install openssh-server -y` 🡪 `sudo apt install vim -y`
+    * `sudo apt update` 🡪 `sudo apt install openssh-server vim -y`
     * `sudo vim /etc/ssh/sshd_config` 🡪 Find the line contains **PermitRootLogin** 🡪\
     Updates it to `PermitRootLogin yes` 🡪 save and quit
     * `systemctl restart sshd`
