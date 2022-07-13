@@ -68,7 +68,7 @@ class DataLoggerServer(models.Model):
 
 class TargetServer(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="metasploitable3-ub1404")
+    hostname = models.CharField(max_length=255,default="target-server")
     ip = models.CharField(max_length=255,default="192.168.56.181")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
@@ -77,7 +77,7 @@ class TargetServer(models.Model):
 
 class BenignServer(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="metasploitable3-ub1404")
+    hostname = models.CharField(max_length=255,default="benign-server")
     ip = models.CharField(max_length=255,default="192.168.56.171")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")

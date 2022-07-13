@@ -20,6 +20,7 @@ set timeout 60
 ## update time
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
 set timeout 60

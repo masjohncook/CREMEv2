@@ -25,9 +25,14 @@ set timeout 60
 
 # install and setting rsyslog client for syslog collection
 expect "*:~# "
+send "dpkg --configure -a\r"
+expect "*:~# "
 send "apt update\r"
 expect "*:~# "
+send "dpkg --configure -a\r"
+expect "*:~# "
 send "apt install software-properties-common -y\r"
+set timeout 60
 expect "*:~# "
 send "add-apt-repository ppa:adiscon/v8-stable -y\r"
 expect "*:~# "
@@ -78,12 +83,12 @@ send "apt install atop -y\r"
 # update time
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
-expect "*:~# "
-send "service ntp stop\r"
-expect "*:~# "
-send "ntpdate ntp.ubuntu.com\r"
-expect "*:~# "
-send "service ntp restart\r"
+#expect "*:~# "
+#send "service ntp stop\r"
+#expect "*:~# "
+#send "ntpdate ntp.ubuntu.com\r"
+#expect "*:~# "
+#send "service ntp restart\r"
 
 # exit
 expect "*:~# "
