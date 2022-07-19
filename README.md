@@ -124,7 +124,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
     * `systemctl restart sshd`
 7. `Clone and set the Repository`:    
     `git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪\
-    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tool.sh run_creme.sh` 🡪\
+    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
     `sudo ./setup_tool.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
 
 ### Run
