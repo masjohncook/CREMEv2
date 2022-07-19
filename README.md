@@ -108,7 +108,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
     * Network 🡪 Choose Ethernet wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 24
-        * Gateway: 192.168.56.1
+        * Gateway: 192.168.56.2
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
 5. `Continue to set 5 VMs you created`: Open terminal and do the followings
