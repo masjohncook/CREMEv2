@@ -125,7 +125,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 7. `Clone and set the Repository`:    
     `git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪\
     `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
-    `sudo ./setup_tool.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
+    `sudo ./setup_tools.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
 
 ### Run
 0. If you would like to rerun several times, you can `take a snapshot` before running, then back to that snapshot to rerun again. The reason is that we already finished configuring some services, so if we reconfigure them again, it may have some behaviors different from the first time
