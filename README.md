@@ -131,7 +131,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 0. If you would like to rerun several times, you can `take a snapshot` before running, then back to that snapshot to rerun again. The reason is that we already finished configuring some services, so if we reconfigure them again, it may have some behaviors different from the first time
 1. Turn on all or your machines(10 Machines)
 2. Login to your controller
-3. `cd CREME-N/` 🡪 `~# ./run_creme.sh`
+3. `cd CREME-N/` 🡪 `./run_creme.sh`
 4. Access the controll interface using your **Host OS Browser** `http://<your controller IP>:8000`
 
 ##### Example of Web Interface
