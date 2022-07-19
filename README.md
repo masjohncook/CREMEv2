@@ -49,8 +49,8 @@ You need to prepare follow [Setup](#Setup) tutorial:
      * `IP`: 192.168.56.111
      * `hostname`: controller-machine
      * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter (set host OS Virtualbox Interface IP to `192.168.56.1`)
-     * `Adapter 2`: Nat network you created
+     * `Adapter 1`: Host-Only adapter
+     * `Adapter 2`: Nat network
   * Data Logger Server
      * `IP`: 192.168.56.121
      * `hostname`: data-logger-machine
@@ -108,7 +108,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 3. `Install 5 VMs we didn't provide`:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs_Information](#VMs_Information).
 4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
-    Follow [VMs_Information](#VMs_Information) to set adapters of each VM.
+    Follow [VMs_Information](#VMs_Information) to set **host-only Network adapter IP** to `192.168.56.1` of each VM.
 5. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet enp0s8(adapter2) wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
