@@ -35,10 +35,9 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 <!-- GETTING STARTED -->
 ## How To's
 You need to prepare follow [Setup](#Setup) tutorial:
-  * Nat network
+  * adapters of each VM
   * 5 VMs we didn't provide
   * 5 VMs we provide
-  * 2 network adapters of each VM
 
 ##### VMs on Virtual Box
 ![](https://i.imgur.com/R4FWhjS.png)
@@ -46,30 +45,30 @@ You need to prepare follow [Setup](#Setup) tutorial:
 ### VMs_Information
 * Not provided:
   * Controller Machine (more than 4GB of RAM, 8GB if possible)
-     * `IP`: 192.168.56.111
-     * `hostname`: controller-machine
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.111
+    * `hostname`: controller-machine
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
   * Data Logger Server
-     * `IP`: 192.168.56.121
-     * `hostname`: data-logger-machine
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.121
+    * `hostname`: data-logger-machine
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
   * Vulnerable Client
-     * `IP`: 192.168.56.151
-     * `hostname`: vulnerable-machine
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.151
+    * `hostname`: vulnerable-machine
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
   * Non Vulnerable Client 1
-     * `IP`: 192.168.56.141
-     * `hostname`: non-vulnerable-machine-1
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.141
+    * `hostname`: non-vulnerable-machine-1
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
   * Non Vulnerable Client 2
-     * `IP`: 192.168.56.142
-     * `hostname`: non-vulnerable-machine-2
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.142
+    * `hostname`: non-vulnerable-machine-2
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
 * Provided:
   * Attacker Server
      * `IP`: 192.168.56.131
@@ -82,40 +81,43 @@ You need to prepare follow [Setup](#Setup) tutorial:
      * `passwd`: qsefthuk
      * `Adapter 1`: Host-Only adapter
   * Target Server
-     * `IP`: 192.168.56.181
-     * `hostname`: metasploitable3-ub1404
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.181
+    * `hostname`: metasploitable3-ub1404
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
   * Benign Server
-     * `IP`: 192.168.56.171
-     * `hostname`: metasploitable3-ub1404
-     * `passwd`: qsefthuk
-     * `Adapter 1`: Host-Only adapter
+    * `IP`: 192.168.56.171
+    * `hostname`: metasploitable3-ub1404
+    * `passwd`: qsefthuk
+    * `Adapter 1`: Host-Only adapter
+  * Router
+    * `Adapter 1`: Host-Only adapter
+    * `Adapter 2`: NAT
 
 ### Setup
 0. You should use a `local network` in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
-1. `Create a Nat network`:\
-    Open VirtualBox 🡪 File 🡪 Preferences… 🡪 Network 🡪 Add a new NatNetwork 🡪 Right click on the new network 🡪 Edit NAT Network 🡪 Update Network CIDR to 192.168.56.0/24 🡪 OK 🡪 OK
-2. `Import 5 provided VMs into VirtualBox`:\
+<!-- 1. `Create a Nat network`:\
+    Open VirtualBox 🡪 File 🡪 Preferences… 🡪 Network 🡪 Add a new NatNetwork 🡪 Right click on the new network 🡪 Edit NAT Network 🡪 Update Network CIDR to 192.168.56.0/24 🡪 OK 🡪 OK -->
+1. `Import 5 provided VMs into VirtualBox`:\
     Import from [Provided](#Provided) and check the informations are all correct ([VMs_Information](#VMs_Information)).
-3. `Install 5 VMs we didn't provide`:\
-    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and passwd follow [VMs_Information](#VMs_Information).
-4. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
+2. `Install 5 VMs we didn't provide`:\
+    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and password follow [VMs_Information](#VMs_Information).
+3. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
     Set **IP in your host adapter** to `192.168.56.1`.
-5. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
+4. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 24
         * Gateway: 192.168.56.1
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
-6. `Continue to set 5 VMs you created`: Open terminal and do the followings
+5. `Continue to set 5 VMs you created`: Open terminal and do the followings
     * `sudo passwd root` 🡪 Set passwd to **qsefthuk**
     * `sudo apt update` 🡪 `sudo apt install openssh-server vim -y`
     * `sudo vim /etc/ssh/sshd_config` 🡪 Find the line contains **PermitRootLogin** 🡪\
     Updates it to `PermitRootLogin yes` 🡪 save and quit
     * `systemctl restart sshd`
-7. `Clone and set the Repository`:    
+6. `Clone and set the Repository`:    
     `git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪\
     `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
     `sudo ./setup_tools.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
