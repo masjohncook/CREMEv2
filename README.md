@@ -101,9 +101,9 @@ You need to prepare follow [Setup](#Setup) tutorial:
 1. `Import 5 provided VMs into VirtualBox`:\
     Import from [Provided](#Provided) and check the informations are all correct ([VMs_Information](#VMs_Information)).
 2. `Install 5 VMs we didn't provide`:\
-    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). create hostname and password follow [VMs_Information](#VMs_Information).
+    OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). Create hostname and password follow [VMs_Information](#VMs_Information).
 3. `Set network adapters of each VM`(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter
-    Set **IP in your host adapter** to `192.168.56.1`.
+    Set **your host adapter IP** to `192.168.56.1`.
 4. `Set 5 VMs you created in step3`: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet wired botton 🡪 IPv4 🡪 Manual
         * Address: follow [VMs_Information](#VMs_Information)
