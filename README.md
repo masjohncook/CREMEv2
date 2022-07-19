@@ -94,6 +94,9 @@ You need to prepare follow [Setup](#Setup) tutorial:
     * `Adapter 1`: Host-Only adapter
     * `Adapter 2`: NAT
 
+### Network Topology
+![](https://i.imgur.com/pLAkRIy.jpg)
+
 ### Setup
 0. You should use a `local network` in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
 <!-- 1. `Create a Nat network`:\
