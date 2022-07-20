@@ -106,12 +106,12 @@ You need to prepare follow [Setup](#Setup) tutorial:
 2. **Install the 5 VMs we didn't provide**:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). Create hostname and password follow [VMs_Information](#VMs_Information).
 3. **Set network adapters of each VM**(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪 choose `Host-Only Ethernet Adapter`\
-    Set **Host-Only Ethernet Adapter on your host OS**\
-        * IP: `192.168.56.1`
+    Set **Host-Only Ethernet Adapter on your host OS**:
+        * IP Address: `192.168.56.1`
         * Netmask: 255.255.255.0/24
 4. **Set the 5 VMs you created**: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet wired botton 🡪 IPv4 🡪 Manual
-        * Address: follow [VMs_Information](#VMs_Information)
+        * IP Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 255.255.255.0/24
         * Gateway: `192.168.56.2`
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
