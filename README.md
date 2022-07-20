@@ -44,7 +44,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 
 ### VMs_Information
 * Not provided:
-  * Controller Machine (more than 4GB of RAM, 8GB if possible)
+  * Controller Machine (more than 8GB of RAM)
     * `IP`: 192.168.56.111
     * `hostname`: controller-machine
     * `password`: qsefthuk
