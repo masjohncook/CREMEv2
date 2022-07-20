@@ -40,7 +40,7 @@ sudo make install
 sudo make install
 
 #install redis
-cd -
+cd ~/
 wget http://download.redis.io/redis-stable.tar.gz
 tar xvzf redis-stable.tar.gz -O ~/
 cd redis-stable
