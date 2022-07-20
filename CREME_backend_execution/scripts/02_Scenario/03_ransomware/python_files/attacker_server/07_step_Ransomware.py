@@ -25,9 +25,6 @@ def main(argv):
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
-    while client.jobs.list:
-        time.sleep(1)
-
     shell = client.sessions.session('4')
     shell.write('wget --no-check-certificate http://{0}/downloads/crypto.sh'.format(my_ip))
     shell.write('chmod 755 ./crypto.sh')
