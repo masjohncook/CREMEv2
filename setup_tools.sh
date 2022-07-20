@@ -42,8 +42,9 @@ sudo make install
 cd -
 
 #install redis
+cd -
 wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz -O ~/
 cd redis-stable
 make MALLOC=libc
 cd -
