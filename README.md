@@ -47,48 +47,48 @@ You need to prepare follow [Setup](#Setup) tutorial:
   * Controller Machine (more than 4GB of RAM, 8GB if possible)
     * `IP`: 192.168.56.111
     * `hostname`: controller-machine
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
   * Data Logger Server
     * `IP`: 192.168.56.121
     * `hostname`: data-logger-machine
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
   * Vulnerable Client
     * `IP`: 192.168.56.151
     * `hostname`: vulnerable-machine
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
   * Non Vulnerable Client 1
     * `IP`: 192.168.56.141
     * `hostname`: non-vulnerable-machine-1
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
   * Non Vulnerable Client 2
     * `IP`: 192.168.56.142
     * `hostname`: non-vulnerable-machine-2
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
 * Provided:
   * Attacker Server
      * `IP`: 192.168.56.131
      * `hostname`: attacker-server
-     * `passwd`: qsefthuk
+     * `password`: qsefthuk
      * `Adapter 1`: Host-Only adapter
   * Malicious Client
      * `IP`: 192.168.56.161
      * `hostname`: malicious-client
-     * `passwd`: qsefthuk
+     * `password`: qsefthuk
      * `Adapter 1`: Host-Only adapter
   * Target Server
     * `IP`: 192.168.56.181
     * `hostname`: metasploitable3-ub1404
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
   * Benign Server
     * `IP`: 192.168.56.171
     * `hostname`: metasploitable3-ub1404
-    * `passwd`: qsefthuk
+    * `password`: qsefthuk
     * `Adapter 1`: Host-Only adapter
   * Router
     * `Adapter 1`: Host-Only adapter
@@ -114,20 +114,23 @@ You need to prepare follow [Setup](#Setup) tutorial:
         * Gateway: 192.168.56.2
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
-5. `Continue to set 5 VMs you created`: Open terminal and do the followings
-    * `sudo passwd root` 🡪 Set passwd to **qsefthuk**
-    * `sudo apt update` 🡪 `sudo apt install openssh-server vim -y`
-    * `sudo vim /etc/ssh/sshd_config` 🡪 Find the line contains **PermitRootLogin** 🡪\
-    Updates it to `PermitRootLogin yes` 🡪 save and quit
-    * `systemctl restart sshd`
-6. `Clone and set the Repository`:    
-    `git clone https://github.com/masjohncook/CREME-N.git` 🡪 `sudo chown -R user:user CREME-N/` 🡪\
-    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪 `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
+5. `Continue to set the 5 VMs you created`: Open terminal and key the following commands\
+    `sudo passwd root`, then set the password to **qsefthuk** 🡪\
+    `sudo apt update` 🡪 `sudo apt install openssh-server vim -y` 🡪\
+    `sudo vim /etc/ssh/sshd_config`, then find the line contains **PermitRootLogin**, Updates it to `PermitRootLogin yes` 🡪\ 
+    save and quit 🡪\
+    `systemctl restart sshd`
+6. `Clone and set the Repository on Controller machine`: Open terminal and key the following commands\
+    `sudo apt install git` 🡪\
+    `git clone https://github.com/masjohncook/CREME-N.git` 🡪\
+    `sudo chown -R {username}:{username} CREME-N/` 🡪\
+    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪\
+    `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
     `sudo ./setup_tools.sh` 🡪 `./setup.sh` 🡪 Wait till all processes is finished
 
 ### Run
 0. If you would like to rerun several times, you can `take a snapshot` before running, then back to that snapshot to rerun again. The reason is that we already finished configuring some services, so if we reconfigure them again, it may have some behaviors different from the first time
-1. Turn on all or your machines(10 Machines)
+1. Turn on all or your machines (10 Machines)
 2. Login to your controller
 3. `cd CREME-N/` 🡪 `./run_creme.sh`
 4. Access the controll interface using your **Host OS Browser** `http://<your controller IP>:8000`
