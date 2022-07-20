@@ -105,24 +105,25 @@ You need to prepare follow [Setup](#Setup) tutorial:
     Import from [Provided](#Provided) and check the informations are all correct ([VMs_Information](#VMs_Information)).
 2. **Install the 5 VMs we didn't provide**:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). Create hostname and password follow [VMs_Information](#VMs_Information).
-3. **Set network adapters of each VM**(note the sequence): Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪 choose `Host-Only Ethernet Adapter`\
-    Set **Host-Only Ethernet Adapter on your host OS**:
-        * IP Address: `192.168.56.1`
-        * Netmask: 255.255.255.0/24
-4. **Set the 5 VMs you created**: Startup VMs 🡪 Settings 🡪
+3. **Set network adapters of each VM except the router we provided** (follow [VMs_Information](#VMs_Information)):\
+    Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪 choose `Host-Only Ethernet Adapter`\
+4. **Set Host-Only Ethernet Adapter on your host OS**: Open network adapter settings **on your host OS** 🡪 Right click **VirtualBox Host-Only Network** adapter 🡪 content 🡪 IPv4 content, then key the following informations
+    * IP Address: `192.168.56.1`
+    * Netmask: 255.255.255.0/24
+5. **Set the 5 VMs you created**: Startup VMs 🡪 Settings 🡪
     * Network 🡪 Choose Ethernet wired botton 🡪 IPv4 🡪 Manual
         * IP Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 255.255.255.0/24
         * Gateway: `192.168.56.2`
         * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
-5. **Continue to set the 5 VMs you created**: Open terminal and key the following commands\
+6. **Continue to set the 5 VMs you created**: Open terminal and key the following commands\
     `sudo passwd root`, then set the password to **qsefthuk** 🡪\
     `sudo apt update` 🡪 `sudo apt install openssh-server vim -y` 🡪\
     `sudo vim /etc/ssh/sshd_config`, then find the line contains **PermitRootLogin**, Updates it to `PermitRootLogin yes` 🡪\ 
     save and quit 🡪\
     `systemctl restart sshd`
-6. **Clone and set the Repository on Controller machine**: Open terminal and key the following commands\
+7. **Clone and set the Repository on Controller machine**: Open terminal and key the following commands\
     `sudo apt install git` 🡪\
     `git clone https://github.com/masjohncook/CREME-N.git` 🡪\
     `sudo chown -R {username}:{username} CREME-N/` 🡪\
