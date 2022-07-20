@@ -51,7 +51,7 @@ class Controller(models.Model):
     hostname = models.CharField(max_length=255,default="controller-machine")
     ip = models.CharField(max_length=255,default="192.168.56.111")
     username = models.CharField(max_length=255,default="user")
-    password = models.CharField(max_length=255,default="qwerty")
+    password = models.CharField(max_length=255,default="qsefthuk")
     path = models.CharField(max_length=255,default="/home/user")
 
 
