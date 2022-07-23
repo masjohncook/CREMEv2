@@ -26,6 +26,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 expect "*:~# "
 send "rm $folder/$atop_file \r"
@@ -33,11 +34,12 @@ send "rm $folder/$atop_file \r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_username@$controller_ip:$controller_path/CREME/CREME_backend_execution/scripts/data_collection/prepared_files/$startatop_file $folder\r"
+send "scp -r $controller_username@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/01_data_collection/prepared_files/$startatop_file $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_password\r"
+set timeout 60
 
 expect "*:~# "
 send "chmod +x $folder/$startatop_file \r"
