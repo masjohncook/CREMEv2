@@ -16,7 +16,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-
+set timeout 60
 
 expect "*:~# "
 send "python3 $path/6th_step_ResourceHijacking.py $path $ip $target_server_ip\r"
