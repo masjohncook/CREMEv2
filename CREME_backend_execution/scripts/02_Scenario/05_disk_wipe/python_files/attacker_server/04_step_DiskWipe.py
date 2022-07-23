@@ -21,7 +21,7 @@ def main(argv):
 
     client = MsfRpcClient('kali')
 
-    time.sleep(2)
+    # start step 4
     output_time_file = 'time_stage_4_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
