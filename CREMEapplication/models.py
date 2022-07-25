@@ -50,9 +50,9 @@ class Controller(models.Model):
     objects = models.Manager()
     hostname = models.CharField(max_length=255,default="controller-machine")
     ip = models.CharField(max_length=255,default="192.168.56.111")
-    username = models.CharField(max_length=255,default="user")
+    username = models.CharField(max_length=255,default="controller-machine")
     password = models.CharField(max_length=255,default="qsefthuk")
-    path = models.CharField(max_length=255,default="/home/user")
+    path = models.CharField(max_length=255,default="/home/controller-machine")
 
 
 class DataLoggerServer(models.Model):
