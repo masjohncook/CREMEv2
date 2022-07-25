@@ -120,8 +120,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 6. **Continue to set the 5 VMs you created**: Open terminal and key the following commands\
     `sudo passwd root`, then set the password to **qsefthuk** 🡪\
     `sudo apt update` 🡪 `sudo apt install openssh-server vim -y` 🡪\
-    `sudo vim /etc/ssh/sshd_config`, then find the line contains **PermitRootLogin**, Updates it to `PermitRootLogin yes` 🡪\ 
-    save and quit 🡪\
+    `sudo vim /etc/ssh/sshd_config`, then find the line contains **PermitRootLogin**, Updates it to `PermitRootLogin yes` 🡪 save and quit 🡪\
     `systemctl restart sshd`
 7. **Clone and set the Repository on Controller machine**: Open terminal and key the following commands\
     `sudo apt install git` 🡪\
