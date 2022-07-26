@@ -209,6 +209,20 @@ class Creme:
     def attack_mirai(self):
         ProgressHelper.update_scenario("Mirai")
         stage = 2
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
+                                    5, new_stage=True)
+        self.attacker_server.mirai_first_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
+                                    5, new_stage=True)
+        self.attacker_server.mirai_second_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is running CNC server and login to manage \
                                     bots", 5, new_stage=True)
         self.attacker_server.mirai_start_cnc_and_login()
