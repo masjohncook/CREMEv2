@@ -108,7 +108,7 @@ class AttackerServer(models.Model):
     ip = models.CharField(max_length=255,default="192.168.56.131")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
-    path = models.CharField(max_length=255, default="/home/attacker-server/Desktop/reinstall")
+    path = models.CharField(max_length=255, default="/home/kali/Desktop/reinstall")
     number_of_new_bots = models.IntegerField(default=3)
     DDoS_type = models.CharField(max_length=10, choices=DDOS_TYPE_CHOICES, default="udp")
     DDoS_duration = models.IntegerField(default=30, validators=[MaxValueValidator(1000000), MinValueValidator(10)])
