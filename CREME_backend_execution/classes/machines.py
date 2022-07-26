@@ -624,7 +624,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     mirai_o4_xxx_1 = None
     mirai_o4_xxx_2 = None
 
-    def __init__(self, hostname, ip, username, password, path="/home/client1/Desktop/reinstall",
+    def __init__(self, hostname, ip, username, password, path="/home/kali/Desktop/reinstall",
                  cnc_pids_file="cnc_pids.txt", transfer_pids_file="transfer_pids.txt", number_of_new_bots="3",
                  targeted_attack="", DDoS_type="udp", DDoS_duration="30"):
         super().__init__(hostname, ip, username, password, path)
@@ -735,7 +735,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 
 
-## Mirai Attack Block
+    ## Mirai Attack Block
     def mirai_first_stage(self):
         filename_path = "02_scenario/00_PRE/bash_file/01_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
