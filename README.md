@@ -106,7 +106,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 2. **Install the 5 VMs we didn't provide**:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). Create hostname and password follow [VMs_Information](#VMs_Information).
 3. **Set network adapters of each VM except the router we provided** (follow [VMs_Information](#VMs_Information)):\
-    Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪 choose `Host-Only Ethernet Adapter`\
+    Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪 choose `Host-Only Ethernet Adapter`
 4. **Set Host-Only Ethernet Adapter on your host OS**: Open network adapter settings **on your host OS** 🡪 Right click **VirtualBox Host-Only Network** adapter 🡪 content 🡪 IPv4 content, then key the following informations
     * IP Address: `192.168.56.1`
     * Netmask: 255.255.255.0/24
@@ -136,7 +136,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 1. Turn on all or your machines (10 Machines)
 2. Login to your controller
 3. `cd CREME-N/` 🡪 `./run_creme.sh`
-4. Access the controll interface using your **Host OS Browser** `http://<your controller IP>:8000`
+4. Access the controll interface using your **Host OS Browser** `http://{your controller IP}:8000`
 
 ##### Example of Web Interface
 ![](https://i.imgur.com/5xTMXRn.png)
