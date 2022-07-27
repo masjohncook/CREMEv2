@@ -15,14 +15,14 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
-## update time
+# update time
 expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
+send "apt -y install ntp\r"
 expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
-set timeout 60
+send "apt -y install ntpdate\r"
+expect "*:~# "
+send "sudo ntpdate ntp.ubuntu.com\r"
 
 expect "*:~# "
 send "exit\r"

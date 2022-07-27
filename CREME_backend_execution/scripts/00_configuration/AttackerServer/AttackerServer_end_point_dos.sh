@@ -22,18 +22,16 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # download files
-#expect "*:~# "
-#send "rm ~/.ssh/known_hosts\r"
-#expect "*:~# "
-#send "scp $controller_user@$controller_ip:$controller_path/$prepared_files/* $path\r"
-#expect "*continue connecting (yes/no*)? "
-#send "yes\r"
-#expect " password: "
-#send "$controller_pass\r"
-#set timeout 60
+expect "*:~# "
+send "rm ~/.ssh/known_hosts\r"
+expect "*:~# "
+send "scp $controller_user@$controller_ip:$controller_path/$prepared_files/* $path\r"
+expect "*continue connecting (yes/no*)? "
+send "yes\r"
+expect " password: "
+send "$controller_pass\r"
 
 expect "*:~# "
 send "chmod +x $path/*.py \r"

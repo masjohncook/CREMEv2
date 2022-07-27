@@ -18,7 +18,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # mount filesystem /run with exec option  -Mirai will be at /run/a
 expect "*:~# "

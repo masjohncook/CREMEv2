@@ -73,8 +73,8 @@ class MaliciousClientForm(forms.ModelForm):
 class AttackScenarioForm(forms.ModelForm):
     class Meta:
         model = AttackScenario
-        fields = ('mirai', 'ransomware', 'resource_hijacking', 'disk_wipe', 'end_point_dos', 'data_theft',
-                  'rootkit_ransomware')
+        fields = ('02_mirai', '03_ransomware', '04_resource_hijacking', '05_disk_wipe', '06_end_point_dos', '07_data_theft',
+                  '08_rootkit_ransomware')
 
 
 class MachineLearningModelForm(forms.ModelForm):

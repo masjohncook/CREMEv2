@@ -15,7 +15,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # forward sending packet to DataLoggerServer
 # configure Port Mirroring for Network Packets colection
@@ -29,13 +28,13 @@ send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
 expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
 
-## update time
-#expect "*:~# "
-#send "systemctl stop ntp\r"
-#expect "*:~# "
-#send "sudo ntpdate ntp.ubuntu.com\r"
-#expect "*:~# "
-#send "systemctl restart ntp\r"
+# update time
+expect "*:~# "
+send "systemctl stop ntp\r"
+expect "*:~# "
+send "sudo ntpdate ntp.ubuntu.com\r"
+expect "*:~# "
+send "systemctl restart ntp\r"
 
 # exit
 expect "*:~# "

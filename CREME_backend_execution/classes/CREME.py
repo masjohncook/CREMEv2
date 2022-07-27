@@ -205,24 +205,10 @@ class Creme:
         for non_vulnerable_client in self.non_vulnerable_clients:
             non_vulnerable_client.stop_benign_behaviors()
 
-    # ---------- 02_scenario ----------
+    # ---------- 02_Scenario ----------
     def attack_mirai(self):
         ProgressHelper.update_scenario("Mirai")
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
-                                    5, new_stage=True)
-        self.attacker_server.mirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
-                                    5, new_stage=True)
-        self.attacker_server.mirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is running CNC server and login to manage \
                                     bots", 5, new_stage=True)
         self.attacker_server.mirai_start_cnc_and_login()
@@ -361,54 +347,23 @@ class Creme:
         self.attacker_server.end_point_dos_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is exploiting unix/irc/unreal_ircd_3281_backdoor",
                                     5, new_stage=True)
-        self.attacker_server.nonmirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
+        self.attacker_server.end_point_dos_first_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished exploiting unix/irc/unreal_ircd_3281_backdoor",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing Create Account",
                                     5, new_stage=True)
-        self.attacker_server.nonmirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
+        self.attacker_server.end_point_dos_second_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing Create Account",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 06_end_point_dos",
                                     5, new_stage=True)
         self.attacker_server.end_point_dos_third_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
-                                    5, new_stage=True)
-        self.attacker_server.end_point_dos_fourth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
-                                    5, new_stage=True)
-        self.attacker_server.end_point_dos_fifth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
-                                    5, new_stage=True)
-        self.attacker_server.end_point_dos_sixth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
-                                    5, new_stage=True)
-        self.attacker_server.end_point_dos_seventh_stage()
-
-
-
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "06_end_point_dos", "times")
         timestamp_file = "time_stage_3_end.txt"
@@ -493,7 +448,7 @@ class Creme:
         :param remote_files: other files at remote_machine (not pcap, accounting, syslog, timestamp)
         """
         log_folder = self.dls.controller_path
-        tmp_folder_names = ["CREME-N", "CREME_backend_execution", "logs", scenario_log_folder]
+        tmp_folder_names = ["CREME", "CREME_backend_execution", "logs", scenario_log_folder]
         for folder in tmp_folder_names:
             log_folder = os.path.join(log_folder, folder)
 

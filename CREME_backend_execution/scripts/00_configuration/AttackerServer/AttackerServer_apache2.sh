@@ -1,5 +1,4 @@
 #!/usr/bin/expect -f
-#OK for Kali
 set delKnownHosts [lindex $argv 0]
 set ip [lindex $argv 1]
 set username [lindex $argv 2]
@@ -16,7 +15,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "sudo apt install apache2 -y\r"

@@ -1,5 +1,5 @@
 127.0.0.1	localhost
-192.168.56.131	mail.speedlab.net mail
+192.168.1.10	mail.speedlab.net mail
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback

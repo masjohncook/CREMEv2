@@ -20,20 +20,19 @@ send "yes\r"
 expect " password: "
 send "$password\r"
 
-## update time
+# update time
 expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
+send "apt -y install ntp\r"
 expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
-set timeout 60
-
-
+send "apt -y install ntpdate\r"
+expect "*:~# "
+send "sudo ntpdate ntp.ubuntu.com\r"
 
 # config new dns
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignClient/ConfigureFiles/resolv.conf  /etc\r"
+send "scp -r $controller_user@$controller_ip:$controller_path/CREME/CREME_backend_execution/scripts/configuration/prepared_files/benign_client/ConfigureFiles/resolv.conf  /etc\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "

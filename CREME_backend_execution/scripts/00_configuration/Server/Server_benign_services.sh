@@ -22,34 +22,26 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # update time
-#expect "*:~# "
-#send "sudo apt update \r"
-#expect "*:~# "
-#send "apt -y install ntp\r"
-#expect "*:~# "
-#send "apt -y install ntpdate\r"
-#expect "*:~# "
-#send "sudo ntpdate ntp.ubuntu.com\r"
-## update time
 expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
-set timeout 60
+send "sudo apt update \r"
 expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
-set timeout 60
+send "apt -y install ntp\r"
+expect "*:~# "
+send "apt -y install ntpdate\r"
+expect "*:~# "
+send "sudo ntpdate ntp.ubuntu.com\r"
+
 
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignServer/* $folder\r"
+send "scp -r $controller_user@$controller_ip:$controller_path/CREME/CREME_backend_execution/scripts/configuration/prepared_files/benign_server/* $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
-set timeout 60
 
 expect "*:~# "
 send "chmod +x *.sh\r"
@@ -83,7 +75,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
-set timeout 60
 
 # restart rsyslog
 expect "*:~# "

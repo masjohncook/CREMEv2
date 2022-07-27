@@ -1,17 +1,21 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt install expect -y
-sudo apt install python3-pip -y
-sudo apt install python-is-python3
+# install python 3.6
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt-get update
+sudo apt-get install python3.6 -y
+
+sudo apt-get update
+sudo apt-get install expect -y
+
 # virtual environment
-sudo apt install python3-venv -y
+sudo apt-get install python-virtualenv -y
 
 # install ssh server
-sudo apt install openssh-server -y
+sudo apt-get install openssh-server -y
 
 # install atop
-sudo apt install atop -y
+sudo apt-get install atop -y
 
 # install argus-serer and argus-client
 wget http://qosient.com/argus/src/argus-3.0.8.2.tar.gz
@@ -20,11 +24,11 @@ wget http://qosient.com/argus/src/argus-clients-3.0.8.2.tar.gz
 tar -xvzf argus-3.0.8.2.tar.gz
 tar -xvzf argus-clients-3.0.8.2.tar.gz
 
-sudo apt update
-sudo apt install flex -y
-sudo apt install bison -y
-sudo apt install libpcap-dev -y
-sudo apt install tmux -y
+sudo apt-get update
+sudo apt-get install flex -y
+sudo apt-get install bison -y
+sudo apt-get install libpcap-dev -y
+sudo apt-get install tmux -y
 
 cd argus-3.0.8.2
 chmod +x configure
@@ -39,11 +43,4 @@ chmod +x configure
 sudo make install
 sudo make install
 
-#install redis
-cd ~/
-wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
-cd redis-stable
-make MALLOC=libc
 cd -
-chown -R $(whoami):$(whoami) redis-stable

@@ -26,7 +26,6 @@ send "$password\r"
 #send "cp ConfigureFiles/resolv.conf /etc\r"
 #expect "*:~# "
 #send "sed -i \"s/my_dns_1/$server_ip/g\" /etc/resolv.conf\r"
-set timeout 60
 
 # configure vulnerable services
 # install and configure vulnerable telnet
@@ -36,13 +35,11 @@ send "apt update && apt -y install telnetd\r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/04_general/telnet/securetty  /etc/\r"
+send "scp $controller_user@$controller_ip:$controller_path/CREME/CREME_backend_execution/scripts/configuration/prepared_files/telnet/securetty  /etc/\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
-set timeout 60
-
 # mount filesystem /run with exec option  -Mirai will be at /run/a
 expect "*:~# "
 send "mount -o remount,exec /run\r"

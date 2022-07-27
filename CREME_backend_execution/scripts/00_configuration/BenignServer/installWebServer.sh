@@ -133,10 +133,8 @@ apt-get install -y software-properties-common
 add-apt-repository -y ppa:fkrull/deadsnakes
 apt-get update
 apt-get install -y python3.5
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 3
-wget https://bootstrap.pypa.io/pip/3.5/get-pip.py
-python3 get_pip.py
-pip3.5 install gdown
+wget -q -O - https://bootstrap.pypa.io/3.5/get-pip.py | python3.5
+pip3 install gdown
 gdown https://drive.google.com/uc?id=10hWuXEte-xlUE64_kOznOwDlEBxB4-oa
 # sudo chown server:server zacson.zip
 unzip zacson.zip -d zacson
