@@ -10,6 +10,8 @@ set numOfNewBots [lindex $argv 7]
 set targetedDDoS [lindex $argv 8]
 set DDoSType [lindex $argv 9]
 set dur [lindex $argv 10]
+set logs_path [lindex $argv 11]
+set outputTime [lindex $argv 12]
 
 set mirai_path "Mirai-Source-Code/mirai"
 set scanListenOutput "ScanListenOutput.txt"
@@ -31,6 +33,12 @@ send "yes\r"
 expect " password: "
 send "$password\r"
 set timeout 60
+
+# Record time
+set DATE [exec date +%s]
+set outputTimeFile [open $logs_path/$outputTime "w+"]
+puts $outputTimeFile $DATE
+close $outputTimeFile
 
 expect "*:~# "
 send "cd $path/$mirai_path\r"
