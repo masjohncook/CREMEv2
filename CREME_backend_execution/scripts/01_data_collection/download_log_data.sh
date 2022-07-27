@@ -26,6 +26,7 @@ send "yes\r"
 
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # download the atop data from the machine in our system
 expect "*:~# "
@@ -36,6 +37,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$machine_pass\r"
+set timeout 60
 
 expect "*:~# "
 send "mv $atop_folder_DLS/$atop_file $atop_folder_DLS/$new_atop_file\r"
