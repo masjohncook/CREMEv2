@@ -16,7 +16,7 @@ set ip_o3 [lindex $argv 13]
 set ip_o4_1 [lindex $argv 14]
 set ip_o4_2 [lindex $argv 15]
 
-set cnc_config_path "CREME/CREME_backend_execution/scripts/configuration/prepared_files/mirai/cnc"
+set cnc_config_path "CREME-N/CREME_backend_execution/scripts/02_scenario/02_mirai/python_files/cnc"
 set debug_path "Mirai-Source-Code/mirai/debug"
 set mirai_path "Mirai-Source-Code/mirai"
 
@@ -30,6 +30,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # install expect
 expect "*:~# "
@@ -44,6 +45,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 expect "*:~# "
 send "chmod +x $path/* \r"
