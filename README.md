@@ -140,7 +140,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
 1. You should use a `local network` in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
 2. If you would like to rerun several times, you can `take a snapshot` before running, then back to that snapshot to rerun again. The reason is that we already finished configuring some services, so if we reconfigure them again, it may have some behaviors different from the first time
 3. If you try to run, but the error message showed in the Dash Board indicate that you can't connet to any VM, just check if the [VMs_Information](#VMs_Information) are all corrected, and try to key the cmd `systemctl restart ssh` on the VM you can't connet to.
-4. If you want to scroll in Tmux terminal to check the previous messages, press `Ctrl+B`, then import `:set -g mouse on`
+4. If you want to check the Tmux messages when CREME-N running, open a terminal and key `tail -f CREME-N/celery.log`, then you can check the last 10 messages in Tmux.
 
 ##### Example of Web Interface
 ![](https://i.imgur.com/5xTMXRn.png)
