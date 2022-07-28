@@ -908,22 +908,22 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 ## End-Point Dos Attack Block
     def end_point_dos_start_metasploit(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_file/00_AttackerServer_start_metasploit_EngPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EngPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_third_stage(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_file/03_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/03_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_fourth_stage(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_file/04_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/04_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_fifth_stage(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_file/05_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/05_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -931,7 +931,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     def end_point_dos_sixth_stage(self):
         new_user_account = "cremetest"
         new_user_password = "password"
-        filename_path = "02_scenario/06_end_point_dos/bash_file06_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/06_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack,
                       new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -939,7 +939,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     def end_point_dos_seventh_stage(self):
         new_user_account = "cremetest"  # must be same as the second stage
         new_user_password = "password"
-        filename_path = "02_scenario/06_end_point_dos/bash_file/07_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/07_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack,
                       new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
