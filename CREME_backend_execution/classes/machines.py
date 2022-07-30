@@ -70,7 +70,7 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_collect_data(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.tcp_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -105,7 +105,7 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
             self.download_time_file(data_logger_client, time_file)
 
     def restart_rsyslog(self):
-        filename_path = "04_General/restart_service.sh"
+        filename_path = "04_general/restart_service.sh"
         service_name = "rsyslog"
         parameters = [self.ip, self.username, self.password, service_name]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -152,7 +152,7 @@ class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDa
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_collect_data(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.tcp_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -187,7 +187,7 @@ class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDa
             self.download_time_file(data_logger_client, time_file)
 
     def restart_rsyslog(self):
-        filename_path = "04_General/restart_service.sh"
+        filename_path = "04_general/restart_service.sh"
         service_name = "rsyslog"
         parameters = [self.ip, self.username, self.password, service_name]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -318,12 +318,12 @@ class VulnerableClient(DataLoggerClient, implements(IConfiguration), implements(
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_benign_behaviors(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def clean_benign_reproduction(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -379,12 +379,12 @@ class NonVulnerableClient(DataLoggerClient, implements(IConfiguration), implemen
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_benign_behaviors(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def clean_benign_reproduction(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -953,7 +953,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def data_theft_first_stage(self):
-        filename_path = "02_scenario/07_data_theft/bash_files/03_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
