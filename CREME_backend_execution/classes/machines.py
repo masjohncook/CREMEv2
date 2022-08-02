@@ -910,7 +910,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 ## End-Point Dos Attack Block
     def end_point_dos_start_metasploit(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EngPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
