@@ -842,66 +842,91 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 # Disk Wipe Attack Block
     def disk_wipe_start_metasploit(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
+        filename_path = "02_scenario/05_disk_wipe/bash_files/00_AttackerServer_start_metasploit_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def disk_wipe_first_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/03_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def disk_wipe_second_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/04_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
     def disk_wipe_third_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/05_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/05_disk_wipe/bash_files/03_step_AttackerServer_DiskWipe.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def disk_wipe_fourth_stage(self):
+        filename_path = "02_scenario/05_disk_wipe/bash_files/04_step_AttackerServer_DiskWipe.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def disk_wipe_fifth_stage(self):
+        filename_path = "02_scenario/05_disk_wipe/bash_files/05_step_AttackerServer_DiskWipe.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def disk_wipe_sixth_stage(self):
+        filename_path = "02_scenario/05_disk_wipe/bash_files/06_step_AttackerServer_DiskWipe.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def disk_wipe_seventh_stage(self):
+        filename_path = "02_scenario/05_disk_wipe/bash_files/07_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
 
 ## Ransomware Attack Block
     def ransomware_start_metasploit(self):
-        filename_path = "02_scenario/03_ransomware/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
+        filename_path = "02_scenario/03_ransomware/bash_files/00_AttackerServer_start_metasploit_Ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def ransomware_first_stage(self):
-        filename_path = "02_scenario/03_ransomware/bash_files/03_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def ransomware_second_stage(self):
-        filename_path = "02_scenario/03_ransomware/bash_files/04_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
     def ransomware_third_stage(self):
-        filename_path = "02_scenario/03_ransomware/bash_files/05_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/03_ransomware/bash_files/03_step_AttackerServer_Ransomware.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def ransomware_fourth_stage(self):
+        filename_path = "02_scenario/03_ransomware/bash_files/04_step_AttackerServer_Ransomware.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def ransomware_fifth_stage(self):
+        filename_path = "02_scenario/03_ransomware/bash_files/05_step_AttackerServer_Ransomware.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+    
+    def ransomware_sixth_stage(self):
+        filename_path = "02_scenario/03_ransomware/bash_files/06_step_AttackerServer_Ransomware.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def ransomware_seventh_stage(self):
+        filename_path = "02_scenario/03_ransomware/bash_files/07_step_AttackerServer_Ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
 
 ### Resource Hijacking Attack Block
     def resource_hijacking_start_metasploit(self):
-        filename_path = "02_scenario/04_resource_hijacking/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/00_AttackerServer_start_metasploit_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def resource_hijacking_first_stage(self):
-        filename_path = "02_scenario/04_resource_hijacking/bash_files/03_step_AttackerServer_EndPointDos.sh"
+    def resource_hijacking_fourth_stage(self):
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/04_step_AttackerServer_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def resource_hijacking_second_stage(self):
-        filename_path = "02_scenario/04_resource_hijacking/bash_files/04_step_AttackerServer_EndPointDos.sh"
+    def resource_hijacking_fifth_stage(self):
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/05_step_AttackerServer_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def resource_hijacking_third_stage(self):
-        filename_path = "02_scenario/04_resource_hijacking/bash_files/05_step_AttackerServer_EndPointDos.sh"
+    def resource_hijacking_sixth_stage(self):
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/06_step_AttackerServer_ResourceHijacking.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def resource_hijacking_seventh_stage(self):
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/07_step_AttackerServer_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
