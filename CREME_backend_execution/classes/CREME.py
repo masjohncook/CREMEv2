@@ -686,11 +686,6 @@ class Creme:
         # restart the rsyslog at data logger server
         self.restart_rsyslog_service()
 
-        # config ulimit to limit the number of processes for normal users,
-        # opening many processes will cause to problems about stuck atop collection
-        # TODO: currently, ulimit can't be applied to ssh session.
-        #self.target_server.configure_end_point_dos_ulimit()
-
         self.start_reproduce_benign_behavior()
         self.start_collect_data()
         self.attack_end_point_dos()

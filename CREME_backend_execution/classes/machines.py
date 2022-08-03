@@ -38,6 +38,8 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
     """
 
     """
+
+
     def __init__(self, hostname, ip, username, password, path, network_interface, tcp_file="traffic.pcap",
                  tcp_pids_file="tcp_pids.txt", atop_interval=1, time_window_traffic=1):
         super().__init__(hostname, ip, username, password, path)
@@ -70,7 +72,7 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_collect_data(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.tcp_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -105,7 +107,7 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
             self.download_time_file(data_logger_client, time_file)
 
     def restart_rsyslog(self):
-        filename_path = "04_General/restart_service.sh"
+        filename_path = "04_general/restart_service.sh"
         service_name = "rsyslog"
         parameters = [self.ip, self.username, self.password, service_name]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -152,7 +154,7 @@ class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDa
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_collect_data(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.tcp_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -187,7 +189,7 @@ class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDa
             self.download_time_file(data_logger_client, time_file)
 
     def restart_rsyslog(self):
-        filename_path = "04_General/restart_service.sh"
+        filename_path = "04_general/restart_service.sh"
         service_name = "rsyslog"
         parameters = [self.ip, self.username, self.password, service_name]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -318,12 +320,12 @@ class VulnerableClient(DataLoggerClient, implements(IConfiguration), implements(
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_benign_behaviors(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def clean_benign_reproduction(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -379,12 +381,12 @@ class NonVulnerableClient(DataLoggerClient, implements(IConfiguration), implemen
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_benign_behaviors(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def clean_benign_reproduction(self):
-        filename_path = "04_General/kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.benign_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -826,17 +828,17 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 ## PRE steps for Non Mirai
     def nonmirai_first_stage(self):
-        filename_path = "02_scenario/00_PRE/bash_file/01_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/00_PRE/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
 
     def nonmirai_second_stage(self):
-        filename_path = "02_scenario/00_PRE/bash_file/00_AttackerServer_start_metasploit_PRE.sh"
+        filename_path = "02_scenario/00_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-        filename_path = "02_scenario/00_PRE/bash_file/02_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/00_PRE/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -933,7 +935,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 ## End-Point Dos Attack Block
     def end_point_dos_start_metasploit(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EngPointDos.sh"
+        filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -978,7 +980,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def data_theft_first_stage(self):
-        filename_path = "02_scenario/07_data_theft/bash_files/03_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 

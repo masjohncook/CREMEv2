@@ -74,10 +74,16 @@ class ProgressHelper:
     this class supports to update progress data that used to display progress on the dashboard
     """
     scenario = "scenario"
-    status_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status", 4: "stage_4_status",
-                     5: "stage_5_status", 6: "stage_6_status", 7: "stage_7_status"}
-    detail_fields = {1: "stage_1_detail", 2: "stage_2_detail", 3: "stage_3_detail", 4: "stage_4_detail",
-                     5: "stage_5_detail", 6: "stage_6_detail", 7: "stage_7_detail"}
+    status_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
+                     4: "stage_4_status", 5: "stage_5_status", 6: "stage_6_status",
+                     7: "stage_7_status", 8: "stage_8_status", 9: "stage_9_status",
+                     10: "stage_10_status", 11: "stage_11_status", 12: "stage_12_status",
+                     13: "stage_13_status", 14: "stage_14_status"}
+    detail_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
+                     4: "stage_4_status", 5: "stage_5_status", 6: "stage_6_status",
+                     7: "stage_7_status", 8: "stage_8_status", 9: "stage_9_status",
+                     10: "stage_10_status", 11: "stage_11_status", 12: "stage_12_status",
+                     13: "stage_13_status", 14: "stage_14_status"}
     attack_phase_fields = {0: "attack_phase_1_data", 1: "attack_phase_2_data", 2: "attack_phase_3_data"}
     messages = []
 
@@ -146,7 +152,7 @@ class ProgressHelper:
         use to update status and detail of stages on the dashboard
         """
         if new_stage:
-            ProgressHelper.clean_stages(stage, 7)
+            ProgressHelper.clean_stages(stage, 14)
 
         ProgressHelper.update_messages(message, size, finished_task, override_pre_message, finished_stage, new_stage)
         detail = ""
