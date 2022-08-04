@@ -203,13 +203,25 @@ class IDiskWipeAttackerServer(Interface):
     def disk_wipe_start_metasploit(self):
         pass
 
-    def disk_wipe_first_stage(self):
+    def nonmirai_first_stage(self):
         pass
 
-    def disk_wipe_second_stage(self):
+    def nonmirai_second_stage(self):
         pass
 
     def disk_wipe_third_stage(self):
+        pass
+
+    def disk_wipe_fourth_stage(self):
+        pass
+
+    def disk_wipe_fifth_stage(self):
+        pass
+
+    def disk_wipe_sixth_stage(self):
+        pass
+
+    def disk_wipe_seventh_stage(self):
         pass
 
 
@@ -220,13 +232,25 @@ class IRansomwareAttackerServer(Interface):
     def ransomware_start_metasploit(self):
         pass
 
-    def ransomware_first_stage(self):
+    def nonmirai_first_stage(self):
         pass
 
-    def ransomware_second_stage(self):
+    def nonmirai_second_stage(self):
         pass
 
     def ransomware_third_stage(self):
+        pass
+
+    def ransomware_fourth_stage(self):
+        pass
+
+    def ransomware_fifth_stage(self):
+        pass
+
+    def ransomware_sixth_stage(self):
+        pass
+
+    def ransomware_seventh_stage(self):
         pass
 
 
@@ -237,13 +261,22 @@ class IResourceHijackingAttackerServer(Interface):
     def resource_hijacking_start_metasploit(self):
         pass
 
-    def resource_hijacking_first_stage(self):
+    def nonmirai_first_stage(self):
         pass
 
-    def resource_hijacking_second_stage(self):
+    def nonmirai_second_stage(self):
         pass
 
-    def resource_hijacking_third_stage(self):
+    def resource_hijacking_fourth_stage(self):
+        pass
+
+    def resource_hijacking_fifth_stage(self):
+        pass
+
+    def resource_hijacking_sixth_stage(self):
+        pass
+
+    def resource_hijacking_seventh_stage(self):
         pass
 
 
