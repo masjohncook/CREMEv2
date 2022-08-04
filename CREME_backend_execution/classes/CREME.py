@@ -269,23 +269,52 @@ class Creme:
         self.attacker_server.disk_wipe_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
                                     5, new_stage=True)
-        self.attacker_server.disk_wipe_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
+        self.attacker_server.nonmirai_first_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
                                     5, new_stage=True)
-        self.attacker_server.disk_wipe_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
+        self.attacker_server.nonmirai_second_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 05_disk_wipe",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_third_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
+                                    5, new_stage=True)
+        self.attacker_server.disk_wipe_fourth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
+                                    5, new_stage=True)
+        self.attacker_server.disk_wipe_fifth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
+                                    5, new_stage=True)
+        self.attacker_server.disk_wipe_sixth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
+                                    5, new_stage=True)
+        self.attacker_server.disk_wipe_seventh_stage()
+        
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "05_disk_wipe", "times")
         timestamp_file = "time_stage_3_end.txt"
@@ -299,25 +328,52 @@ class Creme:
         self.attacker_server.ransomware_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage,
-                                    f"{self.attacker_server.hostname} is exploiting unix/irc/unreal_ircd_3281_backdoor",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
                                     5, new_stage=True)
-        self.attacker_server.ransomware_first_stage()
-        ProgressHelper.update_stage(stage,
-                                    f"{self.attacker_server.hostname} finished exploiting unix/irc/unreal_ircd_3281_backdoor",
+        self.attacker_server.nonmirai_first_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing linux/local/service_persistence",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
                                     5, new_stage=True)
-        self.attacker_server.ransomware_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing linux/local/service_persistence",
+        self.attacker_server.nonmirai_second_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 03_ransomware",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
                                     5, new_stage=True)
         self.attacker_server.ransomware_third_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
+                                    5, new_stage=True)
+        self.attacker_server.ransomware_fourth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
+                                    5, new_stage=True)
+        self.attacker_server.ransomware_fifth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
+                                    5, new_stage=True)
+        self.attacker_server.ransomware_sixth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
+                                    5, new_stage=True)
+        self.attacker_server.ransomware_seventh_stage()
+        
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "03_ransomware", "times")
         timestamp_file = "time_stage_3_end.txt"
@@ -331,23 +387,45 @@ class Creme:
         self.attacker_server.resource_hijacking_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is exploiting linux/http/apache_continuum_cmd_exec",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
                                     5, new_stage=True)
-        self.attacker_server.resource_hijacking_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished exploiting linux/http/apache_continuum_cmd_exec",
+        self.attacker_server.nonmirai_first_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing linux/local/service_persistence",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
                                     5, new_stage=True)
-        self.attacker_server.resource_hijacking_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing linux/local/service_persistence",
+        self.attacker_server.nonmirai_second_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 2
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
+                                    5, new_stage=True)
+        self.attacker_server.resource_hijacking_fourth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 04_resource_hijacking",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
                                     5, new_stage=True)
-        self.attacker_server.resource_hijacking_third_stage()
+        self.attacker_server.resource_hijacking_fifth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
+                                    5, new_stage=True)
+        self.attacker_server.resource_hijacking_sixth_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+
+        stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
+                                    5, new_stage=True)
+        self.attacker_server.resource_hijacking_seventh_stage()
+        
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "04_resource_hijacking", "times")
         timestamp_file = "time_stage_3_end.txt"
