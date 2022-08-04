@@ -19,7 +19,7 @@ send "$password\r"
 set timeout 60
 
 expect "*:~# "
-send "python3 $path/disk_wipe_SecondStage.py $path $ip $target_server_ip\r"
+send "python3 $path/07_step_DiskWipe.py $path $ip $target_server_ip\r"
 
 expect "*:~# "
 send "exit\r"
