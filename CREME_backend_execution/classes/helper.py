@@ -152,7 +152,7 @@ class ProgressHelper:
         use to update status and detail of stages on the dashboard
         """
         if new_stage:
-            ProgressHelper.clean_stages(stage, 14)
+            ProgressHelper.clean_stages(stage, 7)
 
         ProgressHelper.update_messages(message, size, finished_task, override_pre_message, finished_stage, new_stage)
         detail = ""
