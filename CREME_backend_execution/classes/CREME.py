@@ -273,42 +273,42 @@ class Creme:
                                     5, new_stage=True)
         self.attacker_server.nonmirai_first_stage()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
         stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
                                     5, new_stage=True)
         self.attacker_server.nonmirai_second_stage()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
         stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_third_stage()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
         stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_fourth_stage()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
         stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_fifth_stage()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
         stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_sixth_stage()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
         stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
