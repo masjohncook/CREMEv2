@@ -12,6 +12,8 @@ DDOS_TYPE_CHOICES = [('udp', 'udp'), ('others...', 'others...')]
 class ProgressData(models.Model):
     objects = models.Manager()
     scenario = models.TextField(max_length=50, default='None')
+    
+    # Stage display on dashboard
     stage_1_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
     stage_1_detail = models.TextField(default='None')
     stage_2_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
@@ -22,10 +24,6 @@ class ProgressData(models.Model):
     stage_4_detail = models.TextField(default='None')
     stage_5_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
     stage_5_detail = models.TextField(default='None')
-    stage_6_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
-    stage_6_detail = models.TextField(default='None')
-    stage_7_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
-    stage_7_detail = models.TextField(default='None')
 
     # attack phases
     attack_phase_1_data = models.TextField(default='Attack Phase')
