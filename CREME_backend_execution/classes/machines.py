@@ -973,47 +973,47 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 
 
-## Data Theft Attack Block
-    def data_theft_start_metasploit(self):
-        filename_path = "02_scenario/07_data_theft/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+# ## Data Theft Attack Block
+#     def data_theft_start_metasploit(self):
+#         filename_path = "02_scenario/07_data_theft/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+#
+#     def data_theft_first_stage(self):
+#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+#
+#     def data_theft_second_stage(self):
+#         filename_path = "02_scenario/07_data_theft/bash_files/04_step_AttackerServer_EndPointDos.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+#
+#     def data_theft_third_stage(self):
+#         filename_path = "02_scenario/07_data_theft/bash_files/05_step_AttackerServer_EndPointDos.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def data_theft_first_stage(self):
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def data_theft_second_stage(self):
-        filename_path = "02_scenario/07_data_theft/bash_files/04_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def data_theft_third_stage(self):
-        filename_path = "02_scenario/07_data_theft/bash_files/05_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-
-## Rootkit Attack Block
-    def rootkit_ransomware_start_metasploit(self):
-        filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./00_AttackerServer_start_metasploit_PRE.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def rootkit_ransomware_first_stage(self):
-        filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./03_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def rootkit_ransomware_second_stage(self):
-        filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./04_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def rootkit_ransomware_third_stage(self):
-        filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./05_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+# ## Rootkit Attack Block
+#     def rootkit_ransomware_start_metasploit(self):
+#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./00_AttackerServer_start_metasploit_PRE.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+#
+#     def rootkit_ransomware_first_stage(self):
+#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./03_step_AttackerServer_EndPointDos.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+#
+#     def rootkit_ransomware_second_stage(self):
+#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./04_step_AttackerServer_EndPointDos.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+#
+#     def rootkit_ransomware_third_stage(self):
+#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./05_step_AttackerServer_EndPointDos.sh"
+#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_metasploit(self):
         filename_path = "./kill_pids.sh"
