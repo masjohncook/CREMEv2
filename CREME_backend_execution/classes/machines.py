@@ -3,8 +3,7 @@ from interface import implements
 from .interfaces import IConfiguration, IConfigurationCommon, IConfigurationAttack, IConfigurationBenign,\
     IDataCollection, IDataCentralization, IBenignReproduction, IMiraiAttackerServer, IMiraiMaliciousClient,\
     ICleaningBenignReproduction, ICleaningAttackReproduction, IConfigurationAttackerSide, IDiskWipeAttackerServer,\
-    IRansomwareAttackerServer, IResourceHijackingAttackerServer, IEndPointDosAttackerServer, IDataTheftAttackerServer,\
-    IRootkitRansomwareAttackerServer, ICleaningDataCollection
+    IRansomwareAttackerServer, IResourceHijackingAttackerServer, IEndPointDosAttackerServer, ICleaningDataCollection
 from .helper import ScriptHelper, OtherHelper
 from .CREME import Creme
 import time
