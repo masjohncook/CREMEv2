@@ -618,8 +618,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
                      implements(IConfigurationAttack), implements(IMiraiAttackerServer),
                      implements(ICleaningAttackReproduction), implements(IConfigurationAttackerSide),
                      implements(IDiskWipeAttackerServer), implements(IRansomwareAttackerServer),
-                     implements(IResourceHijackingAttackerServer), implements(IEndPointDosAttackerServer),
-                     implements(IDataTheftAttackerServer), implements(IRootkitRansomwareAttackerServer)):
+                     implements(IResourceHijackingAttackerServer), implements(IEndPointDosAttackerServer)):
     data_logger_server_ip = None
     DNS_server_ip = None
     mirai_o4_xxx_1 = None
