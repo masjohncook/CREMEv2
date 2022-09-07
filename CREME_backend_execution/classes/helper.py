@@ -73,6 +73,12 @@ class ProgressHelper:
     """
     this class supports to update progress data that used to display progress on the dashboard
     """
+
+    #stage 1 -->  Configuration
+    #stage 2 -->  Attack
+    #stage 3 -->  Data Processing
+    #stage 4 -->  ML Training
+    #stage 5 -->  Evalutaion
     scenario = "scenario"
     status_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
                      4: "stage_4_status", 5: "stage_5_status"}
