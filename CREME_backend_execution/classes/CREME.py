@@ -645,8 +645,7 @@ class Creme:
     # ---------- run scenario ----------
     def run_mirai(self):
         scenario = "02_mirai"
-        #attack_phases_name = ("Attack Phase 1<br>(Valid Accounts)", "Attack Phase 2</br>(Non-App Layer Protocol)",
-                              "Attack Phase 3</br>(Network DoS)")
+        #attack_phases_name = ("Attack Phase 1<br>(Valid Accounts)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Network DoS)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -668,8 +667,7 @@ class Creme:
 
     def run_disk_wipe(self):
         scenario = "05_disk_wipe"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)",
-                              "Attack Phase 3</br>(Disk wipe)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Disk wipe)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -693,8 +691,7 @@ class Creme:
 
     def run_ransomware(self):
         scenario = "03_ransomware"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)",
-                              "Attack Phase 3</br>(Data Encrypted)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -718,8 +715,7 @@ class Creme:
 
     def run_resource_hijacking(self):
         scenario = "04_resource_hijacking"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)",
-                              "Attack Phase 3</br>(Resource Hijacking)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Resource Hijacking)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -756,8 +752,7 @@ class Creme:
 
     def run_end_point_dos(self):
         scenario = "06_end_point_dos"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Create Account)",
-                              "Attack Phase 3</br>(Endpoint DoS)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Create Account)","Attack Phase 3</br>(Endpoint DoS)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -781,8 +776,7 @@ class Creme:
 
     def run_data_theft(self):
         scenario = "07_data_theft"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)",
-                              "Attack Phase 3</br>(Exfiltration Over C2 Channel)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Exfiltration Over C2 Channel)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -807,8 +801,7 @@ class Creme:
 
     def run_rootkit_ransomware(self):
         scenario = "08_rootkit_ransomware"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)",
-                              "Attack Phase 3</br>(Data Encrypted)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
