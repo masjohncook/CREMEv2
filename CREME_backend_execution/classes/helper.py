@@ -82,8 +82,8 @@ class ProgressHelper:
     scenario = "scenario"
     status_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
                      4: "stage_4_status", 5: "stage_5_status"}
-    detail_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
-                     4: "stage_4_status", 5: "stage_5_status"}
+    detail_fields = {1: "stage_1_detail", 2: "stage_2_detail", 3: "stage_3_detail",
+                     4: "stage_4_detail", 5: "stage_5_detail"}
     #attack_phase_fields = {0: "attack_phase_1_data", 1: "attack_phase_2_data", 2: "attack_phase_3_data"}
     attack_phase_fields = {0: "attack_phase_data"}
     messages = []
