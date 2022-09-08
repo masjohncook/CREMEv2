@@ -741,7 +741,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         outputTime = "time_1_mirai_step_1.txt"
 
 
-        filename_path = "02_scenario/00_PRE/bash_files/01_step_mirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/01_PRE/bash_files/01_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -749,11 +749,11 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         logs_path = "CREME_backend_execution/logs/02_mirai/times"
         outputTime = "time_2_mirai_step_2.txt"
 
-        filename_path = "02_scenario/00_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
+        filename_path = "02_scenario/01_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-        filename_path = "02_scenario/00_PRE/bash_files/02_step_mirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/01_PRE/bash_files/02_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
