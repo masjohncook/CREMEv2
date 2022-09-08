@@ -39,7 +39,7 @@ set timeout 60
 
 # change 02_mirai name
 expect "*:~# "
-send "mv -f $path/$mirai_scan.dbg $path/$mirai.dbg\r"
+send "mv -f $path/mirai_scan.dbg $path/mirai.dbg\r"
 
 # exit
 expect "*:~# "
