@@ -1,10 +1,5 @@
 [
-    {"label number":
-        ["label_num",
-         "tactic_names",
-         "technique_names",
-         "sub_technique_names(if no, same as technique)", 
-         "technique_number(ATT&CK)"]},
+    ["label number" , "tactic_names", "technique_names", "sub_technique_names(if no, same as technique)", "technique_number(ATT&CK)"],
     
     ["1", "Reconnaissance", "Active Scanning", "Scanning IP Blocks", "T1595.001"],
     ["2", "Initial Access", "Exploit Public-Facing Application", "Exploit Public-Facing Application", "T1190"],
