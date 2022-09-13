@@ -1,5 +1,6 @@
 from .helper import DownloadDataHelper, ProgressHelper, ProcessDataHelper, TrainMLHelper, EvaluationHelper, OtherHelper
 import os
+import json
 from multiprocessing import Process
 from threading import Thread
 class Creme:
@@ -23,6 +24,8 @@ class Creme:
     # TODO: should update to allow users define weights on the website
     weights = {"attack_types": 4 / 10 / 20, "attack_scenarios": 2 / 10 / 20, "data_sources": 1 / 10 / 6,
                "labeled_data": 1 / 10 / 6, "feature_set": 1 / 10 / 6, "metadata": 1 / 10}
+
+    table_path = os.path.join("..", "..", "labels_table.json")
 
     def __init__(self, dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients,
                  attacker_server, malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos,
@@ -837,10 +840,9 @@ class Creme:
         # t = [t1, t2, t2, t3, t3, t4, t4, t5]
         t = [t1, t2, t2, t3, t3, t4]
 
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Valid Accounts', 'Non-Application Layer Protocol', 'Network Denial of Service']
-        sub_technique_names = ['Local Accounts', 'Non-Application Layer Protocol', 'Direct Network Flood']
+        label_num = [1, 2, 3, 5, 9, 11, 12, 13]
+        labels, tactic_names, technique_names, sub_technique_names =\
+        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
         
         """Other possible labels
         Tactic -> technique -> sub technique
@@ -919,13 +921,80 @@ class Creme:
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names,\
             technique_names, sub_technique_names
 
-    def process_data_general_scenario(self, log_folder, labels, tactic_names, technique_names, sub_technique_names,
-                                      force_abnormal_cmd_list=[[],[],[]]):
+    # def process_data_general_scenario(self, log_folder, labels, tactic_names, technique_names, sub_technique_names,
+    #                                   force_abnormal_cmd_list=[[],[],[]]):
+    #     """
+    #     this function use to create labeling_file that contain information to label accounting and traffic data for
+    #     general attack scenarios (excepting Mirai), also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
+    #     label syslog
+    #     """
+    #     folder_times = os.path.join(log_folder, "times")
+    #     t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
+    #     t = [t1, t2, t3, t4, t5, t6]
+
+    #     src_ips_1 = []
+    #     des_ips_1 = []
+    #     normal_ips_1 = []
+    #     abnormal_hostnames_1 = []
+    #     normal_hostnames_1 = []
+
+    #     src_ips_1.append(self.attacker_server.ip)
+    #     des_ips_1.append(self.target_server.ip)
+    #     abnormal_hostnames_1.append(self.target_server.hostname)
+    #     normal_ips_1.append(self.benign_server.ip)
+    #     normal_hostnames_1.append(self.benign_server.hostname)
+    #     normal_ips_1.append(self.malicious_client.ip)
+    #     for vulnerable_client in self.vulnerable_clients:
+    #         normal_ips_1.append(vulnerable_client.ip)
+    #         normal_hostnames_1.append(vulnerable_client.hostname)
+    #     for non_vulnerable_client in self.non_vulnerable_clients:
+    #         normal_ips_1.append(non_vulnerable_client.ip)
+    #         normal_hostnames_1.append(non_vulnerable_client.hostname)
+
+    #     src_ips_2 = src_ips_1[:]
+    #     des_ips_2 = des_ips_1[:]
+    #     normal_ips_2 = normal_ips_1[:]
+    #     abnormal_hostnames_2 = abnormal_hostnames_1[:]
+    #     normal_hostnames_2 = normal_hostnames_1[:]
+
+    #     src_ips_3 = src_ips_1[:]
+    #     des_ips_3 = des_ips_1[:]
+    #     normal_ips_3 = normal_ips_1[:]
+    #     abnormal_hostnames_3 = abnormal_hostnames_1[:]
+    #     normal_hostnames_3 = normal_hostnames_1[:]
+
+    #     src_ips = [src_ips_1, src_ips_2, src_ips_3]
+    #     des_ips = [des_ips_1, des_ips_2, des_ips_3]
+    #     normal_ips = [normal_ips_1, normal_ips_2, normal_ips_3]
+    #     normal_hostnames = [normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
+    #     abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+    #     pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker']]
+
+    #     labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
+
+    #     # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
+    #     #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
+    #     #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
+    #     ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
+    #                                          sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+    #                                          abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+
+    #     timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+
+    #     return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
+    #         technique_names, sub_technique_names
+
+    def process_data_disk_wipe(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
-        general attack scenarios (excepting Mirai), also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog
+        Disk_Wipe attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
+        label syslog.
+        If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
+        label_num = [1, 2, 4, 6, 8, 14]
+        labels, tactic_names, technique_names, sub_technique_names =\
+        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+        
         folder_times = os.path.join(log_folder, "times")
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
         t = [t1, t2, t3, t4, t5, t6]
@@ -961,46 +1030,28 @@ class Creme:
         abnormal_hostnames_3 = abnormal_hostnames_1[:]
         normal_hostnames_3 = normal_hostnames_1[:]
 
-        src_ips = [src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
-        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker']]
+        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
+        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
+        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_2, normal_ips_3]
+        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
+                            normal_hostnames_2, normal_hostnames_3]
+        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
+                              abnormal_hostnames_2, abnormal_hostnames_3]
+        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
+        force_abnormal_cmd_list = [[] ,[], [], [], [], []]
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
-        # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-        #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-        #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
 
-    def process_data_disk_wipe(self, log_folder):
-        """
-        this function use to create labeling_file that contain information to label accounting and traffic data for
-        Disk_Wipe attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog.
-        If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
-        """
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk wipe']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk Content Wipe']
-        """Other possible labels
-        Initial Access -> Exploit Public-Facing Application
-        Persistence
-        Impact -> Data Destruction or Disk Wipe -> Disk Content Wipe or Disk Structure Wipe
-
-        """
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names, sub_technique_names)
-
+    # this scenario is incomplete
     def process_data_data_theft(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
@@ -1008,7 +1059,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Exfiltration']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Exfiltration Over C2 Channel']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Exfiltration Over C2 Channel']
@@ -1016,6 +1067,7 @@ class Creme:
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
                                                   sub_technique_names)
 
+    # this scenario is incomplete
     def process_data_rootkit_ransomware(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
@@ -1023,7 +1075,7 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
+        labels = [1, 2, 3]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
         sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
@@ -1038,16 +1090,68 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-        """Other possible labels
-        Initial Access -> Exploit Public-Facing Application
-        Persistence
-        """
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-                                                  sub_technique_names)
+        label_num = [1, 2, 4, 6, 7, 12, 15]
+        labels, tactic_names, technique_names, sub_technique_names =\
+        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+
+
+        folder_times = os.path.join(log_folder, "times")
+        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
+        t = [t1, t2, t3, t4, t5, t6]
+
+        src_ips_1 = []
+        des_ips_1 = []
+        normal_ips_1 = []
+        abnormal_hostnames_1 = []
+        normal_hostnames_1 = []
+
+        src_ips_1.append(self.attacker_server.ip)
+        des_ips_1.append(self.target_server.ip)
+        abnormal_hostnames_1.append(self.target_server.hostname)
+        normal_ips_1.append(self.benign_server.ip)
+        normal_hostnames_1.append(self.benign_server.hostname)
+        normal_ips_1.append(self.malicious_client.ip)
+        for vulnerable_client in self.vulnerable_clients:
+            normal_ips_1.append(vulnerable_client.ip)
+            normal_hostnames_1.append(vulnerable_client.hostname)
+        for non_vulnerable_client in self.non_vulnerable_clients:
+            normal_ips_1.append(non_vulnerable_client.ip)
+            normal_hostnames_1.append(non_vulnerable_client.hostname)
+
+        src_ips_2 = src_ips_1[:]
+        des_ips_2 = des_ips_1[:]
+        normal_ips_2 = normal_ips_1[:]
+        abnormal_hostnames_2 = abnormal_hostnames_1[:]
+        normal_hostnames_2 = normal_hostnames_1[:]
+
+        src_ips_3 = src_ips_1[:]
+        des_ips_3 = des_ips_1[:]
+        normal_ips_3 = normal_ips_1[:]
+        abnormal_hostnames_3 = abnormal_hostnames_1[:]
+        normal_hostnames_3 = normal_hostnames_1[:]
+
+        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
+        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
+        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, 
+                      normal_ips_2, normal_ips_3]
+        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1,
+                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
+        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1,
+                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'],
+                                   ['kworker'], ['kworker']]
+        force_abnormal_cmd_list = [[] ,[], [], [], [], [], []]
+
+        labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
+
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
+                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
+
+        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+
+        return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
+            technique_names, sub_technique_names
 
     def process_data_resource_hijacking(self, log_folder):
         """
@@ -1056,13 +1160,68 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
+        label_num = [1, 2, 4, 6, 8, 16]
+        labels, tactic_names, technique_names, sub_technique_names =\
+        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
 
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-                                                  sub_technique_names)
+
+        folder_times = os.path.join(log_folder, "times")
+        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
+        t = [t1, t2, t3, t4, t5, t6]
+
+        src_ips_1 = []
+        des_ips_1 = []
+        normal_ips_1 = []
+        abnormal_hostnames_1 = []
+        normal_hostnames_1 = []
+
+        src_ips_1.append(self.attacker_server.ip)
+        des_ips_1.append(self.target_server.ip)
+        abnormal_hostnames_1.append(self.target_server.hostname)
+        normal_ips_1.append(self.benign_server.ip)
+        normal_hostnames_1.append(self.benign_server.hostname)
+        normal_ips_1.append(self.malicious_client.ip)
+        for vulnerable_client in self.vulnerable_clients:
+            normal_ips_1.append(vulnerable_client.ip)
+            normal_hostnames_1.append(vulnerable_client.hostname)
+        for non_vulnerable_client in self.non_vulnerable_clients:
+            normal_ips_1.append(non_vulnerable_client.ip)
+            normal_hostnames_1.append(non_vulnerable_client.hostname)
+
+        src_ips_2 = src_ips_1[:]
+        des_ips_2 = des_ips_1[:]
+        normal_ips_2 = normal_ips_1[:]
+        abnormal_hostnames_2 = abnormal_hostnames_1[:]
+        normal_hostnames_2 = normal_hostnames_1[:]
+
+        src_ips_3 = src_ips_1[:]
+        des_ips_3 = des_ips_1[:]
+        normal_ips_3 = normal_ips_1[:]
+        abnormal_hostnames_3 = abnormal_hostnames_1[:]
+        normal_hostnames_3 = normal_hostnames_1[:]
+
+        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
+        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
+        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, 
+                      normal_ips_2, normal_ips_3]
+        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1,
+                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
+        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1,
+                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], 
+                                   ['kworker']]
+        force_abnormal_cmd_list = [[] ,[], [], [], [], [], []]
+
+        labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
+
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
+                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
+
+        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+
+        return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
+            technique_names, sub_technique_names
 
     def process_data_end_point_dos(self, log_folder):
         """
@@ -1071,17 +1230,69 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Persistence', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Create Account', 'Endpoint DoS']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Local Account', 'OS Exhaustion Flood']
+        label_num = [1, 2, 4, 8, 10, 12, 17]
+        labels, tactic_names, technique_names, sub_technique_names =\
+        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
 
+
+        folder_times = os.path.join(log_folder, "times")
+        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
+        t = [t1, t2, t3, t4, t5, t6]
+
+        src_ips_1 = []
+        des_ips_1 = []
+        normal_ips_1 = []
+        abnormal_hostnames_1 = []
+        normal_hostnames_1 = []
+
+        src_ips_1.append(self.attacker_server.ip)
+        des_ips_1.append(self.target_server.ip)
+        abnormal_hostnames_1.append(self.target_server.hostname)
+        normal_ips_1.append(self.benign_server.ip)
+        normal_hostnames_1.append(self.benign_server.hostname)
+        normal_ips_1.append(self.malicious_client.ip)
+        for vulnerable_client in self.vulnerable_clients:
+            normal_ips_1.append(vulnerable_client.ip)
+            normal_hostnames_1.append(vulnerable_client.hostname)
+        for non_vulnerable_client in self.non_vulnerable_clients:
+            normal_ips_1.append(non_vulnerable_client.ip)
+            normal_hostnames_1.append(non_vulnerable_client.hostname)
+
+        src_ips_2 = src_ips_1[:]
+        des_ips_2 = des_ips_1[:]
+        normal_ips_2 = normal_ips_1[:]
+        abnormal_hostnames_2 = abnormal_hostnames_1[:]
+        normal_hostnames_2 = normal_hostnames_1[:]
+
+        src_ips_3 = src_ips_1[:]
+        des_ips_3 = des_ips_1[:]
+        normal_ips_3 = normal_ips_1[:]
+        abnormal_hostnames_3 = abnormal_hostnames_1[:]
+        normal_hostnames_3 = normal_hostnames_1[:]
+
+        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
+        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
+        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, 
+                      normal_ips_2, normal_ips_3]
+        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
+                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
+        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
+                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
         # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal processes
         #  have the same cmd. Think about how to solve this problem???
-        force_abnormal_cmd_list = [[],[],["<bash>"]]  # pattern of force bomb process
+        force_abnormal_cmd_list = [[], [], [], [], [], [], ["<bash>"]]  # pattern of force bomb process
 
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-                                                  sub_technique_names, force_abnormal_cmd_list)
+        labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
+
+        ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
+                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
+
+        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+
+        return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
+            technique_names, sub_technique_names
 
     def process_data(self):
         stage = 5
