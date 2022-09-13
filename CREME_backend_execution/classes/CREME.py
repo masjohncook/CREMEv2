@@ -442,58 +442,58 @@ class Creme:
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
                                     5, new_stage=True)
         self.attacker_server.nonmirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
+        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
-                                    5, new_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
+        #                            5, new_stage=True)
         self.attacker_server.nonmirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
+        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
-                                    5, new_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
+        #                            5, new_stage=True)
         self.attacker_server.end_point_dos_third_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
+        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
-                                    5, new_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
+        #                            5, new_stage=True)
         self.attacker_server.end_point_dos_fourth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
+        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
-                                    5, new_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
+        #                            5, new_stage=True)
         self.attacker_server.end_point_dos_fifth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
+        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
-                                    5, new_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
+        #                            5, new_stage=True)
         self.attacker_server.end_point_dos_sixth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
+        #                           5, finished_task=True, override_pre_message=True, finished_stage=True)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
-                                    5, new_stage=True)
+        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
+        #                            5, new_stage=True)
         self.attacker_server.end_point_dos_seventh_stage()
 
 
 
         # wait and record timestamp
-        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "06_end_point_dos", "times")
-        timestamp_file = "time_stage_3_end.txt"
-        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-                                   timestamp_file=timestamp_file)
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 06_end_point_dos",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        # timestamp_folder = os.path.join("CREME_backend_execution", "logs", "06_end_point_dos", "times")
+        # timestamp_file = "time_stage_3_end.txt"
+        # OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+        #                            timestamp_file=timestamp_file)
+        # ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 06_end_point_dos",
+        #                             5, finished_task=True, override_pre_message=True, finished_stage=True)
 
     def attack_data_theft(self):
         ProgressHelper.update_scenario("Data_Theft")
