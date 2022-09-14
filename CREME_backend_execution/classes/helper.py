@@ -196,6 +196,114 @@ class ProgressHelper:
 
 class ProcessDataHelper:
     @staticmethod
+    def get_MIRAI_info(malicious_client, vulnerable_clients, non_vulnerable_clients, 
+                       target_server, benign_server, attacker_server):
+        """
+        get VMs information when executing MARAI
+        """
+        src_ips_1 = []
+        des_ips_1 = []
+        normal_ips_1 = []
+        abnormal_hostnames_1 = []
+        normal_hostnames_1 = []
+        src_ips_1.append(malicious_client.ip)
+        for vulnerable_client in vulnerable_clients:
+            des_ips_1.append(vulnerable_client.ip)
+            abnormal_hostnames_1.append(vulnerable_client.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_1.append(non_vulnerable_client.ip)
+            normal_hostnames_1.append(non_vulnerable_client.hostname)
+        normal_ips_1.append(target_server.ip)
+        normal_hostnames_1.append(target_server.hostname)
+        normal_ips_1.append(benign_server.ip)
+        normal_hostnames_1.append(benign_server.hostname)
+
+        src_ips_2 = []
+        des_ips_2 = []
+        normal_ips_2 = []
+        abnormal_hostnames_2 = []
+        normal_hostnames_2 = []
+        src_ips_2.append(attacker_server.ip)
+        for vulnerable_client in vulnerable_clients:
+            des_ips_2.append(vulnerable_client.ip)
+            abnormal_hostnames_2.append(vulnerable_client.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_2.append(non_vulnerable_client.ip)
+            normal_hostnames_2.append(non_vulnerable_client.hostname)
+        normal_ips_2.append(target_server.ip)
+        normal_hostnames_2.append(target_server.hostname)
+        normal_ips_2.append(benign_server.ip)
+        normal_hostnames_2.append(benign_server.hostname)
+
+        src_ips_3 = []
+        des_ips_3 = []
+        normal_ips_3 = []
+        abnormal_hostnames_3 = []
+        normal_hostnames_3 = []
+        for vulnerable_client in vulnerable_clients:
+            src_ips_3.append(vulnerable_client.ip)
+            abnormal_hostnames_3.append(vulnerable_client.hostname)
+        des_ips_3.append(target_server.ip)
+        abnormal_hostnames_3.append(target_server.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_3.append(non_vulnerable_client.ip)
+            normal_hostnames_3.append(non_vulnerable_client.hostname)
+        normal_ips_3.append(benign_server.ip)
+        normal_hostnames_3.append(benign_server.hostname)
+
+        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
+        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
+        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_2, normal_ips_3]
+        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
+                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
+        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
+                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
+        force_abnormal_cmd_list = [[] ,[], [], [], [], [], [], []]
+        return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
+
+    @staticmethod
+    def get_attack_info(lifecycle_len, malicious_client, vulnerable_clients, non_vulnerable_clients, 
+                       target_server, benign_server, attacker_server):
+        """
+        get VMs information when executing attack scenarios except MARAI
+        """
+        src_ip = []
+        des_ip = []
+        normal_ip = []
+        abnormal_hostname = []
+        normal_hostname = []
+        src_ip.append(attacker_server.ip)
+        des_ip.append(target_server.ip)
+        abnormal_hostname.append(target_server.hostname)
+        normal_ip.append(benign_server.ip)
+        normal_hostname.append(benign_server.hostname)
+        normal_ip.append(malicious_client.ip)
+        for vulnerable_client in vulnerable_clients:
+            normal_ip.append(vulnerable_client.ip)
+            normal_hostname.append(vulnerable_client.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ip.append(non_vulnerable_client.ip)
+            normal_hostname.append(non_vulnerable_client.hostname)
+        
+        src_ips = []
+        des_ips = []
+        normal_ips = []
+        abnormal_hostnames = []
+        normal_hostnames = []
+        pattern_normal_cmd_list = []
+        force_abnormal_cmd_list = []
+        for i in range(lifecycle_len):
+            src_ips.append(src_ip)
+            des_ips.append(src_ip)
+            normal_ips.append(normal_ip)
+            normal_hostnames.append(normal_hostname)
+            abnormal_hostnames.append(abnormal_hostname)
+            pattern_normal_cmd_list.append(['kworker'])
+            force_abnormal_cmd_list.append([])
+        return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
+
+    @staticmethod
     def get_labels_info(table_path, label_num, labels, tactic_names, technique_names, sub_technique_names):
         """
         get label informations from labels_table.json

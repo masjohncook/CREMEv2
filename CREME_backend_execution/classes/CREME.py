@@ -850,71 +850,15 @@ class Creme:
         Lateral Movement -> Remote Services -> SSH
         Resource Development -> Acquire Infrastructure -> Botnet
         """
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-
-        src_ips_1.append(self.malicious_client.ip)
-        for vulnerable_client in self.vulnerable_clients:
-            des_ips_1.append(vulnerable_client.ip)
-            abnormal_hostnames_1.append(vulnerable_client.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-        normal_ips_1.append(self.target_server.ip)
-        normal_hostnames_1.append(self.target_server.hostname)
-        normal_ips_1.append(self.benign_server.ip)
-        normal_hostnames_1.append(self.benign_server.hostname)
-
-        src_ips_2 = []
-        des_ips_2 = []
-        normal_ips_2 = []
-        abnormal_hostnames_2 = []
-        normal_hostnames_2 = []
-
-        src_ips_2.append(self.attacker_server.ip)
-        for vulnerable_client in self.vulnerable_clients:
-            des_ips_2.append(vulnerable_client.ip)
-            abnormal_hostnames_2.append(vulnerable_client.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_2.append(non_vulnerable_client.ip)
-            normal_hostnames_2.append(non_vulnerable_client.hostname)
-        normal_ips_2.append(self.target_server.ip)
-        normal_hostnames_2.append(self.target_server.hostname)
-        normal_ips_2.append(self.benign_server.ip)
-        normal_hostnames_2.append(self.benign_server.hostname)
-
-        src_ips_3 = []
-        des_ips_3 = []
-        normal_ips_3 = []
-        abnormal_hostnames_3 = []
-        normal_hostnames_3 = []
-
-        for vulnerable_client in self.vulnerable_clients:
-            src_ips_3.append(vulnerable_client.ip)
-            abnormal_hostnames_3.append(vulnerable_client.hostname)
-        des_ips_3.append(self.target_server.ip)
-        abnormal_hostnames_3.append(self.target_server.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_3.append(non_vulnerable_client.ip)
-            normal_hostnames_3.append(non_vulnerable_client.hostname)
-        normal_ips_3.append(self.benign_server.ip)
-        normal_hostnames_3.append(self.benign_server.hostname)
-
-        src_ips = [src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
-        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker']]
+        src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
+        ProcessDataHelper.get_MIRAI_info(self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+                                         self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-                                             abnormal_hostnames, pattern_normal_cmd_list)
+                                             abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t2, t3], [t3, t4]]
 
@@ -999,46 +943,9 @@ class Creme:
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
         t = [t1, t2, t3, t4, t5, t6]
 
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-
-        src_ips_1.append(self.attacker_server.ip)
-        des_ips_1.append(self.target_server.ip)
-        abnormal_hostnames_1.append(self.target_server.hostname)
-        normal_ips_1.append(self.benign_server.ip)
-        normal_hostnames_1.append(self.benign_server.hostname)
-        normal_ips_1.append(self.malicious_client.ip)
-        for vulnerable_client in self.vulnerable_clients:
-            normal_ips_1.append(vulnerable_client.ip)
-            normal_hostnames_1.append(vulnerable_client.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-
-        src_ips_2 = src_ips_1[:]
-        des_ips_2 = des_ips_1[:]
-        normal_ips_2 = normal_ips_1[:]
-        abnormal_hostnames_2 = abnormal_hostnames_1[:]
-        normal_hostnames_2 = normal_hostnames_1[:]
-
-        src_ips_3 = src_ips_1[:]
-        des_ips_3 = des_ips_1[:]
-        normal_ips_3 = normal_ips_1[:]
-        abnormal_hostnames_3 = abnormal_hostnames_1[:]
-        normal_hostnames_3 = normal_hostnames_1[:]
-
-        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
-                            normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
-                              abnormal_hostnames_2, abnormal_hostnames_3]
-        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
-        force_abnormal_cmd_list = [[] ,[], [], [], [], []]
+        src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
+        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+                                          self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
@@ -1099,48 +1006,9 @@ class Creme:
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
         t = [t1, t2, t3, t4, t5, t6]
 
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-
-        src_ips_1.append(self.attacker_server.ip)
-        des_ips_1.append(self.target_server.ip)
-        abnormal_hostnames_1.append(self.target_server.hostname)
-        normal_ips_1.append(self.benign_server.ip)
-        normal_hostnames_1.append(self.benign_server.hostname)
-        normal_ips_1.append(self.malicious_client.ip)
-        for vulnerable_client in self.vulnerable_clients:
-            normal_ips_1.append(vulnerable_client.ip)
-            normal_hostnames_1.append(vulnerable_client.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-
-        src_ips_2 = src_ips_1[:]
-        des_ips_2 = des_ips_1[:]
-        normal_ips_2 = normal_ips_1[:]
-        abnormal_hostnames_2 = abnormal_hostnames_1[:]
-        normal_hostnames_2 = normal_hostnames_1[:]
-
-        src_ips_3 = src_ips_1[:]
-        des_ips_3 = des_ips_1[:]
-        normal_ips_3 = normal_ips_1[:]
-        abnormal_hostnames_3 = abnormal_hostnames_1[:]
-        normal_hostnames_3 = normal_hostnames_1[:]
-
-        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, 
-                      normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1,
-                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1,
-                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
-        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'],
-                                   ['kworker'], ['kworker']]
-        force_abnormal_cmd_list = [[] ,[], [], [], [], [], []]
+        src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
+        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+                                          self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
@@ -1169,48 +1037,9 @@ class Creme:
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
         t = [t1, t2, t3, t4, t5, t6]
 
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-
-        src_ips_1.append(self.attacker_server.ip)
-        des_ips_1.append(self.target_server.ip)
-        abnormal_hostnames_1.append(self.target_server.hostname)
-        normal_ips_1.append(self.benign_server.ip)
-        normal_hostnames_1.append(self.benign_server.hostname)
-        normal_ips_1.append(self.malicious_client.ip)
-        for vulnerable_client in self.vulnerable_clients:
-            normal_ips_1.append(vulnerable_client.ip)
-            normal_hostnames_1.append(vulnerable_client.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-
-        src_ips_2 = src_ips_1[:]
-        des_ips_2 = des_ips_1[:]
-        normal_ips_2 = normal_ips_1[:]
-        abnormal_hostnames_2 = abnormal_hostnames_1[:]
-        normal_hostnames_2 = normal_hostnames_1[:]
-
-        src_ips_3 = src_ips_1[:]
-        des_ips_3 = des_ips_1[:]
-        normal_ips_3 = normal_ips_1[:]
-        abnormal_hostnames_3 = abnormal_hostnames_1[:]
-        normal_hostnames_3 = normal_hostnames_1[:]
-
-        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, 
-                      normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1,
-                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1,
-                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
-        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], 
-                                   ['kworker']]
-        force_abnormal_cmd_list = [[] ,[], [], [], [], [], []]
+        src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
+        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+                                          self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
@@ -1239,46 +1068,9 @@ class Creme:
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
         t = [t1, t2, t3, t4, t5, t6]
 
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-
-        src_ips_1.append(self.attacker_server.ip)
-        des_ips_1.append(self.target_server.ip)
-        abnormal_hostnames_1.append(self.target_server.hostname)
-        normal_ips_1.append(self.benign_server.ip)
-        normal_hostnames_1.append(self.benign_server.hostname)
-        normal_ips_1.append(self.malicious_client.ip)
-        for vulnerable_client in self.vulnerable_clients:
-            normal_ips_1.append(vulnerable_client.ip)
-            normal_hostnames_1.append(vulnerable_client.hostname)
-        for non_vulnerable_client in self.non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-
-        src_ips_2 = src_ips_1[:]
-        des_ips_2 = des_ips_1[:]
-        normal_ips_2 = normal_ips_1[:]
-        abnormal_hostnames_2 = abnormal_hostnames_1[:]
-        normal_hostnames_2 = normal_hostnames_1[:]
-
-        src_ips_3 = src_ips_1[:]
-        des_ips_3 = des_ips_1[:]
-        normal_ips_3 = normal_ips_1[:]
-        abnormal_hostnames_3 = abnormal_hostnames_1[:]
-        normal_hostnames_3 = normal_hostnames_1[:]
-
-        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, 
-                      normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
-                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
-                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
-        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
+        src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
+        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+                                          self.target_server, self.benign_server, self.attacker_server)
         # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal processes
         #  have the same cmd. Think about how to solve this problem???
         force_abnormal_cmd_list = [[], [], [], [], [], [], ["<bash>"]]  # pattern of force bomb process
