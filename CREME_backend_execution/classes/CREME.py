@@ -865,69 +865,6 @@ class Creme:
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names,\
             technique_names, sub_technique_names
 
-    # def process_data_general_scenario(self, log_folder, labels, tactic_names, technique_names, sub_technique_names,
-    #                                   force_abnormal_cmd_list=[[],[],[]]):
-    #     """
-    #     this function use to create labeling_file that contain information to label accounting and traffic data for
-    #     general attack scenarios (excepting Mirai), also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-    #     label syslog
-    #     """
-    #     folder_times = os.path.join(log_folder, "times")
-    #     t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
-    #     t = [t1, t2, t3, t4, t5, t6]
-
-    #     src_ips_1 = []
-    #     des_ips_1 = []
-    #     normal_ips_1 = []
-    #     abnormal_hostnames_1 = []
-    #     normal_hostnames_1 = []
-
-    #     src_ips_1.append(self.attacker_server.ip)
-    #     des_ips_1.append(self.target_server.ip)
-    #     abnormal_hostnames_1.append(self.target_server.hostname)
-    #     normal_ips_1.append(self.benign_server.ip)
-    #     normal_hostnames_1.append(self.benign_server.hostname)
-    #     normal_ips_1.append(self.malicious_client.ip)
-    #     for vulnerable_client in self.vulnerable_clients:
-    #         normal_ips_1.append(vulnerable_client.ip)
-    #         normal_hostnames_1.append(vulnerable_client.hostname)
-    #     for non_vulnerable_client in self.non_vulnerable_clients:
-    #         normal_ips_1.append(non_vulnerable_client.ip)
-    #         normal_hostnames_1.append(non_vulnerable_client.hostname)
-
-    #     src_ips_2 = src_ips_1[:]
-    #     des_ips_2 = des_ips_1[:]
-    #     normal_ips_2 = normal_ips_1[:]
-    #     abnormal_hostnames_2 = abnormal_hostnames_1[:]
-    #     normal_hostnames_2 = normal_hostnames_1[:]
-
-    #     src_ips_3 = src_ips_1[:]
-    #     des_ips_3 = des_ips_1[:]
-    #     normal_ips_3 = normal_ips_1[:]
-    #     abnormal_hostnames_3 = abnormal_hostnames_1[:]
-    #     normal_hostnames_3 = normal_hostnames_1[:]
-
-    #     src_ips = [src_ips_1, src_ips_2, src_ips_3]
-    #     des_ips = [des_ips_1, des_ips_2, des_ips_3]
-    #     normal_ips = [normal_ips_1, normal_ips_2, normal_ips_3]
-    #     normal_hostnames = [normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-    #     abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
-    #     pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker']]
-
-    #     labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
-
-    #     # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
-    #     #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
-    #     #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
-    #     ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
-    #                                          sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
-    #                                          abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list)
-
-    #     timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
-
-    #     return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
-    #         technique_names, sub_technique_names
-
     def process_data_disk_wipe(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
@@ -1076,6 +1013,9 @@ class Creme:
         force_abnormal_cmd_list = [[], [], [], [], [], [], ["<bash>"]]  # pattern of force bomb process
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
+        # TODO: labels are not used, think about using it to label accounting and traffic data (pass to
+        #  make_labeling_file which is used to create a file as parameters for labeling accounting and traffic).
+        #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
                                              sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
