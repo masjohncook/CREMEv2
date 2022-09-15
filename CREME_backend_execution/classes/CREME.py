@@ -209,29 +209,42 @@ class Creme:
     def attack_mirai(self):
         ProgressHelper.update_scenario("Mirai")
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.0001 Active Scanning IP Block",
                                     5, new_stage=True)
         self.attacker_server.mirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - T1595.0001 Active Scanning IP Block",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T1190 Exploit Public-Facing Application",
+                                    5)
         self.attacker_server.mirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - T1190 Exploit Public-Facing Application",
+                                    5, finished_task=True, override_pre_message=False)
+
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is running CNC server and login to manage \
-                                    bots", 5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1059.004 Unix Shell",
+                                    5)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1133 External Remote Service",
+                                    5)
         self.attacker_server.mirai_start_cnc_and_login()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - T1059.004 Unix Shell",
+                                    5, finished_task=True, override_pre_message=False)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - T1133 External Remote Service",
+                                    5, finished_task=True, override_pre_message=False)
 
-        ProgressHelper.update_stage(stage, f"{self.malicious_client.hostname} is running MIRAI and scanning new target \
-                                    bots", 5)
+        ProgressHelper.update_stage(stage, f"{self.malicious_client.hostname} is starting Step 5 - T1622 Debugger Evasion", 5)
         self.malicious_client.mirai_start_malicious()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - T1622 Debugger Evasion",
+                                    5, finished_task=True, override_pre_message=False)
 
+        ProgressHelper.update_stage(stage, f"{self.malicious_client.hostname} is starting Step 6 - T1046 Network Device Scanning",
+                                    5)
         self.attacker_server.mirai_wait_for_finished_scan()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1046 Network Device Scanning",
+                                    5, finished_task=True, override_pre_message=False)
+
         ProgressHelper.update_stage(stage, f"{self.malicious_client.hostname} found bots:", 5, finished_task=True)
         for vulnerable_client in self.vulnerable_clients:
             ProgressHelper.update_stage(stage, f"hostname:{vulnerable_client.hostname}, ip:{vulnerable_client.ip}, \
@@ -240,26 +253,27 @@ class Creme:
 
         self.malicious_client.mirai_stop_malicious()
         ProgressHelper.update_stage(stage, f"Found account information of {self.attacker_server.num_of_new_bots} \
-                                    new target bots", 5, finished_task=True, finished_stage=True)
+                                    new target bots", 5, finished_task=True, )
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is transfering MIRAI to new bots", 5,
-                                    new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1105 Ingress Tool Transfer", 5)
+        #Transfering Mirai
         self.attacker_server.mirai_transfer_and_start_malicious()
-
         self.attacker_server.mirai_wait_for_finished_transfer()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} FINISHED transfering MIRAI to new bots", 5,
-                                    finished_task=True, override_pre_message=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} FINISHED Step 7 - T1105 Ingress Tool Transfer", 5
+                                    )
         ProgressHelper.update_stage(stage, f"{self.attacker_server.num_of_new_bots} new bots were established", 5,
-                                    finished_task=True, finished_stage=True)
+                                    finished_task=True, override_pre_message= False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"Bots is starting to DDoS {self.target_server.hostname}", 5,
-                                    new_stage=True)
+        ProgressHelper.update_stage(stage, f"Bots is starting Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
+                                    DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
+                                    {self.attacker_server.DDoS_duration} seconds", 5
+                                    )
         self.attacker_server.mirai_wait_for_finished_ddos()
-        ProgressHelper.update_stage(stage, f"Bots FINISHED to DDoS {self.target_server.hostname}", 5,
-                                    finished_task=True, override_pre_message=True)
-        ProgressHelper.update_stage(stage, f"Bots FINISHED DDoS {self.target_server.hostname} using: \
+        # ProgressHelper.update_stage(stage, f"Bots FINISHED to DDoS {self.target_server.hostname}", 5,
+        #                             finished_task=True, override_pre_message=True)
+        ProgressHelper.update_stage(stage, f"Bots FINISHED Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5,
                                     finished_task=True, finished_stage=True)
