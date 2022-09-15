@@ -276,238 +276,239 @@ class Creme:
         ProgressHelper.update_stage(stage, f"Bots FINISHED Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5,
-                                    finished_task=True, finished_stage=True)
+                                    finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_disk_wipe(self):
         ProgressHelper.update_scenario("Disk_Wipe")
         self.attacker_server.disk_wipe_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
                                     5, new_stage=True)
         self.attacker_server.nonmirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - T1595.001 Active Scanning IP Block",
                                     5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
                                     5, new_stage=True)
         self.attacker_server.nonmirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - T11190 Exploit Public-Facing Application",
                                     5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Execution for Client Execution",
+                                    5)
         self.attacker_server.disk_wipe_third_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - T1203 Execution for Client Execution",
                                     5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1554 Compromise Client Software Binary",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_fourth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - T1554 Compromise Client Software Binary",
                                     5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - T1068 Exploit for Privilege Escalation",
                                     5, new_stage=True)
         self.attacker_server.disk_wipe_fifth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - T1068 Exploit for Privilege Escalation",
                                     5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1485 Data Destruction",
+                                    5)
         self.attacker_server.disk_wipe_sixth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-                                    5, finished_task=True, override_pre_message=False)
 
-        #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
-                                    5, new_stage=True)
-        self.attacker_server.disk_wipe_seventh_stage()
-        
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "05_disk_wipe", "times")
-        timestamp_file = "time_stage_3_end.txt"
+        timestamp_file = "time_stage_6_end.txt"
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 05_disk_wipe",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1485 Data Destruction",
+                                    5, finished_task=True, override_pre_message=False)
 
     def attack_ransomware(self):
         ProgressHelper.update_scenario("Ransomware")
         self.attacker_server.ransomware_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
+                                    5)
         self.attacker_server.nonmirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - T1595.001 Active Scanning IP Block",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
+                                    5)
         self.attacker_server.nonmirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - T11190 Exploit Public-Facing Application",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Exploitation for Client Execution",
+                                    5)
         self.attacker_server.ransomware_third_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - T1203 Exploitation for Client Execution",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1554 Compromise Client Software Binary",
+                                    5)
         self.attacker_server.ransomware_fourth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - T1554 Compromise Client Software Binary",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - T1543 Create or Modify System Process",
+                                    5)
         self.attacker_server.ransomware_fifth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - T1543 Create or Modify System Process",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1105 Ingress Transfer Tool",
+                                    5)
         self.attacker_server.ransomware_sixth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1105 Ingress Transfer Tool",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1486 Data Destruction for Impact",
                                     5, new_stage=True)
         self.attacker_server.ransomware_seventh_stage()
         
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "03_ransomware", "times")
-        timestamp_file = "time_stage_3_end.txt"
+        timestamp_file = "time_stage_7_end.txt"
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 03_ransomware",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1486 Data Destruction for Impact",
+                                    5, finished_task=True, override_pre_message=False)
 
     def attack_resource_hijacking(self):
         ProgressHelper.update_scenario("Resource_Hijacking")
         self.attacker_server.resource_hijacking_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
+                                    5)
         self.attacker_server.nonmirai_first_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - T1595.001 Active Scanning IP Block",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
+                                    5)
         self.attacker_server.nonmirai_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - T11190 Exploit Public-Facing Application",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Exploitation for Client Execution",
+                                    5)
+        self.attacker_server.resource_hijacking_third_stage()
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - T1203 Exploitation for Client Execution",
+                                    5, finished_task=True, override_pre_message=False)
+
+        #stage += 1
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1554 Compromise Client Software Binary",
+                                    5)
         self.attacker_server.resource_hijacking_fourth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - T1554 Compromise Client Software Binary",
+                                    5, finished_task=True, override_pre_message=False)
 
-        #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
-                                    5, new_stage=True)
+        # stage += 1
+        ProgressHelper.update_stage(stage,
+                                    f"{self.attacker_server.hostname} is starting Step 5 - T1068 Exploit for Privilege Escalation",
+                                    5)
         self.attacker_server.resource_hijacking_fifth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - T1068 Exploit for Privilege Escalation",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1105 Ingress Transfer Tool",
+                                    5)
         self.attacker_server.resource_hijacking_sixth_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1105 Ingress Transfer Tool",
+                                    5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1496 Resource Hijacking",
+                                    5)
         self.attacker_server.resource_hijacking_seventh_stage()
         
         # wait and record timestamp
         timestamp_folder = os.path.join("CREME_backend_execution", "logs", "04_resource_hijacking", "times")
-        timestamp_file = "time_stage_3_end.txt"
+        timestamp_file = "time_stage_7_end.txt"
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 04_resource_hijacking",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1496 Resource Hijacking",
+                                    5, finished_task=True, override_pre_message=False)
 
     def attack_end_point_dos(self):
         ProgressHelper.update_scenario("End_Point_Dos")
         self.attacker_server.end_point_dos_start_metasploit()
 
         stage = 2
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - Reconnaissance",
-                                    5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
+                                    5)
         self.attacker_server.nonmirai_first_stage()
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - Reconnaissance",
-        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 1 - T1595.001 Active Scanning IP Block",
+                                   5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - Initial Access",
-        #                            5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
+                                   5)
         self.attacker_server.nonmirai_second_stage()
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - Initial Access",
-        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 2 - T11190 Exploit Public-Facing Application",
+                                   5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - Execution",
-        #                            5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Exploitation for Client Execution",
+                                   5)
         self.attacker_server.end_point_dos_third_stage()
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - Execution",
-        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - T1203 Exploitation for Client Execution",
+                                   5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - Privilege Escalation",
-        #                            5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1068 Exploit for Privilege Escalation",
+                                   5)
         self.attacker_server.end_point_dos_fourth_stage()
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - Privilege Escalation",
-        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - T1068 Exploit for Privilege Escalation",
+                                   5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - Defense Evasion",
-        #                            5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - T1078.003 Local Account",
+                                   5)
         self.attacker_server.end_point_dos_fifth_stage()
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - Defense Evasion",
-        #                            5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - T1078.003 Local Account",
+                                   5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - Command and Control",
-        #                            5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1105 Ingress Tool Transfer",
+                                   5)
         self.attacker_server.end_point_dos_sixth_stage()
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - Command and Control",
-        #                           5, finished_task=True, override_pre_message=True, finished_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1105 Ingress Tool Transfer",
+                                  5, finished_task=True, override_pre_message=False)
 
         #stage += 1
-        #ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - Impact",
-        #                            5, new_stage=True)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1499 End Point Denial of Service",
+                                   5)
         self.attacker_server.end_point_dos_seventh_stage()
 
 
 
         # wait and record timestamp
-        # timestamp_folder = os.path.join("CREME_backend_execution", "logs", "06_end_point_dos", "times")
-        # timestamp_file = "time_stage_3_end.txt"
-        # OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-        #                            timestamp_file=timestamp_file)
-        # ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 06_end_point_dos",
-        #                             5, finished_task=True, override_pre_message=True, finished_stage=True)
+        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "06_end_point_dos", "times")
+        timestamp_file = "time_stage_7_end.txt"
+        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+                                   timestamp_file=timestamp_file)
+        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1499 End Point Denial of Service",
+                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
 
     def attack_data_theft(self):
         ProgressHelper.update_scenario("Data_Theft")
