@@ -25,7 +25,7 @@ import random
 
 class ScriptHelper:
     @staticmethod
-    def get_del_known_hosts_path(scripts_path, del_script="./del_known_hosts.sh"):
+    def get_del_known_hosts_path(scripts_path, del_script="04_general/del_known_hosts.sh"):
         del_known_hosts_path = os.path.join(scripts_path, del_script)
         return del_known_hosts_path
 
@@ -33,7 +33,7 @@ class ScriptHelper:
     def get_script_cmd(file):
         scripts_path = os.path.join("CREME_backend_execution", "scripts")
         cmd = os.path.join(scripts_path, file)
-        del_known_hosts_path = ScriptHelper.get_del_known_hosts_path(scripts_path, "04_general/./del_known_hosts.sh")
+        del_known_hosts_path = ScriptHelper.get_del_known_hosts_path(scripts_path, "04_general/del_known_hosts.sh")
         return cmd, del_known_hosts_path
 
     @staticmethod
@@ -479,11 +479,11 @@ class ProcessDataHelper:
 
         # output_file_atop = "label_atop.csv"
         # output_file_traffic = "label_traffic.csv"
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/./accounting_extraction.sh "
+        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/accounting_extraction.sh "
         cmd = '{0} {1} {2} {3} {4}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
                                            accounting_result_path, output_file_atop)
         os.system(cmd)
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
+        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/traffic_extraction.sh"
         cmd = '{0} {1} {2} {3} {4} {5}'.format(accounting_extraction_file, labeling_file_path, traffic_file,
                                                time_window_traffic, traffic_result_path, output_file_traffic)
         os.system(cmd)
