@@ -22,7 +22,7 @@ set input_bot_file "input_bot"
 set waitToFinishScan "WaitToFinishScan.py"
 set login_sh "login.sh"
 
-set timeout 10
+set timeout 120
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -32,7 +32,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
+set timeout 120
 
 # Record time
 set DATE [exec date +%s]

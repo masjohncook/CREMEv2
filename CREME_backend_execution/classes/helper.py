@@ -25,7 +25,7 @@ import random
 
 class ScriptHelper:
     @staticmethod
-    def get_del_known_hosts_path(scripts_path, del_script="./del_known_hosts.sh"):
+    def get_del_known_hosts_path(scripts_path, del_script="04_general/del_known_hosts.sh"):
         del_known_hosts_path = os.path.join(scripts_path, del_script)
         return del_known_hosts_path
 
@@ -33,7 +33,7 @@ class ScriptHelper:
     def get_script_cmd(file):
         scripts_path = os.path.join("CREME_backend_execution", "scripts")
         cmd = os.path.join(scripts_path, file)
-        del_known_hosts_path = ScriptHelper.get_del_known_hosts_path(scripts_path, "04_general/./del_known_hosts.sh")
+        del_known_hosts_path = ScriptHelper.get_del_known_hosts_path(scripts_path, "04_general/del_known_hosts.sh")
         return cmd, del_known_hosts_path
 
     @staticmethod
@@ -73,18 +73,19 @@ class ProgressHelper:
     """
     this class supports to update progress data that used to display progress on the dashboard
     """
+
+    #stage 1 -->  Configuration
+    #stage 2 -->  Attack
+    #stage 3 -->  Data Processing
+    #stage 4 -->  ML Training
+    #stage 5 -->  Evalutaion
     scenario = "scenario"
     status_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
-                     4: "stage_4_status", 5: "stage_5_status", 6: "stage_6_status",
-                     7: "stage_7_status", 8: "stage_8_status", 9: "stage_9_status",
-                     10: "stage_10_status", 11: "stage_11_status", 12: "stage_12_status",
-                     13: "stage_13_status", 14: "stage_14_status"}
-    detail_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
-                     4: "stage_4_status", 5: "stage_5_status", 6: "stage_6_status",
-                     7: "stage_7_status", 8: "stage_8_status", 9: "stage_9_status",
-                     10: "stage_10_status", 11: "stage_11_status", 12: "stage_12_status",
-                     13: "stage_13_status", 14: "stage_14_status"}
-    attack_phase_fields = {0: "attack_phase_1_data", 1: "attack_phase_2_data", 2: "attack_phase_3_data"}
+                     4: "stage_4_status", 5: "stage_5_status"}
+    detail_fields = {1: "stage_1_detail", 2: "stage_2_detail", 3: "stage_3_detail",
+                     4: "stage_4_detail", 5: "stage_5_detail"}
+    #attack_phase_fields = {0: "attack_phase_1_data", 1: "attack_phase_2_data", 2: "attack_phase_3_data"}
+    attack_phase_fields = {0: "attack_phase_data"}
     messages = []
 
     @staticmethod
@@ -152,7 +153,7 @@ class ProgressHelper:
         use to update status and detail of stages on the dashboard
         """
         if new_stage:
-            ProgressHelper.clean_stages(stage, 7)
+            ProgressHelper.clean_stages(stage, 5)
 
         ProgressHelper.update_messages(message, size, finished_task, override_pre_message, finished_stage, new_stage)
         detail = ""
@@ -478,11 +479,11 @@ class ProcessDataHelper:
 
         # output_file_atop = "label_atop.csv"
         # output_file_traffic = "label_traffic.csv"
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/./accounting_extraction.sh "
+        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/accounting_extraction.sh "
         cmd = '{0} {1} {2} {3} {4}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
                                            accounting_result_path, output_file_atop)
         os.system(cmd)
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
+        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/traffic_extraction.sh"
         cmd = '{0} {1} {2} {3} {4} {5}'.format(accounting_extraction_file, labeling_file_path, traffic_file,
                                                time_window_traffic, traffic_result_path, output_file_traffic)
         os.system(cmd)

@@ -12,6 +12,8 @@ DDOS_TYPE_CHOICES = [('udp', 'udp'), ('others...', 'others...')]
 class ProgressData(models.Model):
     objects = models.Manager()
     scenario = models.TextField(max_length=50, default='None')
+    
+    # Stage display on dashboard
     stage_1_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
     stage_1_detail = models.TextField(default='None')
     stage_2_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
@@ -22,15 +24,9 @@ class ProgressData(models.Model):
     stage_4_detail = models.TextField(default='None')
     stage_5_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
     stage_5_detail = models.TextField(default='None')
-    stage_6_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
-    stage_6_detail = models.TextField(default='None')
-    stage_7_status = models.IntegerField(default=1)  # 1: off, 2: running, 3: finished
-    stage_7_detail = models.TextField(default='None')
 
     # attack phases
-    attack_phase_1_data = models.TextField(default='Attack Phase 1')
-    attack_phase_2_data = models.TextField(default='Attack Phase 2')
-    attack_phase_3_data = models.TextField(default='Attack Phase 3')
+    attack_phase_1_data = models.TextField(default='Attack Phase')
 
 
 class Testbed(models.Model):
@@ -133,7 +129,7 @@ class AttackScenario(models.Model):
     data_theft = models.BooleanField(default=False)
     rootkit_ransomware = models.BooleanField(default=False)
 
-
+    
 class MachineLearningModel(models.Model):
     objects = models.Manager()
     decision_tree = models.BooleanField(default=True)
@@ -143,6 +139,7 @@ class MachineLearningModel(models.Model):
     random_forest = models.BooleanField(default=True)
     XGBoost = models.BooleanField(default=True)
 
+    
 class SkipStage(models.Model):
     objects = models.Manager()
     skip_configuration = models.BooleanField(default=False)
@@ -150,7 +147,3 @@ class SkipStage(models.Model):
     skip_data_processing = models.BooleanField(default=False)
     skip_ML_training = models.BooleanField(default=False)
     skip_evaluation = models.BooleanField(default=False)
-
-
-
-
