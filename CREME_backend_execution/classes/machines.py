@@ -866,12 +866,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def disk_wipe_seventh_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/07_step_AttackerServer_DiskWipe.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-
 ## Ransomware Attack Block
     def ransomware_start_metasploit(self):
         filename_path = "02_scenario/03_ransomware/bash_files/00_AttackerServer_start_metasploit_Ransomware.sh"
