@@ -2,6 +2,8 @@ from .helper import DownloadDataHelper, ProgressHelper, ProcessDataHelper, Train
 import os
 from multiprocessing import Process
 from threading import Thread
+
+
 class Creme:
     mirai = True
     ransomware = True
@@ -26,7 +28,8 @@ class Creme:
 
     def __init__(self, dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients,
                  attacker_server, malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos,
-                 data_theft, rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing, skip_ML_training, skip_evaluation):
+                 data_theft, rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing,
+                 skip_ML_training, skip_evaluation):
         # self.stage = 0
         # self.status = 1
         # self.finishedTasks = []
@@ -80,56 +83,63 @@ class Creme:
 
     def configure(self):
         stage = 1
+
         def ConfigureDataLoggerServer():
             stage = 1
             ProgressHelper.update_stage(stage, f"Controller is configuring {self.dls.hostname}", 5, new_stage=True)
             self.dls.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {self.dls.hostname}", 5,
                                         finished_task=True, override_pre_message=False)
+
         def ConfigureTargetServer():
             ProgressHelper.update_stage(stage, f"Controller is configuring {self.target_server.hostname}", 5)
             self.target_server.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {self.target_server.hostname}", 5,
                                         finished_task=True, override_pre_message=False)
+
         def ConfigureBenignServer():
             ProgressHelper.update_stage(stage, f"Controller is configuring {self.benign_server.hostname}", 5)
             self.benign_server.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {self.benign_server.hostname}", 5,
                                         finished_task=True, override_pre_message=False)
+
         def ConfigureVulnerableClient(vulnerable_client):
-            #for vulnerable_client in self.vulnerable_clients:
+            # for vulnerable_client in self.vulnerable_clients:
             ProgressHelper.update_stage(stage, f"Controller is configuring {vulnerable_client.hostname}", 5)
             vulnerable_client.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {vulnerable_client.hostname}", 5,
-                                            finished_task=True, override_pre_message=False)
+                                        finished_task=True, override_pre_message=False)
+
         def ConfigureNonVulnerableClient(non_vulnerable_client):
             #for non_vulnerable_client in self.non_vulnerable_clients:
             ProgressHelper.update_stage(stage, f"Controller is configuring {non_vulnerable_client.hostname}", 5)
             non_vulnerable_client.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {non_vulnerable_client.hostname}", 5,
-                                            finished_task=True, override_pre_message=False)
+                                        finished_task=True, override_pre_message=False)
+
         def ConfigureAttackerServer():
             ProgressHelper.update_stage(stage, f"Controller is configuring {self.attacker_server.hostname}", 5)
             self.attacker_server.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {self.attacker_server.hostname}", 5,
                                         finished_task=True, override_pre_message=False)
+
         def ConfigureMaliciousClient():
             ProgressHelper.update_stage(stage, f"Controller is configuring {self.malicious_client.hostname}", 5)
             self.malicious_client.configure()
             ProgressHelper.update_stage(stage, f"Controller FINISHED configuring {self.malicious_client.hostname}", 5,
                                         finished_task=True, override_pre_message=True, finished_stage=True)
-        #t_pool = []
+        # t_pool = []
         ConfigureDataLoggerServer()
         ConfigureTargetServer()
         ConfigureBenignServer()
-        #for i, thread in enumerate(t_pool):
+        # for i, thread in enumerate(t_pool):
         #    thread.start()
-        #for i, thread in enumerate(t_pool):
+        # for i, thread in enumerate(t_pool):
         #    thread.join()
             
         # critical section
         for vulnerable_client in self.vulnerable_clients:
-            #t_pool.append(Thread(target = ConfigureVulnerableClient, args = (vulnerable_client,)))
+            # t_pool.append(Thread(target = ConfigureVulnerableClient, args = (vulnerable_client,)))
             ConfigureVulnerableClient(vulnerable_client)
         for non_vulnerable_client in self.non_vulnerable_clients:
             #t_pool.append(Thread(target = ConfigureNonVulnerableClient, args = (non_vulnerable_client,)))
@@ -510,69 +520,69 @@ class Creme:
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1499 End Point Denial of Service",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
-    def attack_data_theft(self):
-        ProgressHelper.update_scenario("Data_Theft")
-        self.attacker_server.data_theft_start_metasploit()
-
-        stage = 2
-        ProgressHelper.update_stage(stage,
-                                    f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
-                                    5, new_stage=True)
-        self.attacker_server.data_theft_first_stage()
-        ProgressHelper.update_stage(stage,
-                                    f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
-                                    5, new_stage=True)
-        self.attacker_server.data_theft_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 07_data_theft",
-                                    5, new_stage=True)
-        self.attacker_server.data_theft_third_stage()
-        # wait and record timestamp
-        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "07_data_theft", "times")
-        timestamp_file = "time_stage_3_end.txt"
-        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-                                   timestamp_file=timestamp_file)
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 07_data_theft",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-    def attack_rootkit_ransomware(self):
-        ProgressHelper.update_scenario("Rootkit_Ransomware")
-        self.attacker_server.rootkit_ransomware_start_metasploit()
-
-        stage = 2
-        ProgressHelper.update_stage(stage,
-                                    f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
-                                    5, new_stage=True)
-        self.attacker_server.rootkit_ransomware_first_stage()
-        ProgressHelper.update_stage(stage,
-                                    f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
-                                    5, new_stage=True)
-        self.attacker_server.rootkit_ransomware_second_stage()
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
-
-        #stage += 1
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 08_rootkit_ransomware",
-                                    5, new_stage=True)
-        self.attacker_server.rootkit_ransomware_third_stage()
-        # wait and record timestamp
-        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "08_rootkit_ransomware", "times")
-        timestamp_file = "time_stage_3_end.txt"
-        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-                                   timestamp_file=timestamp_file)
-        ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 08_rootkit_ransomware",
-                                    5, finished_task=True, override_pre_message=True, finished_stage=True)
+    # def attack_data_theft(self):
+    #     ProgressHelper.update_scenario("Data_Theft")
+    #     self.attacker_server.data_theft_start_metasploit()
+    #
+    #     stage = 2
+    #     ProgressHelper.update_stage(stage,
+    #                                 f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
+    #                                 5, new_stage=True)
+    #     self.attacker_server.data_theft_first_stage()
+    #     ProgressHelper.update_stage(stage,
+    #                                 f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
+    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
+    #
+    #     #stage += 1
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
+    #                                 5, new_stage=True)
+    #     self.attacker_server.data_theft_second_stage()
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
+    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
+    #
+    #     #stage += 1
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 07_data_theft",
+    #                                 5, new_stage=True)
+    #     self.attacker_server.data_theft_third_stage()
+    #     # wait and record timestamp
+    #     timestamp_folder = os.path.join("CREME_backend_execution", "logs", "07_data_theft", "times")
+    #     timestamp_file = "time_stage_3_end.txt"
+    #     OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+    #                                timestamp_file=timestamp_file)
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 07_data_theft",
+    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
+    #
+    # def attack_rootkit_ransomware(self):
+    #     ProgressHelper.update_scenario("Rootkit_Ransomware")
+    #     self.attacker_server.rootkit_ransomware_start_metasploit()
+    #
+    #     stage = 2
+    #     ProgressHelper.update_stage(stage,
+    #                                 f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
+    #                                 5, new_stage=True)
+    #     self.attacker_server.rootkit_ransomware_first_stage()
+    #     ProgressHelper.update_stage(stage,
+    #                                 f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
+    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
+    #
+    #     #stage += 1
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
+    #                                 5, new_stage=True)
+    #     self.attacker_server.rootkit_ransomware_second_stage()
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
+    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
+    #
+    #     #stage += 1
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 08_rootkit_ransomware",
+    #                                 5, new_stage=True)
+    #     self.attacker_server.rootkit_ransomware_third_stage()
+    #     # wait and record timestamp
+    #     timestamp_folder = os.path.join("CREME_backend_execution", "logs", "08_rootkit_ransomware", "times")
+    #     timestamp_file = "time_stage_3_end.txt"
+    #     OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+    #                                timestamp_file=timestamp_file)
+    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 08_rootkit_ransomware",
+    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
 
     # ---------- download data to controller ----------
     def download_data_to_controller(self, scenario_log_folder, time_filenames=[], other_files_flag=False,
@@ -631,8 +641,12 @@ class Creme:
                 # file_names.append('{0}_continuum.log'.format(self.BenignServer.hostname))
                 # file_names.append('{0}_continuum.log'.format(self.target_server.hostname))
 
-                DownloadDataHelper.get_data(self.dls.ip, self.dls.username, self.dls.password, remote_folder=self.dls.path,
-                                            file_names=file_names, local_folder=local_folder)
+                DownloadDataHelper.get_data(self.dls.ip,
+                                            self.dls.username,
+                                            self.dls.password,
+                                            remote_folder=self.dls.path,
+                                            file_names=file_names,
+                                            local_folder=local_folder)
 
         # ----- download timestamp files -----
         times = "times"
@@ -660,7 +674,8 @@ class Creme:
     # ---------- run scenario ----------
     def run_mirai(self):
         scenario = "02_mirai"
-        #attack_phases_name = ("Attack Phase 1<br>(Valid Accounts)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Network DoS)")
+        #attack_phases_name = ("Attack Phase 1<br>(Valid Accounts)", "Attack Phase 2</br>
+        # (Non-App Layer Protocol)","Attack Phase 3</br>(Network DoS)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -682,7 +697,8 @@ class Creme:
 
     def run_disk_wipe(self):
         scenario = "05_disk_wipe"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Disk wipe)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
+        # (Non-App Layer Protocol)","Attack Phase 3</br>(Disk wipe)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -706,7 +722,8 @@ class Creme:
 
     def run_ransomware(self):
         scenario = "03_ransomware"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
+        # (Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -730,7 +747,8 @@ class Creme:
 
     def run_resource_hijacking(self):
         scenario = "04_resource_hijacking"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Resource Hijacking)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
+        # (Non-App Layer Protocol)","Attack Phase 3</br>(Resource Hijacking)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -767,7 +785,8 @@ class Creme:
 
     def run_end_point_dos(self):
         scenario = "06_end_point_dos"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Create Account)","Attack Phase 3</br>(Endpoint DoS)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(
+        # Create Account)","Attack Phase 3</br>(Endpoint DoS)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -791,7 +810,8 @@ class Creme:
 
     def run_data_theft(self):
         scenario = "07_data_theft"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Exfiltration Over C2 Channel)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
+        # (Non-App Layer Protocol)","Attack Phase 3</br>(Exfiltration Over C2 Channel)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -816,7 +836,8 @@ class Creme:
 
     def run_rootkit_ransomware(self):
         scenario = "08_rootkit_ransomware"
-        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
+        #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
+        # (Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
         ProgressHelper.update_scenario(scenario)
         #ProgressHelper.update_attack_phase_data(attack_phases_name)
 
@@ -938,8 +959,8 @@ class Creme:
                                       force_abnormal_cmd_list=[[],[],[]]):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
-        general attack scenarios (excepting Mirai), also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog
+        general attack scenarios (excepting Mirai), also return abnormal_hostnames, normal_hostnames, timestamps_syslog
+        to process and label syslog
         """
         folder_times = os.path.join(log_folder, "times")
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
@@ -1007,14 +1028,16 @@ class Creme:
         labels = [1, 1, 1]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
         technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk wipe']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Disk Content Wipe']
+        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+                               'Disk Content Wipe']
         """Other possible labels
         Initial Access -> Exploit Public-Facing Application
         Persistence
         Impact -> Data Destruction or Disk Wipe -> Disk Content Wipe or Disk Structure Wipe
 
         """
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names, sub_technique_names)
+        return self.process_data_general_scenario(log_folder, labels, tactic_names,
+                                                  technique_names, sub_technique_names)
 
     def process_data_data_theft(self, log_folder):
         """
@@ -1025,8 +1048,10 @@ class Creme:
         """
         labels = [1, 1, 1]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Exfiltration']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Exfiltration Over C2 Channel']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Exfiltration Over C2 Channel']
+        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+                           'Exfiltration Over C2 Channel']
+        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+                               'Exfiltration Over C2 Channel']
 
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
                                                   sub_technique_names)
@@ -1034,8 +1059,8 @@ class Creme:
     def process_data_rootkit_ransomware(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
-        Rootkit_Ransomware attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog.
+        Rootkit_Ransomware attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to
+        process and label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 1, 1]  # only for syslog
@@ -1067,14 +1092,16 @@ class Creme:
     def process_data_resource_hijacking(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
-        Resource_Hijacking attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog.
+        Resource_Hijacking attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to
+        process and label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 1, 1]  # only for syslog
         tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Resource Hijacking']
+        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+                           'Resource Hijacking']
+        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+                               'Resource Hijacking']
 
         return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
                                                   sub_technique_names)
@@ -1082,8 +1109,8 @@ class Creme:
     def process_data_end_point_dos(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
-        End_Point_Dos attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog.
+        End_Point_Dos attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process
+        and label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 1, 1]  # only for syslog
@@ -1297,11 +1324,14 @@ class Creme:
             # merge continuum logs to dataset_generation.log
             continuum_log_files = []
             tmp_hostnames = []
-            continuum_log_files.append(os.path.join(syslog_folder, "{0}_continuum.log".format(self.benign_server.hostname)))
+            continuum_log_files.append(os.path.join(syslog_folder,
+                                                    "{0}_continuum.log".format(self.benign_server.hostname)))
             tmp_hostnames.append(self.benign_server.hostname)
-            continuum_log_files.append(os.path.join(syslog_folder, "{0}_continuum.log".format(self.target_server.hostname)))
+            continuum_log_files.append(os.path.join(syslog_folder,
+                                                    "{0}_continuum.log".format(self.target_server.hostname)))
             tmp_hostnames.append(self.target_server.hostname)
-            ProcessDataHelper.merge_other_logs_2_syslog(continuum_log_files, syslog_file, timestamps_syslog, tmp_hostnames)
+            ProcessDataHelper.merge_other_logs_2_syslog(continuum_log_files, syslog_file, timestamps_syslog,
+                                                        tmp_hostnames)
 
             scenarios_labels.append(labels)
             scenarios_tactics.append(tactics)
@@ -1353,7 +1383,7 @@ class Creme:
                                                                 final_name_atop, time_window_traffic)
         # balance data and filter features
         ProcessDataHelper.balance_data(folder_atop, final_name_atop)
-        ProcessDataHelper.balance_data(folder_traffic, final_name_traffic, balanced_label_zero = False)
+        ProcessDataHelper.balance_data(folder_traffic, final_name_traffic, balanced_label_zero=False)
         ProcessDataHelper.filter_features(folder_atop, final_name_atop, 0.1)
         ProcessDataHelper.filter_features(folder_traffic, final_name_traffic, 0.04)
         ProgressHelper.update_stage(stage, f"Finished processing the accounting and network packet data sources", 5,
@@ -1514,4 +1544,3 @@ class Creme:
         # evaluation
         if not Creme.skip_evaluation:
             self.evaluation(eff_result)
-
