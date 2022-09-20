@@ -1,0 +1,10 @@
+/argus-3.0.8.2.tar.gz
+/argus-clients-3.0.8.2.tar.gz
+/argus-3.0.8.2/
+/argus-clients-3.0.8.2/
+/CREME_backend_execution/evaluation_results/
+/CREME_backend_execution/logs/
+/celery.log
+/db.sqlite3
+/CREMEapplication/migrations/0001_initial.py
+/CREMEapplication/migrations/__init__.py

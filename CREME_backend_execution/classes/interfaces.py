@@ -221,9 +221,6 @@ class IDiskWipeAttackerServer(Interface):
     def disk_wipe_sixth_stage(self):
         pass
 
-    def disk_wipe_seventh_stage(self):
-        pass
-
 
 class IRansomwareAttackerServer(Interface):
     """
