@@ -691,6 +691,13 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
+    def configure_disk_wipe(self):
+        prepared_files = "CREME/CREME_backend_execution/scripts/02_scenario/02_disk_wipe/python_files/attacker_server"
+        filename_path = "00_configuration/AttackerServer/AttackerServer_disk_wipe.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
+                      self.controller_password, self.controller_path, prepared_files]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
     def configure_ransomware(self):
         prepared_files = "CREME/CREME_backend_execution/scripts/02_scenario/03_ransomware/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_ransomware.sh"
@@ -701,13 +708,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     def configure_resource_hijacking(self):
         prepared_files = "CREME/CREME_backend_execution/scripts/02_scenario/04_resource_hijacking/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_resource_hijacking.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
-                      self.controller_password, self.controller_path, prepared_files]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def configure_disk_wipe(self):
-        prepared_files = "CREME/CREME_backend_execution/scripts/02_scenario/05_disk_wipe/python_files/attacker_server"
-        filename_path = "00_configuration/AttackerServer/AttackerServer_disk_wipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, prepared_files]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -736,82 +736,98 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
 
     ## Mirai Attack Block
-    def mirai_first_stage(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+    def mirai_first_step(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_1_mirai_step_1.txt"
 
 
-        filename_path = "02_scenario/01_PRE/bash_files/01_step_mirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/01_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def mirai_second_stage(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+    def mirai_second_step(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_2_mirai_step_2.txt"
 
-        filename_path = "02_scenario/01_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+        # filename_path = "02_scenario/01_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
+        # parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+        # ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-        filename_path = "02_scenario/01_PRE/bash_files/02_step_mirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/02_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def mirai_start_cnc_and_login(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+    # start cnc and login
+    def mirai_third_step(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_3_mirai_start_cnc_and_login.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/03_step_AttackerServer_start_cnc_and_login.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/03_step_AttackerServer_start_cnc_and_login.sh"
         parameters = [self.hostname, self.ip, self.username, self.password, self.path, self.cnc_pids_file,
                       self.num_of_new_bots, self.targeted_attack, self.DDoS_type, self.DDoS_duration, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def mirai_wait_for_finished_scan(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+    def mirai_fifth_step(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
+        outputTime = "time_5_kali_start_scan.txt"
+
+        filename_path = "02_scenario/01_mirai/bash_files/05_step_MaliciousClient_start_malicious.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.mirai_pids_file, logs_path, outputTime]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def mirai_sixth_step(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_6_mirai_wait_finish_scan.txt"
 
         FinishedFile = "ScanFinishedFile.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/06_step_AttackerServer_wait_for_finished_phase.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/06_step_AttackerServer_wait_for_finished_phase.sh"
         parameters = [self.ip, self.username, self.password, self.path, FinishedFile, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def mirai_transfer_and_start_malicious(self):
+    def mirai_stop_malicious(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
+        outputTime = "time_6_MaliciousClient_stop_malicious.txt"
+
+        filename_path = "02_scenario/01_mirai/bash_files/06_step_MaliciousClient_stop_malicious.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.mirai_pids_file, logs_path, outputTime]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def mirai_seventh_step(self):
         scan_flag = "0"
         input_bot = "input_bot"  # example: input_bot_192.168.1.112.txt
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         output_time = "time_7_start_transfer.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/07_step_AttackerServer_transfer_and_start_malicious.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/07_step_AttackerServer_transfer_and_start_malicious.sh"
         parameters = [self.ip, self.username, self.password, self.path, input_bot, scan_flag, self.transfer_pids_file,
                       logs_path, output_time]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def mirai_wait_for_finished_transfer(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_7_mirai_wait_finish_transfer.txt"
 
         FinishedFile = "TransferFinishedFile.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/06_step_AttackerServer_wait_for_finished_phase.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/06_step_AttackerServer_wait_for_finished_phase.sh"
         parameters = [self.ip, self.username, self.password, self.path, FinishedFile, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    def mirai_wait_for_finished_ddos(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+    def mirai_eight_step(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_8_mirai_wait_finish_ddos.txt"
 
         FinishedFile = "ddosFinishedFile.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/06_step_AttackerServer_wait_for_finished_phase.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/06_step_AttackerServer_wait_for_finished_phase.sh"
         parameters = [self.ip, self.username, self.password, self.path, FinishedFile, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_malicious(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
         outputTime = "time_8_mirai_stop_malicious.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/08_step_AttackerServer_cnc_stop_malicious.sh"
+        filename_path = "02_scenario/01_mirai/bash_files/08_step_AttackerServer_cnc_stop_malicious.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.transfer_pids_file, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -824,45 +840,39 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         self.stop_malicious()
         self.stop_cnc_and_login()
 
-## PRE steps for Non Mirai
-    def nonmirai_first_stage(self):
-        filename_path = "02_scenario/00_PRE/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-
-    def nonmirai_second_stage(self):
-        filename_path = "02_scenario/00_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-        filename_path = "02_scenario/00_PRE/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
 # Disk Wipe Attack Block
     def disk_wipe_start_metasploit(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/00_AttackerServer_start_metasploit_DiskWipe.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/00_AttackerServer_start_metasploit_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def disk_wipe_first_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def disk_wipe_second_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def disk_wipe_third_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/03_step_AttackerServer_DiskWipe.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/03_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def disk_wipe_fourth_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/04_step_AttackerServer_DiskWipe.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/04_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def disk_wipe_fifth_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/05_step_AttackerServer_DiskWipe.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/05_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def disk_wipe_sixth_stage(self):
-        filename_path = "02_scenario/05_disk_wipe/bash_files/06_step_AttackerServer_DiskWipe.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/06_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -870,6 +880,16 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     def ransomware_start_metasploit(self):
         filename_path = "02_scenario/03_ransomware/bash_files/00_AttackerServer_start_metasploit_Ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def ransomware_first_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def ransomware_second_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def ransomware_third_stage(self):
@@ -904,6 +924,16 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
+    def resource_hijacking_first_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def resource_hijacking_second_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
     def resource_hijacking_fourth_stage(self):
         filename_path = "02_scenario/04_resource_hijacking/bash_files/04_step_AttackerServer_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
@@ -929,6 +959,16 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     def end_point_dos_start_metasploit(self):
         filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def end_point_dos_first_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+    def end_point_dos_second_stage(self):
+        filename_path = "02_scenario/02_disk_wipe/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_third_stage(self):
@@ -1111,18 +1151,4 @@ class MaliciousClient(Machine, implements(IConfiguration), implements(IConfigura
     def configure_rootkit_ransomware(self):
         pass
 
-    def mirai_start_malicious(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
-        outputTime = "time_5_kali_start_scan.txt"
 
-        filename_path = "02_scenario/02_mirai/bash_files/05_step_MaliciousClient_start_malicious.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.mirai_pids_file, logs_path, outputTime]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-    def mirai_stop_malicious(self):
-        logs_path = "CREME_backend_execution/logs/02_mirai/times"
-        outputTime = "time_6_MaliciousClient_stop_malicious.txt"
-
-        filename_path = "02_scenario/02_mirai/bash_files/06_step_MaliciousClient_stop_malicious.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.mirai_pids_file, logs_path, outputTime]
-        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
