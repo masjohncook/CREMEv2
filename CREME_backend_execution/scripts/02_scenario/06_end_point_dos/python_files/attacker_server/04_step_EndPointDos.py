@@ -35,7 +35,7 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(10)
-    output_time_file = 'time_stage_4_end.txt'
+    output_time_file = 'time_step_4_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 

@@ -21,7 +21,7 @@ def main(argv):
     my_ip = argv[2]
     target_ip = argv[3]
 
-    output_time_file = 'time_step_2_mirai_start.txt'
+    output_time_file = 'time_step_2_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
     # put the attack launch command
@@ -39,7 +39,7 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(10)
-    output_time_file = 'time_step_2_mirai_end.txt'
+    output_time_file = 'time_step_2_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
