@@ -4,9 +4,9 @@ set ip [lindex $argv 1]
 set username [lindex $argv 2]
 set password [lindex $argv 3]
 set path [lindex $argv 4]
-set pids_file [lindex $argv 5]
+set target_server_ip [lindex $argv 5]
 
-set timeout 1200
+et timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -18,12 +18,8 @@ expect " password: "
 send "$password\r"
 set timeout 60
 
-# Pymetasploit (Py3)
 expect "*:~# "
-send "msfrpcd -P kali -S \r"
-
-expect "*:~# "
-send "ps -ef | grep 'msfrpcd' | awk '{print \$2}' > $path/$pids_file\r"
+send "python3 $path/01_step_PRE_NonMirai.py $path $ip $target_server_ip\r"
 
 expect "*:~# "
 send "exit\r"
