@@ -144,32 +144,32 @@ class IMiraiAttackerServer(Interface):
     """
     defining actions of Mirai attack for the attacker server
     """
-    def mirai_start_cnc_and_login(self):
+    def mirai_third_step(self):
         """
         starting cnc program and telnet login to cnc program to control bots
         """
         pass
 
-    def mirai_wait_for_finished_scan(self):
+    def mirai_sixth_step(self):
         """
         waiting the malicious client to finish scanning new bots
         """
         pass
 
-    def mirai_transfer_and_start_malicious(self):
+    def mirai_seventh_step(self):
         """
-        cnc transfers malicious software (02_mirai) to new bots and run it (02_mirai)
+        cnc transfers malicious software (01_mirai) to new bots and run it (01_mirai)
         """
         pass
 
     def mirai_wait_for_finished_transfer(self):
         """
-        cnc waits to finish transferring malicious software (02_mirai) to new bots.
+        cnc waits to finish transferring malicious software (01_mirai) to new bots.
         Then, cnc sends ddos commands to bots.
         """
         pass
 
-    def mirai_wait_for_finished_ddos(self):
+    def mirai_eight_step(self):
         """
         waiting to finish ddos attack.
         """
@@ -180,15 +180,15 @@ class IMiraiMaliciousClient(Interface):
     """
     defining actions of Mirai attack for the malicious client
     """
-    def mirai_start_malicious(self):
+    def mirai_fifth_step(self):
         """
-        starting the malicious software (02_mirai) at malicious client and scanning to find new bots.
+        starting the malicious software (01_mirai) at malicious client and scanning to find new bots.
         """
         pass
 
     def mirai_stop_malicious(self):
         """
-        should stop the malicious software (02_mirai) before cnc transfers 02_mirai to new bots.
+        should stop the malicious software (01_mirai) before cnc transfers 01_mirai to new bots.
         Otherwise, cnc may fail to telnet login to new bots. Because the ip range is small, the malicious client will
         continue to scan the bot even it already found the username and password.
         Contracting a list of existing bots may help to deal this problem.
@@ -203,10 +203,10 @@ class IDiskWipeAttackerServer(Interface):
     def disk_wipe_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def disk_wipe_first_stage(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def disk_wipe_second_stage(self):
         pass
 
     def disk_wipe_third_stage(self):
@@ -229,10 +229,10 @@ class IRansomwareAttackerServer(Interface):
     def ransomware_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def ransomware_first_stage(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def ransomware_second_stage(self):
         pass
 
     def ransomware_third_stage(self):
@@ -258,10 +258,10 @@ class IResourceHijackingAttackerServer(Interface):
     def resource_hijacking_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def resource_hijacking_first_stage(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def resource_hijacking_second_stage(self):
         pass
 
     def resource_hijacking_fourth_stage(self):
@@ -284,10 +284,10 @@ class IEndPointDosAttackerServer(Interface):
     def end_point_dos_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def end_point_dos_first_stage(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def end_point_dos_second_stage(self):
         pass
 
     def end_point_dos_third_stage(self):
