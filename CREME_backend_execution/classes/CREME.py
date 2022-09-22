@@ -238,20 +238,20 @@ class Creme:
                                     5)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1133 External Remote Service",
                                     5)
-        self.attacker_server.mirai_third_step()
+        self.attacker_server.mirai_start_cnc_and_login()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 3 - T1059.004 Unix Shell",
                                     5, finished_task=True, override_pre_message=False)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 4 - T1133 External Remote Service",
                                     5, finished_task=True, override_pre_message=False)
 
         ProgressHelper.update_stage(stage, f"{self.malicious_client.hostname} is starting Step 5 - T1622 Debugger Evasion", 5)
-        self.malicious_client.mirai_fifth_step()
+        self.malicious_client.mirai_start_malicious()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 5 - T1622 Debugger Evasion",
                                     5, finished_task=True, override_pre_message=False)
 
         ProgressHelper.update_stage(stage, f"{self.malicious_client.hostname} is starting Step 6 - T1046 Network Device Scanning",
                                     5)
-        self.attacker_server.mirai_sixth_step()
+        self.attacker_server.mirai_wait_for_finish_scan()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1046 Network Device Scanning",
                                     5, finished_task=True, override_pre_message=False)
 
@@ -268,7 +268,7 @@ class Creme:
         #stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1105 Ingress Tool Transfer", 5)
         #Transfering Mirai
-        self.attacker_server.mirai_seventh_step()
+        self.attacker_server.mirai_transfer_and_start_malicious()
         self.attacker_server.mirai_wait_for_finished_transfer()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} FINISHED Step 7 - T1105 Ingress Tool Transfer", 5
                                     )
@@ -280,7 +280,7 @@ class Creme:
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5
                                     )
-        self.attacker_server.mirai_eight_step()
+        self.attacker_server.mirai_wait_for_finished_ddos()
         # ProgressHelper.update_stage(stage, f"Bots FINISHED to DDoS {self.target_server.hostname}", 5,
         #                             finished_task=True, override_pre_message=True)
         # wait and record timestamp
