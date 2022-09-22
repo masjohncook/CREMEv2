@@ -144,19 +144,19 @@ class IMiraiAttackerServer(Interface):
     """
     defining actions of Mirai attack for the attacker server
     """
-    def mirai_third_step(self):
+    def mirai_start_cnc_and_login(self):
         """
         starting cnc program and telnet login to cnc program to control bots
         """
         pass
 
-    def mirai_sixth_step(self):
+    def mirai_wait_for_finish_scan(self):
         """
         waiting the malicious client to finish scanning new bots
         """
         pass
 
-    def mirai_seventh_step(self):
+    def mirai_transfer_and_start_malicious(self):
         """
         cnc transfers malicious software (01_mirai) to new bots and run it (01_mirai)
         """
@@ -169,7 +169,7 @@ class IMiraiAttackerServer(Interface):
         """
         pass
 
-    def mirai_eight_step(self):
+    def mirai_wait_for_finished_ddos(self):
         """
         waiting to finish ddos attack.
         """
@@ -180,7 +180,7 @@ class IMiraiMaliciousClient(Interface):
     """
     defining actions of Mirai attack for the malicious client
     """
-    def mirai_fifth_step(self):
+    def mirai_start_malicious(self):
         """
         starting the malicious software (01_mirai) at malicious client and scanning to find new bots.
         """
@@ -203,22 +203,22 @@ class IDiskWipeAttackerServer(Interface):
     def disk_wipe_start_metasploit(self):
         pass
 
-    def disk_wipe_first_stage(self):
+    def disk_wipe_first_step(self):
         pass
 
-    def disk_wipe_second_stage(self):
+    def disk_wipe_second_step(self):
         pass
 
-    def disk_wipe_third_stage(self):
+    def disk_wipe_third_step(self):
         pass
 
-    def disk_wipe_fourth_stage(self):
+    def disk_wipe_fourth_step(self):
         pass
 
-    def disk_wipe_fifth_stage(self):
+    def disk_wipe_fifth_step(self):
         pass
 
-    def disk_wipe_sixth_stage(self):
+    def disk_wipe_sixth_step(self):
         pass
 
 
@@ -229,25 +229,25 @@ class IRansomwareAttackerServer(Interface):
     def ransomware_start_metasploit(self):
         pass
 
-    def ransomware_first_stage(self):
+    def ransomware_first_step(self):
         pass
 
-    def ransomware_second_stage(self):
+    def ransomware_second_step(self):
         pass
 
-    def ransomware_third_stage(self):
+    def ransomware_third_step(self):
         pass
 
-    def ransomware_fourth_stage(self):
+    def ransomware_fourth_step(self):
         pass
 
-    def ransomware_fifth_stage(self):
+    def ransomware_fifth_step(self):
         pass
 
-    def ransomware_sixth_stage(self):
+    def ransomware_sixth_step(self):
         pass
 
-    def ransomware_seventh_stage(self):
+    def ransomware_seventh_step(self):
         pass
 
 
@@ -258,22 +258,22 @@ class IResourceHijackingAttackerServer(Interface):
     def resource_hijacking_start_metasploit(self):
         pass
 
-    def resource_hijacking_first_stage(self):
+    def resource_hijacking_first_step(self):
         pass
 
-    def resource_hijacking_second_stage(self):
+    def resource_hijacking_second_step(self):
         pass
 
-    def resource_hijacking_fourth_stage(self):
+    def resource_hijacking_fourth_step(self):
         pass
 
-    def resource_hijacking_fifth_stage(self):
+    def resource_hijacking_fifth_step(self):
         pass
 
-    def resource_hijacking_sixth_stage(self):
+    def resource_hijacking_sixth_step(self):
         pass
 
-    def resource_hijacking_seventh_stage(self):
+    def resource_hijacking_seventh_step(self):
         pass
 
 
@@ -284,25 +284,25 @@ class IEndPointDosAttackerServer(Interface):
     def end_point_dos_start_metasploit(self):
         pass
 
-    def end_point_dos_first_stage(self):
+    def end_point_dos_first_step(self):
         pass
 
-    def end_point_dos_second_stage(self):
+    def end_point_dos_second_step(self):
         pass
 
-    def end_point_dos_third_stage(self):
+    def end_point_dos_third_step(self):
         pass
 
-    def end_point_dos_fourth_stage(self):
+    def end_point_dos_fourth_step(self):
         pass
 
-    def end_point_dos_fifth_stage(self):
+    def end_point_dos_fifth_step(self):
         pass
 
-    def end_point_dos_sixth_stage(self):
+    def end_point_dos_sixth_step(self):
         pass
 
-    def end_point_dos_seventh_stage(self):
+    def end_point_dos_seventh_step(self):
         pass
 
 
