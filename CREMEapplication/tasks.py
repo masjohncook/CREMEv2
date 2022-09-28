@@ -119,7 +119,8 @@ def load_testbed_information():
     Creme.models_name = models_name[:]
     creme = Creme(dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients, attacker_server,
                   malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos, data_theft,
-                  rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing, skip_ML_training, skip_evaluation)
+                  rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing, skip_ML_training,
+                  skip_evaluation)
     creme.run()
     # creme.test_print_information()
     # creme.configure()
