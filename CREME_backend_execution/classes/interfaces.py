@@ -66,10 +66,10 @@ class IConfigurationAttackerSide(Interface):
     """
 
     def configure_pymetasploit(self):
-       pass
+        pass
 
     def configure_apache2(self):
-       pass
+        pass
 
 
 # ---------- data collection ----------
@@ -150,7 +150,7 @@ class IMiraiAttackerServer(Interface):
         """
         pass
 
-    def mirai_wait_for_finished_scan(self):
+    def mirai_wait_for_finish_scan(self):
         """
         waiting the malicious client to finish scanning new bots
         """
@@ -158,13 +158,13 @@ class IMiraiAttackerServer(Interface):
 
     def mirai_transfer_and_start_malicious(self):
         """
-        cnc transfers malicious software (02_mirai) to new bots and run it (02_mirai)
+        cnc transfers malicious software (01_mirai) to new bots and run it (01_mirai)
         """
         pass
 
     def mirai_wait_for_finished_transfer(self):
         """
-        cnc waits to finish transferring malicious software (02_mirai) to new bots.
+        cnc waits to finish transferring malicious software (01_mirai) to new bots.
         Then, cnc sends ddos commands to bots.
         """
         pass
@@ -182,13 +182,13 @@ class IMiraiMaliciousClient(Interface):
     """
     def mirai_start_malicious(self):
         """
-        starting the malicious software (02_mirai) at malicious client and scanning to find new bots.
+        starting the malicious software (01_mirai) at malicious client and scanning to find new bots.
         """
         pass
 
     def mirai_stop_malicious(self):
         """
-        should stop the malicious software (02_mirai) before cnc transfers 02_mirai to new bots.
+        should stop the malicious software (01_mirai) before cnc transfers 01_mirai to new bots.
         Otherwise, cnc may fail to telnet login to new bots. Because the ip range is small, the malicious client will
         continue to scan the bot even it already found the username and password.
         Contracting a list of existing bots may help to deal this problem.
@@ -203,22 +203,22 @@ class IDiskWipeAttackerServer(Interface):
     def disk_wipe_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def disk_wipe_first_step(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def disk_wipe_second_step(self):
         pass
 
-    def disk_wipe_third_stage(self):
+    def disk_wipe_third_step(self):
         pass
 
-    def disk_wipe_fourth_stage(self):
+    def disk_wipe_fourth_step(self):
         pass
 
-    def disk_wipe_fifth_stage(self):
+    def disk_wipe_fifth_step(self):
         pass
 
-    def disk_wipe_sixth_stage(self):
+    def disk_wipe_sixth_step(self):
         pass
 
 
@@ -229,25 +229,25 @@ class IRansomwareAttackerServer(Interface):
     def ransomware_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def ransomware_first_step(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def ransomware_second_step(self):
         pass
 
-    def ransomware_third_stage(self):
+    def ransomware_third_step(self):
         pass
 
-    def ransomware_fourth_stage(self):
+    def ransomware_fourth_step(self):
         pass
 
-    def ransomware_fifth_stage(self):
+    def ransomware_fifth_step(self):
         pass
 
-    def ransomware_sixth_stage(self):
+    def ransomware_sixth_step(self):
         pass
 
-    def ransomware_seventh_stage(self):
+    def ransomware_seventh_step(self):
         pass
 
 
@@ -258,22 +258,22 @@ class IResourceHijackingAttackerServer(Interface):
     def resource_hijacking_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def resource_hijacking_first_step(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def resource_hijacking_second_step(self):
         pass
 
-    def resource_hijacking_fourth_stage(self):
+    def resource_hijacking_fourth_step(self):
         pass
 
-    def resource_hijacking_fifth_stage(self):
+    def resource_hijacking_fifth_step(self):
         pass
 
-    def resource_hijacking_sixth_stage(self):
+    def resource_hijacking_sixth_step(self):
         pass
 
-    def resource_hijacking_seventh_stage(self):
+    def resource_hijacking_seventh_step(self):
         pass
 
 
@@ -284,25 +284,25 @@ class IEndPointDosAttackerServer(Interface):
     def end_point_dos_start_metasploit(self):
         pass
 
-    def nonmirai_first_stage(self):
+    def end_point_dos_first_step(self):
         pass
 
-    def nonmirai_second_stage(self):
+    def end_point_dos_second_step(self):
         pass
 
-    def end_point_dos_third_stage(self):
+    def end_point_dos_third_step(self):
         pass
 
-    def end_point_dos_fourth_stage(self):
+    def end_point_dos_fourth_step(self):
         pass
 
-    def end_point_dos_fifth_stage(self):
+    def end_point_dos_fifth_step(self):
         pass
 
-    def end_point_dos_sixth_stage(self):
+    def end_point_dos_sixth_step(self):
         pass
 
-    def end_point_dos_seventh_stage(self):
+    def end_point_dos_seventh_step(self):
         pass
 
 

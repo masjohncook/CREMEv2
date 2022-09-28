@@ -44,28 +44,28 @@ class Testbed(models.Model):
 
 class Controller(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="controller-machine")
-    ip = models.CharField(max_length=255,default="192.168.56.111")
-    username = models.CharField(max_length=255,default="controller-machine")
-    password = models.CharField(max_length=255,default="qsefthuk")
-    path = models.CharField(max_length=255,default="/home/controller-machine")
+    hostname = models.CharField(max_length=255, default="controller-machine")
+    ip = models.CharField(max_length=255, default="192.168.56.111")
+    username = models.CharField(max_length=255, default="controller-machine")
+    password = models.CharField(max_length=255, default="qsefthuk")
+    path = models.CharField(max_length=255, default="/home/controller-machine")
 
 
 class DataLoggerServer(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="data-logger-machine")
-    ip = models.CharField(max_length=255,default="192.168.56.121")
+    hostname = models.CharField(max_length=255, default="data-logger-machine")
+    ip = models.CharField(max_length=255, default="192.168.56.121")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
-    network_interface = models.CharField(max_length=255,default="enp0s3")
+    network_interface = models.CharField(max_length=255, default="enp0s3")
     atop_interval = models.IntegerField(default=1)  # second
 
 
 class TargetServer(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="target-server")
-    ip = models.CharField(max_length=255,default="192.168.56.181")
+    hostname = models.CharField(max_length=255, default="target-server")
+    ip = models.CharField(max_length=255, default="192.168.56.181")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
@@ -73,8 +73,8 @@ class TargetServer(models.Model):
 
 class BenignServer(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="benign-server")
-    ip = models.CharField(max_length=255,default="192.168.56.171")
+    hostname = models.CharField(max_length=255, default="benign-server")
+    ip = models.CharField(max_length=255, default="192.168.56.171")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
@@ -100,8 +100,8 @@ class NonVulnerableClient(models.Model):
 
 class AttackerServer(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="attacker-server")
-    ip = models.CharField(max_length=255,default="192.168.56.131")
+    hostname = models.CharField(max_length=255, default="attacker-server")
+    ip = models.CharField(max_length=255, default="192.168.56.131")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/home/kali/Desktop/reinstall")
@@ -112,8 +112,8 @@ class AttackerServer(models.Model):
 
 class MaliciousClient(models.Model):
     objects = models.Manager()
-    hostname = models.CharField(max_length=255,default="malicious-client")
-    ip = models.CharField(max_length=255,default="192.168.56.161")
+    hostname = models.CharField(max_length=255, default="malicious-client")
+    ip = models.CharField(max_length=255, default="192.168.56.161")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")

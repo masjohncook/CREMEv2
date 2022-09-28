@@ -1,6 +1,6 @@
 if [ $# != 3 ]; then
     echo "Usage: ./make_subflow_dataset.sh time_window(secs) pcap_file_path code_path"
-    exit -1
+    exit 1
 fi
 
 time_window=$1

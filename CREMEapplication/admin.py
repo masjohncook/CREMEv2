@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Testbed, DataLoggerServer, TargetServer, BenignServer, VulnerableClient, NonVulnerableClient, \
-    AttackerServer, MaliciousClient, AttackScenario, ProgressData, Controller, MachineLearningModel,SkipStage
+    AttackerServer, MaliciousClient, AttackScenario, ProgressData, Controller, MachineLearningModel, SkipStage
 
 # Register your models here.
 admin.site.register(Testbed)

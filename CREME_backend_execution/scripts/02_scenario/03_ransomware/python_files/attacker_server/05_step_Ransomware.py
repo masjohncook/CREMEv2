@@ -40,8 +40,9 @@ def main(argv):
     client.sessions.session('3').stop()
 
     time.sleep(10)
-    output_time_file = 'time_stage_5_end.txt'
+    output_time_file = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
+
 
 main(sys.argv)

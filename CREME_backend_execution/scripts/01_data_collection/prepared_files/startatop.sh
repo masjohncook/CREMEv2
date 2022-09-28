@@ -2,7 +2,7 @@
 
 if [ $# != 3 ]; then
     echo "Usage: ./clientWebGet.sh folder atop_file interval"
-    exit -1
+    exit 1
 fi
 
 folder=$1

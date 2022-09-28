@@ -30,7 +30,7 @@ send "rm $path/*.pcap\r"
 
 # Start capturing
 expect "*:~# "
-#sudo tcpdump -w /root/02_mirai.pcap -n -i enp3s0 &
+#sudo tcpdump -w /root/01_mirai.pcap -n -i enp3s0 &
 send "nohup tcpdump -U -w $path/$tcpFile -n -i $netInterface &\r"
 expect "output to 'nohup.out'"
 send "\r"

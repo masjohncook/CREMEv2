@@ -23,7 +23,11 @@ send "cd $path\r"
 
 ## Configure Postgresql
 expect "$path# "
-send "sudo systemctl start postgresql.service"
+send "sudo msfdb init"
+
+#start MSFRPCD
+expect "$path# "
+send "msfrpcd -P kali -S"
 
 # Pymetasploit (Py3)
 expect "$path# "

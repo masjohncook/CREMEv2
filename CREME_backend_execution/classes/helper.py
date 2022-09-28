@@ -17,11 +17,8 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_validate
 from sklearn.feature_selection import RFECV
 import matplotlib.pyplot as plt
-import time
 import socket
 import time
-import numpy as np
-import random
 
 class ScriptHelper:
     @staticmethod
@@ -74,17 +71,17 @@ class ProgressHelper:
     this class supports to update progress data that used to display progress on the dashboard
     """
 
-    #stage 1 -->  Configuration
-    #stage 2 -->  Attack
-    #stage 3 -->  Data Processing
-    #stage 4 -->  ML Training
-    #stage 5 -->  Evalutaion
+    # stage 1 -->  Configuration
+    # stage 2 -->  Attack
+    # stage 3 -->  Data Processing
+    # stage 4 -->  ML Training
+    # stage 5 -->  Evalutaion
     scenario = "scenario"
     status_fields = {1: "stage_1_status", 2: "stage_2_status", 3: "stage_3_status",
                      4: "stage_4_status", 5: "stage_5_status"}
     detail_fields = {1: "stage_1_detail", 2: "stage_2_detail", 3: "stage_3_detail",
                      4: "stage_4_detail", 5: "stage_5_detail"}
-    #attack_phase_fields = {0: "attack_phase_1_data", 1: "attack_phase_2_data", 2: "attack_phase_3_data"}
+    # attack_phase_fields = {0: "attack_phase_1_data", 1: "attack_phase_2_data", 2: "attack_phase_3_data"}
     attack_phase_fields = {0: "attack_phase_data"}
     messages = []
 
@@ -132,7 +129,7 @@ class ProgressHelper:
         else:
             icon = running_icon
         localtime = time.localtime()
-        time_stamp =  time.strftime("%H:%M:%S", localtime)
+        time_stamp = time.strftime("%H:%M:%S", localtime)
         message = f'<h{size}>{icon} {message} {time_stamp}</h{size}>'
         # message += "<br>"
 
@@ -197,8 +194,8 @@ class ProgressHelper:
 class ProcessDataHelper:
     @staticmethod
     def make_labeling_file(labeling_file_path, tactic_names, technique_names, sub_technique_names, t, src_ips, des_ips,
-                           normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list=[[],[],[]],
-                           force_abnormal_cmd_list=[[],[],[]]):
+                           normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list=[[], [], []],
+                           force_abnormal_cmd_list=[[], [], []]):
         """
         use to create a labeling file which is a parameter using to label data
         """
@@ -233,7 +230,7 @@ class ProcessDataHelper:
             t2 = int(f2.readline())
         with open(time_4_start_DDoS, 'rt') as f3:
             t3 = int(f3.readline())
-            #t4 = t3
+            # t4 = t3
         t5 = t3 + int(dur) + 10  # 10 to avoid problems if there is some delay
         # return t1, t2, t3, t4, t5
         return t1, t2, t3, t5
@@ -548,9 +545,9 @@ class ProcessDataHelper:
             if hostname != dls_hostname:
                 dateTime = parse(time_string)
                 # timestamp = (int)(dateTime.strftime("%s"))
-                timestamp = (int)(dateTime.timestamp())
+                timestamp = int(dateTime.timestamp())
 
-                if (int)(t_start) <= timestamp <= (int)(t_end):
+                if int(t_start) <= timestamp <= int(t_end):
                     component = fields[2]
                     if component == apache_access:
                         return_lines_apache.append(line)
@@ -717,7 +714,7 @@ class ProcessDataHelper:
         # parse logs
         # tmp_output_files is a list 2d
         tmp_list_of_output_files = ProcessDataHelper.parse_syslog([filtered_syslog, filtered_syslog_apache],
-                                                          input_dir=result_path, output_dir=result_path)
+                                                                  input_dir=result_path, output_dir=result_path)
         for tmp_output_files in tmp_list_of_output_files:
             for tmp_file in tmp_output_files:
                 remove_files.append(os.path.join(result_path, tmp_file))
@@ -808,8 +805,6 @@ class ProcessDataHelper:
         # print('len(df): {0}'.format(len(df)))
         # print('label_0: {0}'.format(len(df_0)))
         # print('label_1: {0}'.format(len(df_1)))
-
-        
         
         if balanced_label_zero:
             df_0.drop_duplicates(keep='last', inplace=True)
@@ -824,9 +819,9 @@ class ProcessDataHelper:
             df_0.drop_duplicates(keep='last', inplace=True)
             num_of_label_0 = len(df_0)
             num_of_label_1 = len(df_1)
-            if("traffic" in input_file):
+            if "traffic" in input_file:
                 ind = df_0[(df_0['Sum'] == 0.0) | (df_0['Min'] == 0.0) | (df_0['Max'] == 0.0)].index
-                df_0.drop(ind,inplace = True)
+                df_0.drop(ind, inplace=True)
             df = df_1.append(df_0)
 
         df.to_csv(os.path.join(folder, input_file), encoding='utf-8', index=False)
@@ -853,7 +848,6 @@ class ProcessDataHelper:
         df.drop(removed_features, axis=1, inplace=True)
         df.to_csv(tmp_filename, encoding='utf-8', index=False)
 
-
     @staticmethod
     def merge_other_logs_2_syslog(other_log_files, syslog_file, timestamps_syslog, hostnames, time_zone="+08:00",
                                   component="continuum[]"):
@@ -875,8 +869,8 @@ class ProcessDataHelper:
 
                 time_string = "{0}T{1}{2}".format(tmp_date, hour_min_second, time_zone)
                 dateTime = parse(time_string)
-                timestamp = (int)(dateTime.timestamp())
-                if (int)(t_start) <= timestamp <= (int)(t_end):
+                timestamp = int(dateTime.timestamp())
+                if int(t_start) <= timestamp <= int(t_end):
                     new_line = "{0} {1} {2}: {3}".format(time_string, hostnames[i], component, log_message)
                     new_lines.append(new_line)
 
@@ -906,9 +900,9 @@ class TrainMLHelper:
             if 'knn' in models_name:
                 models['knn'] = KNeighborsClassifier()
             if 'random_forest' in models_name:
-                models['random_forest'] = RandomForestClassifier(n_jobs=-1,random_state=1)
+                models['random_forest'] = RandomForestClassifier(n_jobs=-1, random_state=1)
             if 'XGBoost' in models_name:
-                models['XGBoost'] = XGBClassifier(n_jobs=-1,random_state=1)
+                models['XGBoost'] = XGBClassifier(n_jobs=-1, random_state=1)
             # print('Defined %d models' % len(models))
             return models
 
@@ -926,8 +920,8 @@ class TrainMLHelper:
             scaler = preprocessing.StandardScaler()
         else:  # Min Max scale
             scaler = preprocessing.MinMaxScaler()
-        scaler = scaler.fit(X)
-        tmp_df = scaler.transform(X)
+        tmp_df = scaler.fit_transform(X)
+        # tmp_df = scaler.transform(X)
         X = pd.DataFrame(tmp_df)
 
         if num_of_folds < 2:
@@ -935,7 +929,8 @@ class TrainMLHelper:
         cv = StratifiedKFold(n_splits=num_of_folds, shuffle=True, random_state=1)
         scoring = ['accuracy', 'f1', 'precision', 'recall']
 
-        csv_columns = ['ML_algorithms', 'fit_time', 'score_time', 'test_accuracy', 'test_f1', 'test_precision', 'test_recall']
+        csv_columns = ['ML_algorithms', 'fit_time', 'score_time', 'test_accuracy', 'test_f1',
+                       'test_precision', 'test_recall']
         csv_rows = []
 
         # get models and train
@@ -961,8 +956,9 @@ class TrainMLHelper:
             # draw chart
             csv_file = os.path.join(output_folder, csv_output_file)
             df = pd.read_csv(csv_file)
-            ax = df.plot.barh(x='ML_algorithms',y=['test_accuracy','test_f1','test_precision','test_recall'],width=0.8,figsize=(10,10))
-            ax.legend(bbox_to_anchor=(1.1,1.1))
+            ax = df.plot.barh(x='ML_algorithms', y=['test_accuracy', 'test_f1', 'test_precision', 'test_recall'],
+                              width=0.8, figsize=(10, 10))
+            ax.legend(bbox_to_anchor=(1.1, 1.1))
             for i in ax.patches:
                 ax.text(i.get_width(), i.get_y()+0.1, 
                         str(round((i.get_width()), 2)), 
@@ -993,8 +989,8 @@ class TrainMLHelper:
             scaler = preprocessing.StandardScaler()
         else:  # Min Max scale
             scaler = preprocessing.MinMaxScaler()
-        scaler = scaler.fit(X)
-        tmp_df = scaler.transform(X)
+        tmp_df = scaler.fit_transform(X)
+        # tmp_df = scaler.transform(X)
         X = pd.DataFrame(tmp_df)
 
         # if you want use other models, change at here

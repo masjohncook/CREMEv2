@@ -73,7 +73,7 @@ class MaliciousClientForm(forms.ModelForm):
 class AttackScenarioForm(forms.ModelForm):
     class Meta:
         model = AttackScenario
-        fields = ('mirai', 'ransomware', 'resource_hijacking', 'disk_wipe', 'end_point_dos')
+        fields = ('mirai', 'disk_wipe', 'ransomware', 'resource_hijacking', 'end_point_dos')
         # fields = ('mirai', 'ransomware', 'resource_hijacking', 'disk_wipe', 'end_point_dos', 'data_theft',
         #           'rootkit_ransomware')
 
@@ -83,7 +83,9 @@ class MachineLearningModelForm(forms.ModelForm):
         model = MachineLearningModel
         fields = ("decision_tree", "naive_bayes", "extra_tree", "knn", "random_forest", "XGBoost")
 
+
 class SkipStageForm(forms.ModelForm):
     class Meta:
         model = SkipStage
-        fields = {"skip_configuration","skip_reproduction","skip_data_processing","skip_ML_training","skip_evaluation"}
+        fields = {"skip_configuration", "skip_reproduction", "skip_data_processing", "skip_ML_training",
+                  "skip_evaluation"}

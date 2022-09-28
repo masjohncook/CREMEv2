@@ -1,7 +1,7 @@
 import time
 import sys
 import os
-
+import subprocess
 
 
 def record_timestamp(folder, output_time_file):
@@ -21,19 +21,19 @@ def main(argv):
 
 
     time.sleep(2)
-    output_time_file = 'time_stage_3_start.txt'
+    output_time_file = 'time_step_1_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
-
-    while client.jobs.list:
-        time.sleep(1)
-
-    # print(client.sessions.list['4'])
-
-    #shell = client.sessions.session('4')
     change_mode = 'chmod +x local_slowloris.py'
     launch_attack = 'timeout 60s ./local_slowloris &'
+    subprocess.run(change_mode.split(), stdout=subprocess.PIPE)
+    subprocess.run(launch_attack.split(), stdout=subprocess.PIPE)
+
+    time.sleep(10)
+    output_time_file = 'time_step_7_end.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
 
 main(sys.argv)

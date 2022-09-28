@@ -3,6 +3,7 @@ import sys
 import os
 from dateutil.parser import parse
 
+
 def main(argv):
     if len(argv) != 4:
         print("Usage: {} raw_input_file output_csv_file delete_filter_file(0/1, default=1)".format(argv[0]))
@@ -31,7 +32,7 @@ def main(argv):
 
                 line = fp.readline()
             
-            #print(line)
+            # print(line)
             cmd_position = line.find("CMD")
             wfp.write("TIMESTAMP " + line)
             
@@ -64,6 +65,7 @@ def main(argv):
     
     if delete_filter_flag:
         os.remove(filter_file)
+
 
 if __name__ == '__main__':
     main(sys.argv)

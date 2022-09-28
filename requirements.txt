@@ -9,3 +9,8 @@ python-dateutil
 sklearn
 xgboost
 matplotlib
+python-nmap
+multiprocess
+numpy
+requests
+pymetasploit3

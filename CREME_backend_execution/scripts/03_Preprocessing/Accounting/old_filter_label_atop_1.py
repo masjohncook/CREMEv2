@@ -3,12 +3,14 @@ import sys
 import os
 import json
 
+
 def filter_timerange(start, end):
     for filename in os.listdir(os.getcwd()):
         if "_merge.csv" in filename:
             df = pd.read_csv(filename)
             df = df[(df['TIMESTAMP'] >= start) & (df['TIMESTAMP'] <= end)]
             df.to_csv(filename, index=False)
+
 
 def merge(label_df_dict, result_abs_path, result_file_name):
     final_df = None
@@ -24,6 +26,7 @@ def merge(label_df_dict, result_abs_path, result_file_name):
 
     final_df = final_df.sort_values('TIMESTAMP')
     final_df.to_csv(os.path.join(result_abs_path, result_file_name), index=False)
+
 
 def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_file_name):    
     label_df_dict = {}
@@ -57,9 +60,10 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
                 df.loc[idx, 'SubTechnique'] = sub_technique_name
 
             label_df_dict[filename] = df
-            #os.remove(filename)
+            # os.remove(filename)
 
     merge(label_df_dict, result_abs_path, result_file_name)
+
 
 def compareStage(labeling_list, result_abs_path, result_file_name):
     all_stage_abnormal_cmd_list = []
@@ -116,6 +120,7 @@ def main(argv):
     
     filter_timerange(start, end)
     compareStage(labeling_list, result_abs_path, result_file_name)
+
 
 if __name__ == '__main__':
     main(sys.argv)

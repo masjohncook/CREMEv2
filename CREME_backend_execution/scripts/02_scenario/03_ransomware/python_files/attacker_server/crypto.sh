@@ -23,7 +23,7 @@ genFileName() {
 
     if [ ${getRandPos} == 0 ]
     then
-      let getRandPos=$((getRandPos + 1))
+      ((getRandPos=$((getRandPos + 1))))
     fi
 
     getNewString="${randString//^\(.\{$getRandPos\}\)/\1$getRandNum/}"
@@ -58,7 +58,7 @@ genExtName() {
 
     if [ ${getRandPos} == 0 ]
     then
-      let getRandPos=$((getRandPos + 1))
+      ((getRandPos=$((getRandPos + 1))))
     fi
 
     getNewString="${randString//^\(.\{$getRandPos\}\)/\1$getRandNum/}"
