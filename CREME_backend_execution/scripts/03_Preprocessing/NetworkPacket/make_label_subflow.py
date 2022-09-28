@@ -8,6 +8,7 @@ import json
 # Technique
 # Normal(0), Valid Accounts(1), Non-Application Layer Protocol(2), Network Denial of Service(3)
 
+
 def main(argv):
     if len(argv) != 5:
         print("Usage: {} filename labeling_abs_file result_abs_path result_file_name".format(argv[0]))
@@ -30,7 +31,7 @@ def main(argv):
     df = df[(df['StartTime'] >= start) & (df['StartTime'] <= end)]
     
     # add label column
-    label = [-1]*len(df) # -1: delete, 0: normal, 1: abnormal
+    label = [-1]*len(df)  # -1: delete, 0: normal, 1: abnormal
     df['Label'] = label
     tactic = ['Normal']*len(df)
     df['Tactic'] = tactic
@@ -56,7 +57,8 @@ def main(argv):
         # df.loc[idx, 'Technique'] = 'Normal'
         # df.loc[idx, 'SubTechnique'] = 'Normal'
 
-        idx = stage[((stage['SrcAddr'].isin(srcip_list)) & (stage['DstAddr'].isin(dstip_list))) | ((stage['SrcAddr'].isin(dstip_list)) & (stage['DstAddr'].isin(srcip_list)))].index
+        idx = stage[((stage['SrcAddr'].isin(srcip_list)) & (stage['DstAddr'].isin(dstip_list))) |
+                    ((stage['SrcAddr'].isin(dstip_list)) & (stage['DstAddr'].isin(srcip_list)))].index
         df.loc[idx, 'Label'] = 1
         df.loc[idx, 'Tactic'] = tactic_name
         df.loc[idx, 'Technique'] = technique_name
