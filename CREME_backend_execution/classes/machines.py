@@ -1,4 +1,3 @@
-import os
 from interface import implements
 from .interfaces import IConfiguration, IConfigurationCommon, IConfigurationAttack, IConfigurationBenign,\
     IDataCollection, IDataCentralization, IBenignReproduction, IMiraiAttackerServer, IMiraiMaliciousClient,\
@@ -34,10 +33,6 @@ class Machine:
 class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigurationCommon),
                        implements(IDataCollection), implements(IDataCentralization),
                        implements(ICleaningDataCollection)):
-    """
-
-    """
-
 
     def __init__(self, hostname, ip, username, password, path, network_interface, tcp_file="traffic.pcap",
                  tcp_pids_file="tcp_pids.txt", atop_interval=1, time_window_traffic=1):
@@ -117,6 +112,7 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
     """
 
     """
+
 
 class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDataCollection)):
     dls = None  # store information of data logger server
@@ -480,7 +476,7 @@ class TargetServer(DataLoggerClient, implements(IConfiguration), implements(ICon
         pass
 
     # to do: use right before running process, think about whether run it during configuration time, but remembering
-    #about persistent 00_configuration after reboot
+    # about persistent 00_configuration after reboot
     def configure_end_point_dos_ulimit(self):
         filename_path = "00_configuration/TargetServer/TargetServer_end_point_dos_ulimit.sh"
         parameters = [self.ip, self.username, self.password]
@@ -637,7 +633,8 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         self.DDoS_duration = DDoS_duration
         self.killed_pids_file = "killed_pids.txt"
         # self.flag_finish = "Creme_finish_attack_scenario"
-## configuration block
+# configuration block
+
     def configure(self):
         self.configure_base()
         self.configure_data_collection()
@@ -733,29 +730,17 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
                       self.controller_password, self.controller_path, prepared_files]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-
-
-    ## Mirai Attack Block
+    # Mirai Attack Block
     def mirai_first_step(self):
-        logs_path = "CREME_backend_execution/logs/01_mirai/times"
-        outputTime = "time_1_mirai_step_1.txt"
-
-
         filename_path = "02_scenario/01_mirai/bash_files/01_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def mirai_second_step(self):
-        logs_path = "CREME_backend_execution/logs/01_mirai/times"
-        outputTime = "time_2_mirai_step_2.txt"
-
-        # filename_path = "02_scenario/01_PRE/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
-        # parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-        # ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
         filename_path = "02_scenario/01_mirai/bash_files/02_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
     # start cnc and login
     def mirai_start_cnc_and_login(self):
         logs_path = "CREME_backend_execution/logs/01_mirai/times"
@@ -824,7 +809,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         self.stop_malicious()
         self.stop_cnc_and_login()
 
-# Disk Wipe Attack Block
+    # Disk Wipe Attack Block
     def disk_wipe_start_metasploit(self):
         filename_path = "02_scenario/02_disk_wipe/bash_files/00_AttackerServer_start_metasploit_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
@@ -860,7 +845,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-## Ransomware Attack Block
+    # Ransomware Attack Block
     def ransomware_start_metasploit(self):
         filename_path = "02_scenario/03_ransomware/bash_files/00_AttackerServer_start_metasploit_Ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
@@ -901,8 +886,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-
-### Resource Hijacking Attack Block
+    # Resource Hijacking Attack Block
     def resource_hijacking_start_metasploit(self):
         filename_path = "02_scenario/04_resource_hijacking/bash_files/00_AttackerServer_start_metasploit_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
@@ -938,8 +922,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-
-## End-Point Dos Attack Block
+    # End-Point Dos Attack Block
     def end_point_dos_start_metasploit(self):
         filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
@@ -970,7 +953,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-
     def end_point_dos_sixth_step(self):
         new_user_account = "cremetest"
         new_user_password = "password"
@@ -986,8 +968,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack,
                       new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-
 
 # ## Data Theft Attack Block
 #     def data_theft_start_metasploit(self):
@@ -1150,5 +1130,3 @@ class MaliciousClient(Machine, implements(IConfiguration), implements(IConfigura
         filename_path = "02_scenario/01_mirai/bash_files/06_step_MaliciousClient_stop_malicious.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.mirai_pids_file, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-
