@@ -1,9 +1,9 @@
-# CREME-N: A toolchain of automatic dataset collection for machine learning in intrusion detection based on MITRE ATT&CK
+# CREMEv2: A toolchain of automatic dataset collection for machine learning in intrusion detection based on MITRE ATT&CK
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-* This tool is an extended part of [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://github.com/buihuukhoi/CREME).
+* This tool is an extended part of 1st version [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://github.com/buihuukhoi/CREME).
 * In this part we try to:
   1. improve the stages from original 3 stages into N stages (follow [MITRE ATT&CK](https://attack.mitre.org/))
   2. improve the labeling
