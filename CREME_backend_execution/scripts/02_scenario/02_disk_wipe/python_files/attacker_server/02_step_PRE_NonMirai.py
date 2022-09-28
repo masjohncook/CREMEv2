@@ -18,7 +18,6 @@ def main(argv):
         print("Usage: {} Folder local_ip target_ip".format(argv[0]))
 
     folder = argv[1]
-    my_ip = argv[2]
     target_ip = argv[3]
 
     output_time_file = 'time_step_2_start.txt'
@@ -42,6 +41,5 @@ def main(argv):
     output_time_file = 'time_step_2_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
-
 
 main(sys.argv)
