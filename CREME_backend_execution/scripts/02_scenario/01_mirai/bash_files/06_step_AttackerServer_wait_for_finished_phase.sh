@@ -31,13 +31,14 @@ close $outputTimeFile
 expect "*:~# "
 send "cat $path/$finishedPhaseFile\r"
 
-while { $flag < 1 } {
-    expect "True" {
-	    incr flag
-    }
-    send "cat $path/$finishedPhaseFile\r"
-    sleep 1
-}
+while [ $flag -lt 1 ]
+do
+expect "True"
+incr flag
+
+send "cat $path/$finishedPhaseFile\r"
+sleep 1
+done
 
 expect "*:~# "
 send "exit\r"

