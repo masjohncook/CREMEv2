@@ -66,10 +66,10 @@ class IConfigurationAttackerSide(Interface):
     """
 
     def configure_pymetasploit(self):
-       pass
+        pass
 
     def configure_apache2(self):
-       pass
+        pass
 
 
 # ---------- data collection ----------
