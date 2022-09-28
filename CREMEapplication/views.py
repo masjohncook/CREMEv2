@@ -90,21 +90,19 @@ def dashboard(request):
         if first_testbed.status == 3:
             # Ref : https://www.geeksforgeeks.org/rendering-data-frame-to-html-template-in-table-view-using-django-framework/
             file_dir = os.path.dirname(__file__)
-            accuracy_dir =  os.path.join(file_dir, '../CREME_backend_execution/evaluation_results/accuracy')
-            data_sources = ['accounting','syslog','traffic']
-            
-            
+            accuracy_dir = os.path.join(file_dir, '../CREME_backend_execution/evaluation_results/accuracy')
+            data_sources = ['accounting', 'syslog', 'traffic']
+
             for i, source in enumerate(data_sources):
                 data = []
                 csv_path = os.path.join(accuracy_dir, 'accuracy_for_{}.csv'.format(source))
                 df = pd.read_csv(csv_path) 
-                json_records = df.reset_index().to_json(orient ='records')
+                json_records = df.reset_index().to_json(orient='records')
                 data.append([])
                 data = json.loads(json_records)
                 
-                context["d_{}".format(source)] =  data 
-                
-                
+                context["d_{}".format(source)] = data
+
     return render(request, 'testbed/dashboard.html', context)
 
 
@@ -164,8 +162,7 @@ def new_testbed(request):
             skip_stages = SkipStage.objects.all()
             if skip_stages:
                 first_skip_stage = skip_stages.first()
-                form_skip_stage = SkipStageForm(request.POST,
-                                                    instance=first_skip_stage)
+                form_skip_stage = SkipStageForm(request.POST, instance=first_skip_stage)
             form_skip_stage.save()
 
         # if not valid --> re-fill the form
@@ -183,8 +180,6 @@ def new_testbed(request):
             dict_forms['Machine Learning model:'] = MachineLearningModelForm(request.POST)
             dict_forms['Skip Stage:'] = SkipStageForm(request.POST)
             return render(request, 'testbed/new_testbed.html', {'dict_forms': dict_forms})
-
-        
 
         return redirect(NEW_TESTBED_INFORMATION)
 
