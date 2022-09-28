@@ -40,4 +40,5 @@ def main(argv):
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
+
 main(sys.argv)
