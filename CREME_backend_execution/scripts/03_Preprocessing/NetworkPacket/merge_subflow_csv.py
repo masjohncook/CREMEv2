@@ -2,6 +2,7 @@ import os
 import sys
 import pandas as pd
 
+
 def main(argv):
     if len(argv) != 2:
         print("Usage: {} filename_postfix".format(argv[0]))
@@ -18,6 +19,7 @@ def main(argv):
 
     final = final.sort_values(by=['StartTime'], ascending=True)
     final.to_csv('merge_' + sys.argv[1] + '.csv', index=False)
+
 
 if __name__ == '__main__':
     main(sys.argv)
