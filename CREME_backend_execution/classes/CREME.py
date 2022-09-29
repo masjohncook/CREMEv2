@@ -517,7 +517,7 @@ class Creme:
         self.attacker_server.end_point_dos_seventh_step()
 
         # wait and record timestamp
-        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "06_end_point_dos", "times")
+        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "05_end_point_dos", "times")
         timestamp_file = "time_step_7_end.txt"
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
@@ -677,7 +677,7 @@ class Creme:
 
     # ---------- run scenario ----------
     def run_mirai(self):
-        scenario = "Mirai"
+        scenario = "01_mirai"
         # attack_phases_name = ("Attack Phase 1<br>(Valid Accounts)", "Attack Phase 2</br>
         # (Non-App Layer Protocol)","Attack Phase 3</br>(Network DoS)")
         ProgressHelper.update_scenario(scenario)
@@ -700,7 +700,7 @@ class Creme:
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
     def run_disk_wipe(self):
-        scenario = "Disk Wipe"
+        scenario = "02_disk_wipe"
         # attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
         # (Non-App Layer Protocol)","Attack Phase 3</br>(Disk wipe)")
         ProgressHelper.update_scenario(scenario)
@@ -725,7 +725,7 @@ class Creme:
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
     def run_ransomware(self):
-        scenario = "Ransomware"
+        scenario = "03_ransomware"
         # attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
         # (Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
         ProgressHelper.update_scenario(scenario)
@@ -750,7 +750,7 @@ class Creme:
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
     def run_resource_hijacking(self):
-        scenario = "Resource Hijacking"
+        scenario = "04_resource_hijacking"
         # attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
         # (Non-App Layer Protocol)","Attack Phase 3</br>(Resource Hijacking)")
         ProgressHelper.update_scenario(scenario)
@@ -788,7 +788,7 @@ class Creme:
                                          local_folders=local_folders, remote_files=remote_files)
 
     def run_end_point_dos(self):
-        scenario = "End Point DoS"
+        scenario = "05_end_point_dos"
         # attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>(
         # Create Account)","Attack Phase 3</br>(Endpoint DoS)")
         ProgressHelper.update_scenario(scenario)
@@ -1373,7 +1373,7 @@ class Creme:
             scenarios_techniques.append(techniques)
             scenarios_sub_techniques.append(sub_techniques)
 
-            ProgressHelper.update_stage(stage, f"Finished processing the data of 06_end_point_dos scenario", 5,
+            ProgressHelper.update_stage(stage, f"Finished processing the data of 05_end_point_dos scenario", 5,
                                         finished_task=True, override_pre_message=True)
 
         ProgressHelper.update_stage(stage, f"Processing the accounting and network packet data sources", 5)
@@ -1487,7 +1487,7 @@ class Creme:
             attack_types.extend(["vulnerability", "backdoor", "04_resource_hijacking"])
         if Creme.end_point_dos:
             attack_scenarios.append("End Point Dos")
-            attack_types.extend(["vulnerability", "privilege_escalation", "backdoor", "06_end_point_dos"])
+            attack_types.extend(["vulnerability", "privilege_escalation", "backdoor", "05_end_point_dos"])
         # if Creme.data_theft:
         #     attack_scenarios.append("07_data_theft")
         #     attack_types.extend(["vulnerability", "backdoor", "exfiltration"])
