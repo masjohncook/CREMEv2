@@ -4,7 +4,7 @@ SESSION="CREME"
 
 tmux start-server
 
-if [ "$(tmux ls || grep ${SESSION})" ]; then
+if [ "$(tmux ls | grep ${SESSION})" ]; then
   tmux kill-session -t ${SESSION}
 fi
 
