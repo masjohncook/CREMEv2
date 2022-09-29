@@ -38,4 +38,8 @@ send "pip install --user pymetasploit3 \r"
 set timeout 30
 
 expect "$path# "
+send "pip install --user python-nmap \r"
+set timeout 30
+
+expect "$path# "
 send "exit\r"
