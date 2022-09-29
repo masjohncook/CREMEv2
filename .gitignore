@@ -8,3 +8,9 @@
 /db.sqlite3
 /CREMEapplication/migrations/0001_initial.py
 /CREMEapplication/migrations/__init__.py
+/.idea/.gitignore
+/.idea/CREME-N.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
