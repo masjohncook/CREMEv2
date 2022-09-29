@@ -20,18 +20,22 @@ set timeout 60
 
 expect "*:~# "
 send "cd $path\r"
+set timeout 30
 
 ## Configure Postgresql
 expect "$path# "
-send "sudo msfdb init"
+send "msfdb init"
+set timeout 30
 
 #start MSFRPCD
 expect "$path# "
 send "msfrpcd -P kali -S"
+set timeout 30
 
 # Pymetasploit (Py3)
 expect "$path# "
 send "pip install --user pymetasploit3 \r"
+set timeout 30
 
 expect "$path# "
 send "exit\r"
