@@ -20,6 +20,7 @@ set timeout 60
 
 expect "*:~# "
 send "python3 $path/01_step_PRE_NonMirai.py $path $ip $target_server_ip\r"
+set timeout 60
 
 expect "*:~# "
 send "exit\r"
