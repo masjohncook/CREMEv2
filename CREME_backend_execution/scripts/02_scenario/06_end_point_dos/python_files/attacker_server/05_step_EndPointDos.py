@@ -32,10 +32,10 @@ def main(argv):
     # shell.write('useradd -p $(openssl passwd -1 password) test') # cremetest:password
     shell.write('useradd -p $(openssl passwd -1 {0}) {1}'.format(new_user_password, new_user_account))
 
-    time.sleep(10)
+    time.sleep(30)
     output_time_file = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(2)
+    time.sleep(30)
 
 
 main(sys.argv)

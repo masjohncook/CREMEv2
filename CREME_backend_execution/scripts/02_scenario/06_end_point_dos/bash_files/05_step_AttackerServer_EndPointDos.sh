@@ -8,7 +8,7 @@ set target_server_ip [lindex $argv 5]
 set new_user_account [lindex $argv 6]
 set new_user_password [lindex $argv 7]
 
-set timeout 1200
+set timeout 120
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -22,6 +22,7 @@ set timeout 60
 
 expect "*:~# "
 send "python3 $path/05_step_EndPontDos.py $path $ip $target_server_ip $new_user_account $new_user_password\r"
+set timeout 60
 
 expect "*:~# "
 send "exit\r"

@@ -33,10 +33,10 @@ def main(argv):
     while client.jobs.list:
         time.sleep(1)
 
-    time.sleep(10)
+    time.sleep(30)
     output_time_file = 'time_step_7_end.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(2)
+    time.sleep(30)
 
 
 main(sys.argv)

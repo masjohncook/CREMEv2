@@ -27,10 +27,10 @@ def main(argv):
     subprocess.run(download_the_app.split(), stdout=subprocess.PIPE)
 
     # print(client.sessions.list['4'])
-    time.sleep(10)
+    time.sleep(30)
     output_time_file = 'time_step_6_end.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(2)
+    time.sleep(30)
 
 
 main(sys.argv)

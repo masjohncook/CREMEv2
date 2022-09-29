@@ -6,11 +6,11 @@
 * This tool is an extended part of 1st version [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://github.com/buihuukhoi/CREME).
 * In this part we try to:
   1. improve the stages from original 3 stages into N stages (follow [MITRE ATT&CK](https://attack.mitre.org/))
-  2. improve the labeling
+  2. improve the labeling --> the data will be labelled using MITRE technique
 
 
 ## Basic Info
-This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environtment. You need install the Virtualbox first. In pricipal, we need at least 10 VMs to be launched to run this tool. The VMs are:
+This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environment. You need install the Virtualbox first. In pricipal, we need at least 10 VMs to be launched to run this tool. The VMs are:
 
 ### VMs_Links
   * [Controller Machine](https://drive.google.com/drive/folders/1y9n9MITLintSc8jiN3hFmApmk76TMNKF?usp=sharing)
