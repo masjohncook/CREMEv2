@@ -285,10 +285,10 @@ class Creme:
         # ProgressHelper.update_stage(stage, f"Bots FINISHED to DDoS {self.target_server.hostname}", 5,
         #                             finished_task=True, override_pre_message=True)
         # wait and record timestamp
-        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "01_mirai", "times")
-        timestamp_file = "time_step_8_end.txt"
-        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-                                   timestamp_file=timestamp_file)
+        # timestamp_folder = os.path.join("CREME_backend_execution", "logs", "01_mirai", "times")
+        # timestamp_file = "time_step_8_end.txt"
+        # OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+        #                            timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"Bots FINISHED Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5,
