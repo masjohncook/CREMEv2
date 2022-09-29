@@ -10,7 +10,7 @@
 
 
 ## Basic Info
-This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environtment. You need install the Virtualbox first. In pricipal, we need at least 10 VMs to be launched to run this tool. The VMs are:
+This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environment. You need install the Virtualbox first. In pricipal, we need at least 10 VMs to be launched to run this tool. The VMs are:
 
 ### VMs_Links
   * [Controller Machine](https://drive.google.com/drive/folders/1y9n9MITLintSc8jiN3hFmApmk76TMNKF?usp=sharing)
