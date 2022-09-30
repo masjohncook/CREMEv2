@@ -344,7 +344,7 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1485 Data Destruction",
-                                    5, finished_task=True, override_pre_message=False)
+                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_ransomware(self):
         ProgressHelper.update_scenario("Ransomware")
@@ -403,7 +403,7 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1486 Data Destruction for Impact",
-                                    5, finished_task=True, override_pre_message=False)
+                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_resource_hijacking(self):
         ProgressHelper.update_scenario("Resource Hijacking")
@@ -463,7 +463,7 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1496 Resource Hijacking",
-                                    5, finished_task=True, override_pre_message=False)
+                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_end_point_dos(self):
         ProgressHelper.update_scenario("End Point Dos")
