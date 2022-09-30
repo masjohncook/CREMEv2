@@ -32,11 +32,17 @@ expect "$path# "
 send "msfrpcd -P kali -S"
 set timeout 30
 
+# install pip3
+expect "$path# "
+send "sudo apt install -y python3-pip \r"
+set timeout 30
+
 # Pymetasploit (Py3)
 expect "$path# "
 send "pip install --user pymetasploit3 \r"
 set timeout 30
 
+# install python-nmap
 expect "$path# "
 send "pip install --user python-nmap \r"
 set timeout 30
