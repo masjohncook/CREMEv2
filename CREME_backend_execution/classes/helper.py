@@ -305,22 +305,20 @@ class ProcessDataHelper:
         return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
 
     @staticmethod
-    def get_labels_info(table_path, label_num, labels, tactic_names, technique_names, sub_technique_names):
+    def get_labels_info(table_path, labels):
         """
         get label informations from labels_table.json
         """
-        labels = []
         tactic_names = []
         technique_names = []
         sub_technique_names = []
         with open(table_path, "r") as f:
             data = json.load(f)
-            for i in range(len(label_num)):
-                labels.append(label_num[i])
-                tactic_names.append(data[label_num[i]][1])
-                technique_names.append(data[label_num[i]][2])
-                sub_technique_names.append(data[label_num[i]][3])
-        return labels, tactic_names, technique_names, sub_technique_names
+            for i in range(len(labels)):
+                tactic_names.append(data[labels[i]][1])
+                technique_names.append(data[labels[i]][2])
+                sub_technique_names.append(data[labels[i]][3])
+        return tactic_names, technique_names, sub_technique_names
     
     @staticmethod
     def make_labeling_file(labeling_file_path, tactic_names, technique_names, sub_technique_names, t, src_ips, des_ips,

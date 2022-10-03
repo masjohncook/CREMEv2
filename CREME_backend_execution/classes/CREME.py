@@ -835,12 +835,11 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques
         """
-        label_num = [1, 2, 3, 5, 9, 11, 12, 13]
-        labels, tactic_names, technique_names, sub_technique_names =\
-        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+        labels = [1, 2, 3, 5, 9, 11, 12, 13]
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
 
         folder_times = os.path.join(log_folder, "times")
-        timestamps = ProcessDataHelper.get_time_stamps_mirai(folder_times, self.attacker_server.DDoS_duration, len(label_num))
+        timestamps = ProcessDataHelper.get_time_stamps_mirai(folder_times, self.attacker_server.DDoS_duration, len(labels))
         
         """Other possible labels
         Tactic -> technique -> sub technique
@@ -870,16 +869,15 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        label_num = [1, 2, 4, 6, 8, 14]
-        labels, tactic_names, technique_names, sub_technique_names =\
-        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+        labels = [1, 2, 4, 6, 8, 14]
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
         
         folder_times = os.path.join(log_folder, "times")
         t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
         t = [t1, t2, t3, t4, t5, t6]
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
-        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+        ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
                                           self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
@@ -932,9 +930,8 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        label_num = [1, 2, 4, 6, 7, 12, 15]
-        labels, tactic_names, technique_names, sub_technique_names =\
-        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+        labels = [1, 2, 4, 6, 7, 12, 15]
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
 
 
         folder_times = os.path.join(log_folder, "times")
@@ -942,7 +939,7 @@ class Creme:
         t = [t1, t2, t3, t4, t5, t6]
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
-        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+        ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
                                           self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
@@ -963,9 +960,8 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        label_num = [1, 2, 4, 6, 8, 16]
-        labels, tactic_names, technique_names, sub_technique_names =\
-        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+        labels = [1, 2, 4, 6, 8, 16]
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
 
 
         folder_times = os.path.join(log_folder, "times")
@@ -973,7 +969,7 @@ class Creme:
         t = [t1, t2, t3, t4, t5, t6]
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
-        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+        ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
                                           self.target_server, self.benign_server, self.attacker_server)
 
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
@@ -994,9 +990,8 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        label_num = [1, 2, 4, 8, 10, 12, 17]
-        labels, tactic_names, technique_names, sub_technique_names =\
-        ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+        labels = [1, 2, 4, 8, 10, 12, 17]
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
 
 
         folder_times = os.path.join(log_folder, "times")
@@ -1004,7 +999,7 @@ class Creme:
         t = [t1, t2, t3, t4, t5, t6]
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
-        ProcessDataHelper.get_attack_info(len(label_num), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
+        ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
                                           self.target_server, self.benign_server, self.attacker_server)
         # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal processes
         #  have the same cmd. Think about how to solve this problem???
