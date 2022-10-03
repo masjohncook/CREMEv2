@@ -409,6 +409,17 @@ class ProcessDataHelper:
         return t1, t2, t3, t4, t5, t6
 
     @staticmethod
+    def get_timestamp_pairs(timestamps):
+        timestamps_syslog = []
+        for i in range(len(timestamps)/2):
+            timestamps_pair = []
+            timestamps_pair.append(timestamps[i*2])
+            timestamps_pair.append(timestamps[i*2+1])
+            timestamps_syslog.append(timestamps_pair)
+        return timestamps_syslog
+
+
+    @staticmethod
     def load_dataset_traffic(folder, filenames, finalname, one_hot_fields=[], removed_fields=[], replace_strings=dict(),
                              remove_rows_with_str=dict()):
         df = pd.DataFrame()

@@ -857,7 +857,7 @@ class Creme:
                                              sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
-        timestamps_syslog = [[t1, t2], [t2, t3], [t3, t4]]
+        timestamps_syslog = ProcessDataHelper.get_timestamp_pairs(timestamps)
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names,\
             technique_names, sub_technique_names
