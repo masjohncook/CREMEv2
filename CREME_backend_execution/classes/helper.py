@@ -1,4 +1,5 @@
 import os
+from sqlite3 import Timestamp
 import paramiko
 import pandas as pd
 import json
@@ -348,21 +349,43 @@ class ProcessDataHelper:
             json.dump(my_list, fw)
 
     @staticmethod
-    def get_time_stamps_mirai(log_folder, dur):
-        time_1_kali_start_scan = os.path.join(log_folder, "time_1_kali_start_scan.txt")
-        time_2_start_transfer = os.path.join(log_folder, "time_2_start_transfer.txt")
-        time_4_start_DDoS = os.path.join(log_folder, "time_4_start_DDoS.txt")
+    def get_time_stamps_mirai(log_folder, dur, label_num):
+        timestamp_namelist = []
+        timestamps = []
+        timestamp_num = label_num * 2
 
-        with open(time_1_kali_start_scan, 'rt') as f1:
-            t1 = int(f1.readline())
-        with open(time_2_start_transfer, 'rt') as f2:
-            t2 = int(f2.readline())
-        with open(time_4_start_DDoS, 'rt') as f3:
-            t3 = int(f3.readline())
-            #t4 = t3
-        t5 = t3 + int(dur) + 10  # 10 to avoid problems if there is some delay
-        # return t1, t2, t3, t4, t5
-        return t1, t2, t3, t5
+        # step 1
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_1_mirai_start.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_1_mirai_end.txt"))
+        # step 2
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_2_mirai_start.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_2_mirai_end.txt"))
+        # step 3
+        timestamp_namelist.append(os.path.join(log_folder, "time_3_mirai_start_cnc_and_login.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_4_start_DDoS.txt"))
+        # step 4
+        timestamp_namelist.append(os.path.join(log_folder, "time_4_start_DDoS.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_5_kali_start_scan.txt"))
+        # step 5
+        timestamp_namelist.append(os.path.join(log_folder, "time_5_kali_start_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_6_mirai_wait_finish_scan.txt"))
+        # step 6
+        timestamp_namelist.append(os.path.join(log_folder, "time_6_mirai_wait_finish_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_6_MaliciousClient_stop_malicious.txt"))
+        # step 7
+        timestamp_namelist.append(os.path.join(log_folder, "time_7_start_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_7_mirai_wait_finish_transfer.txt"))
+        # step 8
+        timestamp_namelist.append(os.path.join(log_folder, "time_7_mirai_wait_finish_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_8_mirai_wait_finish_ddos.txt"))
+
+        for i in range(timestamp_num):
+            with open(timestamp_namelist[i], 'rt') as f:
+                timestamps.append(int(f.readline()))
+        # In original CREME, ddos duration time was added
+        timestamps[timestamp_num-1] += 10
+        # timestamps[timestamp_num-1] += (10 + int(dur)) # 10 to avoid problems if there is some delay
+        return timestamps
 
     @staticmethod
     def get_time_stamps(log_folder):

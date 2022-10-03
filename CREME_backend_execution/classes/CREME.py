@@ -835,14 +835,12 @@ class Creme:
         label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques
         """
-        folder_times = os.path.join(log_folder, "times")
-        t1, t2, t3, t4 = ProcessDataHelper.get_time_stamps_mirai(folder_times, self.attacker_server.DDoS_duration)
-        # t = [t1, t2, t2, t3, t3, t4, t4, t5]
-        t = [t1, t2, t2, t3, t3, t4]
-
         label_num = [1, 2, 3, 5, 9, 11, 12, 13]
         labels, tactic_names, technique_names, sub_technique_names =\
         ProcessDataHelper.get_labels_info(self.table_path, label_num, labels, tactic_names, technique_names, sub_technique_names)
+
+        folder_times = os.path.join(log_folder, "times")
+        timestamps = ProcessDataHelper.get_time_stamps_mirai(folder_times, self.attacker_server.DDoS_duration, len(label_num))
         
         """Other possible labels
         Tactic -> technique -> sub technique
@@ -857,7 +855,7 @@ class Creme:
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
-                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
         timestamps_syslog = [[t1, t2], [t2, t3], [t3, t4]]
