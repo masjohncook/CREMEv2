@@ -1,4 +1,4 @@
-## CREME reproduction scanning
+# CREME reproduction scanning
 #  I this step the attacker server try to perform nmap scan to the target server
 
 import time
@@ -12,10 +12,10 @@ def record_timestamp(folder, output_time_file):
     with open(output_time_file, "w+") as fw:
         fw.write('%f' % time.time())
 
+
 def main(argv):
     folder = argv[1]
-    my_ip = argv[2]
-    target_ip = argv[3]
+    target_ip = argv[2]
 
     output_time_file = 'time_step_1_start.txt'
     record_timestamp(folder, output_time_file)
@@ -28,5 +28,6 @@ def main(argv):
     output_time_file = 'time_step_1_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(30)
+
 
 main(sys.argv)

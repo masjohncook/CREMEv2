@@ -19,7 +19,7 @@ send "$password\r"
 set timeout 60
 
 expect "*:~# "
-send "python3 $path/01_step_PRE_NonMirai.py $path $ip $target_server_ip\r"
+send "python3 $path/01_step_PRE_NonMirai.py $path $target_server_ip\r"
 set timeout 60
 
 expect "*:~# "
