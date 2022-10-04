@@ -29,7 +29,7 @@ set timeout 30
 
 #start MSFRPCD
 expect "$path# "
-send "msfrpcd -P kali -S"
+send "msfrpcd -P kali -S \r"
 set timeout 30
 
 # install pip3
