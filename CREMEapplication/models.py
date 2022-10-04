@@ -113,7 +113,7 @@ class AttackerServer(models.Model):
 class MaliciousClient(models.Model):
     objects = models.Manager()
     hostname = models.CharField(max_length=255, default="malicious-client")
-    ip = models.CharField(max_length=255, default="192.168.56.161")
+    ip = models.CharField(max_length=255, default="192.168.56.114")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
