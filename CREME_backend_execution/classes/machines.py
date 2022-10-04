@@ -792,13 +792,13 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         parameters = [self.ip, self.username, self.password, self.path, FinishedFile, logs_path, outputTime]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    # def stop_malicious(self):
-    #     logs_path = "CREME_backend_execution/logs/01_mirai/times"
-    #     outputTime = "time_8_mirai_stop_malicious.txt"
-    #
-    #     filename_path = "02_scenario/01_mirai/bash_files/08_step_AttackerServer_cnc_stop_malicious.sh"
-    #     parameters = [self.ip, self.username, self.password, self.path, self.transfer_pids_file, logs_path, outputTime]
-    #     ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+    def stop_malicious(self):
+        logs_path = "CREME_backend_execution/logs/01_mirai/times"
+        outputTime = "time_8_mirai_stop_malicious.txt"
+
+        filename_path = "02_scenario/01_mirai/bash_files/08_step_AttackerServer_cnc_stop_malicious.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.transfer_pids_file, logs_path, outputTime]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_cnc_and_login(self):
         filename_path = "./kill_pids.sh"
