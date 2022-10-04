@@ -77,7 +77,7 @@ You need to prepare follow [Setup](#Setup) tutorial:
    * `password`: qsefthuk
    * `Adapter 1`: Host-Only adapter
 * Malicious Client
-   * `IP`: 192.168.56.161
+   * `IP`: 192.168.56.114
    * `hostname`: malicious-client
    * `password`: qsefthuk
    * `Adapter 1`: Host-Only adapter
