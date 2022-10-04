@@ -386,30 +386,23 @@ class ProcessDataHelper:
         return timestamps
 
     @staticmethod
-    def get_time_stamps(log_folder):
-        time_stage_1_start = os.path.join(log_folder, "time_stage_1_start.txt")
-        time_stage_1_end = os.path.join(log_folder, "time_stage_1_end.txt")
-        time_stage_2_start = os.path.join(log_folder, "time_stage_2_start.txt")
-        time_stage_2_end = os.path.join(log_folder, "time_stage_2_end.txt")
-        time_stage_3_start = os.path.join(log_folder, "time_stage_3_start.txt")
-        time_stage_3_end = os.path.join(log_folder, "time_stage_3_end.txt")
+    def get_time_stamps(log_folder, label_num):
+        timestamp_namelist = []
+        timestamps = []
+        timestamp_num = label_num * 2
 
-        with open(time_stage_1_start, 'rt') as f:
-            t1 = float(f.readline())
-        with open(time_stage_1_end, 'rt') as f:
-            t2 = float(f.readline())
-        with open(time_stage_2_start, 'rt') as f:
-            t3 = float(f.readline())
-        with open(time_stage_2_end, 'rt') as f:
-            t4 = float(f.readline())
-        with open(time_stage_3_start, 'rt') as f:
-            t5 = float(f.readline())
-        with open(time_stage_3_end, 'rt') as f:
-            t6 = float(f.readline())
-        return t1, t2, t3, t4, t5, t6
+        # get start and end timestamps
+        for i in range(label_num):
+            timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_start.txt"))
+            timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_end.txt"))
+
+        for i in range(timestamp_num):
+            with open(timestamp_namelist[i], 'rt') as f:
+                timestamps.append(int(f.readline()))
+        return timestamps
 
     @staticmethod
-    def get_timestamp_pairs(timestamps):
+    def set_timestamp_pairs(timestamps):
         timestamps_syslog = []
         for i in range(len(timestamps)/2):
             timestamps_pair = []

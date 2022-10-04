@@ -857,7 +857,7 @@ class Creme:
                                              sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
-        timestamps_syslog = ProcessDataHelper.get_timestamp_pairs(timestamps)
+        timestamps_syslog = ProcessDataHelper.set_timestamp_pairs(timestamps)
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names,\
             technique_names, sub_technique_names
@@ -873,8 +873,7 @@ class Creme:
         tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
         
         folder_times = os.path.join(log_folder, "times")
-        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
-        t = [t1, t2, t3, t4, t5, t6]
+        timestamps = ProcessDataHelper.get_time_stamps(folder_times, len(labels))
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
         ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
@@ -883,10 +882,10 @@ class Creme:
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
-                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
-        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+        timestamps_syslog = ProcessDataHelper.set_timestamp_pairs(timestamps)
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
@@ -935,8 +934,7 @@ class Creme:
 
 
         folder_times = os.path.join(log_folder, "times")
-        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
-        t = [t1, t2, t3, t4, t5, t6]
+        timestamps = ProcessDataHelper.get_time_stamps(folder_times, len(labels))
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
         ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
@@ -945,10 +943,10 @@ class Creme:
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
-                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
-        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+        timestamps_syslog = ProcessDataHelper.set_timestamp_pairs(timestamps)
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
@@ -965,8 +963,7 @@ class Creme:
 
 
         folder_times = os.path.join(log_folder, "times")
-        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
-        t = [t1, t2, t3, t4, t5, t6]
+        timestamps = ProcessDataHelper.get_time_stamps(folder_times, len(labels))
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
         ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
@@ -975,10 +972,10 @@ class Creme:
         labeling_file_path = os.path.join(log_folder, "labeling_file_path.txt")
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
-                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
-        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+        timestamps_syslog = ProcessDataHelper.set_timestamp_pairs(timestamps)
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
@@ -995,8 +992,7 @@ class Creme:
 
 
         folder_times = os.path.join(log_folder, "times")
-        t1, t2, t3, t4, t5, t6 = ProcessDataHelper.get_time_stamps(folder_times)
-        t = [t1, t2, t3, t4, t5, t6]
+        timestamps = ProcessDataHelper.get_time_stamps(folder_times, len(labels))
 
         src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list =\
         ProcessDataHelper.get_attack_info(len(labels), self.malicious_client, self.vulnerable_clients, self.non_vulnerable_clients, 
@@ -1011,10 +1007,10 @@ class Creme:
         #  Currently, hard-code label 1 for abnormal data in filter_label_atop.py and make_label_subflow.py
 
         ProcessDataHelper.make_labeling_file(labeling_file_path, tactic_names, technique_names,
-                                             sub_technique_names, t, src_ips, des_ips, normal_ips, normal_hostnames,
+                                             sub_technique_names, timestamps, src_ips, des_ips, normal_ips, normal_hostnames,
                                              abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels)
 
-        timestamps_syslog = [[t1, t2], [t3, t4], [t5, t6]]
+        timestamps_syslog = ProcessDataHelper.set_timestamp_pairs(timestamps)
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
