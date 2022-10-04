@@ -17,7 +17,6 @@ def main(argv):
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
-    wipe_disk_folder = "/tmp"
 
     client = MsfRpcClient('kali')
     
