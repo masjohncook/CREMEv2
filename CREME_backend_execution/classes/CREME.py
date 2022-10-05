@@ -694,7 +694,7 @@ class Creme:
         self.attacker_server.clean_mirai()
 
         self.centralize_data()
-        file_names = ["time_step_1_start.txt", "time_tep_1_end.txt", "time_step_2_start.txt", "time_tep_2_end.txt"]
+        file_names = ["time_step_1_start.txt", "time_step_1_end.txt", "time_step_2_start.txt", "time_step_2_end.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
