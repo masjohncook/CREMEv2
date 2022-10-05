@@ -35,8 +35,8 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
             df = pd.read_csv(filename)
 
             # add label column
-            label = [0] * len(df)
-            df['Label'] = label
+            label_normal = [0] * len(df)
+            df['Label'] = label_normal
             tactic = ['Normal'] * len(df)
             df['Tactic'] = tactic
             technique = ['Normal'] * len(df)
@@ -50,7 +50,7 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
                 sub_technique_name = stage_list[2]
                 start_time = stage_list[3]
                 end_time = stage_list[4]
-                step_num = stage_list[12]
+                label = stage_list[12]
                 
                 # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal
                 #  processes have the same cmd. Think about how to solve this problem???
@@ -58,7 +58,7 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
 
                 stage = df[(df['TIMESTAMP'] >= start_time) & (df['TIMESTAMP'] < end_time)]
                 abnormal_idx = stage[stage['CMD'].isin(abnormal_cmd_list)].index
-                df.loc[abnormal_idx, 'Label'] = step_num
+                df.loc[abnormal_idx, 'Label'] = label
                 df.loc[abnormal_idx, 'Tactic'] = tactic_name
                 df.loc[abnormal_idx, 'Technique'] = technique_name
                 df.loc[abnormal_idx, 'SubTechnique'] = sub_technique_name

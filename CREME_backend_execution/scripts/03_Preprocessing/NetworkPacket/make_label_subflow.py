@@ -39,7 +39,7 @@ def main(argv):
     sub_technique = ['Normal']*len(df)
     df['SubTechnique'] = sub_technique
     
-    for stage_list in labeling_list:
+    for stage_idx, stage_list in enumerate(labeling_list):
         tactic_name = stage_list[0]
         technique_name = stage_list[1]
         sub_technique_name = stage_list[2]
@@ -48,19 +48,20 @@ def main(argv):
         srcip_list = stage_list[5]
         dstip_list = stage_list[6]
         normalip_list = stage_list[7]
+        label = stage_list[12]
 
         stage = df[(df['StartTime'] >= start_time) & (df['StartTime'] < end_time)]
-        idx = stage[stage['SrcAddr'].isin(normalip_list) | stage['DstAddr'].isin(normalip_list)].index
-        df.loc[idx, 'Label'] = 0
-        # df.loc[idx, 'Tactic'] = 'Normal'
-        # df.loc[idx, 'Technique'] = 'Normal'
-        # df.loc[idx, 'SubTechnique'] = 'Normal'
+        normal_idx = stage[stage['SrcAddr'].isin(normalip_list) | stage['DstAddr'].isin(normalip_list)].index
+        df.loc[normal_idx, 'Label'] = 0
+        # df.loc[normal_idx, 'Tactic'] = 'Normal'
+        # df.loc[normal_idx, 'Technique'] = 'Normal'
+        # df.loc[normal_idx, 'SubTechnique'] = 'Normal'
 
-        idx = stage[((stage['SrcAddr'].isin(srcip_list)) & (stage['DstAddr'].isin(dstip_list))) | ((stage['SrcAddr'].isin(dstip_list)) & (stage['DstAddr'].isin(srcip_list)))].index
-        df.loc[idx, 'Label'] = 1
-        df.loc[idx, 'Tactic'] = tactic_name
-        df.loc[idx, 'Technique'] = technique_name
-        df.loc[idx, 'SubTechnique'] = sub_technique_name
+        abnormal_idx = stage[((stage['SrcAddr'].isin(srcip_list)) & (stage['DstAddr'].isin(dstip_list))) | ((stage['SrcAddr'].isin(dstip_list)) & (stage['DstAddr'].isin(srcip_list)))].index
+        df.loc[abnormal_idx, 'Label'] = label
+        df.loc[abnormal_idx, 'Tactic'] = tactic_name
+        df.loc[abnormal_idx, 'Technique'] = technique_name
+        df.loc[abnormal_idx, 'SubTechnique'] = sub_technique_name
 
         stage = df[(df['StartTime'] >= start_time) & (df['StartTime'] < end_time)]
         del_idx = stage[stage['Label'] == -1].index
