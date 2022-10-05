@@ -757,20 +757,15 @@ class ProcessDataHelper:
         return list(set(normal_component_event_ids))
 
     @staticmethod
-    def label_filtered_syslog(df, t, white_list_1, white_list_2, white_list_3, labels, tactics,
-                              techniques, sub_techniques):
+    def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
         # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
         # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
-        t1, t2, t3, t4, t5, t6 = map(float, t)
-        df.loc[(t1 <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t2) & (
-            ~df['ComponentEventId'].isin(white_list_1)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
-            labels[0], tactics[0], techniques[0], sub_techniques[0]
-        df.loc[(t3 <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t4) & (
-            ~df['ComponentEventId'].isin(white_list_2)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
-            labels[1], tactics[1], techniques[1], sub_techniques[1]
-        df.loc[(t5 <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) <= t6) & (
-            ~df['ComponentEventId'].isin(white_list_3)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
-            labels[2], tactics[2], techniques[2], sub_techniques[2]
+        for i in range(labels):
+            t_start = float(timestamps[i*2])
+            t_end = float(timestamps[i*2+1])
+            df.loc[(t_start <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t_end) & (
+                ~df['ComponentEventId'].isin(white_list)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
+                labels[i], tactics[i], techniques[i], sub_techniques[i]
 
     @staticmethod
     def counting_vector(folder, input_file, output_file):
@@ -819,7 +814,7 @@ class ProcessDataHelper:
                 sum_one_hot = tmp_df.sum()
                 df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
 
-        df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
+        # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
         # all_df_count_vector = all_df_count_vector.append(df_count_vector)
 
         # try to save results
@@ -899,6 +894,7 @@ class ProcessDataHelper:
         # label
         for i in range(len(scenarios_timestamps)):  # each scenario
             white_list = []
+            timestamps = []
             # stage
             for j in range(len(scenarios_timestamps[i])):  # each stage
                 abnormal_hostnames = scenarios_abnormal_hostnames[i][j]
@@ -906,7 +902,9 @@ class ProcessDataHelper:
                 abnormal_df = df[(df['HostName'].isin(abnormal_hostnames))]
                 normal_df = df[(df['HostName'].isin(normal_hostnames))]
                 t_start = scenarios_timestamps[i][j][0]
+                timestamps.append(t_start)
                 t_end = scenarios_timestamps[i][j][1]
+                timestamps.append(t_end)
                 tmp_white_list = ProcessDataHelper.get_all_component_event_ids(abnormal_df, normal_df, t_start, t_end)
                 white_list.extend(tmp_white_list)
 
@@ -915,10 +913,8 @@ class ProcessDataHelper:
             techniques = scenarios_techniques[i]
             sub_techniques = scenarios_sub_techniques[i]
 
-            t = [scenarios_timestamps[i][0][0], scenarios_timestamps[i][0][1], scenarios_timestamps[i][1][0],
-                 scenarios_timestamps[i][1][1], scenarios_timestamps[i][2][0], scenarios_timestamps[i][2][1]]
             # label
-            ProcessDataHelper.label_filtered_syslog(df, t, white_list, white_list, white_list, labels, tactics,
+            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, white_list, white_list, labels, tactics,
                                                     techniques, sub_techniques)
             # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
             # print('label 1: {0}'.format(len(df[df['Label'] == 1])))
