@@ -694,7 +694,7 @@ class Creme:
         self.attacker_server.clean_mirai()
 
         self.centralize_data()
-        file_names = ["time_4_start_DDoS.txt"]
+        file_names = ["time_step_1_start.txt", "time_tep_1_end.txt", "time_step_2_start.txt", "time_tep_2_end.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
@@ -718,8 +718,9 @@ class Creme:
         self.target_server.clean_disk_wipe()
 
         self.centralize_data()
-        file_names = ["time_stage_1_start.txt", "time_stage_1_end.txt", "time_stage_2_start.txt",
-                      "time_stage_2_end.txt", "time_stage_3_start.txt"]
+        file_names = ["time_step_1_start.txt", "time_step_1_end.txt", "time_step_2_start.txt", "time_step_2_end.txt",
+                      "time_step_3_start.txt", "time_step_3_end.txt", "time_step_4_start.txt", "time_step_4_end.txt",
+                      "time_step_5_start.txt", "time_step_5_end.txt", "time_step_6_start.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
@@ -743,8 +744,10 @@ class Creme:
         self.target_server.clean_ransomware()
 
         self.centralize_data()
-        file_names = ["time_stage_1_start.txt", "time_stage_1_end.txt", "time_stage_2_start.txt",
-                      "time_stage_2_end.txt", "time_stage_3_start.txt"]
+        file_names = ["time_step_1_start.txt", "time_step_1_end.txt", "time_step_2_start.txt", "time_step_2_end.txt",
+                      "time_step_3_start.txt", "time_step_3_end.txt", "time_step_4_start.txt", "time_step_4_end.txt",
+                      "time_step_5_start.txt", "time_step_5_end.txt", "time_step_6_start.txt", "time_step_6_end.txt",
+                      "time_step_7_start.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
@@ -775,8 +778,10 @@ class Creme:
         remote_files = ["continuum.log"]
         self.centralize_data(True, remote_paths, remote_files)
 
-        file_names = ["time_stage_1_start.txt", "time_stage_1_end.txt", "time_stage_2_start.txt",
-                      "time_stage_2_end.txt", "time_stage_3_start.txt"]
+        file_names = ["time_step_1_start.txt", "time_step_1_end.txt", "time_step_2_start.txt", "time_step_2_end.txt",
+                      "time_step_3_start.txt", "time_step_3_end.txt", "time_step_4_start.txt", "time_step_4_end.txt",
+                      "time_step_5_start.txt", "time_step_5_end.txt", "time_step_6_start.txt", "time_step_6_end.txt",
+                      "time_step_7_start.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
 
         local_folders = ["syslog", "syslog"]
@@ -806,8 +811,10 @@ class Creme:
         self.target_server.clean_end_point_dos()
 
         self.centralize_data()
-        file_names = ["time_stage_1_start.txt", "time_stage_1_end.txt", "time_stage_2_start.txt",
-                      "time_stage_2_end.txt"]
+        file_names = ["time_step_1_start.txt", "time_step_1_end.txt", "time_step_2_start.txt", "time_step_2_end.txt",
+                      "time_step_3_start.txt", "time_step_3_end.txt", "time_step_4_start.txt", "time_step_4_end.txt",
+                      "time_step_5_start.txt", "time_step_5_end.txt", "time_step_6_start.txt", "time_step_6_end.txt",
+                      "time_step_7_start.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
