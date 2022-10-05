@@ -710,7 +710,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def configure_end_point_dos(self):
-        prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/06_end_point_dos/python_files/attacker_server"
+        prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/05_end_point_dos/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_end_point_dos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, prepared_files]
@@ -924,7 +924,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 
     # End-Point Dos Attack Block
     def end_point_dos_start_metasploit(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EndPointDos.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/00_AttackerServer_start_metasploit_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -939,24 +939,24 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_third_step(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_files/03_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/03_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_fourth_step(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_files/04_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/04_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_fifth_step(self):
-        filename_path = "02_scenario/06_end_point_dos/bash_files/05_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/05_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_sixth_step(self):
         new_user_account = "cremetest"
         new_user_password = "password"
-        filename_path = "02_scenario/06_end_point_dos/bash_files/06_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/06_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack,
                       new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
@@ -964,7 +964,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     def end_point_dos_seventh_step(self):
         new_user_account = "cremetest"  # must be same as the second stage
         new_user_password = "password"
-        filename_path = "02_scenario/06_end_point_dos/bash_files/07_step_AttackerServer_EndPointDos.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/07_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack,
                       new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
