@@ -193,70 +193,212 @@ class ProgressHelper:
 
 class ProcessDataHelper:
     @staticmethod
-    def make_labeling_file(labeling_file_path, tactic_names, technique_names, sub_technique_names, t, src_ips, des_ips,
-                           normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list=[[], [], []],
-                           force_abnormal_cmd_list=[[], [], []]):
+    def get_MIRAI_info(malicious_client, vulnerable_clients, non_vulnerable_clients, 
+                       target_server, benign_server, attacker_server):
+        """
+        get VMs information when executing MARAI
+        """
+        src_ips_1 = []
+        des_ips_1 = []
+        normal_ips_1 = []
+        abnormal_hostnames_1 = []
+        normal_hostnames_1 = []
+        src_ips_1.append(malicious_client.ip)
+        for vulnerable_client in vulnerable_clients:
+            des_ips_1.append(vulnerable_client.ip)
+            abnormal_hostnames_1.append(vulnerable_client.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_1.append(non_vulnerable_client.ip)
+            normal_hostnames_1.append(non_vulnerable_client.hostname)
+        normal_ips_1.append(target_server.ip)
+        normal_hostnames_1.append(target_server.hostname)
+        normal_ips_1.append(benign_server.ip)
+        normal_hostnames_1.append(benign_server.hostname)
+
+        src_ips_2 = []
+        des_ips_2 = []
+        normal_ips_2 = []
+        abnormal_hostnames_2 = []
+        normal_hostnames_2 = []
+        src_ips_2.append(attacker_server.ip)
+        for vulnerable_client in vulnerable_clients:
+            des_ips_2.append(vulnerable_client.ip)
+            abnormal_hostnames_2.append(vulnerable_client.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_2.append(non_vulnerable_client.ip)
+            normal_hostnames_2.append(non_vulnerable_client.hostname)
+        normal_ips_2.append(target_server.ip)
+        normal_hostnames_2.append(target_server.hostname)
+        normal_ips_2.append(benign_server.ip)
+        normal_hostnames_2.append(benign_server.hostname)
+
+        src_ips_3 = []
+        des_ips_3 = []
+        normal_ips_3 = []
+        abnormal_hostnames_3 = []
+        normal_hostnames_3 = []
+        for vulnerable_client in vulnerable_clients:
+            src_ips_3.append(vulnerable_client.ip)
+            abnormal_hostnames_3.append(vulnerable_client.hostname)
+        des_ips_3.append(target_server.ip)
+        abnormal_hostnames_3.append(target_server.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_3.append(non_vulnerable_client.ip)
+            normal_hostnames_3.append(non_vulnerable_client.hostname)
+        normal_ips_3.append(benign_server.ip)
+        normal_hostnames_3.append(benign_server.hostname)
+
+        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
+        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
+        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_2, normal_ips_3]
+        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
+                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
+        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
+                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
+        force_abnormal_cmd_list = [[] ,[], [], [], [], [], [], []]
+        return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
+
+    @staticmethod
+    def get_attack_info(lifecycle_len, malicious_client, vulnerable_clients, non_vulnerable_clients, 
+                       target_server, benign_server, attacker_server):
+        """
+        get VMs information when executing attack scenarios except MARAI
+        """
+        src_ip = []
+        des_ip = []
+        normal_ip = []
+        abnormal_hostname = []
+        normal_hostname = []
+        src_ip.append(attacker_server.ip)
+        des_ip.append(target_server.ip)
+        abnormal_hostname.append(target_server.hostname)
+        normal_ip.append(benign_server.ip)
+        normal_hostname.append(benign_server.hostname)
+        normal_ip.append(malicious_client.ip)
+        for vulnerable_client in vulnerable_clients:
+            normal_ip.append(vulnerable_client.ip)
+            normal_hostname.append(vulnerable_client.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ip.append(non_vulnerable_client.ip)
+            normal_hostname.append(non_vulnerable_client.hostname)
+        
+        src_ips = []
+        des_ips = []
+        normal_ips = []
+        abnormal_hostnames = []
+        normal_hostnames = []
+        pattern_normal_cmd_list = []
+        force_abnormal_cmd_list = []
+        for i in range(lifecycle_len):
+            src_ips.append(src_ip)
+            des_ips.append(src_ip)
+            normal_ips.append(normal_ip)
+            normal_hostnames.append(normal_hostname)
+            abnormal_hostnames.append(abnormal_hostname)
+            pattern_normal_cmd_list.append(['kworker'])
+            force_abnormal_cmd_list.append([])
+        return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
+
+    @staticmethod
+    def get_labels_info(table_path, labels):
+        """
+        get label informations from labels_table.json
+        """
+        tactic_names = []
+        technique_names = []
+        sub_technique_names = []
+        with open(table_path, "r") as f:
+            data = json.load(f)
+            for i in range(len(labels)):
+                tactic_names.append(data[labels[i]][1])
+                technique_names.append(data[labels[i]][2])
+                sub_technique_names.append(data[labels[i]][3])
+        return tactic_names, technique_names, sub_technique_names
+    
+    @staticmethod
+    def make_labeling_file(labeling_file_path, tactic_names, technique_names, sub_technique_names, timestamps, src_ips, des_ips,
+                           normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list, labels):
         """
         use to create a labeling file which is a parameter using to label data
         """
-        t1, t2, t3, t4, t5, t6 = map(float, t)
-
         # if attack_scenario == MIRAI:
         #     t1 = XXX + 1
 
         # each element is one stage in an attack scenario
         my_list = []
-        my_list.append([tactic_names[0], technique_names[0], sub_technique_names[0], t1, t2 + 1, src_ips[0], des_ips[0],
-                        normal_ips[0], normal_hostnames[0], abnormal_hostnames[0], pattern_normal_cmd_list[0],
-                        force_abnormal_cmd_list[0]])
-        my_list.append([tactic_names[1], technique_names[1], sub_technique_names[1], t3, t4 + 1, src_ips[1], des_ips[1],
-                        normal_ips[1], normal_hostnames[1], abnormal_hostnames[1], pattern_normal_cmd_list[1],
-                        force_abnormal_cmd_list[1]])
-        my_list.append([tactic_names[2], technique_names[2], sub_technique_names[2], t5, t6 + 1, src_ips[2], des_ips[2],
-                        normal_ips[2], normal_hostnames[2], abnormal_hostnames[2], pattern_normal_cmd_list[2],
-                        force_abnormal_cmd_list[2]])
+        for i in range(len(labels)):
+            my_list.append([tactic_names[i], technique_names[i], sub_technique_names[i], float(timestamps[i*2]), float(timestamps[i*2+1] + 1),
+                            src_ips[i], des_ips[i], normal_ips[i], normal_hostnames[i], abnormal_hostnames[i], pattern_normal_cmd_list[i],
+                            force_abnormal_cmd_list[i], labels[i]])
+
         with open(labeling_file_path, "w+") as fw:
             json.dump(my_list, fw)
 
     @staticmethod
-    def get_time_stamps_mirai(log_folder, dur):
-        time_1_kali_start_scan = os.path.join(log_folder, "time_1_kali_start_scan.txt")
-        time_2_start_transfer = os.path.join(log_folder, "time_2_start_transfer.txt")
-        time_4_start_DDoS = os.path.join(log_folder, "time_4_start_DDoS.txt")
+    def get_time_stamps_mirai(log_folder, dur, label_num):
+        timestamp_namelist = []
+        timestamps = []
+        timestamp_num = label_num * 2
 
-        with open(time_1_kali_start_scan, 'rt') as f1:
-            t1 = int(f1.readline())
-        with open(time_2_start_transfer, 'rt') as f2:
-            t2 = int(f2.readline())
-        with open(time_4_start_DDoS, 'rt') as f3:
-            t3 = int(f3.readline())
-            # t4 = t3
-        t5 = t3 + int(dur) + 10  # 10 to avoid problems if there is some delay
-        # return t1, t2, t3, t4, t5
-        return t1, t2, t3, t5
+        # step 1
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_1_mirai_start.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_1_mirai_end.txt"))
+        # step 2
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_2_mirai_start.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_2_mirai_end.txt"))
+        # step 3
+        timestamp_namelist.append(os.path.join(log_folder, "time_3_mirai_start_cnc_and_login.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_4_start_DDoS.txt"))
+        # step 4
+        timestamp_namelist.append(os.path.join(log_folder, "time_4_start_DDoS.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_5_kali_start_scan.txt"))
+        # step 5
+        timestamp_namelist.append(os.path.join(log_folder, "time_5_kali_start_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_6_mirai_wait_finish_scan.txt"))
+        # step 6
+        timestamp_namelist.append(os.path.join(log_folder, "time_6_mirai_wait_finish_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_6_MaliciousClient_stop_malicious.txt"))
+        # step 7
+        timestamp_namelist.append(os.path.join(log_folder, "time_7_start_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_7_mirai_wait_finish_transfer.txt"))
+        # step 8
+        timestamp_namelist.append(os.path.join(log_folder, "time_7_mirai_wait_finish_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_8_mirai_wait_finish_ddos.txt"))
+
+        for i in range(timestamp_num):
+            with open(timestamp_namelist[i], 'rt') as f:
+                timestamps.append(int(f.readline()))
+        # In original CREME, ddos duration time was added
+        timestamps[timestamp_num-1] += 10
+        # timestamps[timestamp_num-1] += (10 + int(dur)) # 10 to avoid problems if there is some delay
+        return timestamps
 
     @staticmethod
-    def get_time_stamps(log_folder):
-        time_stage_1_start = os.path.join(log_folder, "time_stage_1_start.txt")
-        time_stage_1_end = os.path.join(log_folder, "time_stage_1_end.txt")
-        time_stage_2_start = os.path.join(log_folder, "time_stage_2_start.txt")
-        time_stage_2_end = os.path.join(log_folder, "time_stage_2_end.txt")
-        time_stage_3_start = os.path.join(log_folder, "time_stage_3_start.txt")
-        time_stage_3_end = os.path.join(log_folder, "time_stage_3_end.txt")
+    def get_time_stamps(log_folder, label_num):
+        timestamp_namelist = []
+        timestamps = []
+        timestamp_num = label_num * 2
 
-        with open(time_stage_1_start, 'rt') as f:
-            t1 = float(f.readline())
-        with open(time_stage_1_end, 'rt') as f:
-            t2 = float(f.readline())
-        with open(time_stage_2_start, 'rt') as f:
-            t3 = float(f.readline())
-        with open(time_stage_2_end, 'rt') as f:
-            t4 = float(f.readline())
-        with open(time_stage_3_start, 'rt') as f:
-            t5 = float(f.readline())
-        with open(time_stage_3_end, 'rt') as f:
-            t6 = float(f.readline())
-        return t1, t2, t3, t4, t5, t6
+        # get start and end timestamps
+        for i in range(label_num):
+            timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_start.txt"))
+            timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_end.txt"))
+
+        for i in range(timestamp_num):
+            with open(timestamp_namelist[i], 'rt') as f:
+                timestamps.append(int(f.readline()))
+        return timestamps
+
+    @staticmethod
+    def set_timestamp_pairs(timestamps):
+        timestamps_syslog = []
+        for i in range(len(timestamps)/2):
+            timestamps_pair = []
+            timestamps_pair.append(timestamps[i*2])
+            timestamps_pair.append(timestamps[i*2+1])
+            timestamps_syslog.append(timestamps_pair)
+        return timestamps_syslog
 
     @staticmethod
     def load_dataset_traffic(folder, filenames, finalname, one_hot_fields=[], removed_fields=[], replace_strings=dict(),
@@ -476,11 +618,11 @@ class ProcessDataHelper:
 
         # output_file_atop = "label_atop.csv"
         # output_file_traffic = "label_traffic.csv"
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/accounting_extraction.sh "
+        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/./accounting_extraction.sh "
         cmd = '{0} {1} {2} {3} {4}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
                                            accounting_result_path, output_file_atop)
         os.system(cmd)
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/traffic_extraction.sh"
+        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
         cmd = '{0} {1} {2} {3} {4} {5}'.format(accounting_extraction_file, labeling_file_path, traffic_file,
                                                time_window_traffic, traffic_result_path, output_file_traffic)
         os.system(cmd)
@@ -610,20 +752,15 @@ class ProcessDataHelper:
         return list(set(normal_component_event_ids))
 
     @staticmethod
-    def label_filtered_syslog(df, t, white_list_1, white_list_2, white_list_3, labels, tactics,
-                              techniques, sub_techniques):
+    def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
         # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
         # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
-        t1, t2, t3, t4, t5, t6 = map(float, t)
-        df.loc[(t1 <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t2) & (
-            ~df['ComponentEventId'].isin(white_list_1)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
-            labels[0], tactics[0], techniques[0], sub_techniques[0]
-        df.loc[(t3 <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t4) & (
-            ~df['ComponentEventId'].isin(white_list_2)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
-            labels[1], tactics[1], techniques[1], sub_techniques[1]
-        df.loc[(t5 <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) <= t6) & (
-            ~df['ComponentEventId'].isin(white_list_3)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
-            labels[2], tactics[2], techniques[2], sub_techniques[2]
+        for i in range(labels):
+            t_start = float(timestamps[i*2])
+            t_end = float(timestamps[i*2+1])
+            df.loc[(t_start <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t_end) & (
+                ~df['ComponentEventId'].isin(white_list)), ['Label', 'Tactic', 'Technique', 'SubTechnique']] = \
+                labels[i], tactics[i], techniques[i], sub_techniques[i]
 
     @staticmethod
     def counting_vector(folder, input_file, output_file):
@@ -672,7 +809,7 @@ class ProcessDataHelper:
                 sum_one_hot = tmp_df.sum()
                 df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
 
-        df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
+        # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
         # all_df_count_vector = all_df_count_vector.append(df_count_vector)
 
         # try to save results
@@ -714,7 +851,7 @@ class ProcessDataHelper:
         # parse logs
         # tmp_output_files is a list 2d
         tmp_list_of_output_files = ProcessDataHelper.parse_syslog([filtered_syslog, filtered_syslog_apache],
-                                                                  input_dir=result_path, output_dir=result_path)
+                                                          input_dir=result_path, output_dir=result_path)
         for tmp_output_files in tmp_list_of_output_files:
             for tmp_file in tmp_output_files:
                 remove_files.append(os.path.join(result_path, tmp_file))
@@ -752,6 +889,7 @@ class ProcessDataHelper:
         # label
         for i in range(len(scenarios_timestamps)):  # each scenario
             white_list = []
+            timestamps = []
             # stage
             for j in range(len(scenarios_timestamps[i])):  # each stage
                 abnormal_hostnames = scenarios_abnormal_hostnames[i][j]
@@ -759,7 +897,9 @@ class ProcessDataHelper:
                 abnormal_df = df[(df['HostName'].isin(abnormal_hostnames))]
                 normal_df = df[(df['HostName'].isin(normal_hostnames))]
                 t_start = scenarios_timestamps[i][j][0]
+                timestamps.append(t_start)
                 t_end = scenarios_timestamps[i][j][1]
+                timestamps.append(t_end)
                 tmp_white_list = ProcessDataHelper.get_all_component_event_ids(abnormal_df, normal_df, t_start, t_end)
                 white_list.extend(tmp_white_list)
 
@@ -767,11 +907,8 @@ class ProcessDataHelper:
             tactics = scenarios_tactics[i]
             techniques = scenarios_techniques[i]
             sub_techniques = scenarios_sub_techniques[i]
-
-            t = [scenarios_timestamps[i][0][0], scenarios_timestamps[i][0][1], scenarios_timestamps[i][1][0],
-                 scenarios_timestamps[i][1][1], scenarios_timestamps[i][2][0], scenarios_timestamps[i][2][1]]
             # label
-            ProcessDataHelper.label_filtered_syslog(df, t, white_list, white_list, white_list, labels, tactics,
+            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, white_list, white_list, labels, tactics,
                                                     techniques, sub_techniques)
             # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
             # print('label 1: {0}'.format(len(df[df['Label'] == 1])))

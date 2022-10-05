@@ -35,8 +35,8 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
             df = pd.read_csv(filename)
 
             # add label column
-            label = [0] * len(df)
-            df['Label'] = label
+            label_normal = [0] * len(df)
+            df['Label'] = label_normal
             tactic = ['Normal'] * len(df)
             df['Tactic'] = tactic
             technique = ['Normal'] * len(df)
@@ -44,22 +44,24 @@ def label(labeling_list, all_stage_abnormal_cmd_list, result_abs_path, result_fi
             sub_technique = ['Normal'] * len(df)
             df['SubTechnique'] = sub_technique
 
-            for idx, stage_list in enumerate(labeling_list):
+            for stage_idx, stage_list in enumerate(labeling_list):
                 tactic_name = stage_list[0]
                 technique_name = stage_list[1]
                 sub_technique_name = stage_list[2]
                 start_time = stage_list[3]
                 end_time = stage_list[4]
+                label = stage_list[12]
+                
                 # TODO: currently, using only cmd to label accounting data. There is a problem if normal and abnormal
                 #  processes have the same cmd. Think about how to solve this problem???
-                abnormal_cmd_list = all_stage_abnormal_cmd_list[idx]
+                abnormal_cmd_list = all_stage_abnormal_cmd_list[stage_idx]
 
                 stage = df[(df['TIMESTAMP'] >= start_time) & (df['TIMESTAMP'] < end_time)]
-                idx = stage[stage['CMD'].isin(abnormal_cmd_list)].index
-                df.loc[idx, 'Label'] = 1
-                df.loc[idx, 'Tactic'] = tactic_name
-                df.loc[idx, 'Technique'] = technique_name
-                df.loc[idx, 'SubTechnique'] = sub_technique_name
+                abnormal_idx = stage[stage['CMD'].isin(abnormal_cmd_list)].index
+                df.loc[abnormal_idx, 'Label'] = label
+                df.loc[abnormal_idx, 'Tactic'] = tactic_name
+                df.loc[abnormal_idx, 'Technique'] = technique_name
+                df.loc[abnormal_idx, 'SubTechnique'] = sub_technique_name
 
             label_df_dict[filename] = df
             os.remove(filename)
@@ -81,8 +83,8 @@ def compareStage(labeling_list, result_abs_path, result_file_name):
         normal_atop_list = [s + "_merge.csv" for s in stage_list[8]]
         abnormal_atop_list = [s + "_merge.csv" for s in stage_list[9]]
 
-        pattern_normal_cmd_list = stage_list[10]  # cmd with these patterns are always the label 0,
-        force_abnormal_cmd_list = stage_list[11]  # all cmd in this list will be labeled as 1
+        pattern_normal_cmd_list = stage_list[10]  # cmd with these patterns are always the label normal,
+        force_abnormal_cmd_list = stage_list[11]  # all cmd in this list will be labeled as abnormal
 
         normal_set = set()
         for normal_filename in normal_atop_list:
