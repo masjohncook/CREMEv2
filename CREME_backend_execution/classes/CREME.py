@@ -1139,68 +1139,6 @@ class Creme:
             ProgressHelper.update_stage(stage, f"Finished processing the data of Disk_Wipe scenario", 5,
                                         finished_task=True, override_pre_message=True)
 
-        if Creme.data_theft:
-            ProgressHelper.update_stage(stage, f"Processing the data of Data_Theft scenario", 5)
-
-            scenario = "07_data_theft"
-            log_folder_data_theft = os.path.join(log_folder, scenario)
-            labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactics,\
-                techniques, sub_techniques = self.process_data_data_theft(log_folder_data_theft)
-            accounting_folder = "accounting"
-            traffic_file = os.path.join("traffic", self.dls.tcp_file)
-            information = [labeling_file_path, log_folder_data_theft, accounting_folder, traffic_file]
-
-            big_list.append(information)
-            traffic_files.append("label_traffic_data_theft.csv")
-            atop_files.append("label_atop_data_theft.csv")
-
-            # syslog
-            syslog_file = os.path.join(log_folder_data_theft, "syslog")
-            syslog_file = os.path.join(syslog_file, "dataset_generation.log")
-            input_files.append(syslog_file)
-            scenarios_timestamps.append(timestamps_syslog)
-            scenarios_abnormal_hostnames.append(abnormal_hostnames)
-            scenarios_normal_hostnames.append(normal_hostnames)
-
-            scenarios_labels.append(labels)
-            scenarios_tactics.append(tactics)
-            scenarios_techniques.append(techniques)
-            scenarios_sub_techniques.append(sub_techniques)
-
-            ProgressHelper.update_stage(stage, f"Finished processing the data of 07_data_theft scenario", 5,
-                                        finished_task=True, override_pre_message=True)
-
-        if Creme.rootkit_ransomware:
-            ProgressHelper.update_stage(stage, f"Processing the data of Rootkit_Ransomware scenario", 5)
-
-            scenario = "08_rootkit_ransomware"
-            log_folder_rootkit_ransomware = os.path.join(log_folder, scenario)
-            labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactics,\
-                techniques, sub_techniques = self.process_data_rootkit_ransomware(log_folder_rootkit_ransomware)
-            accounting_folder = "accounting"
-            traffic_file = os.path.join("traffic", self.dls.tcp_file)
-            information = [labeling_file_path, log_folder_rootkit_ransomware, accounting_folder, traffic_file]
-
-            big_list.append(information)
-            traffic_files.append("label_traffic_rootkit_ransomware.csv")
-            atop_files.append("label_atop_rootkit_ransomware.csv")
-
-            # syslog
-            syslog_file = os.path.join(log_folder_rootkit_ransomware, "syslog")
-            syslog_file = os.path.join(syslog_file, "dataset_generation.log")
-            input_files.append(syslog_file)
-            scenarios_timestamps.append(timestamps_syslog)
-            scenarios_abnormal_hostnames.append(abnormal_hostnames)
-            scenarios_normal_hostnames.append(normal_hostnames)
-
-            scenarios_labels.append(labels)
-            scenarios_tactics.append(tactics)
-            scenarios_techniques.append(techniques)
-            scenarios_sub_techniques.append(sub_techniques)
-
-            ProgressHelper.update_stage(stage, f"Finished processing the data of 08_rootkit_ransomware scenario", 5,
-                                        finished_task=True, override_pre_message=True)
-
         if Creme.ransomware:
             ProgressHelper.update_stage(stage, f"Processing the data of Ransomware scenario", 5)
 
@@ -1304,6 +1242,68 @@ class Creme:
 
             ProgressHelper.update_stage(stage, f"Finished processing the data of 05_end_point_dos scenario", 5,
                                         finished_task=True, override_pre_message=True)
+
+        # if Creme.data_theft:
+        #     ProgressHelper.update_stage(stage, f"Processing the data of Data_Theft scenario", 5)
+
+        #     scenario = "07_data_theft"
+        #     log_folder_data_theft = os.path.join(log_folder, scenario)
+        #     labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactics,\
+        #         techniques, sub_techniques = self.process_data_data_theft(log_folder_data_theft)
+        #     accounting_folder = "accounting"
+        #     traffic_file = os.path.join("traffic", self.dls.tcp_file)
+        #     information = [labeling_file_path, log_folder_data_theft, accounting_folder, traffic_file]
+
+        #     big_list.append(information)
+        #     traffic_files.append("label_traffic_data_theft.csv")
+        #     atop_files.append("label_atop_data_theft.csv")
+
+        #     # syslog
+        #     syslog_file = os.path.join(log_folder_data_theft, "syslog")
+        #     syslog_file = os.path.join(syslog_file, "dataset_generation.log")
+        #     input_files.append(syslog_file)
+        #     scenarios_timestamps.append(timestamps_syslog)
+        #     scenarios_abnormal_hostnames.append(abnormal_hostnames)
+        #     scenarios_normal_hostnames.append(normal_hostnames)
+
+        #     scenarios_labels.append(labels)
+        #     scenarios_tactics.append(tactics)
+        #     scenarios_techniques.append(techniques)
+        #     scenarios_sub_techniques.append(sub_techniques)
+
+        #     ProgressHelper.update_stage(stage, f"Finished processing the data of 07_data_theft scenario", 5,
+        #                                 finished_task=True, override_pre_message=True)
+
+        # if Creme.rootkit_ransomware:
+        #     ProgressHelper.update_stage(stage, f"Processing the data of Rootkit_Ransomware scenario", 5)
+
+        #     scenario = "08_rootkit_ransomware"
+        #     log_folder_rootkit_ransomware = os.path.join(log_folder, scenario)
+        #     labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactics,\
+        #         techniques, sub_techniques = self.process_data_rootkit_ransomware(log_folder_rootkit_ransomware)
+        #     accounting_folder = "accounting"
+        #     traffic_file = os.path.join("traffic", self.dls.tcp_file)
+        #     information = [labeling_file_path, log_folder_rootkit_ransomware, accounting_folder, traffic_file]
+
+        #     big_list.append(information)
+        #     traffic_files.append("label_traffic_rootkit_ransomware.csv")
+        #     atop_files.append("label_atop_rootkit_ransomware.csv")
+
+        #     # syslog
+        #     syslog_file = os.path.join(log_folder_rootkit_ransomware, "syslog")
+        #     syslog_file = os.path.join(syslog_file, "dataset_generation.log")
+        #     input_files.append(syslog_file)
+        #     scenarios_timestamps.append(timestamps_syslog)
+        #     scenarios_abnormal_hostnames.append(abnormal_hostnames)
+        #     scenarios_normal_hostnames.append(normal_hostnames)
+
+        #     scenarios_labels.append(labels)
+        #     scenarios_tactics.append(tactics)
+        #     scenarios_techniques.append(techniques)
+        #     scenarios_sub_techniques.append(sub_techniques)
+
+        #     ProgressHelper.update_stage(stage, f"Finished processing the data of 08_rootkit_ransomware scenario", 5,
+        #                                 finished_task=True, override_pre_message=True)
 
         ProgressHelper.update_stage(stage, f"Processing the accounting and network packet data sources", 5)
         folder_traffic = os.path.join(log_folder, "label_traffic")
