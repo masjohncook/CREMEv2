@@ -31,6 +31,7 @@ close $outputTimeFile
 expect "*:~# "
 send "cat $path/$finishedPhaseFile\r"
 
+flag=0
 while [ $flag -lt 1 ]
 do
 expect "True"
