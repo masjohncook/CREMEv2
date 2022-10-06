@@ -348,23 +348,23 @@ class ProcessDataHelper:
         timestamp_namelist.append(os.path.join(log_folder, "time_step_2_mirai_start.txt"))
         timestamp_namelist.append(os.path.join(log_folder, "time_step_2_mirai_end.txt"))
         # step 3
-        timestamp_namelist.append(os.path.join(log_folder, "time_3_mirai_start_cnc_and_login.txt"))
-        timestamp_namelist.append(os.path.join(log_folder, "time_4_start_DDoS.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_3_mirai_start_cnc_and_login.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_4_start_DDoS.txt"))
         # step 4
-        timestamp_namelist.append(os.path.join(log_folder, "time_4_start_DDoS.txt"))
-        timestamp_namelist.append(os.path.join(log_folder, "time_5_kali_start_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_4_start_DDoS.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_5_kali_start_scan.txt"))
         # step 5
-        timestamp_namelist.append(os.path.join(log_folder, "time_5_kali_start_scan.txt"))
-        timestamp_namelist.append(os.path.join(log_folder, "time_6_mirai_wait_finish_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_5_kali_start_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_6_mirai_wait_finish_scan.txt"))
         # step 6
-        timestamp_namelist.append(os.path.join(log_folder, "time_6_mirai_wait_finish_scan.txt"))
-        timestamp_namelist.append(os.path.join(log_folder, "time_6_MaliciousClient_stop_malicious.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_6_mirai_wait_finish_scan.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_6_MaliciousClient_stop_malicious.txt"))
         # step 7
-        timestamp_namelist.append(os.path.join(log_folder, "time_7_start_transfer.txt"))
-        timestamp_namelist.append(os.path.join(log_folder, "time_7_mirai_wait_finish_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_7_start_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_7_mirai_wait_finish_transfer.txt"))
         # step 8
-        timestamp_namelist.append(os.path.join(log_folder, "time_7_mirai_wait_finish_transfer.txt"))
-        timestamp_namelist.append(os.path.join(log_folder, "time_8_mirai_wait_finish_ddos.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_7_mirai_wait_finish_transfer.txt"))
+        timestamp_namelist.append(os.path.join(log_folder, "time_step_8_mirai_wait_finish_ddos.txt"))
 
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:

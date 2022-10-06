@@ -933,38 +933,6 @@ class Creme:
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
 
-    def process_data_data_theft(self, log_folder):
-        """
-        this function use to create labeling_file that contain information to label accounting and traffic data for
-        Data_Theft attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-        label syslog.
-        If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
-        """
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Exfiltration']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
-                           'Exfiltration Over C2 Channel']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
-                               'Exfiltration Over C2 Channel']
-
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-                                                  sub_technique_names)
-
-    def process_data_rootkit_ransomware(self, log_folder):
-        """
-        this function use to create labeling_file that contain information to label accounting and traffic data for
-        Rootkit_Ransomware attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to
-        process and label syslog.
-        If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
-        """
-        labels = [1, 1, 1]  # only for syslog
-        tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-        technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-        sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-
-        return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-                                                  sub_technique_names)
-
     def process_data_ransomware(self, log_folder):
         """
         this function use to create labeling_file that contain information to label accounting and traffic data for
@@ -1057,6 +1025,38 @@ class Creme:
 
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
+
+    # def process_data_data_theft(self, log_folder):
+    #     """
+    #     this function use to create labeling_file that contain information to label accounting and traffic data for
+    #     Data_Theft attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
+    #     label syslog.
+    #     If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
+    #     """
+    #     labels = [1, 1, 1]  # only for syslog
+    #     tactic_names = ['Initial Access', 'Command and Control', 'Exfiltration']
+    #     technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+    #                        'Exfiltration Over C2 Channel']
+    #     sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
+    #                            'Exfiltration Over C2 Channel']
+
+    #     return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
+    #                                               sub_technique_names)
+
+    # def process_data_rootkit_ransomware(self, log_folder):
+    #     """
+    #     this function use to create labeling_file that contain information to label accounting and traffic data for
+    #     Rootkit_Ransomware attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to
+    #     process and label syslog.
+    #     If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
+    #     """
+    #     labels = [1, 1, 1]  # only for syslog
+    #     tactic_names = ['Initial Access', 'Command and Control', 'Impact']
+    #     technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
+    #     sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
+
+    #     return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
+    #                                               sub_technique_names)
 
     def process_data(self):
         stage = 5
