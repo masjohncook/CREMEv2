@@ -2,7 +2,6 @@ from .helper import DownloadDataHelper, ProgressHelper, ProcessDataHelper, Train
 import os
 
 
-
 class Creme:
     mirai = True
     ransomware = True
@@ -694,7 +693,8 @@ class Creme:
         self.attacker_server.clean_mirai()
 
         self.centralize_data()
-        file_names = ["time_step_1_mirai_start.txt", "time_step_1_mirai_end.txt", "time_step_2_mirai_start.txt", "time_step_2_mirai_end.txt"]
+        file_names = ["time_step_1_mirai_start.txt", "time_step_1_mirai_end.txt", "time_step_2_mirai_start.txt",
+                      "time_step_2_mirai_end.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
