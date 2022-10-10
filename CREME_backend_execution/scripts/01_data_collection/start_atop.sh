@@ -14,7 +14,7 @@ set controller_path [lindex $argv 11]
 
 set startatop_file "startatop.sh"
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

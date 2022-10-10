@@ -10,6 +10,8 @@ set pids_file [lindex $argv 7]
 set logs_path [lindex $argv 8]
 set outputTime [lindex $argv 9]
 
+set timeout 1200
+
 set debug_path "Mirai-Source-Code/mirai/debug"
 set transferAndStartMalicious "TransferAndStartMalicious.py"
 

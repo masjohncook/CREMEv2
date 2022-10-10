@@ -16,7 +16,7 @@ set domain_name [lindex $argv 13]
 
 set ConfigureFiles "ConfigureFiles"
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
