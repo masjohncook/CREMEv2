@@ -5,7 +5,7 @@ set username [lindex $argv 2]
 set password [lindex $argv 3]
 set datalogger_ip [lindex $argv 4]
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

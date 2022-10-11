@@ -113,7 +113,7 @@ class AttackerServer(models.Model):
 class MaliciousClient(models.Model):
     objects = models.Manager()
     hostname = models.CharField(max_length=255, default="malicious-client")
-    ip = models.CharField(max_length=255, default="192.168.56.161")
+    ip = models.CharField(max_length=255, default="192.168.56.114")
     username = models.CharField(max_length=255, default="root")
     password = models.CharField(max_length=255, default="qsefthuk")
     path = models.CharField(max_length=255, default="/root")
@@ -126,8 +126,8 @@ class AttackScenario(models.Model):
     resource_hijacking = models.BooleanField(default=True)
     disk_wipe = models.BooleanField(default=True)
     end_point_dos = models.BooleanField(default=True)
-    data_theft = models.BooleanField(default=False)
-    rootkit_ransomware = models.BooleanField(default=False)
+    # data_theft = models.BooleanField(default=False)
+    # rootkit_ransomware = models.BooleanField(default=False)
 
     
 class MachineLearningModel(models.Model):

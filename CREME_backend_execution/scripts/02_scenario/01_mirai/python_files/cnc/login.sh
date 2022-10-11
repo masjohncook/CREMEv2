@@ -8,8 +8,8 @@ set cnc_ip [lindex $argv 5]
 
 set ddosFinishedFile "ddosFinishedFile.txt"
 set transferFinishedFile "TransferFinishedFile.txt"
-set outputTime "time_4_start_DDoS.txt"
-set timeout 10
+set outputTime "time_step_4_start_DDoS.txt"
+set timeout 1200
 set flag 0
 
 set outputDDoSFile [open $path/$ddosFinishedFile "w+"]

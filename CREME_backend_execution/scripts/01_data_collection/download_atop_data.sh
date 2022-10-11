@@ -11,7 +11,7 @@ set atop_file [lindex $argv 8]
 set atop_folder_DLS [lindex $argv 9]
 # example: ./download_atop_data.sh 192.168.1.164 root qsefthuk 192.168.1.112 root qsefthuk /root atop.raw /root 112_atop.raw
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh

@@ -5,7 +5,7 @@ set username [lindex $argv 2]
 set password [lindex $argv 3]
 set server_ip [lindex $argv 4]
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -16,10 +16,10 @@ spawn ssh $username@$vulnerableClient
 
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 60
+set timeout 120
 expect " password: "
 send "$password\r"
-set timeout 60
+set timeout 120
 
 # mount filesystem /run with exec option  -Mirai will be at /run/a
 expect "*:~# "

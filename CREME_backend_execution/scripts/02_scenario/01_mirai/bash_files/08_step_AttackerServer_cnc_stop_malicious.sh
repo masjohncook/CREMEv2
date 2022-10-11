@@ -6,10 +6,10 @@ set password [lindex $argv 3]
 set path [lindex $argv 4]
 set pids_file [lindex $argv 5]
 #set pids_file "pids_file.txt"
-set logs_path [lindex $argv 7]
-set outputTime [lindex $argv 6]
+set logs_path [lindex $argv 6]
+set outputTime [lindex $argv 7]
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
