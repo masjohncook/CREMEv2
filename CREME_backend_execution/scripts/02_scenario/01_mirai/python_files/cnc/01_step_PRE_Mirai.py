@@ -8,8 +8,8 @@ from nmap import nmap
 
 
 def record_timestamp(folder, output_time_file):
-    output_time_file = os.path.join(folder, output_time_file)
-    with open(output_time_file, "w+") as fw:
+    time_output_file = os.path.join(folder, output_time_file)
+    with open(time_output_file, "w+") as fw:
         fw.write('%f' % time.time())
 
 
@@ -23,6 +23,7 @@ def main(argv):
     output_time_file = 'time_step_1_mirai_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
+
     # put the attack launch command
     nm = nmap.PortScanner()
     nm.scan(hosts=target_ip, arguments='-O -A -p 0-65535')

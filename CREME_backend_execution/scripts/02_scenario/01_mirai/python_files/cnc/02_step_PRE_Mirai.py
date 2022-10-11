@@ -8,8 +8,8 @@ from pymetasploit3.msfrpc import MsfRpcClient
 
 
 def record_timestamp(folder, output_time_file):
-    output_time_file = os.path.join(folder, output_time_file)
-    with open(output_time_file, "w+") as fw:
+    time_output_file = os.path.join(folder, output_time_file)
+    with open(time_output_file, "w+") as fw:
         fw.write('%f' % time.time())
 
 

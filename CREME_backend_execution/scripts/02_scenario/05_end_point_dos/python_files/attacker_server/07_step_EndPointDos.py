@@ -30,9 +30,9 @@ def main(argv):
     subprocess.run(change_mode.split(), stdout=subprocess.PIPE)
     subprocess.run(launch_attack.split(), stdout=subprocess.PIPE)
 
-    time.sleep(30)
-    output_time_file = 'time_step_7_end.txt'
-    record_timestamp(folder, output_time_file)
+    # time.sleep(30)
+    # output_time_file = 'time_step_7_end.txt'
+    # record_timestamp(folder, output_time_file)
     time.sleep(30)
 
 
