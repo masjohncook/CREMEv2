@@ -22,15 +22,15 @@ expect "*:~# "
 send "cd $path\r"
 set timeout 30
 
-## Configure Postgresql
-expect "$path# "
-send "msfdb init"
-set timeout 30
-
-#start MSFRPCD
-expect "$path# "
-send "msfrpcd -P kali -S \r"
-set timeout 30
+### Configure Postgresql
+#expect "$path# "
+#send "msfdb init \r"
+#set timeout 30
+#
+##start MSFRPCD
+#expect "$path# "
+#send "msfrpcd -P kali -S \r"
+#set timeout 30
 
 # install pip3
 expect "$path# "
