@@ -22,7 +22,7 @@ def main(argv):
 
     output_time_file = 'time_step_1_mirai_start.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(2)
+    time.sleep(10)
 
     # put the attack launch command
     nm = nmap.PortScanner()
@@ -31,7 +31,7 @@ def main(argv):
     time.sleep(10)
     output_time_file = 'time_step_1_mirai_end.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(2)
+    time.sleep(10)
 
 
 main(sys.argv)
