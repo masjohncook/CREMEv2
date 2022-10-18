@@ -221,6 +221,8 @@ class Creme:
     # ---------- 02_scenario ----------
     def attack_mirai(self):
         ProgressHelper.update_scenario("Mirai")
+        self.attacker_server.mirai_start_metasploit()
+
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.0001 Active "
                                            f"Scanning IP Block", 5, new_stage=True)
@@ -294,11 +296,11 @@ class Creme:
         ProgressHelper.update_stage(stage, f"Bots FINISHED Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5,
-                                    finished_task=True, override_pre_message=False, finished_stage=True)
+                                    finished_task=True, override_pre_message=False)
 
     def attack_disk_wipe(self):
         ProgressHelper.update_scenario("Disk Wipe")
-        # self.attacker_server.disk_wipe_start_metasploit()
+        self.attacker_server.disk_wipe_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -346,11 +348,11 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1485 Data Destruction",
-                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
     def attack_ransomware(self):
         ProgressHelper.update_scenario("Ransomware")
-        # self.attacker_server.ransomware_start_metasploit()
+        self.attacker_server.ransomware_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -405,11 +407,11 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1486 Data Destruction for Impact",
-                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
     def attack_resource_hijacking(self):
         ProgressHelper.update_scenario("Resource Hijacking")
-        # self.attacker_server.resource_hijacking_start_metasploit()
+        self.attacker_server.resource_hijacking_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -465,11 +467,11 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1496 Resource Hijacking",
-                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
+                                    5, finished_task=True, override_pre_message=False)
 
     def attack_end_point_dos(self):
         ProgressHelper.update_scenario("End Point Dos")
-        # self.attacker_server.end_point_dos_start_metasploit()
+        self.attacker_server.end_point_dos_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
