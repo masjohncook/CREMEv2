@@ -40,6 +40,9 @@ class Creme:
         # self.finishedStageList = []
         # Helper.clearProgressData()
 
+        # labels_table.json path
+        self.table_path = os.path.join("..", "..", "labels_table.json")
+
         # Machines
         self.dls = dls
         self.target_server = target_server
