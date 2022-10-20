@@ -288,15 +288,17 @@ class Creme:
         self.attacker_server.mirai_wait_for_finished_ddos()
         # ProgressHelper.update_stage(stage, f"Bots FINISHED to DDoS {self.target_server.hostname}", 5,
         #                             finished_task=True, override_pre_message=True)
+
         # wait and record timestamp
-        # timestamp_folder = os.path.join("CREME_backend_execution", "logs", "01_mirai", "times")
-        # timestamp_file = "time_step_8_end.txt"
-        # OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-        #                            timestamp_file=timestamp_file)
+        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "01_mirai", "times")
+        timestamp_file = "time_step_8_end.txt"
+        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+                                   timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"Bots FINISHED Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5,
-                                    finished_task=True, override_pre_message=False)
+                                    finished_task=True, override_pre_message=False, finished_stage=True)
+
 
     def attack_disk_wipe(self):
         ProgressHelper.update_scenario("Disk Wipe")
@@ -348,7 +350,7 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 6 - T1485 Data Destruction",
-                                    5, finished_task=True, override_pre_message=False)
+                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_ransomware(self):
         ProgressHelper.update_scenario("Ransomware")
@@ -407,7 +409,7 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1486 Data Destruction for Impact",
-                                    5, finished_task=True, override_pre_message=False)
+                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_resource_hijacking(self):
         ProgressHelper.update_scenario("Resource Hijacking")
@@ -467,7 +469,7 @@ class Creme:
         OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
                                    timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1496 Resource Hijacking",
-                                    5, finished_task=True, override_pre_message=False)
+                                    5, finished_task=True, override_pre_message=False, finished_stage=True)
 
     def attack_end_point_dos(self):
         ProgressHelper.update_scenario("End Point Dos")
@@ -699,7 +701,9 @@ class Creme:
         self.attacker_server.clean_mirai()
 
         self.centralize_data()
-        file_names = ["time_step_1_mirai_start.txt", "time_step_1_mirai_end.txt", "time_step_2_mirai_start.txt",
+        file_names = ["time_step_1_mirai_start.txt",
+                      "time_step_1_mirai_end.txt",
+                      "time_step_2_mirai_start.txt",
                       "time_step_2_mirai_end.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
