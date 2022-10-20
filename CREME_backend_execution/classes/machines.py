@@ -732,6 +732,11 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
     #     ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     # Mirai Attack Block
+    def mirai_start_metasploit(self):
+        filename_path = "02_scenario/01_mirai/bash_files/00_AttackerServer_start_metasploit_Mirai.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
     def mirai_first_step(self):
         filename_path = "02_scenario/01_mirai/bash_files/01_step_mirai_AttackerServer_PRE.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
