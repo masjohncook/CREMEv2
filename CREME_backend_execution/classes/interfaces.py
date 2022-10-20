@@ -52,11 +52,11 @@ class IConfigurationAttack(Interface):
     def configure_end_point_dos(self):
         pass
 
-    def configure_data_theft(self):
-        pass
-
-    def configure_rootkit_ransomware(self):
-        pass
+    # def configure_data_theft(self):
+    #     pass
+    #
+    # def configure_rootkit_ransomware(self):
+    #     pass
 
 
 class IConfigurationAttackerSide(Interface):
@@ -361,9 +361,9 @@ class ICleaningAttackReproduction(Interface):
     def clean_disk_wipe(self):
         pass
 
-    def clean_data_theft(self):
-        pass
-
+    # def clean_data_theft(self):
+    #     pass
+    #
     def clean_ransomware(self):
         pass
 
@@ -373,8 +373,8 @@ class ICleaningAttackReproduction(Interface):
     def clean_end_point_dos(self):
         pass
 
-    def clean_rootkit_ransomware(self):
-        pass
+    # def clean_rootkit_ransomware(self):
+    #     pass
 
 
 class ICleaningDataCollection(Interface):

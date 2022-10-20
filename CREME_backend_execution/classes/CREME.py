@@ -2,7 +2,6 @@ from .helper import DownloadDataHelper, ProgressHelper, ProcessDataHelper, Train
 import os
 
 
-
 class Creme:
     mirai = True
     ransomware = True
@@ -10,8 +9,8 @@ class Creme:
     disk_wipe = True
     end_point_dos = True
 
-    data_theft = True
-    rootkit_ransomware = True
+    # data_theft = True
+    # rootkit_ransomware = True
 
     models_name = ["decision_tree", "naive_bayes", "extra_tree", "knn", "random_forest", "XGBoost"]
 
@@ -27,8 +26,12 @@ class Creme:
 
     def __init__(self, dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients,
                  attacker_server, malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos,
-                 data_theft, rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing,
-                 skip_ML_training, skip_evaluation):
+                 skip_configuration, skip_reproduction, skip_data_processing, skip_ML_training, skip_evaluation):
+    # def __init__(self, dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients,
+    #              attacker_server, malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos,
+    #              data_theft, rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing,
+    #              skip_ML_training, skip_evaluation):
+
         # self.stage = 0
         # self.status = 1
         # self.finishedTasks = []
@@ -52,8 +55,8 @@ class Creme:
         Creme.resource_hijacking = resource_hijacking
         Creme.disk_wipe = disk_wipe
         Creme.end_point_dos = end_point_dos
-        Creme.data_theft = data_theft
-        Creme.rootkit_ransomware = rootkit_ransomware
+        # Creme.data_theft = data_theft
+        # Creme.rootkit_ransomware = rootkit_ransomware
 
         # Skip 
         Creme.skip_configuration = skip_configuration
@@ -218,6 +221,8 @@ class Creme:
     # ---------- 02_scenario ----------
     def attack_mirai(self):
         ProgressHelper.update_scenario("Mirai")
+        self.attacker_server.mirai_start_metasploit()
+
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.0001 Active "
                                            f"Scanning IP Block", 5, new_stage=True)
@@ -283,19 +288,21 @@ class Creme:
         self.attacker_server.mirai_wait_for_finished_ddos()
         # ProgressHelper.update_stage(stage, f"Bots FINISHED to DDoS {self.target_server.hostname}", 5,
         #                             finished_task=True, override_pre_message=True)
+
         # wait and record timestamp
-        # timestamp_folder = os.path.join("CREME_backend_execution", "logs", "01_mirai", "times")
-        # timestamp_file = "time_step_8_end.txt"
-        # OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-        #                            timestamp_file=timestamp_file)
+        timestamp_folder = os.path.join("CREME_backend_execution", "logs", "01_mirai", "times")
+        timestamp_file = "time_step_8_end.txt"
+        OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
+                                   timestamp_file=timestamp_file)
         ProgressHelper.update_stage(stage, f"Bots FINISHED Step 8 - T1498.001 Direct Network Flood {self.target_server.hostname} using: \
                                     DDoS Type: {self.attacker_server.DDoS_type}, Duration: \
                                     {self.attacker_server.DDoS_duration} seconds", 5,
                                     finished_task=True, override_pre_message=False, finished_stage=True)
 
+
     def attack_disk_wipe(self):
         ProgressHelper.update_scenario("Disk Wipe")
-        # self.attacker_server.disk_wipe_start_metasploit()
+        self.attacker_server.disk_wipe_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -347,7 +354,7 @@ class Creme:
 
     def attack_ransomware(self):
         ProgressHelper.update_scenario("Ransomware")
-        # self.attacker_server.ransomware_start_metasploit()
+        self.attacker_server.ransomware_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -406,7 +413,7 @@ class Creme:
 
     def attack_resource_hijacking(self):
         ProgressHelper.update_scenario("Resource Hijacking")
-        # self.attacker_server.resource_hijacking_start_metasploit()
+        self.attacker_server.resource_hijacking_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -466,7 +473,7 @@ class Creme:
 
     def attack_end_point_dos(self):
         ProgressHelper.update_scenario("End Point Dos")
-        # self.attacker_server.end_point_dos_start_metasploit()
+        self.attacker_server.end_point_dos_start_metasploit()
 
         stage = 2
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 1 - T1595.001 Active Scanning IP Block",
@@ -694,7 +701,10 @@ class Creme:
         self.attacker_server.clean_mirai()
 
         self.centralize_data()
-        file_names = ["time_step_1_mirai_start.txt", "time_step_1_mirai_end.txt", "time_step_2_mirai_start.txt", "time_step_2_mirai_end.txt"]
+        file_names = ["time_step_1_mirai_start.txt",
+                      "time_step_1_mirai_end.txt",
+                      "time_step_2_mirai_start.txt",
+                      "time_step_2_mirai_end.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 

@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set path [lindex $argv 4]
 set target_server_ip [lindex $argv 5]
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -18,8 +18,9 @@ expect " password: "
 send "$password\r"
 set timeout 60
 
+
 expect "*:~# "
-send "python3 $path/04_step_ResourceHijacking.py $path $ip $target_server_ip\r"
+send "python3 $path/05_step_ResourceHijacking.py $path $ip $target_server_ip\r"
 set timeout 60
 
 expect "*:~# "

