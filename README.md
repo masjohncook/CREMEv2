@@ -123,11 +123,11 @@ You need to prepare follow [Setup](#Setup) tutorial:
     `sudo vim /etc/ssh/sshd_config`, then find the line contains **PermitRootLogin**, Updates it to `PermitRootLogin yes` 🡪 save and quit 🡪\
     `systemctl restart sshd` -->
 5. **Clone and set the Repository on Controller machine**: Open terminal and then type in the following commands\
-    `git clone https://github.com/masjohncook/CREME-N.git` 🡪\
-    `sudo chown -R controller-machine:controller-machine CREME-N/` 🡪\
-    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪\
+    `git clone https://github.com/masjohncook/CREMEv2.git` 🡪\
+    `sudo chown -R controller-machine:controller-machine CREMEv2/` 🡪\
+    `sudo chmod -R 777 CREMEv2` 🡪 `cd CREMEv2` 🡪\
     `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
-    `source ./setup_tools.sh` 🡪 `cd CREME-N` 🡪\
+    `source ./setup_tools.sh` 🡪 `cd CREMEv2` 🡪\
     `./setup.sh`
 
 ### Run
