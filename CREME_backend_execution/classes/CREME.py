@@ -609,7 +609,7 @@ class Creme:
         :param remote_files: other files at remote_machine (not pcap, accounting, syslog, timestamp)
         """
         log_folder = self.dls.controller_path
-        tmp_folder_names = ["CREME-N", "CREME_backend_execution", "logs", scenario_log_folder]
+        tmp_folder_names = ["CREMEv2", "CREME_backend_execution", "logs", scenario_log_folder]
         for folder in tmp_folder_names:
             log_folder = os.path.join(log_folder, folder)
 

@@ -690,28 +690,28 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def configure_disk_wipe(self):
-        prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/02_disk_wipe/python_files/attacker_server"
+        prepared_files = "CREMEv2/CREME_backend_execution/scripts/02_scenario/02_disk_wipe/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_disk_wipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, prepared_files]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def configure_ransomware(self):
-        prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/03_ransomware/python_files/attacker_server"
+        prepared_files = "CREMEv2/CREME_backend_execution/scripts/02_scenario/03_ransomware/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, prepared_files]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def configure_resource_hijacking(self):
-        prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/04_resource_hijacking/python_files/attacker_server"
+        prepared_files = "CREMEv2/CREME_backend_execution/scripts/02_scenario/04_resource_hijacking/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_resource_hijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, prepared_files]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def configure_end_point_dos(self):
-        prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/05_end_point_dos/python_files/attacker_server"
+        prepared_files = "CREMEv2/CREME_backend_execution/scripts/02_scenario/05_end_point_dos/python_files/attacker_server"
         filename_path = "00_configuration/AttackerServer/AttackerServer_end_point_dos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, prepared_files]

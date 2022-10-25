@@ -18,7 +18,7 @@ set ip_o4_2 [lindex $argv 15]
 
 set timeout 1200
 
-set cnc_config_path "CREME-N/CREME_backend_execution/scripts/02_scenario/01_mirai/python_files/cnc"
+set cnc_config_path "CREMEv2/CREME_backend_execution/scripts/02_scenario/01_mirai/python_files/cnc"
 set debug_path "Mirai-Source-Code/mirai/debug"
 set mirai_path "Mirai-Source-Code/mirai"
 
