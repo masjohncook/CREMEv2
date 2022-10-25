@@ -16,7 +16,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "mkdir /usr/share/wordlists"
@@ -24,7 +23,6 @@ expect "*:~# "
 send "echo 'admin\n123456\n12345\n123456789\npassword\niloveyou\nqwerty\n111111\n000000\niloveme\n987654321\nqsefthuk\n999999' >> /usr/share/wordlists/unix_password_modified.txt"
 expect "*:~# "
 send "python3 $path/02_step_PRE_NonMirai.py $path $target_server_ip\r"
-set timeout 60
 
 expect "*:~# "
 send "exit\r"

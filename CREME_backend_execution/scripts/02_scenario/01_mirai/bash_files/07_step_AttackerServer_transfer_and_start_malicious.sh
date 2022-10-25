@@ -15,8 +15,6 @@ set timeout 1200
 set debug_path "Mirai-Source-Code/mirai/debug"
 set transferAndStartMalicious "TransferAndStartMalicious.py"
 
-set timeout 10
-
 # SSH connection
 spawn /bin/bash $delKnownHosts
 send "exit\r"
@@ -27,7 +25,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "cd $path/$debug_path\r"

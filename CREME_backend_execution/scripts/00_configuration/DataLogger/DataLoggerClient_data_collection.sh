@@ -21,7 +21,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # install and setting rsyslog client for syslog collection
 expect "*:~# "
@@ -31,7 +30,6 @@ expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
 send "scp $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/04_general/rsyslog_client/$rsyslog_file  /etc/rsyslog.conf\r"
-set timeout 30
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "

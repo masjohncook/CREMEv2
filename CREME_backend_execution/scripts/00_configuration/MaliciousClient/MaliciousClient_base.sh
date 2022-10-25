@@ -19,7 +19,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # update time
 expect "*:~# "
@@ -39,7 +38,6 @@ send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_back
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
-set timeout 60
 
 send "$controller_pass\r"
 # add executable permission

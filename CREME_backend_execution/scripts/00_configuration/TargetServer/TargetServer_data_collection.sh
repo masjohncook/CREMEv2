@@ -21,7 +21,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # install and setting rsyslog client for syslog collection
 expect "*:~# "
@@ -32,7 +31,6 @@ expect "*:~# "
 send "dpkg --configure -a\r"
 expect "*:~# "
 send "apt install software-properties-common -y\r"
-set timeout 60
 expect "*:~# "
 send "add-apt-repository ppa:adiscon/v8-stable -y\r"
 expect "*:~# "
@@ -56,7 +54,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
-set timeout 60
 
 expect "*:~# "
 send "sed -i \"s/dataloggerserver_ip/$datalogger_ip/g\" /etc/rsyslog.conf\r"

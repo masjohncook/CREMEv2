@@ -20,7 +20,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # Record time
 set DATE [exec date +%s]
@@ -31,15 +30,14 @@ close $outputTimeFile
 expect "*:~# "
 send "cat $path/$finishedPhaseFile\r"
 
-flag=0
-while [ $flag -lt 1 ]
-do
-expect "True"
-incr flag
+set flag 0
+while {$flag<1} {
+      expect "True"
+      incr flag
 
-send "cat $path/$finishedPhaseFile\r"
-sleep 1
-done
+      send "cat $path/$finishedPhaseFile\r"
+      sleep 1
+}
 
 expect "*:~# "
 send "exit\r"

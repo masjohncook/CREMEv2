@@ -24,10 +24,8 @@ spawn ssh $username@$client
 
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 60
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "rm $folder/$atop_file \r"
@@ -40,7 +38,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_password\r"
-set timeout 60
 
 expect "*:~# "
 send "chmod +x $folder/$startatop_file \r"

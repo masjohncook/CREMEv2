@@ -707,7 +707,8 @@ class Creme:
         file_names = ["time_step_1_mirai_start.txt",
                       "time_step_1_mirai_end.txt",
                       "time_step_2_mirai_start.txt",
-                      "time_step_2_mirai_end.txt"]
+                      "time_step_2_mirai_end.txt",
+                      "time_step_4_start_DDoS.txt"]
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 

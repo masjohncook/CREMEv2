@@ -20,10 +20,8 @@ send "exit\r"
 spawn ssh $username@$ip
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 60
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "mkdir $folder/$ftp_folder\r"

@@ -17,14 +17,11 @@ spawn ssh $username@$ip
 
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 120
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "ps -ef | grep 'atop -a -w $folder' | awk '{print \$2}' >> $folder/$atop_pids_file\r"
-set timeout 120
 
 # Stop capturing
 expect "*:~# "

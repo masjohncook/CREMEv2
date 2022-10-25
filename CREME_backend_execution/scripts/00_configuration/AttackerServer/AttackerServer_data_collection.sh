@@ -16,7 +16,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # forward sending packet to DataLoggerServer
 # configure Port Mirroring for Network Packets collection

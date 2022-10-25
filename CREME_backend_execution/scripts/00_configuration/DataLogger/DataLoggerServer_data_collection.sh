@@ -19,7 +19,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # install and configure rsyslog remote for syslog collection
 expect "*:~# "
@@ -32,7 +31,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
-set timeout 60
 expect "*:~# "
 send "systemctl restart rsyslog\r"
 
