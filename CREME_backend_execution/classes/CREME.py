@@ -63,7 +63,7 @@ class Creme:
 
         # Skip 
         Creme.skip_configuration = skip_configuration
-        Creme.skip_reproduction = skip_configuration
+        Creme.skip_reproduction = skip_reproduction
         Creme.skip_data_processing = skip_data_processing
         Creme.skip_ML_training = skip_ML_training
         Creme.skip_evaluation = skip_evaluation
