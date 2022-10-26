@@ -10,7 +10,7 @@ set controller_path [lindex $argv 7]
 set datalogger_ip [lindex $argv 8]
 set rsyslog_file [lindex $argv 9]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

@@ -12,7 +12,7 @@ set controller_path [lindex $argv 9]
 set domain_name [lindex $argv 10]
 set attacker_server_ip [lindex $argv 11]
 
-set timeout 1800
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

@@ -8,7 +8,7 @@ set controller_user [lindex $argv 5]
 set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

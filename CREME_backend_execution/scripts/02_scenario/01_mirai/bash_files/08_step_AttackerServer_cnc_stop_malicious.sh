@@ -9,7 +9,7 @@ set pids_file [lindex $argv 5]
 set logs_path [lindex $argv 6]
 set outputTime [lindex $argv 7]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

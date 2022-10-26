@@ -10,7 +10,7 @@ set outputTime [lindex $argv 7]
 #set malicious_file [lindex $argv 6]
 set malicious_file "mirai.dbg"
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

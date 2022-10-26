@@ -6,12 +6,13 @@ set dur [lindex $argv 3]
 set path [lindex $argv 4]
 set cnc_ip [lindex $argv 5]
 
-set timeout 1200
 
 set ddosFinishedFile "ddosFinishedFile.txt"
 set transferFinishedFile "TransferFinishedFile.txt"
 set outputTime "time_step_4_start_DDoS.txt"
 set flag 0
+
+set timeout 900
 
 set outputDDoSFile [open $path/$ddosFinishedFile "w+"]
 puts $outputDDoSFile "False"
@@ -21,6 +22,7 @@ set outputTransferFile [open $path/$transferFinishedFile "w+"]
 puts $outputTransferFile "False"
 close $outputTransferFile
 
+set timeout 300
 # Connect to CNC Server
 spawn telnet $cnc_ip 23
 send "\r"

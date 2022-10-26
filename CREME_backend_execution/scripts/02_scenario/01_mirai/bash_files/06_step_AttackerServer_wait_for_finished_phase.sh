@@ -10,7 +10,7 @@ set logs_path [lindex $argv 6]
 set outputTime [lindex $argv 7]
 set flag 0
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -27,6 +27,8 @@ set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
 
+set timeout 120
+
 expect "*:~# "
 send "cat $path/$finishedPhaseFile\r"
 
@@ -38,6 +40,7 @@ while {$flag<1} {
       send "cat $path/$finishedPhaseFile\r"
       sleep 1
 }
+set timeout 120
 
 expect "*:~# "
 send "exit\r"

@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set folder [lindex $argv 4]
 set atop_pids_file [lindex $argv 5]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
