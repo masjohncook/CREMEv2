@@ -46,6 +46,10 @@ while {$flag<1} {
       puts $outputTransferFile "True"
       close $outputTransferFile
 
+      set DATE [exec date +%s]
+      set outputTimeFile [open $path/$outputTime "w+"]
+      puts $outputTimeFile $DATE
+      close $outputTimeFile
 # Record time finish transfer and start to DDoS
       send "$DDoSType $targetedDDoS $dur\r"
       incr flag
@@ -53,10 +57,7 @@ while {$flag<1} {
       send "botcount\r"
 }
 
-set DATE [exec date +%s]
-set outputTimeFile [open $path/$outputTime "w+"]
-puts $outputTimeFile $DATE
-close $outputTimeFile
+
 
 # wait to fully finish DDoS
 set sleep_time [expr $dur + 30]

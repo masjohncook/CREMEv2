@@ -16,7 +16,7 @@ set ip_o3 [lindex $argv 13]
 set ip_o4_1 [lindex $argv 14]
 set ip_o4_2 [lindex $argv 15]
 
-set cnc_config_path "CREME-N/CREME_backend_execution/scripts/02_scenario/01_mirai/python_files/cnc"
+set cnc_config_path "CREMEv2/CREME_backend_execution/scripts/02_scenario/01_mirai/python_files/cnc"
 set debug_path "Mirai-Source-Code/mirai/debug"
 set mirai_path "Mirai-Source-Code/mirai"
 
