@@ -7,10 +7,11 @@
 /CREMEapplication/migrations/0001_initial.py
 /CREMEapplication/migrations/__init__.py
 /.idea/.gitignore
-/.idea/CREME-N.iml
+/.idea/CREME-v2.iml
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
 /CREME_backend_execution/logs/07_data_theft/
 /CREME_backend_execution/logs/08_rootkit_ransomware/
@@ -24,6 +25,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
 
 # Generated files
 .idea/**/contentModel.xml
