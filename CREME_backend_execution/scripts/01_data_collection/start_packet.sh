@@ -9,7 +9,7 @@ set netInterface [lindex $argv 6]
 set tcp_pids_file [lindex $argv 7]
 # example: ./start_packet.sh ./DelKnownHosts.sh 192.168.1.164 root qsefthuk /root/tcpdump_data.pcap enp3s0 /root/tcp_pids.txt
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -22,7 +22,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # clean all pcap files before capturing
 expect "*:~# "

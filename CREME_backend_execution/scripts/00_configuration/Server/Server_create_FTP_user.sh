@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set client_hostname [lindex $argv 4]
 set client_password [lindex $argv 5]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -16,7 +16,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # create ftp user
 expect "*:~# "

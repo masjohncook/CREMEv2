@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set folder [lindex $argv 4]
 set atop_pids_file [lindex $argv 5]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -17,14 +17,11 @@ spawn ssh $username@$ip
 
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 120
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "ps -ef | grep 'atop -a -w $folder' | awk '{print \$2}' >> $folder/$atop_pids_file\r"
-set timeout 120
 
 # Stop capturing
 expect "*:~# "

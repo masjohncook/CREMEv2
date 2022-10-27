@@ -123,24 +123,26 @@ You need to prepare follow [Setup](#Setup) tutorial:
     `sudo vim /etc/ssh/sshd_config`, then find the line contains **PermitRootLogin**, Updates it to `PermitRootLogin yes` 🡪 save and quit 🡪\
     `systemctl restart sshd` -->
 5. **Clone and set the Repository on Controller machine**: Open terminal and then type in the following commands\
-    `git clone https://github.com/masjohncook/CREME-N.git` 🡪\
-    `sudo chown -R controller-machine:controller-machine CREME-N/` 🡪\
-    `sudo chmod -R 777 CREME-N` 🡪 `cd CREME-N` 🡪\
-    `chmod +x setup.sh setup_tools.sh run_creme.sh` 🡪\
-    `source ./setup_tools.sh` 🡪 `cd CREME-N` 🡪\
-    `./setup.sh`
+    * `git clone https://github.com/masjohncook/CREMEv2.git`
+    * `sudo chown -R controller-machine:controller-machine CREMEv2/`
+    * `sudo chmod -R 777 CREMEv2`
+    * `cd CREMEv2`
+    * `chmod +x setup.sh setup_tools.sh run_creme.sh`
+    * `source ./setup_tools.sh`
+    * `cd CREMEv2`
+    * `./setup.sh`
 
 ### Run
 1. Turn on all your machines (10 Machines)
 2. Login to your `Controller`
-3. `cd CREME-N/` 🡪 `./run_creme.sh`
+3. `cd CREMEv2/` 🡪 `./run_creme.sh`
 4. Access the controll interface using your **Host OS Browser** `http://192.168.56.111:8000`
 
 ### Please Note
 1. You should use a `local network` in your testbed, not a public network. Because in the scanning phase of the attack, we assume we don't know the vulnerable clients, so we will scan in the network (with subnet mask 24) then try to find the vulnerable clients (similar to real attacks). You may get into some trouble if using the public network.
 2. If you would like to rerun several times, you can `take a snapshot` before running, then back to that snapshot to rerun again. The reason is that we already finished configuring some services, so if we reconfigure them again, it may have some behaviors different from the first time
 3. If you try to run, but the error messages showed in the Dash Board indicate that you can't connect to any VM, just check if the [VMs_Information](#VMs_Information) are all correct, then try to type in the cmd `systemctl restart ssh` on the VM you can't connect to.
-4. If you want to check the Tmux messages when CREME-N is running, open a terminal and type in `tail -f CREME-N/celery.log`, then you can check the last 10 messages in Tmux.
+4. If you want to check the Tmux messages when CREMEv2 is running, open a terminal and type in `tail -f CREMEv2/celery.log`, then you can check the last 10 messages in Tmux.
 
 ##### Example of Web Interface
 ![](https://i.imgur.com/5xTMXRn.png)

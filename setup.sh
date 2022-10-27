@@ -1,9 +1,9 @@
 #!/bin/bash
 # create virtual environment
-python -m venv venv_CREME-N
+python -m venv venv_CREMEv2
 
 # active venv
-source venv_CREME-N/bin/activate
+source venv_CREMEv2/bin/activate
 
 # update pip
 pip install --upgrade pip

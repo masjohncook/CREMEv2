@@ -10,12 +10,10 @@ set pids_file [lindex $argv 7]
 set logs_path [lindex $argv 8]
 set outputTime [lindex $argv 9]
 
-set timeout 1200
+set timeout 900
 
 set debug_path "Mirai-Source-Code/mirai/debug"
 set transferAndStartMalicious "TransferAndStartMalicious.py"
-
-set timeout 10
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -27,7 +25,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "cd $path/$debug_path\r"
@@ -37,6 +34,8 @@ set DATE [exec date +%s]
 set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
+
+set timeout 300
 
 # Load Malicious Code
 expect "*debug# "

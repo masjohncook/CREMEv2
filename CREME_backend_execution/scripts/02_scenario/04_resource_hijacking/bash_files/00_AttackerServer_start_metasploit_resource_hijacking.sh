@@ -16,17 +16,14 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 ## Configure Postgresql
 expect "$path# "
 send "msfdb init \r"
-set timeout 30
 
 #start MSFRPCD
 expect "$path# "
 send "msfrpcd -P kali -S \r"
-set timeout 30
 
 expect "*:~# "
 send "ps -ef | grep 'msfrpcd' | awk '{print \$2}' > $path/$pids_file\r"

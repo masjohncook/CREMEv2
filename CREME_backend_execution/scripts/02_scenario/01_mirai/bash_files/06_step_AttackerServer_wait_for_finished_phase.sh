@@ -10,7 +10,7 @@ set logs_path [lindex $argv 6]
 set outputTime [lindex $argv 7]
 set flag 0
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -20,7 +20,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # Record time
 set DATE [exec date +%s]
@@ -28,18 +27,20 @@ set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
 
+set timeout 120
+
 expect "*:~# "
 send "cat $path/$finishedPhaseFile\r"
 
-flag=0
-while [ $flag -lt 1 ]
-do
-expect "True"
-incr flag
+set flag 0
+while {$flag<1} {
+      expect "True"
+      incr flag
 
-send "cat $path/$finishedPhaseFile\r"
-sleep 1
-done
+      send "cat $path/$finishedPhaseFile\r"
+      sleep 1
+}
+set timeout 120
 
 expect "*:~# "
 send "exit\r"

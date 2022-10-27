@@ -14,7 +14,7 @@ set controller_path [lindex $argv 11]
 
 set startatop_file "startatop.sh"
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -24,10 +24,8 @@ spawn ssh $username@$client
 
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
-set timeout 60
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "rm $folder/$atop_file \r"
@@ -35,12 +33,11 @@ send "rm $folder/$atop_file \r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_username@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/01_data_collection/prepared_files/$startatop_file $folder\r"
+send "scp -r $controller_username@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/01_data_collection/prepared_files/$startatop_file $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_password\r"
-set timeout 60
 
 expect "*:~# "
 send "chmod +x $folder/$startatop_file \r"

@@ -11,7 +11,7 @@ set atop_file [lindex $argv 8]
 set atop_folder_DLS [lindex $argv 9]
 # example: ./download_atop_data.sh 192.168.1.164 root qsefthuk 192.168.1.112 root qsefthuk /root atop.raw /root 112_atop.raw
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -25,7 +25,6 @@ send "yes\r"
 
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # download the atop data from the machine in our system
 expect "*:~# "
@@ -36,7 +35,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$machine_pass\r"
-set timeout 60
 
 expect "*:~# "
 send "exit\r"

@@ -19,13 +19,13 @@ tmux send-key -t 0 "cd ~/redis-stable/src" Enter
 tmux send-key -t 0 "./redis-server" Enter
 
 #terminal 1
-tmux send-key -t 1 "cd ~/CREME-N" Enter
-tmux send-key -t 1 "source venv_CREME-N/bin/activate" Enter
+tmux send-key -t 1 "cd ~/CREMEv2" Enter
+tmux send-key -t 1 "source venv_CREMEv2/bin/activate" Enter
 tmux send-key -t 1 "celery -A CREME.celery worker --loglevel=info > celery.log" Enter
 
 #terminal 2
-tmux send-key -t 2 "cd ~/CREME-N" Enter
-tmux send-key -t 2 "source venv_CREME-N/bin/activate" Enter
+tmux send-key -t 2 "cd ~/CREMEv2" Enter
+tmux send-key -t 2 "source venv_CREMEv2/bin/activate" Enter
 tmux send-key -t 2 "python manage.py runserver 0.0.0.0:8000" Enter
 
 

@@ -21,8 +21,8 @@ def main(argv):
 
 
     time.sleep(2)
-    output_time_file = 'time_step_7_start.txt'
-    record_timestamp(folder, output_time_file)
+    output_time_file_start = 'time_step_7_start.txt'
+    record_timestamp(folder, output_time_file_start)
     time.sleep(2)
 
     change_mode = 'chmod +x local_slowloris.py'
@@ -30,9 +30,7 @@ def main(argv):
     subprocess.run(change_mode.split(), stdout=subprocess.PIPE)
     subprocess.run(launch_attack.split(), stdout=subprocess.PIPE)
 
-    # time.sleep(30)
-    # output_time_file = 'time_step_7_end.txt'
-    # record_timestamp(folder, output_time_file)
+
     time.sleep(30)
 
 

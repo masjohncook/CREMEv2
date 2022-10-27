@@ -969,8 +969,7 @@ class ProcessDataHelper:
         use to filter/remove features have correlation with Label less then the corr_threshold
         in the folder/filename
         """
-        tmp_filename = os.path.join(folder, filename)
-        df = pd.read_csv(tmp_filename)
+        df = pd.read_csv(os.path.join(folder, filename))
 
         # drop space character at the end of feature's name
         column_names = df.columns.values
@@ -983,7 +982,7 @@ class ProcessDataHelper:
 
         # update features and re-save the file
         df.drop(removed_features, axis=1, inplace=True)
-        df.to_csv(tmp_filename, encoding='utf-8', index=False)
+        df.to_csv(os.path.join(folder, filename), encoding='utf-8', index=False)
 
     @staticmethod
     def merge_other_logs_2_syslog(other_log_files, syslog_file, timestamps_syslog, hostnames, time_zone="+08:00",

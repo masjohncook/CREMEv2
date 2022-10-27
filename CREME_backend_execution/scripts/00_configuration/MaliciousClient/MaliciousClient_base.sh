@@ -9,7 +9,7 @@ set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 set server_ip [lindex $argv 8]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -19,7 +19,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # update time
 expect "*:~# "
@@ -35,11 +34,10 @@ send "sudo ntpdate ntp.ubuntu.com\r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignClient/ConfigureFiles/resolv.conf  /etc\r"
+send "scp -r $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/00_configuration/BenignClient/ConfigureFiles/resolv.conf  /etc\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
-set timeout 60
 
 send "$controller_pass\r"
 # add executable permission

@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set path [lindex $argv 4]
 set target_server_ip [lindex $argv 5]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -16,7 +16,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 expect "*:~# "
 send "python3 $path/01_step_PRE_Mirai.py $path $ip $target_server_ip\r"

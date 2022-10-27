@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set path [lindex $argv 4]
 set pids_file [lindex $argv 5]
 
-set timeout 1200
+set timeout 900
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -16,17 +16,14 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 ## Configure Postgresql
 expect "$path# "
 send "msfdb init \r"
-set timeout 30
 
 #start MSFRPCD
 expect "$path# "
 send "msfrpcd -P kali -S \r"
-set timeout 30
 
 expect "*:~# "
 send "ps -ef | grep 'msfrpcd' | awk '{print \$2}' > $path/$pids_file\r"

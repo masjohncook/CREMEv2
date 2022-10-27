@@ -7,7 +7,7 @@ set path [lindex $argv 4]
 set pids_file [lindex $argv 5]
 #set pids_file "pids_file.txt"
 
-set timeout 120
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -17,7 +17,6 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
-set timeout 60
 
 # Stop pids
 expect "*:~# "
