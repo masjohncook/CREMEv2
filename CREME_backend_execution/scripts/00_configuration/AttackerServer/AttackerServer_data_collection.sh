@@ -5,7 +5,7 @@ set username [lindex $argv 2]
 set password [lindex $argv 3]
 set datalogger_ip [lindex $argv 4]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -16,6 +16,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # forward sending packet to DataLoggerServer
 # configure Port Mirroring for Network Packets collection
@@ -25,7 +26,7 @@ expect "*:~# "
 send "iptables -t mangle -I POSTROUTING -j TEE --gateway $datalogger_ip\r"
 # iptables-persistent
 expect "*:~# "
-send "DEBIAN_FRONTEND=noninteractive apt -yq install iptables-persistent\r"
+send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
 expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
 

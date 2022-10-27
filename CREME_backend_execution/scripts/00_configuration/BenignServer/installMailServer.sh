@@ -31,7 +31,7 @@ cp ./config_files/mail/hosts /etc/hosts
 apt-get update
 apt-get install -y expect
 DEBIAN_FRONTEND=noninteractive
-apt-get install -yq postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql
+apt-get install -y postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql
 
 
 ################################

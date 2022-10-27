@@ -12,7 +12,7 @@ set controller_path [lindex $argv 9]
 set domain_name [lindex $argv 10]
 set attacker_server_ip [lindex $argv 11]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -22,6 +22,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # update time
 #expect "*:~# "
@@ -35,17 +36,20 @@ send "$password\r"
 ## update time
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
 
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/00_configuration/BenignServer/* $folder\r"
+send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignServer/* $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 expect "*:~# "
 send "chmod +x *.sh\r"
@@ -57,7 +61,7 @@ expect "*:~# "
 send "iptables -D INPUT -j DROP\r"
 # iptables-persistent
 expect "*:~# "
-send "DEBIAN_FRONTEND=noninteractive apt -yq install iptables-persistent\r"
+send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
 expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
 
@@ -79,6 +83,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 # restart rsyslog
 expect "*:~# "

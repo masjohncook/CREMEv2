@@ -8,7 +8,7 @@ set controller_user [lindex $argv 5]
 set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -19,6 +19,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # install and configure rsyslog remote for syslog collection
 expect "*:~# "
@@ -26,11 +27,12 @@ send "apt update && apt install -y rsyslog\r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/04_general/rsyslog_server/rsyslog.conf /etc/\r"
+send "scp $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/04_general/rsyslog_server/rsyslog.conf /etc/\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 expect "*:~# "
 send "systemctl restart rsyslog\r"
 

@@ -16,7 +16,7 @@ set domain_name [lindex $argv 13]
 
 set ConfigureFiles "ConfigureFiles"
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -27,16 +27,19 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # download configured file from controller
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp -r $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/00_configuration/BenignClient/*  $folder\r"
+send "scp -r $controller_user@$controller_ip:$controller_path/CREME-N/CREME_backend_execution/scripts/00_configuration/BenignClient/*  $folder\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
+set timeout 30
 expect " password: "
 send "$controller_pass\r"
+set timeout 30
 # add executable permission
 expect "*:~# "
 send "chmod +x *.sh\r"

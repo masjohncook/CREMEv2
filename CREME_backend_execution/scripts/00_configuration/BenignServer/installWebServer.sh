@@ -22,7 +22,6 @@ killall -9 mysqld
 userdel mysql
 service apache2 stop
 apt-get purge -y apache2*
-apt-get purge phpmyadmin
 # apt-get purge -y php5*
 apt-get autoremove -y
 apt-get autoclean
@@ -44,7 +43,7 @@ ufw allow in 'Apache Full'
 export DEBIAN_FRONTEND=noninteractive 
 debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password password qsefthuk'
 debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password qsefthuk'
-apt-get install -yq mariadb-server mariadb-client
+apt-get install -y mariadb-server mariadb-client
 
 # systemctl enable mysql
 
@@ -118,7 +117,7 @@ expect eof
 "
 
 cp ./config_files/web/phpmyadmin.conf /etc/dbconfig-common/phpmyadmin.conf
-#dpkg-reconfigure --frontend=noninteractive phpmyadmin
+dpkg-reconfigure --frontend=noninteractive phpmyadmin
 echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
 # systemctl restart apache2
 service apache2 restart

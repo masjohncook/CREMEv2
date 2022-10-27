@@ -11,7 +11,7 @@ set sleep_second [lindex $argv 8]
 set benign_pids_file [lindex $argv 9]
 set domain_name [lindex $argv 10]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -20,8 +20,10 @@ send "exit\r"
 spawn ssh $username@$ip
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
+set timeout 60
 expect " password: "
 send "$password\r"
+set timeout 60
 
 expect "*:~# "
 send "mkdir $folder/$ftp_folder\r"
