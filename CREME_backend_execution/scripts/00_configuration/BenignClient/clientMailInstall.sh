@@ -12,7 +12,7 @@ configpath=$4
 serverip=$5
 
 apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install -y mutt
+DEBIAN_FRONTEND=noninteractive apt-get install -yq mutt
 
 mkdir ~/.mutt
 cp ${configpath}/certificates_${serverip} ~/.mutt/certificates

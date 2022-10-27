@@ -57,7 +57,7 @@ expect "*:~# "
 send "iptables -D INPUT -j DROP\r"
 # iptables-persistent
 expect "*:~# "
-send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
+send "DEBIAN_FRONTEND=noninteractive apt -yq install iptables-persistent\r"
 expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
 
