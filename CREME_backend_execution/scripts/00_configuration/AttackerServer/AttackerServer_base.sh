@@ -23,11 +23,7 @@ send "$password\r"
 ## update time
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
-expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
 set timeout 60
-
-
 
 # config new dns
 expect "*:~# "
