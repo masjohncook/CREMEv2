@@ -12,7 +12,7 @@ set controller_path [lindex $argv 9]
 set domain_name [lindex $argv 10]
 set attacker_server_ip [lindex $argv 11]
 
-set timeout 1200
+set timeout 600
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -61,6 +61,8 @@ expect "*:~# "
 send "iptables -D INPUT -j DROP\r"
 # iptables-persistent
 expect "*:~# "
+send "dpkg --configure -a\r"
+expect "*:~# "
 send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
 expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
@@ -69,6 +71,17 @@ send "iptables-save > /etc/iptables/rules.v4\r"
 #expect "*:~# "
 #send "./installFTPServer.sh\r"
 # install Web Server
+
+expect "*:~# "
+send "rm ~/.ssh/known_hosts\r"
+expect "*:~# "
+send "scp -r $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/00_configuration/BenignClient/*  $folder\r"
+expect "*continue connecting (yes/no*)? "
+send "yes\r"
+expect " password: "
+send "$controller_pass\r"
+set timeout 60
+
 expect "*:~# "
 send "./installWebServer.sh $hostname $domain_name\r"
 # install email
@@ -78,7 +91,7 @@ send "./installMailServer.sh $domain_name $ip $hostname\r"
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
 expect "*:~# "
-send "scp certificates $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/configuration/prepared_files/benign_client/ConfigureFiles/certificates_$ip\r"
+send "scp certificates $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/00_configuration/BenignClient/ConfigureFiles/certificates_$ip\r"
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
