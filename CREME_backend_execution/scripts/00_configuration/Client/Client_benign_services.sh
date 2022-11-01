@@ -60,9 +60,9 @@ send "sed -i \"s/my_dns_1/$server_ip/g\" /etc/resolv.conf\r"
 # config mail client
 
 expect "*:~# "
-send "sudo apt update \r"
+send "sudo apt update\r"
 expect "*:~# "
-send "./clientMailInstall.sh $virtual_account $hostname $domain_name $ConfigureFiles $server_ip \r"
+send "./clientMailInstall.sh $virtual_account $hostname $domain_name $ConfigureFiles $server_ip\r"
 
 # execute ftp in the backend
 #./clientFtpDownloadUpload.sh hostname password local_folder sleep_second
