@@ -8,6 +8,7 @@ fi
 USERNAME=$1
 domainname=$2
 
+dpkg --configure -a
 apt-get update
 apt-get install -y expect
 
@@ -15,16 +16,16 @@ apt-get install -y expect
 # Uninstall MySQL and Apache2 #
 ###############################
 
-apt-get purge -y mysql*
-rm -rf /etc/mysql
-rm -rf /var/lib/mysql
-killall -9 mysqld
-userdel mysql
-service apache2 stop
-apt-get purge -y apache2*
-# apt-get purge -y php5*
-apt-get autoremove -y
-apt-get autoclean
+#apt-get purge -y mysql*
+#rm -rf /etc/mysql
+#rm -rf /var/lib/mysql
+#killall -9 mysqld
+#userdel mysql
+#service apache2 stop
+#apt-get purge -y apache2*
+## apt-get purge -y php5*
+#apt-get autoremove -y
+#apt-get autoclean
 
 ###################
 # install apache2 #
@@ -130,15 +131,15 @@ update-rc.d apache2 defaults
 # download template
 # wget -O zacson.zip 'https://colorlib.com/download/6639/?dlm-dp-dl-force=1&dlm-dp-dl-nonce=bdb6988b9f'
 apt-get install -y software-properties-common
-add-apt-repository -y ppa:fkrull/deadsnakes
-apt-get update
-apt-get install -y python3.5
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 3
-wget https://bootstrap.pypa.io/pip/3.5/get-pip.py
-python3 get_pip.py
-pip3.5 install gdown
-gdown https://drive.google.com/uc?id=10hWuXEte-xlUE64_kOznOwDlEBxB4-oa
-# sudo chown server:server zacson.zip
+#add-apt-repository -y ppa:fkrull/deadsnakes
+#apt-get update
+#apt-get install -y python3.5
+#update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 3
+#wget https://bootstrap.pypa.io/pip/3.5/get-pip.py
+#python3 get_pip.py
+#pip3.5 install gdown
+#gdown https://drive.google.com/uc?id=10hWuXEte-xlUE64_kOznOwDlEBxB4-oa
+#sudo chown server:server zacson.zip
 unzip zacson.zip -d zacson
 
 # change /var/www/html group premission
