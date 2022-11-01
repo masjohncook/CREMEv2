@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set path [lindex $argv 4]
 
 
-set timeout 1200
+set timeout 600
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -32,9 +32,13 @@ set timeout 30
 #send "msfrpcd -P kali -S \r"
 #set timeout 30
 
+expect "$path# "
+send "apt update --fix-missing\r"
+set timeout 30
+
 # install pip3
 expect "$path# "
-send "sudo apt install -y python3-pip\r"
+send "apt install -y python3-pip\r"
 set timeout 30
 
 # Pymetasploit (Py3)
