@@ -369,7 +369,7 @@ class ProcessDataHelper:
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
                 timestamps.append(f.readline())
-        timestamps = [int(i) for i in timestamps]
+        timestamps = [int(float(i)) for i in timestamps]
         # In original CREME, ddos duration time was added
         timestamps[timestamp_num-1] += 10
         # timestamps[timestamp_num-1] += (10 + int(dur)) # 10 to avoid problems if there is some delay
@@ -389,7 +389,7 @@ class ProcessDataHelper:
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
                 timestamps.append(f.readline())
-        timestamps = [int(i) for i in timestamps]
+        timestamps = [int(float(i)) for i in timestamps]
         return timestamps
 
     @staticmethod
