@@ -41,7 +41,7 @@ class Creme:
         # Helper.clearProgressData()
 
         # labels_table.json path
-        self.table_path = os.path.join("..", "..", "labels_table.json")
+        self.table_path = os.path.join("labels_table.json")
 
         # Machines
         self.dls = dls
