@@ -393,7 +393,7 @@ class ProcessDataHelper:
     @staticmethod
     def set_timestamp_pairs(timestamps):
         timestamps_syslog = []
-        for i in range(len(timestamps)/2):
+        for i in range(int(len(timestamps)/2)):
             timestamps_pair = []
             timestamps_pair.append(timestamps[i*2])
             timestamps_pair.append(timestamps[i*2+1])
