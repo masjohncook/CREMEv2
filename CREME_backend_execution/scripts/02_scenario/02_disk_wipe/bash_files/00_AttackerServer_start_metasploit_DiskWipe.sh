@@ -19,11 +19,11 @@ send "$password\r"
 
 ## Configure Postgresql
 expect "$path# "
-send "msfdb init \r"
+send "msfdb init\r"
 
 #start MSFRPCD
 expect "$path# "
-send "msfrpcd -P kali -S \r"
+send "msfrpcd -P kali -S\r"
 
 expect "*:~# "
 send "ps -ef | grep 'msfrpcd' | awk '{print \$2}' > $path/$pids_file\r"

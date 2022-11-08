@@ -1073,7 +1073,7 @@ class Creme:
     #                                               sub_technique_names)
 
     def process_data(self):
-        stage = 5
+        stage = 3
         ProgressHelper.update_stage(stage, f"Start processing data ...", 5, new_stage=True)
 
         big_list = []
@@ -1386,7 +1386,7 @@ class Creme:
         return result
 
     def train_ML(self, data_sources):
-        stage = 6
+        stage = 4
         ProgressHelper.update_stage(stage, f"Start training models for Accuracy:", 5, new_stage=True)
         # accuracy
         self.train_ML_accuracy(stage, data_sources)
@@ -1451,7 +1451,7 @@ class Creme:
                                                                   attack_types)
 
     def evaluation(self, eff_result):
-        stage = 7
+        stage = 5
         ProgressHelper.update_stage(stage, f"Start Efficiency evaluation:", 5, new_stage=True)
         # efficiency
         self.efficiency_evaluation(stage, eff_result)
