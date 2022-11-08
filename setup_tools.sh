@@ -25,6 +25,7 @@ sudo apt install flex -y
 sudo apt install bison -y
 sudo apt install libpcap-dev -y
 sudo apt install tmux -y
+sudo apt install sshpass -y
 
 cd argus-3.0.8.2
 chmod +x configure
