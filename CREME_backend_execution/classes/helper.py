@@ -176,7 +176,7 @@ class ProgressHelper:
         use to update the content(sub-technique) of attack phases
         """
         num_of_phases = len(attack_phases_data)
-        if num_of_phases is not 3:
+        if num_of_phases != 3:
             while True:
                 # should not come here, number of phases must be 3
                 pass
@@ -1008,7 +1008,7 @@ class ProcessDataHelper:
                 tmp_date = fields[0]
                 hour_min_second = (fields[1]).split(',')[0]
                 log_message = fields[-1]
-                if len(fields) < 5 or len(tmp_date.split('-')) is not 3:
+                if len(fields) < 5 or len(tmp_date.split('-')) != 3:
                     continue  # something is wrong here
 
                 time_string = "{0}T{1}{2}".format(tmp_date, hour_min_second, time_zone)
