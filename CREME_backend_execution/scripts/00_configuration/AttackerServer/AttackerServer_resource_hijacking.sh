@@ -12,7 +12,7 @@ set prepared_files [lindex $argv 9]
 
 #set python_files "CREME/CREME_backend_execution/scripts/00_configuration/python_files/02_disk_wipe/attacker_server"
 
-set timeout 600
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

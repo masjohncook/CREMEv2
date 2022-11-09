@@ -5,7 +5,7 @@ set username [lindex $argv 2]
 set password [lindex $argv 3]
 set server_ip [lindex $argv 4]
 
-set timeout 600
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh

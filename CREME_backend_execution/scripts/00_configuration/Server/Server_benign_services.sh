@@ -12,7 +12,7 @@ set controller_path [lindex $argv 9]
 set domain_name [lindex $argv 10]
 set attacker_server_ip [lindex $argv 11]
 
-set timeout 600
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -34,9 +34,6 @@ set timeout 60
 #expect "*:~# "
 #send "sudo ntpdate ntp.ubuntu.com\r"
 ## update time
-expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
-set timeout 60
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
 set timeout 60

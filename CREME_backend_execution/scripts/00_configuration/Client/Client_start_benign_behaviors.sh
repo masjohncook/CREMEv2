@@ -11,7 +11,7 @@ set sleep_second [lindex $argv 8]
 set benign_pids_file [lindex $argv 9]
 set domain_name [lindex $argv 10]
 
-set timeout 600
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
