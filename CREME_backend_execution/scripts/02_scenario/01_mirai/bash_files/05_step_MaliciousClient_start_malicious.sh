@@ -31,6 +31,7 @@ expect "*:~# "
 send "nohup $path/./$malicious_file &\r"
 expect "output to 'nohup.out'"
 send "\r"
+sleep 10
 
 expect "*:~# "
 #send "ps -ef | grep '$path/./$malicious_file' | awk '{print \$2}' > $path/$pids_file\r"
