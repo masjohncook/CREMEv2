@@ -14,11 +14,11 @@ sudo apt install openssh-server -y
 sudo apt install atop -y
 
 # install argus-serer and argus-client
-wget http://qosient.com/argus/src/argus-3.0.8.2.tar.gz
-wget http://qosient.com/argus/src/argus-clients-3.0.8.2.tar.gz
-
-tar -xvzf argus-3.0.8.2.tar.gz
-tar -xvzf argus-clients-3.0.8.2.tar.gz
+#wget http://qosient.com/argus/src/argus-3.0.8.2.tar.gz
+#wget http://qosient.com/argus/src/argus-clients-3.0.8.2.tar.gz
+#
+#tar -xvzf argus-3.0.8.2.tar.gz
+#tar -xvzf argus-clients-3.0.8.2.tar.gz
 
 sudo apt update
 sudo apt install flex -y
@@ -26,18 +26,19 @@ sudo apt install bison -y
 sudo apt install libpcap-dev -y
 sudo apt install tmux -y
 sudo apt install sshpass -y
+sudo apt install argus-client argus-server -y
 
-cd argus-3.0.8.2
-chmod +x configure
-./configure
-sudo make install
-
-cd -
-
-cd argus-clients-3.0.8.2
-chmod +x configure
-./configure
-sudo make install
+#cd argus-3.0.8.2
+#chmod +x configure
+#./configure
+#sudo make install
+#
+#cd -
+#
+#cd argus-clients-3.0.8.2
+#chmod +x configure
+#./configure
+#sudo make install
 
 #install redis
 cd ~/
