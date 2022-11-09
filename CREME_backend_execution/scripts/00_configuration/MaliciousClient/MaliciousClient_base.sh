@@ -29,7 +29,7 @@ send "apt -y install ntp\r"
 expect "*:~# "
 send "apt -y install ntpdate\r"
 expect "*:~# "
-send "sudo ntpdate ntp.ubuntu.com\r"
+send "timedatectl set-timezone Asia/Taipei\r"
 
 # config new dns
 expect "*:~# "
