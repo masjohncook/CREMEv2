@@ -90,3 +90,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 !/CREME_backend_execution/scripts/00_configuration/BenignClient/ConfigureFiles/certificates_192.168.56.181
+/run_vm.sh
