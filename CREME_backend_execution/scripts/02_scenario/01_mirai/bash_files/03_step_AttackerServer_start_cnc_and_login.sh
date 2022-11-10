@@ -22,7 +22,7 @@ set input_bot_file "input_bot"
 set waitToFinishScan "WaitToFinishScan.py"
 set login_sh "login.sh"
 
-set timeout 600
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -39,7 +39,7 @@ set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
 
-set timeout 300
+set timeout 120
 
 expect "*:~# "
 send "cd $path/$mirai_path\r"
