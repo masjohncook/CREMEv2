@@ -683,6 +683,7 @@ class Creme:
         self.target_server.restart_rsyslog()
         self.benign_server.restart_rsyslog()
         self.dls.restart_rsyslog()
+        self.dls.refresh_syslog_file()
 
     # ---------- run scenario ----------
     def run_mirai(self):
