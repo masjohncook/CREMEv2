@@ -430,7 +430,7 @@ class ProcessDataHelper:
                 len(tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-3'])))
 
             """
-            df = df.append(tmp_df)
+            df = pd.concat([df, tmp_df])
 
         # full_filename = os.path.join(folder, filename)
         # df = pd.read_csv(full_filename)
@@ -523,7 +523,7 @@ class ProcessDataHelper:
             tmp_df = pd.read_csv(filename)
             # print(len(tmp_df[tmp_df['Label'] == 0]))
             # print(len(tmp_df[tmp_df['Label'] == 1]))
-            df = df.append(tmp_df)
+            df = pd.concat([df, tmp_df])
 
         # print(len(df.columns.values))
         # print(df.columns.values)
