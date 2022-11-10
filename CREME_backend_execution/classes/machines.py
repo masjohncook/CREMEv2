@@ -106,6 +106,13 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
         parameters = [self.ip, self.username, self.password, service_name]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
+    def refresh_syslog_file(self):
+        filename_path = "04_general/refresh_rsyslog.sh"
+        service_name = "rsyslog"
+        parameters = [self.ip, self.username, self.password, service_name]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+
     def clean_data_collection(self):
         self.restart_rsyslog()
 
