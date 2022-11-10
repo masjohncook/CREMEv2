@@ -24,29 +24,31 @@ send "$password\r"
 set timeout 60
 
 # install and setting rsyslog client for syslog collection
-expect "*:~# "
-send "dpkg --configure -a\r"
-expect "*:~# "
-send "apt update\r"
-expect "*:~# "
-send "dpkg --configure -a\r"
-expect "*:~# "
-send "apt install software-properties-common -y\r"
-set timeout 60
-expect "*:~# "
-send "add-apt-repository ppa:adiscon/v8-stable -y\r"
-expect "*:~# "
-send "apt update\r"
+#expect "*:~# "
+#send "dpkg --configure -a\r"
+#expect "*:~# "
+#send "apt update\r"
+#expect "*:~# "
+#send "dpkg --configure -a\r"
+#expect "*:~# "
+#send "apt install software-properties-common -y\r"
+#set timeout 60
+#expect "*:~# "
+#send "add-apt-repository ppa:adiscon/v8-stable -y\r"
+#expect "*:~# "
+#send "apt update\r"
 
-expect "*:~# "
-send "service rsyslog stop\r"
-expect "*:~# "
-send "apt purge rsyslog -y\r"
+#expect "*:~# "
+#send "service rsyslog stop\r"
+#expect "*:~# "
+#send "apt purge rsyslog -y\r"
+#
+#expect "*:~# "
+#send "apt update\r"
+#expect "*:~# "
+#send "apt install rsyslog -y\r"
 
-expect "*:~# "
-send "apt update\r"
-expect "*:~# "
-send "apt install rsyslog -y\r"
+
 # download configured file from controller
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
@@ -57,6 +59,7 @@ send "yes\r"
 expect " password: "
 send "$controller_pass\r"
 set timeout 60
+
 
 expect "*:~# "
 send "sed -i \"s/dataloggerserver_ip/$datalogger_ip/g\" /etc/rsyslog.conf\r"
@@ -69,20 +72,20 @@ send "iptables -t mangle -D POSTROUTING -j TEE --gateway $datalogger_ip\r"
 expect "*:~# "
 send "iptables -t mangle -I POSTROUTING -j TEE --gateway $datalogger_ip\r"
 # iptables-persistent
-expect "*:~# "
-send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
+#expect "*:~# "
+#send "DEBIAN_FRONTEND=noninteractive apt -y install iptables-persistent\r"
 expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
 
-# install atop for accouting collection
-expect "*:~# "
-send "apt update\r"
-expect "*:~# "
-send "apt install atop -y\r"
+## install atop for accouting collection
+#expect "*:~# "
+#send "apt update\r"
+#expect "*:~# "
+#send "apt install atop -y\r"
 
 # update time
-expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
+#expect "*:~# "
+#send "timedatectl set-timezone Asia/Taipei\r"
 #expect "*:~# "
 #send "service ntp stop\r"
 #expect "*:~# "
