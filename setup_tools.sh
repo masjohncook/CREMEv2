@@ -27,6 +27,7 @@ sudo apt install libpcap-dev -y
 sudo apt install tmux -y
 sudo apt install sshpass -y
 sudo apt install argus-client argus-server -y
+sudo spt install nmap
 
 #cd argus-3.0.8.2
 #chmod +x configure

@@ -176,7 +176,7 @@ class ProgressHelper:
         use to update the content(sub-technique) of attack phases
         """
         num_of_phases = len(attack_phases_data)
-        if num_of_phases is not 3:
+        if num_of_phases != 3:
             while True:
                 # should not come here, number of phases must be 3
                 pass
@@ -432,7 +432,7 @@ class ProcessDataHelper:
                 len(tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-3'])))
 
             """
-            df = df.append(tmp_df)
+            df = pd.concat([df, tmp_df])
 
         # full_filename = os.path.join(folder, filename)
         # df = pd.read_csv(full_filename)
@@ -525,7 +525,7 @@ class ProcessDataHelper:
             tmp_df = pd.read_csv(filename)
             # print(len(tmp_df[tmp_df['Label'] == 0]))
             # print(len(tmp_df[tmp_df['Label'] == 1]))
-            df = df.append(tmp_df)
+            df = pd.concat([df, tmp_df])
 
         # print(len(df.columns.values))
         # print(df.columns.values)
@@ -1010,7 +1010,7 @@ class ProcessDataHelper:
                 tmp_date = fields[0]
                 hour_min_second = (fields[1]).split(',')[0]
                 log_message = fields[-1]
-                if len(fields) < 5 or len(tmp_date.split('-')) is not 3:
+                if len(fields) < 5 or len(tmp_date.split('-')) != 3:
                     continue  # something is wrong here
 
                 time_string = "{0}T{1}{2}".format(tmp_date, hour_min_second, time_zone)

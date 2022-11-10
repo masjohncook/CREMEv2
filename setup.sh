@@ -9,6 +9,7 @@ source venv_CREMEv2/bin/activate
 pip install --upgrade pip
 
 # install libraries
+# should check python-interface later
 pip install -r requirements.txt
 
 # create database
