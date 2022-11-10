@@ -383,12 +383,14 @@ class ProcessDataHelper:
 
         # get start and end timestamps
         for i in range(label_num):
+            i += 1
             timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_start.txt"))
             timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_end.txt"))
 
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
                 timestamps.append(f.readline())
+
         timestamps = [int(float(i)) for i in timestamps]
         return timestamps
 
