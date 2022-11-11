@@ -792,6 +792,7 @@ class ProcessDataHelper:
         col_list = ['HostName', 'EventTemplate', 'Timestamp', 'Label']
         one_hot_col_list = ['EventTemplate']
         df = pd.read_csv(filename, usecols=col_list)
+        labels = df['Label'].unique()
 
         # print(len(df['Timestamp'].unique()))
 
@@ -817,8 +818,22 @@ class ProcessDataHelper:
             for tmp_timestamp in tmp_unique_timestamps:
                 tmp_df = df_machine[df_machine['Timestamp'] == tmp_timestamp]
                 tmp_df = tmp_df.drop(columns=del_col_list)
-
+                classes_num = {}
+                for j in labels:
+                    class_num = len(tmp_df[tmp_df['Label'] == j])
+                    if j != 0 and class_num > 0:
+                        classes_num[j] = class_num
                 sum_one_hot = tmp_df.sum()
+
+                # label according to most frequent technique
+                max_num = 0
+                max_label = 0
+                for key in classes_num:
+                    if classes_num[key] > max_num:
+                        max_num = classes_num[key]
+                        max_label = key
+                sum_one_hot['Label'] = max_label
+                sum_one_hot['Timestamp'] = tmp_timestamp
                 df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
 
         # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
