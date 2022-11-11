@@ -920,7 +920,7 @@ class ProcessDataHelper:
             techniques = scenarios_techniques[i]
             sub_techniques = scenarios_sub_techniques[i]
             # label
-            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, white_list, white_list, labels, tactics,
+            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, labels, tactics,
                                                     techniques, sub_techniques)
             # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
             # print('label 1: {0}'.format(len(df[df['Label'] == 1])))
