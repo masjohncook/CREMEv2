@@ -819,7 +819,7 @@ class ProcessDataHelper:
                 tmp_df = tmp_df.drop(columns=del_col_list)
 
                 sum_one_hot = tmp_df.sum()
-                df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
+                df_count_vector = pd.concat([df_count_vector, sum_one_hot.transpose()], ignore_index=True)
 
         # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
         # all_df_count_vector = all_df_count_vector.append(df_count_vector)
