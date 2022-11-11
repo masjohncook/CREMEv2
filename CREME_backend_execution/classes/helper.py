@@ -767,7 +767,7 @@ class ProcessDataHelper:
     def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
         # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
         # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
-        for i in range(labels):
+        for i in range(len(labels)):
             t_start = float(timestamps[i*2])
             t_end = float(timestamps[i*2+1])
             df.loc[(t_start <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t_end) & (
