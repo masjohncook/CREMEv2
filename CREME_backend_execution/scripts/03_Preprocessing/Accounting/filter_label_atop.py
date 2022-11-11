@@ -22,7 +22,7 @@ def merge(label_df_dict, result_abs_path, result_file_name):
         if final_df is None:
             final_df = temp
         else:
-            final_df = pd.concat([final_df, temp])
+            final_df = final_df.append(temp)
 
     final_df = final_df.sort_values('TIMESTAMP')
     final_df.to_csv(os.path.join(result_abs_path, result_file_name), index=False)

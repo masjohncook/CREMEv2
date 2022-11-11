@@ -13,7 +13,7 @@ def main(argv):
         if '.csv' in filename:
             # print(filename)
             temp = pd.read_csv(filename, dtype={'Sport': object, 'Dport': object})
-            final = pd.concat([final, temp])
+            final = final.append(temp)
             final = final.reset_index(drop=True)
             os.remove(filename)
 
