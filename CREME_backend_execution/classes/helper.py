@@ -368,7 +368,8 @@ class ProcessDataHelper:
 
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
-                timestamps.append(f.readline())
+                # read to sec
+                timestamps.append(f.readline(10))
         timestamps = [int(float(i)) for i in timestamps]
         # In original CREME, ddos duration time was added
         timestamps[timestamp_num-1] += 10
@@ -389,7 +390,8 @@ class ProcessDataHelper:
 
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
-                timestamps.append(f.readline())
+                # read to sec
+                timestamps.append(f.readline(10))
 
         timestamps = [int(float(i)) for i in timestamps]
         return timestamps
@@ -765,7 +767,7 @@ class ProcessDataHelper:
     def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
         # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
         # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
-        for i in range(labels):
+        for i in range(len(labels)):
             t_start = float(timestamps[i*2])
             t_end = float(timestamps[i*2+1])
             df.loc[(t_start <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t_end) & (
@@ -790,6 +792,7 @@ class ProcessDataHelper:
         col_list = ['HostName', 'EventTemplate', 'Timestamp', 'Label']
         one_hot_col_list = ['EventTemplate']
         df = pd.read_csv(filename, usecols=col_list)
+        labels = df['Label'].unique()
 
         # print(len(df['Timestamp'].unique()))
 
@@ -815,9 +818,23 @@ class ProcessDataHelper:
             for tmp_timestamp in tmp_unique_timestamps:
                 tmp_df = df_machine[df_machine['Timestamp'] == tmp_timestamp]
                 tmp_df = tmp_df.drop(columns=del_col_list)
-
+                classes_num = {}
+                for j in labels:
+                    class_num = len(tmp_df[tmp_df['Label'] == j])
+                    if j != 0 and class_num > 0:
+                        classes_num[j] = class_num
                 sum_one_hot = tmp_df.sum()
-                df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
+
+                # label according to most frequent technique
+                max_num = 0
+                max_label = 0
+                for key in classes_num:
+                    if classes_num[key] > max_num:
+                        max_num = classes_num[key]
+                        max_label = key
+                sum_one_hot['Label'] = max_label
+                sum_one_hot['Timestamp'] = tmp_timestamp
+                df_count_vector = pd.concat([df_count_vector, sum_one_hot.transpose()], ignore_index=True)
 
         # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
         # all_df_count_vector = all_df_count_vector.append(df_count_vector)
@@ -918,7 +935,7 @@ class ProcessDataHelper:
             techniques = scenarios_techniques[i]
             sub_techniques = scenarios_sub_techniques[i]
             # label
-            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, white_list, white_list, labels, tactics,
+            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, labels, tactics,
                                                     techniques, sub_techniques)
             # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
             # print('label 1: {0}'.format(len(df[df['Label'] == 1])))
