@@ -40,9 +40,6 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(30)
-    output_time_file_end = 'time_step_6_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
 
 
 main(sys.argv)
