@@ -11,7 +11,14 @@ sudo apt install python3-venv -y
 sudo apt install openssh-server -y
 
 # install atop
-sudo apt install atop -y
+apt remove --purge atop -y
+sudo apt install -y libz-dev libncurses5-dev zlib1g libncurses5 gcc make
+cd ~/
+tar xvzf CREMEv2/CREME_backend_execution/scripts/04_general/atop-1.26_modified.tar.gz
+cd atop-1.26
+make install
+cd -
+
 
 # install argus-serer and argus-client
 #wget http://qosient.com/argus/src/argus-3.0.8.2.tar.gz
