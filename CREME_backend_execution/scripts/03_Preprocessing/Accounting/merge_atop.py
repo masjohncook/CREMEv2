@@ -16,13 +16,6 @@ def main(argv):
     memory_df = pd.read_csv(memory_filename)
     process_df = pd.read_csv(process_filename)
 
-    # to synchronize atop2.4(for ubuntu20) and atop1.26(for ubuntu14)
-    if "benign" in merge_filename or "target" in merge_filename:
-        memory_df = memory_df.drop(['MINFLT', 'MAJFLT', 'VSTEXT'], axis=1)
-    else:
-        disk_df = disk_df.drop(['TID'], axis=1)
-        memory_df = memory_df.drop(['VSTACK', 'SWAPSZ', 'PSIZE'], axis=1)
-
     data_frames = [disk_df, memory_df, process_df]
     # df_merged = reduce(lambda left, right: pd.merge(left, right, on=['TIMESTAMP', 'PID', 'CMD'], how='outer'),
     # data_frames).fillna(0)
