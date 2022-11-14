@@ -1,6 +1,6 @@
 #!/bin/bash
-if [ $# != 5 ]; then
-    echo "Usage: ./auto_accounting_process.sh atop_path atop.raw code_path target_server_ip target_server_password"
+if [ $# != 3 ]; then
+    echo "Usage: ./auto_accounting_process.sh atop_path atop.raw code_path"
     exit 1
 fi
 
@@ -8,8 +8,6 @@ fi
 location=$1
 
 code_path=$3
-target_server_ip=$4
-target_server_password=$5
 
 filename=$(basename $2 .raw)
 raw_disk_file="${filename}_disk.txt"

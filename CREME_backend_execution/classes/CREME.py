@@ -1328,7 +1328,7 @@ class Creme:
         time_window_traffic = self.dls.time_window_traffic  # second
         ProcessDataHelper.handle_accounting_packet_all_scenario(big_list, folder_traffic, traffic_files,
                                                                 final_name_traffic, folder_atop, atop_files,
-                                                                final_name_atop, time_window_traffic, self.target_server.ip, self.target_server.password)
+                                                                final_name_atop, time_window_traffic)
         # balance data and filter features
         # ProcessDataHelper.balance_data(folder_atop, final_name_atop)
         # ProcessDataHelper.balance_data(folder_traffic, final_name_traffic, balanced_label_zero = False)

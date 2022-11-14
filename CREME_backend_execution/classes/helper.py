@@ -601,7 +601,7 @@ class ProcessDataHelper:
     @staticmethod
     def handle_accounting_and_packet_2(labeling_file_path, output_file_atop, output_file_traffic, log_folder,
                                        accounting_folder, traffic_file, accounting_result_path, traffic_result_path,
-                                       time_window_traffic, target_server_ip, target_server_password):
+                                       time_window_traffic):
         """
         this function uses to process accounting and packet traffic for each scenario
         :param labeling_file_path: contains information to label data for each scenario
@@ -613,8 +613,6 @@ class ProcessDataHelper:
         :param accounting_result_path: folder uses to store output_file_atop
         :param traffic_result_path: folder uses to store output_file_traffic
         :param time_window_traffic: use to to split traffic flow to sub-flow
-        :param target_server_ip: use to extract atop1.26 data which collected from benign and target server
-        :param target_server_password: use to extract atop1.26 data which collected from benign and target server
         :return:
         """
         # maybe you need to change that
@@ -629,7 +627,7 @@ class ProcessDataHelper:
 
         accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/./accounting_extraction.sh "
         cmd = '{0} {1} {2} {3} {4} {5} {6}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
-                                           accounting_result_path, output_file_atop, target_server_ip, target_server_password)
+                                           accounting_result_path, output_file_atop)
         os.system(cmd)
         traffic_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
 
@@ -652,8 +650,6 @@ class ProcessDataHelper:
         :param file_atop: list of label atop files of scenarios
         :param finalname_atop: the final output file of atop
         :param time_window_traffic: use to to split traffic flow to sub-flow
-        :param target_server_ip: use to extract atop1.26 data which collected from benign and target server
-        :param target_server_password: use to extract atop1.26 data which collected from benign and target server
         :return:
         """
         for i, information in enumerate(biglist):
@@ -669,7 +665,7 @@ class ProcessDataHelper:
             ProcessDataHelper.handle_accounting_and_packet_2(labeling_file_path, output_file_atop, output_file_traffic,
                                                              log_folder, accounting_folder, traffic_file,
                                                              accounting_result_path, traffic_result_path,
-                                                             time_window_traffic, target_server_ip, target_server_password)
+                                                             time_window_traffic)
 
         ProcessDataHelper.execute_traffic(folder_traffic, file_traffic, finalname_traffic)
         ProcessDataHelper.execute_accounting(folder_atop, file_atop, finalname_atop)
