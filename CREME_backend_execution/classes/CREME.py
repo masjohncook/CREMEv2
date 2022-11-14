@@ -403,7 +403,7 @@ class Creme:
 
         # stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1486 Data Destruction for Impact",
-                                    5, new_stage=True)
+                                    5)
         self.attacker_server.ransomware_seventh_step()
         
         # wait and record timestamp
