@@ -6,7 +6,7 @@ set password [lindex $argv 3]
 set path [lindex $argv 4]
 set pids_file [lindex $argv 5]
 
-set timeout 1200
+set timeout 300
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
