@@ -626,7 +626,7 @@ class ProcessDataHelper:
         # output_file_traffic = "label_traffic.csv"
 
         accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/./accounting_extraction.sh "
-        cmd = '{0} {1} {2} {3} {4} {5} {6}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
+        cmd = '{0} {1} {2} {3} {4}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
                                            accounting_result_path, output_file_atop)
         os.system(cmd)
         traffic_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
