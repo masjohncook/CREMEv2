@@ -30,12 +30,9 @@ expect "*:~# "
 send "iptables-save > /etc/iptables/rules.v4\r"
 
 ## update time
-#expect "*:~# "
-#send "systemctl stop ntp\r"
-#expect "*:~# "
-#send "sudo ntpdate ntp.ubuntu.com\r"
-#expect "*:~# "
-#send "systemctl restart ntp\r"
+expect "*:~# "
+send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
 
 # exit
 expect "*:~# "
