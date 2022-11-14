@@ -83,15 +83,11 @@ send "iptables-save > /etc/iptables/rules.v4\r"
 #expect "*:~# "
 #send "apt install atop -y\r"
 
-# update time
-#expect "*:~# "
-#send "timedatectl set-timezone Asia/Taipei\r"
-#expect "*:~# "
-#send "service ntp stop\r"
-#expect "*:~# "
-#send "ntpdate ntp.ubuntu.com\r"
-#expect "*:~# "
-#send "service ntp restart\r"
+## update time
+expect "*:~# "
+send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
+
 
 # exit
 expect "*:~# "
