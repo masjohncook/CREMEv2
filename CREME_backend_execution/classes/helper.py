@@ -637,7 +637,7 @@ class ProcessDataHelper:
 
     @staticmethod
     def handle_accounting_packet_all_scenario(biglist, folder_traffic, file_traffic, finalname_traffic, folder_atop,
-                                              file_atop, finalname_atop, time_window_traffic, target_server_ip, target_server_password):
+                                              file_atop, finalname_atop, time_window_traffic):
         """
         this function uses to process accounting and packet data of all scenarios
         :param biglist: list of information of scenarios; list=[[labeling_file_path, log_folder_scenario,
