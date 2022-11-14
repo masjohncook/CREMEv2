@@ -147,5 +147,5 @@ find zacson/zacson -type d -print0 | xargs -0 chmod 0755
 find zacson/zacson -type f -print0 | xargs -0 chmod 0644
 
 rm -r /var/www/html/*
-cp -r ./zacson/zacson/* /var/www/html
+cp -rf ./zacson/zacson/* /var/www/html
 chown -R $USERNAME:www-data /var/www/html
