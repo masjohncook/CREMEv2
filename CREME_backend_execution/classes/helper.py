@@ -310,7 +310,7 @@ class ProcessDataHelper:
         force_abnormal_cmd_list = []
         for i in range(lifecycle_len):
             src_ips.append(src_ip)
-            des_ips.append(src_ip)
+            des_ips.append(des_ip)
             normal_ips.append(normal_ip)
             normal_hostnames.append(normal_hostname)
             abnormal_hostnames.append(abnormal_hostname)
