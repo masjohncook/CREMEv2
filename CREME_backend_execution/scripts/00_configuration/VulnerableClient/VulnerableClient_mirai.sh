@@ -8,8 +8,7 @@ set controller_user [lindex $argv 5]
 set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 
-set timeout 900
-
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -27,6 +26,7 @@ send "$password\r"
 #send "cp ConfigureFiles/resolv.conf /etc\r"
 #expect "*:~# "
 #send "sed -i \"s/my_dns_1/$server_ip/g\" /etc/resolv.conf\r"
+set timeout 60
 
 # configure vulnerable services
 # install and configure vulnerable telnet
@@ -41,6 +41,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 # mount filesystem /run with exec option  -Mirai will be at /run/a
 expect "*:~# "

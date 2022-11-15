@@ -17,5 +17,5 @@
     ["14",           "Impact",               "Data Destruction",                      "Data Destruction",                              "T1485"],
     ["15",           "Impact",               "Data Encrypted for Impact",             "Data Encrypted for Impact",                     "T1486"],
     ["16",           "Impact",               "Resource Hijacking",                    "Resource Hijacking",                            "T1496"],
-    ["17",           "Tmpact",               "Endpoint Denial of Service",            "Endpoint Denial of Service",                    "T1499"]
+    ["17",           "Impact",               "Endpoint Denial of Service",            "Endpoint Denial of Service",                    "T1499"]
 ]

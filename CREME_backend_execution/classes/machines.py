@@ -106,6 +106,13 @@ class DataLoggerServer(Machine, implements(IConfiguration), implements(IConfigur
         parameters = [self.ip, self.username, self.password, service_name]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
+    def refresh_syslog_file(self):
+        filename_path = "04_general/refresh_rsyslog.sh"
+        service_name = "rsyslog"
+        parameters = [self.ip, self.username, self.password, service_name]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
+
+
     def clean_data_collection(self):
         self.restart_rsyslog()
 
@@ -214,7 +221,7 @@ class DataLoggerClient(Machine, implements(IConfigurationCommon), implements(IDa
             rsyslog_file = "rsyslog_apache.conf"
         else:
             rsyslog_file = "rsyslog_no_apache.conf"
-        filename_path = "00_configuration/DataLogger/DataLoggerClient_data_collection.sh"
+        filename_path = "00_configuration/DataLogger/DataLoggerClient20_data_collection.sh"
         parameters = [self.ip, self.username, self.password, self.controller_ip, self.controller_username,
                       self.controller_password, self.controller_path, self.dls.ip, rsyslog_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)

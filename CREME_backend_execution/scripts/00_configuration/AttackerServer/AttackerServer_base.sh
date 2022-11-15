@@ -9,7 +9,7 @@ set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 set server_ip [lindex $argv 8]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -23,8 +23,7 @@ send "$password\r"
 ## update time
 expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
-expect "*:~# "
-send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
 
 # config new dns
 expect "*:~# "

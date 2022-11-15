@@ -9,7 +9,7 @@ set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 set server_ip [lindex $argv 8]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -19,6 +19,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # update time
 expect "*:~# "
@@ -28,7 +29,7 @@ send "apt -y install ntp\r"
 expect "*:~# "
 send "apt -y install ntpdate\r"
 expect "*:~# "
-send "sudo ntpdate ntp.ubuntu.com\r"
+send "timedatectl set-timezone Asia/Taipei\r"
 
 # config new dns
 expect "*:~# "
@@ -38,6 +39,7 @@ send "scp -r $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_back
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
+set timeout 60
 
 send "$controller_pass\r"
 # add executable permission

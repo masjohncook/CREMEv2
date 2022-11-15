@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ $# != 3 ]; then
     echo "Usage: ./auto_accounting_process.sh atop_path atop.raw code_path"
     exit 1

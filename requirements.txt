@@ -6,11 +6,10 @@ celery
 redis
 pandas
 python-dateutil
-sklearn
+scikit-learn
 xgboost
 matplotlib
 python-nmap
 multiprocess
-numpy
 requests
 pymetasploit3

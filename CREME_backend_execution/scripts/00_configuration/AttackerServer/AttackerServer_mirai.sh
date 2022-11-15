@@ -20,7 +20,7 @@ set cnc_config_path "CREMEv2/CREME_backend_execution/scripts/02_scenario/01_mira
 set debug_path "Mirai-Source-Code/mirai/debug"
 set mirai_path "Mirai-Source-Code/mirai"
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -30,6 +30,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # install expect
 expect "*:~# "
@@ -44,6 +45,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 
 expect "*:~# "
 send "chmod +x $path/* \r"

@@ -26,6 +26,29 @@ def main(argv):
             while 'PID' not in line:
                 if 'ATOP' in line:
                     temp = line.split()
+                    """
+                    fix format error in head one, should be 8 items here
+
+                    error format ex: 
+                    ATOP - benign-server2022/11/01  09:34:56------     5d17h31m55s elapsed
+                    
+                    correct format ex:
+                    ATOP - benign-server     2022/11/01  09:34:56     ------     5d17h31m55s elapsed
+                    """
+                    if len(temp) == 6:
+                        tmp2 = temp[2][:-10]
+                        tmp3 = temp[2][-10:]
+                        tmp4 = temp[3][:8]
+                        tmp5 = temp[3][8:]
+                        tmp6 = temp[4]
+                        tmp7 = temp[5]
+                        temp[2] = tmp2
+                        temp[3] = tmp3
+                        temp[4] = tmp4
+                        temp[5] = tmp5
+                        temp.append(tmp6)
+                        temp.append(tmp7)
+
                     time_str = temp[3] + " " + temp[4]
                     dt = parse(time_str)
                     timestamp = dt.timestamp()

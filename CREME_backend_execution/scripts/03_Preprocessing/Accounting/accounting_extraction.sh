@@ -11,10 +11,10 @@ result_file_name=$4
 root_path=$(pwd)
 code_path=$(dirname $(realpath "$0"))
 result_file_abs_path="${root_path}/${result_file_path}"
-atop_file_abs_path=$(cd $atop_file_path|| pwd)
+atop_file_abs_path=$(cd $atop_file_path; pwd)
 
 cd $atop_file_abs_path
-for d in $(ls || grep .raw); do
+for d in $(ls | grep .raw); do
 	sh "${code_path}/auto_accounting_process.sh" ${atop_file_abs_path} $d ${code_path}
 done
 

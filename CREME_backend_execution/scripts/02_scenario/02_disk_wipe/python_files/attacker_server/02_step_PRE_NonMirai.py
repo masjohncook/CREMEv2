@@ -14,7 +14,7 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
+    if len(argv) != 3:
         print("Usage: {} Folder local_ip target_ip".format(argv[0]))
 
     folder = argv[1]
@@ -43,5 +43,6 @@ def main(argv):
     output_time_file_end = 'time_step_2_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(30)
+
 
 main(sys.argv)

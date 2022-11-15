@@ -8,7 +8,7 @@ set controller_user [lindex $argv 5]
 set controller_pass [lindex $argv 6]
 set controller_path [lindex $argv 7]
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -19,6 +19,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$password\r"
+set timeout 60
 
 # install and configure rsyslog remote for syslog collection
 expect "*:~# "
@@ -31,6 +32,7 @@ expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
 send "$controller_pass\r"
+set timeout 60
 expect "*:~# "
 send "systemctl restart rsyslog\r"
 
@@ -39,16 +41,35 @@ expect "*:~# "
 send "apt update && apt -y install tcpdump\r"
 
 # install atop to process atop data from other machines
+# expect "*:~# "
+# send "apt update && apt install atop\r"
 expect "*:~# "
-send "apt update && apt install atop\r"
+send "rm ~/.ssh/known_hosts\r"
+expect "*:~# "
+send "scp $controller_user@$controller_ip:$controller_path/CREMEv2/CREME_backend_execution/scripts/04_general/atop-1.26_modified.tar.gz /root\r"
+expect "*continue connecting (yes/no*)? "
+send "yes\r"
+expect " password: "
+send "$controller_pass\r"
+set timeout 30
+expect "*:~# "
+send "apt remove --purge atop -y\r"
+expect "*:~# "
+send "apt install -y libz-dev libncurses5-dev zlib1g libncurses5 gcc make\r"
+expect "*:~# "
+send "tar -xzvf atop-1.26_modified.tar.gz\r"
+expect "*:~# "
+send "cd atop-1.26\r"
+expect "*atop-1.26# "
+send "make install\r"
+expect "*atop-1.26# "
+send "cd\r"
+
 
 ## update time
-#expect "*:~# "
-#send "systemctl stop ntp\r"
-#expect "*:~# "
-#send "sudo ntpdate ntp.ubuntu.com\r"
-#expect "*:~# "
-#send "systemctl restart ntp\r"
+expect "*:~# "
+send "timedatectl set-timezone Asia/Taipei\r"
+set timeout 60
 
 expect "*:~# "
 send "exit\r"

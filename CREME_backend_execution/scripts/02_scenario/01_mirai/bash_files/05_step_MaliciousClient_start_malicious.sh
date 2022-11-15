@@ -10,7 +10,7 @@ set outputTime [lindex $argv 7]
 #set malicious_file [lindex $argv 6]
 set malicious_file "mirai.dbg"
 
-set timeout 900
+set timeout 600
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
@@ -31,6 +31,7 @@ expect "*:~# "
 send "nohup $path/./$malicious_file &\r"
 expect "output to 'nohup.out'"
 send "\r"
+sleep 10
 
 expect "*:~# "
 #send "ps -ef | grep '$path/./$malicious_file' | awk '{print \$2}' > $path/$pids_file\r"

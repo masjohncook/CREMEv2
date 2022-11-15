@@ -176,7 +176,7 @@ class ProgressHelper:
         use to update the content(sub-technique) of attack phases
         """
         num_of_phases = len(attack_phases_data)
-        if num_of_phases is not 3:
+        if num_of_phases != 3:
             while True:
                 # should not come here, number of phases must be 3
                 pass
@@ -198,63 +198,81 @@ class ProcessDataHelper:
         """
         get VMs information when executing MARAI
         """
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-        src_ips_1.append(malicious_client.ip)
+        src_ips_12 = []
+        des_ips_12 = []
+        normal_ips_12 = []
+        abnormal_hostnames_12 = []
+        normal_hostnames_12 = []
+        src_ips_12.append(attacker_server.ip)
+        des_ips_12.append(target_server.ip)
+        abnormal_hostnames_12.append(target_server.hostname)
+        normal_ips_12.append(benign_server.ip)
+        normal_hostnames_12.append(benign_server.hostname)
+        normal_ips_12.append(malicious_client.ip)
         for vulnerable_client in vulnerable_clients:
-            des_ips_1.append(vulnerable_client.ip)
-            abnormal_hostnames_1.append(vulnerable_client.hostname)
+            normal_ips_12.append(vulnerable_client.ip)
+            normal_hostnames_12.append(vulnerable_client.hostname)
         for non_vulnerable_client in non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-        normal_ips_1.append(target_server.ip)
-        normal_hostnames_1.append(target_server.hostname)
-        normal_ips_1.append(benign_server.ip)
-        normal_hostnames_1.append(benign_server.hostname)
-
-        src_ips_2 = []
-        des_ips_2 = []
-        normal_ips_2 = []
-        abnormal_hostnames_2 = []
-        normal_hostnames_2 = []
-        src_ips_2.append(attacker_server.ip)
+            normal_ips_12.append(non_vulnerable_client.ip)
+            normal_hostnames_12.append(non_vulnerable_client.hostname)
+        
+        src_ips_3456 = []
+        des_ips_3456 = []
+        normal_ips_3456 = []
+        abnormal_hostnames_3456 = []
+        normal_hostnames_3456 = []
+        src_ips_3456.append(malicious_client.ip)
         for vulnerable_client in vulnerable_clients:
-            des_ips_2.append(vulnerable_client.ip)
-            abnormal_hostnames_2.append(vulnerable_client.hostname)
+            des_ips_3456.append(vulnerable_client.ip)
+            abnormal_hostnames_3456.append(vulnerable_client.hostname)
         for non_vulnerable_client in non_vulnerable_clients:
-            normal_ips_2.append(non_vulnerable_client.ip)
-            normal_hostnames_2.append(non_vulnerable_client.hostname)
-        normal_ips_2.append(target_server.ip)
-        normal_hostnames_2.append(target_server.hostname)
-        normal_ips_2.append(benign_server.ip)
-        normal_hostnames_2.append(benign_server.hostname)
+            normal_ips_3456.append(non_vulnerable_client.ip)
+            normal_hostnames_3456.append(non_vulnerable_client.hostname)
+        normal_ips_3456.append(target_server.ip)
+        normal_hostnames_3456.append(target_server.hostname)
+        normal_ips_3456.append(benign_server.ip)
+        normal_hostnames_3456.append(benign_server.hostname)
 
-        src_ips_3 = []
-        des_ips_3 = []
-        normal_ips_3 = []
-        abnormal_hostnames_3 = []
-        normal_hostnames_3 = []
+        src_ips_7 = []
+        des_ips_7 = []
+        normal_ips_7 = []
+        abnormal_hostnames_7 = []
+        normal_hostnames_7 = []
+        src_ips_7.append(attacker_server.ip)
         for vulnerable_client in vulnerable_clients:
-            src_ips_3.append(vulnerable_client.ip)
-            abnormal_hostnames_3.append(vulnerable_client.hostname)
-        des_ips_3.append(target_server.ip)
-        abnormal_hostnames_3.append(target_server.hostname)
+            des_ips_7.append(vulnerable_client.ip)
+            abnormal_hostnames_7.append(vulnerable_client.hostname)
         for non_vulnerable_client in non_vulnerable_clients:
-            normal_ips_3.append(non_vulnerable_client.ip)
-            normal_hostnames_3.append(non_vulnerable_client.hostname)
-        normal_ips_3.append(benign_server.ip)
-        normal_hostnames_3.append(benign_server.hostname)
+            normal_ips_7.append(non_vulnerable_client.ip)
+            normal_hostnames_7.append(non_vulnerable_client.hostname)
+        normal_ips_7.append(target_server.ip)
+        normal_hostnames_7.append(target_server.hostname)
+        normal_ips_7.append(benign_server.ip)
+        normal_hostnames_7.append(benign_server.hostname)
 
-        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
-                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
-                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        src_ips_8 = []
+        des_ips_8 = []
+        normal_ips_8 = []
+        abnormal_hostnames_8 = []
+        normal_hostnames_8 = []
+        for vulnerable_client in vulnerable_clients:
+            src_ips_8.append(vulnerable_client.ip)
+            abnormal_hostnames_8.append(vulnerable_client.hostname)
+        des_ips_8.append(target_server.ip)
+        abnormal_hostnames_8.append(target_server.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_8.append(non_vulnerable_client.ip)
+            normal_hostnames_8.append(non_vulnerable_client.hostname)
+        normal_ips_8.append(benign_server.ip)
+        normal_hostnames_8.append(benign_server.hostname)
+
+        src_ips = [src_ips_12, src_ips_12, src_ips_3456, src_ips_3456, src_ips_3456, src_ips_3456, src_ips_7, src_ips_8]
+        des_ips = [des_ips_12, des_ips_12, des_ips_3456, des_ips_3456, des_ips_3456, des_ips_3456, des_ips_7, des_ips_8]
+        normal_ips = [normal_ips_12, normal_ips_12, normal_ips_3456, normal_ips_3456, normal_ips_3456, normal_ips_3456, normal_ips_7, normal_ips_8]
+        normal_hostnames = [normal_hostnames_12, normal_hostnames_12, normal_hostnames_3456, normal_hostnames_3456, normal_hostnames_3456, 
+                            normal_hostnames_3456, normal_hostnames_7, normal_hostnames_8]
+        abnormal_hostnames = [abnormal_hostnames_12, abnormal_hostnames_12, abnormal_hostnames_3456, abnormal_hostnames_3456, abnormal_hostnames_3456, 
+                              abnormal_hostnames_3456, abnormal_hostnames_7, abnormal_hostnames_8]
         pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
         force_abnormal_cmd_list = [[] ,[], [], [], [], [], [], []]
         return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
@@ -368,7 +386,9 @@ class ProcessDataHelper:
 
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
-                timestamps.append(int(f.readline()))
+                # read to sec
+                timestamps.append(f.readline(10))
+        timestamps = [int(float(i)) for i in timestamps]
         # In original CREME, ddos duration time was added
         timestamps[timestamp_num-1] += 10
         # timestamps[timestamp_num-1] += (10 + int(dur)) # 10 to avoid problems if there is some delay
@@ -382,18 +402,22 @@ class ProcessDataHelper:
 
         # get start and end timestamps
         for i in range(label_num):
+            i += 1
             timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_start.txt"))
             timestamp_namelist.append(os.path.join(log_folder, "time_step_"+str(i)+"_end.txt"))
 
         for i in range(timestamp_num):
             with open(timestamp_namelist[i], 'rt') as f:
-                timestamps.append(int(f.readline()))
+                # read to sec
+                timestamps.append(f.readline(10))
+
+        timestamps = [int(float(i)) for i in timestamps]
         return timestamps
 
     @staticmethod
     def set_timestamp_pairs(timestamps):
         timestamps_syslog = []
-        for i in range(len(timestamps)/2):
+        for i in range(int(len(timestamps)/2)):
             timestamps_pair = []
             timestamps_pair.append(timestamps[i*2])
             timestamps_pair.append(timestamps[i*2+1])
@@ -428,7 +452,7 @@ class ProcessDataHelper:
                 len(tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-3'])))
 
             """
-            df = df.append(tmp_df)
+            df = pd.concat([df, tmp_df])
 
         # full_filename = os.path.join(folder, filename)
         # df = pd.read_csv(full_filename)
@@ -521,7 +545,7 @@ class ProcessDataHelper:
             tmp_df = pd.read_csv(filename)
             # print(len(tmp_df[tmp_df['Label'] == 0]))
             # print(len(tmp_df[tmp_df['Label'] == 1]))
-            df = df.append(tmp_df)
+            df = pd.concat([df, tmp_df])
 
         # print(len(df.columns.values))
         # print(df.columns.values)
@@ -618,12 +642,14 @@ class ProcessDataHelper:
 
         # output_file_atop = "label_atop.csv"
         # output_file_traffic = "label_traffic.csv"
+
         accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/Accounting/./accounting_extraction.sh "
         cmd = '{0} {1} {2} {3} {4}'.format(accounting_extraction_file, labeling_file_path, accounting_folder,
                                            accounting_result_path, output_file_atop)
         os.system(cmd)
-        accounting_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
-        cmd = '{0} {1} {2} {3} {4} {5}'.format(accounting_extraction_file, labeling_file_path, traffic_file,
+        traffic_extraction_file = "CREME_backend_execution/scripts/03_Preprocessing/NetworkPacket/./traffic_extraction.sh"
+
+        cmd = '{0} {1} {2} {3} {4} {5}'.format(traffic_extraction_file, labeling_file_path, traffic_file,
                                                time_window_traffic, traffic_result_path, output_file_traffic)
         os.system(cmd)
 
@@ -755,7 +781,7 @@ class ProcessDataHelper:
     def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
         # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
         # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
-        for i in range(labels):
+        for i in range(len(labels)):
             t_start = float(timestamps[i*2])
             t_end = float(timestamps[i*2+1])
             df.loc[(t_start <= df['Timestamp'].astype(int)) & (df['Timestamp'].astype(int) < t_end) & (
@@ -780,6 +806,7 @@ class ProcessDataHelper:
         col_list = ['HostName', 'EventTemplate', 'Timestamp', 'Label']
         one_hot_col_list = ['EventTemplate']
         df = pd.read_csv(filename, usecols=col_list)
+        labels = df['Label'].unique()
 
         # print(len(df['Timestamp'].unique()))
 
@@ -805,9 +832,23 @@ class ProcessDataHelper:
             for tmp_timestamp in tmp_unique_timestamps:
                 tmp_df = df_machine[df_machine['Timestamp'] == tmp_timestamp]
                 tmp_df = tmp_df.drop(columns=del_col_list)
-
+                classes_num = {}
+                for j in labels:
+                    class_num = len(tmp_df[tmp_df['Label'] == j])
+                    if j != 0 and class_num > 0:
+                        classes_num[j] = class_num
                 sum_one_hot = tmp_df.sum()
-                df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
+
+                # label according to most frequent technique
+                max_num = 0
+                max_label = 0
+                for key in classes_num:
+                    if classes_num[key] > max_num:
+                        max_num = classes_num[key]
+                        max_label = key
+                sum_one_hot['Label'] = max_label
+                sum_one_hot['Timestamp'] = tmp_timestamp
+                df_count_vector = pd.concat([df_count_vector, sum_one_hot.transpose()], ignore_index=True)
 
         # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
         # all_df_count_vector = all_df_count_vector.append(df_count_vector)
@@ -863,7 +904,7 @@ class ProcessDataHelper:
         df_syslog = pd.read_csv(filtered_syslog_structured)
         df_apache = pd.read_csv(filtered_syslog_structured_apache)
         del df_apache['Time_Apache']
-        df = df_syslog.append(df_apache, ignore_index=True)
+        df = pd.concat([df_syslog, df_apache], ignore_index=True)
 
         # get diff services to label data
         # syslog_structured = os.path.join(result_path, "{0}_structured.csv".format(filtered_syslog))
@@ -908,7 +949,7 @@ class ProcessDataHelper:
             techniques = scenarios_techniques[i]
             sub_techniques = scenarios_sub_techniques[i]
             # label
-            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, white_list, white_list, labels, tactics,
+            ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, labels, tactics,
                                                     techniques, sub_techniques)
             # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
             # print('label 1: {0}'.format(len(df[df['Label'] == 1])))
@@ -1000,7 +1041,7 @@ class ProcessDataHelper:
                 tmp_date = fields[0]
                 hour_min_second = (fields[1]).split(',')[0]
                 log_message = fields[-1]
-                if len(fields) < 5 or len(tmp_date.split('-')) is not 3:
+                if len(fields) < 5 or len(tmp_date.split('-')) != 3:
                     continue  # something is wrong here
 
                 time_string = "{0}T{1}{2}".format(tmp_date, hour_min_second, time_zone)

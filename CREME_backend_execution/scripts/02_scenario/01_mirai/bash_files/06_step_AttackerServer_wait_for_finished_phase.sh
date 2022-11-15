@@ -10,7 +10,7 @@ set logs_path [lindex $argv 6]
 set outputTime [lindex $argv 7]
 set flag 0
 
-set timeout 900
+set timeout 600
 
 # SSH connection
 spawn /bin/bash $delKnownHosts

@@ -41,7 +41,7 @@ class Creme:
         # Helper.clearProgressData()
 
         # labels_table.json path
-        self.table_path = os.path.join("..", "..", "labels_table.json")
+        self.table_path = os.path.join("labels_table.json")
 
         # Machines
         self.dls = dls
@@ -403,7 +403,7 @@ class Creme:
 
         # stage += 1
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1486 Data Destruction for Impact",
-                                    5, new_stage=True)
+                                    5)
         self.attacker_server.ransomware_seventh_step()
         
         # wait and record timestamp
@@ -683,6 +683,7 @@ class Creme:
         self.target_server.restart_rsyslog()
         self.benign_server.restart_rsyslog()
         self.dls.restart_rsyslog()
+        self.dls.refresh_syslog_file()
 
     # ---------- run scenario ----------
     def run_mirai(self):
@@ -1073,7 +1074,7 @@ class Creme:
     #                                               sub_technique_names)
 
     def process_data(self):
-        stage = 5
+        stage = 3
         ProgressHelper.update_stage(stage, f"Start processing data ...", 5, new_stage=True)
 
         big_list = []
@@ -1386,7 +1387,7 @@ class Creme:
         return result
 
     def train_ML(self, data_sources):
-        stage = 6
+        stage = 4
         ProgressHelper.update_stage(stage, f"Start training models for Accuracy:", 5, new_stage=True)
         # accuracy
         self.train_ML_accuracy(stage, data_sources)
@@ -1451,7 +1452,7 @@ class Creme:
                                                                   attack_types)
 
     def evaluation(self, eff_result):
-        stage = 7
+        stage = 5
         ProgressHelper.update_stage(stage, f"Start Efficiency evaluation:", 5, new_stage=True)
         # efficiency
         self.efficiency_evaluation(stage, eff_result)
