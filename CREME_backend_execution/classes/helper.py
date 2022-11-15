@@ -198,63 +198,81 @@ class ProcessDataHelper:
         """
         get VMs information when executing MARAI
         """
-        src_ips_1 = []
-        des_ips_1 = []
-        normal_ips_1 = []
-        abnormal_hostnames_1 = []
-        normal_hostnames_1 = []
-        src_ips_1.append(malicious_client.ip)
+        src_ips_12 = []
+        des_ips_12 = []
+        normal_ips_12 = []
+        abnormal_hostnames_12 = []
+        normal_hostnames_12 = []
+        src_ips_12.append(attacker_server.ip)
+        des_ips_12.append(target_server.ip)
+        abnormal_hostnames_12.append(target_server.hostname)
+        normal_ips_12.append(benign_server.ip)
+        normal_hostnames_12.append(benign_server.hostname)
+        normal_ips_12.append(malicious_client.ip)
         for vulnerable_client in vulnerable_clients:
-            des_ips_1.append(vulnerable_client.ip)
-            abnormal_hostnames_1.append(vulnerable_client.hostname)
+            normal_ips_12.append(vulnerable_client.ip)
+            normal_hostnames_12.append(vulnerable_client.hostname)
         for non_vulnerable_client in non_vulnerable_clients:
-            normal_ips_1.append(non_vulnerable_client.ip)
-            normal_hostnames_1.append(non_vulnerable_client.hostname)
-        normal_ips_1.append(target_server.ip)
-        normal_hostnames_1.append(target_server.hostname)
-        normal_ips_1.append(benign_server.ip)
-        normal_hostnames_1.append(benign_server.hostname)
-
-        src_ips_2 = []
-        des_ips_2 = []
-        normal_ips_2 = []
-        abnormal_hostnames_2 = []
-        normal_hostnames_2 = []
-        src_ips_2.append(attacker_server.ip)
+            normal_ips_12.append(non_vulnerable_client.ip)
+            normal_hostnames_12.append(non_vulnerable_client.hostname)
+        
+        src_ips_3456 = []
+        des_ips_3456 = []
+        normal_ips_3456 = []
+        abnormal_hostnames_3456 = []
+        normal_hostnames_3456 = []
+        src_ips_3456.append(malicious_client.ip)
         for vulnerable_client in vulnerable_clients:
-            des_ips_2.append(vulnerable_client.ip)
-            abnormal_hostnames_2.append(vulnerable_client.hostname)
+            des_ips_3456.append(vulnerable_client.ip)
+            abnormal_hostnames_3456.append(vulnerable_client.hostname)
         for non_vulnerable_client in non_vulnerable_clients:
-            normal_ips_2.append(non_vulnerable_client.ip)
-            normal_hostnames_2.append(non_vulnerable_client.hostname)
-        normal_ips_2.append(target_server.ip)
-        normal_hostnames_2.append(target_server.hostname)
-        normal_ips_2.append(benign_server.ip)
-        normal_hostnames_2.append(benign_server.hostname)
+            normal_ips_3456.append(non_vulnerable_client.ip)
+            normal_hostnames_3456.append(non_vulnerable_client.hostname)
+        normal_ips_3456.append(target_server.ip)
+        normal_hostnames_3456.append(target_server.hostname)
+        normal_ips_3456.append(benign_server.ip)
+        normal_hostnames_3456.append(benign_server.hostname)
 
-        src_ips_3 = []
-        des_ips_3 = []
-        normal_ips_3 = []
-        abnormal_hostnames_3 = []
-        normal_hostnames_3 = []
+        src_ips_7 = []
+        des_ips_7 = []
+        normal_ips_7 = []
+        abnormal_hostnames_7 = []
+        normal_hostnames_7 = []
+        src_ips_7.append(attacker_server.ip)
         for vulnerable_client in vulnerable_clients:
-            src_ips_3.append(vulnerable_client.ip)
-            abnormal_hostnames_3.append(vulnerable_client.hostname)
-        des_ips_3.append(target_server.ip)
-        abnormal_hostnames_3.append(target_server.hostname)
+            des_ips_7.append(vulnerable_client.ip)
+            abnormal_hostnames_7.append(vulnerable_client.hostname)
         for non_vulnerable_client in non_vulnerable_clients:
-            normal_ips_3.append(non_vulnerable_client.ip)
-            normal_hostnames_3.append(non_vulnerable_client.hostname)
-        normal_ips_3.append(benign_server.ip)
-        normal_hostnames_3.append(benign_server.hostname)
+            normal_ips_7.append(non_vulnerable_client.ip)
+            normal_hostnames_7.append(non_vulnerable_client.hostname)
+        normal_ips_7.append(target_server.ip)
+        normal_hostnames_7.append(target_server.hostname)
+        normal_ips_7.append(benign_server.ip)
+        normal_hostnames_7.append(benign_server.hostname)
 
-        src_ips = [src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_1, src_ips_2, src_ips_3]
-        des_ips = [des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_1, des_ips_2, des_ips_3]
-        normal_ips = [normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_1, normal_ips_2, normal_ips_3]
-        normal_hostnames = [normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, normal_hostnames_1, 
-                            normal_hostnames_1, normal_hostnames_2, normal_hostnames_3]
-        abnormal_hostnames = [abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, abnormal_hostnames_1, 
-                              abnormal_hostnames_1, abnormal_hostnames_2, abnormal_hostnames_3]
+        src_ips_8 = []
+        des_ips_8 = []
+        normal_ips_8 = []
+        abnormal_hostnames_8 = []
+        normal_hostnames_8 = []
+        for vulnerable_client in vulnerable_clients:
+            src_ips_8.append(vulnerable_client.ip)
+            abnormal_hostnames_8.append(vulnerable_client.hostname)
+        des_ips_8.append(target_server.ip)
+        abnormal_hostnames_8.append(target_server.hostname)
+        for non_vulnerable_client in non_vulnerable_clients:
+            normal_ips_8.append(non_vulnerable_client.ip)
+            normal_hostnames_8.append(non_vulnerable_client.hostname)
+        normal_ips_8.append(benign_server.ip)
+        normal_hostnames_8.append(benign_server.hostname)
+
+        src_ips = [src_ips_12, src_ips_12, src_ips_3456, src_ips_3456, src_ips_3456, src_ips_3456, src_ips_7, src_ips_8]
+        des_ips = [des_ips_12, des_ips_12, des_ips_3456, des_ips_3456, des_ips_3456, des_ips_3456, des_ips_7, des_ips_8]
+        normal_ips = [normal_ips_12, normal_ips_12, normal_ips_3456, normal_ips_3456, normal_ips_3456, normal_ips_3456, normal_ips_7, normal_ips_8]
+        normal_hostnames = [normal_hostnames_12, normal_hostnames_12, normal_hostnames_3456, normal_hostnames_3456, normal_hostnames_3456, 
+                            normal_hostnames_3456, normal_hostnames_7, normal_hostnames_8]
+        abnormal_hostnames = [abnormal_hostnames_12, abnormal_hostnames_12, abnormal_hostnames_3456, abnormal_hostnames_3456, abnormal_hostnames_3456, 
+                              abnormal_hostnames_3456, abnormal_hostnames_7, abnormal_hostnames_8]
         pattern_normal_cmd_list = [['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker'], ['kworker']]
         force_abnormal_cmd_list = [[] ,[], [], [], [], [], [], []]
         return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
