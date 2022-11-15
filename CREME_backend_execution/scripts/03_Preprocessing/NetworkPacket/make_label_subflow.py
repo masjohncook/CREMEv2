@@ -39,7 +39,7 @@ def main(argv):
     sub_technique = ['Normal']*len(df)
     df['SubTechnique'] = sub_technique
     
-    for stage_idx, stage_list in enumerate(labeling_list):
+    for stage_list in labeling_list:
         tactic_name = stage_list[0]
         technique_name = stage_list[1]
         sub_technique_name = stage_list[2]

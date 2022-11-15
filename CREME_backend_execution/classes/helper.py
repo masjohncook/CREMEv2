@@ -886,7 +886,7 @@ class ProcessDataHelper:
         df_syslog = pd.read_csv(filtered_syslog_structured)
         df_apache = pd.read_csv(filtered_syslog_structured_apache)
         del df_apache['Time_Apache']
-        df = df_syslog.append(df_apache, ignore_index=True)
+        df = pd.concat([df_syslog, df_apache], ignore_index=True)
 
         # get diff services to label data
         # syslog_structured = os.path.join(result_path, "{0}_structured.csv".format(filtered_syslog))
