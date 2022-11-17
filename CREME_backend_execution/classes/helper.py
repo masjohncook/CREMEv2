@@ -551,7 +551,7 @@ class ProcessDataHelper:
         # print(df.columns.values)
 
         # print(len(df))
-        # df.drop_duplicates(keep=False, inplace=True)
+        df.drop_duplicates(keep=False, inplace=True)
         # print(len(df))
 
         for field in removed_fields:
