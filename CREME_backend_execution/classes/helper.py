@@ -848,7 +848,7 @@ class ProcessDataHelper:
                         max_label = key
                 sum_one_hot['Label'] = max_label
                 sum_one_hot['Timestamp'] = tmp_timestamp
-                df_count_vector = pd.concat([df_count_vector, sum_one_hot.transpose()], ignore_index=True)
+                df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
 
         # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
         # all_df_count_vector = all_df_count_vector.append(df_count_vector)
