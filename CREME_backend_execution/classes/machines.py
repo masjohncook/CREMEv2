@@ -457,7 +457,12 @@ class TargetServer(DataLoggerClient, implements(IConfiguration), implements(ICon
             ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def start_collect_data(self):
-        super().start_collect_data()
+        # super().start_collect_data()
+        filename_path = "01_data_collection/start_atop_old.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.atop_file, self.atop_interval,
+                      self.atop_pids_file, self.controller_ip, self.controller_username, self.controller_password,
+                      self.controller_path]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_collect_data(self):
         super().stop_collect_data()
@@ -596,7 +601,12 @@ class BenignServer(DataLoggerClient, implements(IConfiguration), implements(ICon
             ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def start_collect_data(self):
-        super().start_collect_data()
+        #super().start_collect_data()
+        filename_path = "01_data_collection/start_atop_old.sh"
+        parameters = [self.ip, self.username, self.password, self.path, self.atop_file, self.atop_interval,
+                      self.atop_pids_file, self.controller_ip, self.controller_username, self.controller_password,
+                      self.controller_path]
+        ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_collect_data(self):
         super().stop_collect_data()
@@ -814,7 +824,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_cnc_and_login(self):
-        filename_path = "./kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.cnc_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -1031,7 +1041,7 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
 #         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def stop_metasploit(self):
-        filename_path = "./kill_pids.sh"
+        filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
