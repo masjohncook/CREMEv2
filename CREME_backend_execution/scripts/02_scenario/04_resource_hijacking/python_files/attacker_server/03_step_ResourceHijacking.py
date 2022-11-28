@@ -18,7 +18,7 @@ def main(argv):
     my_ip = argv[2]
     target_ip = argv[3]
     
-    output_time_file_start = 'time_step_4_start.txt'
+    output_time_file_start = 'time_step_3_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
 
@@ -35,7 +35,7 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(30)
-    output_time_file_end = 'time_step_4_end.txt'
+    output_time_file_end = 'time_step_3_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 
