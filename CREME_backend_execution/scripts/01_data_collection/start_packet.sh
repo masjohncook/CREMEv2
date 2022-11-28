@@ -9,7 +9,7 @@ set netInterface [lindex $argv 6]
 set tcp_pids_file [lindex $argv 7]
 # example: ./start_packet.sh ./DelKnownHosts.sh 192.168.1.164 root qsefthuk /root/tcpdump_data.pcap enp3s0 /root/tcp_pids.txt
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 #spawn /bin/bash ./DelKnownHosts.sh
@@ -36,7 +36,7 @@ send "\r"
 
 expect "*:~# "
 #send "ps -ef | grep tcpdump | awk '{print $2}' > /root/tcp_pids.txt"
-send "ps -ef | grep 'tcpdump -U -w' | awk '{print \$2}' > $path/$tcp_pids_file\r"
+send "ps -ef | grep 'tcpdump -U -w' | awk 'NR == 1 {print \$2}' > $path/$tcp_pids_file\r"
 
 expect "*:~# "
 send "exit\r"
