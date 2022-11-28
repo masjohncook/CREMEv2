@@ -35,7 +35,7 @@ sleep 10
 
 expect "*:~# "
 #send "ps -ef | grep '$path/./$malicious_file' | awk '{print \$2}' > $path/$pids_file\r"
-send "ps -ef | grep 'mirai.dbg' | awk '{print \$2}' > $path/$pids_file\r"
+send "ps -ef | grep 'mirai.dbg' | awk 'NR == 1 {print \$2}' > $path/$pids_file\r"
 
 expect "*:~# "
 send "exit\r"
