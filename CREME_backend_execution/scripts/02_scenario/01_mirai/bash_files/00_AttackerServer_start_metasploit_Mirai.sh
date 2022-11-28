@@ -26,7 +26,7 @@ expect "$path# "
 send "msfrpcd -P kali -S \r"
 
 expect "*:~# "
-send "ps -ef | grep 'msfrpcd' | awk '{print \$2}' > $path/$pids_file\r"
+send "ps -ef | grep 'msfrpcd' | awk 'NR == 1 {print \$2}' > $path/$pids_file\r"
 
 expect "*:~# "
 send "exit\r"
