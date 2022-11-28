@@ -18,6 +18,12 @@ def main(argv):
     my_ip = argv[2]
     target_ip = argv[3]
 
+    time.sleep(30)
+    output_time_file_end = 'time_step_5_end.txt'
+    record_timestamp(folder, output_time_file_end)
+    time.sleep(30)
+
+
     time.sleep(2)
     output_time_file_start = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file_start)
@@ -27,9 +33,6 @@ def main(argv):
     subprocess.run(download_the_app.split(), stdout=subprocess.PIPE)
 
     # print(client.sessions.list['4'])
-    time.sleep(30)
-    output_time_file_end = 'time_step_6_end.txt'
-    record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 
 

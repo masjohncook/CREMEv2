@@ -19,9 +19,14 @@ def main(argv):
     target_ip = argv[3]
 
     client = MsfRpcClient('kali')
-    
+
+    time.sleep(30)
+    output_time_file_end = 'time_step_4_end.txt'
+    record_timestamp(folder, output_time_file_end)
+    time.sleep(30)
+
     # start step 6
-    output_time_file_start = 'time_step_6_start.txt'
+    output_time_file_start = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
     
@@ -35,10 +40,6 @@ def main(argv):
     while client.jobs.list:
         time.sleep(1)
 
-    time.sleep(30)
-    output_time_file_end = 'time_step_6_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
 
 
 main(sys.argv)
