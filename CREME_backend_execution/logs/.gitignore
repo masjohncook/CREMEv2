@@ -1,0 +1,8 @@
+*
+*/
+!.gitignore
+!/01_mirai
+!/02_disk_wipe
+!/03_ransomware
+!/04_resource_hijacking
+!/05_end_point_dos
