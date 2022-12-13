@@ -52,7 +52,7 @@ send "chmod +x $path/* \r"
 expect "*:~# "
 send "> $transfer_pids\r"
 expect "*:~# "
-send "rm $path/$debug_path/*.txt\r"
+send "rm -R $path/$debug_path/*.txt\r"
 
 # build Mirai-Source-Code
 expect "*:~# "
