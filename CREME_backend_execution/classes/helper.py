@@ -516,8 +516,8 @@ class ProcessDataHelper:
 
         one_hot_fields = ['Flgs', 'Proto', 'State']
         # fields_with_hex_value = ['Sport', 'Dport']
-        removed_fields = ['Rank', 'StartTime', 'SrcAddr', 'DstAddr', 'LastTime', 'Tactic', 'Technique', 'SubTechnique']
-        # removed_fields = ['Rank', 'StartTime', 'SrcAddr', 'DstAddr', 'LastTime']
+        removed_fields = ['Rank', 'SrcAddr', 'DstAddr', 'Tactic', 'Technique', 'SubTechnique']
+        # removed_fields = ['Rank', 'StartTime', 'SrcAddr', 'DstAddr', 'LastTime', 'Tactic', 'Technique', 'SubTechnique']
         replace_strings = dict()
         remove_rows_with_str = dict()
         """
@@ -596,8 +596,8 @@ class ProcessDataHelper:
         # test_filename='UNSW_NB15_testing-set.csv'
 
         one_hot_fields = ['POLI', 'ST', 'EXC', 'S']
-        removed_fields = ['TIMESTAMP', 'PID', 'CMD', 'Hostname', 'Tactic', 'Technique', 'SubTechnique']
-        # removed_fields = ['TIMESTAMP', 'PID', 'CMD', 'Hostname']
+        removed_fields = ['PID', 'CMD', 'Hostname', 'Tactic', 'Technique', 'SubTechnique']
+        # removed_fields = ['TIMESTAMP', 'PID', 'CMD', 'Hostname', 'Tactic', 'Technique', 'SubTechnique']
         replace_strings = {'%': '', 'K': '000', 'M': '000000', 'G': '000000000'}
         remove_rows_with_str = {'-': '0'}
         """
