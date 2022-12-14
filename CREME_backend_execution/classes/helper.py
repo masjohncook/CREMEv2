@@ -779,8 +779,6 @@ class ProcessDataHelper:
 
     @staticmethod
     def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
-        # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
-        # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
         for i in range(len(labels)):
             t_start = float(timestamps[i*2])
             t_end = float(timestamps[i*2+1])
@@ -850,9 +848,6 @@ class ProcessDataHelper:
                 sum_one_hot['Timestamp'] = tmp_timestamp
                 df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
 
-        # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
-        # all_df_count_vector = all_df_count_vector.append(df_count_vector)
-
         # try to save results
         try:
             full_output_file = os.path.join(folder, output_file)
@@ -864,7 +859,7 @@ class ProcessDataHelper:
     @staticmethod
     def handle_syslog(input_files, scenarios_timestamps, scenarios_abnormal_hostnames, scenarios_normal_hostnames,
                       scenarios_labels, scenarios_tactics, scenarios_techniques, scenarios_sub_techniques, dls_hostname,
-                      result_path, output_file):
+                      result_path, output_file, log_files):
         filtered_lines = []
         filtered_lines_apache = []
         remove_files = []
@@ -951,9 +946,13 @@ class ProcessDataHelper:
             # label
             ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, labels, tactics,
                                                     techniques, sub_techniques)
-            # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
-            # print('label 1: {0}'.format(len(df[df['Label'] == 1])))
-            # print('\n')
+
+        # parsing log files for each scenario
+        for i, file_name_scenario in enumerate(log_files):
+            stage_timestamps = scenarios_timestamps[i]
+            df_parsed = df[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1])]
+            path_scenario = os.path.join(result_path, file_name_scenario)
+            df_parsed.to_csv(path_scenario, encoding='utf-8', index=False)
 
         del df['ComponentEventId']
         tmp_output = "{0}_{1}".format("original", output_file)

@@ -1080,6 +1080,7 @@ class Creme:
         big_list = []
         traffic_files = []
         atop_files = []
+        log_files = []
         log_folder = "CREME_backend_execution/logs"
 
         # syslog
@@ -1106,6 +1107,7 @@ class Creme:
             big_list.append(information)
             traffic_files.append("label_traffic_mirai.csv")
             atop_files.append("label_atop_mirai.csv")
+            log_files.append("label_syslog_mirai.csv")
 
             # syslog
             syslog_file = os.path.join(log_folder_mirai, "syslog")
@@ -1137,6 +1139,7 @@ class Creme:
             big_list.append(information)
             traffic_files.append("label_traffic_disk_wipe.csv")
             atop_files.append("label_atop_disk_wipe.csv")
+            log_files.append("label_syslog_disk_wipe.csv")
 
             # syslog
             syslog_file = os.path.join(log_folder_disk_wipe, "syslog")
@@ -1168,6 +1171,7 @@ class Creme:
             big_list.append(information)
             traffic_files.append("label_traffic_ransomware.csv")
             atop_files.append("label_atop_ransomware.csv")
+            log_files.append("label_syslog_ransomware.csv")
 
             # syslog
             syslog_file = os.path.join(log_folder_ransomware, "syslog")
@@ -1199,6 +1203,7 @@ class Creme:
             big_list.append(information)
             traffic_files.append("label_traffic_resource_hijacking.csv")
             atop_files.append("label_atop_resource_hijacking.csv")
+            log_files.append("label_syslog_resource_hijacking.csv")
 
             # syslog
             syslog_folder = os.path.join(log_folder_resource_hijacking, "syslog")
@@ -1241,6 +1246,7 @@ class Creme:
             big_list.append(information)
             traffic_files.append("label_traffic_end_point_dos.csv")
             atop_files.append("label_atop_end_point_dos.csv")
+            log_files.append("label_syslog_end_point_dos.csv")
 
             # syslog
             syslog_file = os.path.join(log_folder_end_point_dos, "syslog")
@@ -1344,7 +1350,7 @@ class Creme:
         ProcessDataHelper.handle_syslog(input_files, scenarios_timestamps, scenarios_abnormal_hostnames,
                                         scenarios_normal_hostnames, scenarios_labels, scenarios_tactics,
                                         scenarios_techniques, scenarios_sub_techniques, dls_hostname,
-                                        result_path_syslog, final_name_syslog)
+                                        result_path_syslog, final_name_syslog, log_files)
         # filter features
         # ProcessDataHelper.filter_features(result_path_syslog, final_name_syslog, 0.1)
         ProgressHelper.update_stage(stage, f"Finished processing the syslog data source", 5,
