@@ -734,19 +734,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
                       self.controller_password, self.controller_path, prepared_files]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-    # def configure_data_theft(self):
-    #     prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/07_data_theft/python_files/attacker_server"
-    #     filename_path = "00_configuration/AttackerServer/AttackerServer_data_theft.sh"
-    #     parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
-    #                   self.controller_password, self.controller_path, prepared_files]
-    #     ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-    #
-    # def configure_rootkit_ransomware(self):
-    #     prepared_files = "CREME-N/CREME_backend_execution/scripts/02_scenario/08_rootkit_ransomware/python_files/attacker_server"
-    #     filename_path = "00_configuration/AttackerServer/AttackerServer_rootkit_ransomware.sh"
-    #     parameters = [self.ip, self.username, self.password, self.path, self.controller_ip, self.controller_username,
-    #                   self.controller_password, self.controller_path, prepared_files]
-    #     ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     # Mirai Attack Block
     def mirai_start_metasploit(self):
@@ -998,48 +985,6 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
                       new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
-# ## Data Theft Attack Block
-#     def data_theft_start_metasploit(self):
-#         filename_path = "02_scenario/07_data_theft/bash_files/00_AttackerServer_start_metasploit_PRE.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-#
-#     def data_theft_first_stage(self):
-#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-#
-#     def data_theft_second_stage(self):
-#         filename_path = "02_scenario/07_data_theft/bash_files/04_step_AttackerServer_EndPointDos.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-#
-#     def data_theft_third_stage(self):
-#         filename_path = "02_scenario/07_data_theft/bash_files/05_step_AttackerServer_EndPointDos.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
-
-# ## Rootkit Attack Block
-#     def rootkit_ransomware_start_metasploit(self):
-#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./00_AttackerServer_start_metasploit_PRE.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-#
-#     def rootkit_ransomware_first_stage(self):
-#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./03_step_AttackerServer_EndPointDos.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-#
-#     def rootkit_ransomware_second_stage(self):
-#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./04_step_AttackerServer_EndPointDos.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-#
-#     def rootkit_ransomware_third_stage(self):
-#         filename_path = "02_scenario/08_rootkit_ransomware/bash_files/./05_step_AttackerServer_EndPointDos.sh"
-#         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
-#         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
-
     def stop_metasploit(self):
         filename_path = "04_general/kill_pids.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.killed_pids_file]
@@ -1082,8 +1027,6 @@ class MaliciousClient(Machine, implements(IConfiguration), implements(IConfigura
         self.configure_data_collection()
         if Creme.mirai:
             self.configure_mirai()
-        # if Creme.ransomware or Creme.resource_hijacking or Creme.disk_wipe or Creme.end_point_dos or \
-        #         Creme.data_theft or Creme.rootkit_ransomware:
         if Creme.ransomware or Creme.resource_hijacking or Creme.disk_wipe or Creme.end_point_dos:
             self.configure_pymetasploit()
             self.configure_apache2()
@@ -1095,10 +1038,7 @@ class MaliciousClient(Machine, implements(IConfiguration), implements(IConfigura
             self.configure_disk_wipe()
         if Creme.end_point_dos:
             self.configure_end_point_dos()
-        # if Creme.data_theft:
-        #     self.configure_data_theft()
-        # if Creme.rootkit_ransomware:
-        #     self.configure_rootkit_ransomware()
+
 
     def configure_base(self):
         filename_path = "00_configuration/MaliciousClient/MaliciousClient_base.sh"
@@ -1138,12 +1078,6 @@ class MaliciousClient(Machine, implements(IConfiguration), implements(IConfigura
     def configure_end_point_dos(self):
         # ?????
         pass
-
-    # def configure_data_theft(self):
-    #     pass
-
-    # def configure_rootkit_ransomware(self):
-    #     pass
 
     def mirai_start_malicious(self):
         logs_path = "CREME_backend_execution/logs/01_mirai/times"
