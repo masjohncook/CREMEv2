@@ -17,6 +17,12 @@ send "yes\r"
 expect " password: "
 send "$password\r"
 
+## Configure Postgresql
+expect "$path# "
+send "msfdb start\r"
+expect "*[no]: "
+send "no\r"
+
 # Pymetasploit (Py3)
 expect "*:~# "
 send "msfrpcd -P kali -S \r"

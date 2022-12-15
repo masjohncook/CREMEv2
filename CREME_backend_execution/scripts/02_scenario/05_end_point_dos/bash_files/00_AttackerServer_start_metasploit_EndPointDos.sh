@@ -19,7 +19,9 @@ send "$password\r"
 
 ## Configure Postgresql
 expect "$path# "
-send "msfdb init \r"
+send "msfdb start\r"
+expect "*[no]: "
+send "no\r"
 
 #start MSFRPCD
 expect "$path# "
