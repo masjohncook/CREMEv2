@@ -965,8 +965,11 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_fifth_step(self):
+        new_user_account = "cremetest"
+        new_user_password = "password"
         filename_path = "02_scenario/05_end_point_dos/bash_files/05_step_AttackerServer_EndPointDos.sh"
-        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
+        parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack,
+                      new_user_account, new_user_password]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_sixth_step(self):
