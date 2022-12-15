@@ -21,7 +21,7 @@ send "$password\r"
 expect "$path# "
 send "msfdb start\r"
 expect "*[no]: "
-send "no\r"
+send "\r"
 
 #start MSFRPCD
 expect "$path# "
