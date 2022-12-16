@@ -20,7 +20,6 @@ send "$password\r"
 ## Configure Postgresql
 expect "$path# "
 send "msfdb start\r"
-expect "*[no]: "
 send "\r"
 
 # Pymetasploit (Py3)
