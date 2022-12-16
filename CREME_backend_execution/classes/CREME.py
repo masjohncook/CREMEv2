@@ -234,6 +234,7 @@ class Creme:
                                            f"Scanning IP Block", 5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.mirai_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T1190 Exploit "
                                            f"Public-Facing Application", 5)
         self.attacker_server.mirai_second_step()
@@ -315,6 +316,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.disk_wipe_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
                                     5)
         self.attacker_server.disk_wipe_second_step()
@@ -322,6 +324,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.disk_wipe_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Execution for Client Execution",
                                     5)
         self.attacker_server.disk_wipe_third_step()
@@ -329,6 +332,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.disk_wipe_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1554 Compromise Client Software Binary",
                                     5)
         self.attacker_server.disk_wipe_fourth_step()
@@ -336,6 +340,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.disk_wipe_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - T1068 Exploit for Privilege Escalation",
                                     5)
         self.attacker_server.disk_wipe_fifth_step()
@@ -343,6 +348,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.disk_wipe_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1485 Data Destruction",
                                     5)
         self.attacker_server.disk_wipe_sixth_step()
@@ -367,6 +373,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.ransomware_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
                                     5)
         self.attacker_server.ransomware_second_step()
@@ -374,6 +381,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.ransomware_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Exploitation for Client Execution",
                                     5)
         self.attacker_server.ransomware_third_step()
@@ -381,6 +389,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.ransomware_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1554 Compromise Client Software Binary",
                                     5)
         self.attacker_server.ransomware_fourth_step()
@@ -388,6 +397,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.ransomware_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - T1543 Create or Modify System Process",
                                     5)
         self.attacker_server.ransomware_fifth_step()
@@ -395,6 +405,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.ransomware_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1105 Ingress Transfer Tool",
                                     5)
         self.attacker_server.ransomware_sixth_step()
@@ -402,6 +413,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.ransomware_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1486 Data Destruction for Impact",
                                     5)
         self.attacker_server.ransomware_seventh_step()
@@ -426,6 +438,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.resource_hijacking_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
                                     5)
         self.attacker_server.resource_hijacking_second_step()
@@ -433,6 +446,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.resource_hijacking_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Exploitation for Client Execution",
                                     5)
         self.attacker_server.resource_hijacking_third_step()
@@ -440,6 +454,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.resource_hijacking_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1554 Compromise Client Software Binary",
                                     5)
         self.attacker_server.resource_hijacking_fourth_step()
@@ -447,6 +462,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.resource_hijacking_start_metasploit()
         ProgressHelper.update_stage(stage,
                                     f"{self.attacker_server.hostname} is starting Step 5 - T1068 Exploit for Privilege Escalation",
                                     5)
@@ -455,6 +471,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.resource_hijacking_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1105 Ingress Transfer Tool",
                                     5)
         self.attacker_server.resource_hijacking_sixth_step()
@@ -462,6 +479,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.resource_hijacking_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1496 Resource Hijacking",
                                     5)
         self.attacker_server.resource_hijacking_seventh_step()
@@ -486,6 +504,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.end_point_dos_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 2 - T11190 Exploit Public-Facing Application",
                                     5)
         self.attacker_server.end_point_dos_second_step()
@@ -493,6 +512,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.end_point_dos_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 3 - T1203 Exploitation for Client Execution",
                                     5)
         self.attacker_server.end_point_dos_third_step()
@@ -500,6 +520,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.end_point_dos_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 4 - T1068 Exploit for Privilege Escalation",
                                     5)
         self.attacker_server.end_point_dos_fourth_step()
@@ -507,6 +528,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.end_point_dos_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 5 - T1078.003 Local Account",
                                     5)
         self.attacker_server.end_point_dos_fifth_step()
@@ -514,6 +536,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.end_point_dos_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is Starting Step 6 - T1105 Ingress Tool Transfer",
                                     5)
         self.attacker_server.end_point_dos_sixth_step()
@@ -521,6 +544,7 @@ class Creme:
                                     5, finished_task=True, override_pre_message=False)
 
         # stage += 1
+        self.attacker_server.end_point_dos_start_metasploit()
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is starting Step 7 - T1499 End Point Denial of Service",
                                     5)
         self.attacker_server.end_point_dos_seventh_step()
