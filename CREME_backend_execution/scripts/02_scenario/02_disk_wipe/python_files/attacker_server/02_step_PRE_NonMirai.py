@@ -14,11 +14,12 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 3:
+    if len(argv) != 4:
         print("Usage: {} Folder local_ip target_ip".format(argv[0]))
 
     folder = argv[1]
-    target_ip = argv[2]
+    my_ip = argv[2]
+    target_ip = argv[3]
 
     output_time_file_start = 'time_step_2_start.txt'
     record_timestamp(folder, output_time_file_start)
@@ -40,8 +41,8 @@ def main(argv):
         time.sleep(1)
 
     time.sleep(30)
-    output_time_file_end = 'time_step_2_end.txt'
-    record_timestamp(folder, output_time_file_end)
+    output_time_file_start = 'time_step_2_end.txt'
+    record_timestamp(folder, output_time_file_start)
     time.sleep(30)
 
 
