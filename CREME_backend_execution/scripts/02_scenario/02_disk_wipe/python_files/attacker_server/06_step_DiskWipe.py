@@ -11,9 +11,6 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
@@ -30,7 +27,7 @@ def main(argv):
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
 
-    shell = client.sessions.session('4')
+    shell = client.sessions.session('3')
     shell.write('apt install wipe -y')
     time.sleep(30)
     shell.write("wipe -f {0}".format(wipe_disk_folder))

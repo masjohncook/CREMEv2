@@ -11,9 +11,6 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 6:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
