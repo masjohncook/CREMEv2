@@ -35,7 +35,7 @@ def main(argv):
     while client.jobs.list:
         time.sleep(1)
 
-    client.sessions.session('1').stop()
+    #client.sessions.session('1').stop()
     client.sessions.session('2').stop()
     client.sessions.session('3').stop()
 
