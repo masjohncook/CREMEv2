@@ -11,16 +11,20 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    folder = argv[1]
-    my_ip = argv[2]
-
-    client = MsfRpcClient('kali')
-
+    
+        # end step 4
     output_time_file_end = 'time_step_4_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(30)
+    
+    folder = argv[1]
+    my_ip = argv[2]
+    
+    
 
-    # start step 5
+    client = MsfRpcClient('kali')
+
+        # start step 5
     output_time_file_start = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(10)
