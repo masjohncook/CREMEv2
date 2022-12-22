@@ -26,7 +26,9 @@ def main(argv):
 
         # start step 5
     output_time_file_start = 'time_step_5_start.txt'
-    record_timestamp(folder, output_time_file_start)
+    record_texit
+    cleqr
+    imestamp(folder, output_time_file_start)
     time.sleep(10)
 
     exploit = client.modules.use('exploit', 'multi/handler')
