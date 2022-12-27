@@ -6,6 +6,7 @@ from dateutil.parser import parse
 from CREMEapplication.models import ProgressData
 from . import Drain
 import csv
+from sklearn.metrics import f1_score, precision_score, recall_score, make_scorer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import ExtraTreeClassifier
@@ -1078,7 +1079,12 @@ class TrainMLHelper:
             if 'random_forest' in models_name:
                 models['random_forest'] = RandomForestClassifier(n_jobs=-1, random_state=1)
             if 'XGBoost' in models_name:
-                models['XGBoost'] = XGBClassifier(n_jobs=-1, random_state=1)
+                models['XGBoost'] = XGBClassifier(
+                    n_jobs=-1, 
+                    random_state=1, 
+                    # use_label_encoder=False, 
+                    # eval_metric='merror'
+                )
             # print('Defined %d models' % len(models))
             return models
 
@@ -1088,9 +1094,17 @@ class TrainMLHelper:
         csv_output_file = 'accuracy_for_{0}.csv'.format(data_source)
         label_field = 'Label'
 
+        # balancing extremly few class
+        for class_label in df['Label'].unique():
+            while len(df[df['Label'] == class_label]) < 10:
+                tmp_df = df[df['Label'] == class_label]
+                df = pd.concat([df, tmp_df])
+        
         X = df.loc[:, df.columns != label_field]
         y = df.loc[:, df.columns == label_field]
-        # features_train = X.columns.values
+        y = y.values.flatten()
+        encoder = preprocessing.LabelEncoder()
+        y = encoder.fit_transform(y)
 
         if standard_scale:  # standard scale
             scaler = preprocessing.StandardScaler()
@@ -1103,9 +1117,14 @@ class TrainMLHelper:
         if num_of_folds < 2:
             num_of_folds = 5
         cv = StratifiedKFold(n_splits=num_of_folds, shuffle=True, random_state=1)
-        scoring = ['accuracy', 'f1', 'precision', 'recall']
+        scoring = {
+            'accuracy': 'accuracy',
+            'f1_weighted': make_scorer(f1_score, average='weighted', zero_division=0),
+            'precision': make_scorer(precision_score, average='weighted', zero_division=0),
+            'recall': make_scorer(recall_score, average='weighted', zero_division=0),
+        }
 
-        csv_columns = ['ML_algorithms', 'fit_time', 'score_time', 'test_accuracy', 'test_f1',
+        csv_columns = ['ML_algorithms', 'fit_time', 'score_time', 'test_accuracy', 'test_f1_weighted',
                        'test_precision', 'test_recall']
         csv_rows = []
 
@@ -1132,7 +1151,7 @@ class TrainMLHelper:
             # draw chart
             csv_file = os.path.join(output_folder, csv_output_file)
             df = pd.read_csv(csv_file)
-            ax = df.plot.barh(x='ML_algorithms', y=['test_accuracy', 'test_f1', 'test_precision', 'test_recall'],
+            ax = df.plot.barh(x='ML_algorithms', y=['test_accuracy', 'test_f1_weighted', 'test_precision', 'test_recall'],
                               width=0.8, figsize=(10, 10))
             ax.legend(bbox_to_anchor=(1.1, 1.1))
             for i in ax.patches:
@@ -1156,10 +1175,17 @@ class TrainMLHelper:
 
         label_field = 'Label'
 
+        # balancing extremly few class
+        for class_label in df['Label'].unique():
+            while len(df[df['Label'] == class_label]) < 10:
+                tmp_df = df[df['Label'] == class_label]
+                df = pd.concat([df, tmp_df])
+        
         X = df.loc[:, df.columns != label_field]
         y = df.loc[:, df.columns == label_field]
-        # features_train = X.columns.values
-        # print(len(list(features_train)))
+        y = y.values.flatten()
+        encoder = preprocessing.LabelEncoder()
+        y = encoder.fit_transform(y)
 
         if standard_scale:  # standard scale
             scaler = preprocessing.StandardScaler()
@@ -1229,10 +1255,10 @@ class EvaluationHelper:
         grid_scores = rfecv.grid_scores_
         total_features = len(grid_scores)
         important_features = total_features
-        maximum = max(grid_scores)
+        maximum = max(grid_scores, key=lambda x:x[0])
         acceptable_accuracy = maximum - threshold
         for index, accuracy in enumerate(grid_scores):
-            if accuracy >= acceptable_accuracy:
+            if accuracy[0] >= acceptable_accuracy[0]:
                 important_features = index + 1
                 break
         return total_features, important_features
