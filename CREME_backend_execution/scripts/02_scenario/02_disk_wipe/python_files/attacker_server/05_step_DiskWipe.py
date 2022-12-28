@@ -11,12 +11,6 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    
-        # end step 4
-    output_time_file_end = 'time_step_4_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
-    
     folder = argv[1]
     my_ip = argv[2]
     

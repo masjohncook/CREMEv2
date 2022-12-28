@@ -11,7 +11,9 @@ fi
 tmux new-session -d -s ${SESSION} -n CREME
 tmux set remain-on-exit on
 tmux split-window -h
+tmux split-window -v -t 1
 tmux split-window -v -t 0
+
 
 
 #terminal 0
@@ -27,6 +29,10 @@ tmux send-key -t 1 "celery -A CREME.celery worker --loglevel=info > celery.log" 
 tmux send-key -t 2 "cd ~/CREMEv2" Enter
 tmux send-key -t 2 "source venv_CREMEv2/bin/activate" Enter
 tmux send-key -t 2 "python manage.py runserver 0.0.0.0:8000" Enter
+
+#terminal 3
+tmux send-key -t 3 "cd ~/CREMEv2" Enter
+tmux send-key -t 3 "tail -f celery.log" Enter
 
 
 tmux -2 attach-session -t ${SESSION}

@@ -21,9 +21,13 @@ def main(argv):
     output_time_file_start = 'time_step_1_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
+    
+    
     # put the attack launch command
     nm = nmap.PortScanner()
     nm.scan(hosts=target_ip, arguments='-O -A -p 0-65535')
+
+
 
     time.sleep(30)
     output_time_file_end = 'time_step_1_end.txt'
