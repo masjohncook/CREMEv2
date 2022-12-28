@@ -18,7 +18,7 @@ expect " password: "
 send "$password\r"
 
 expect "*:~# "
-send "python3 $path/01_step_PRE_NonMirai.py $path $ip $target_server_ip\r"
+send "python3 $path/01_step_DiskWipe.py $path $ip $target_server_ip\r"
 
 expect "*:~# "
 send "exit\r"

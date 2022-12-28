@@ -18,12 +18,12 @@ expect " password: "
 send "$password\r"
 
 ## Configure Postgresql
-expect "$path# "
-send "msfdb start\r"
-send "\r"
+# expect "*:~# "
+# send "msfdb start\r"
+# send "\r"
 
 #start MSFRPCD
-expect "$path# "
+expect "*:~# "
 send "msfrpcd -P kali -S\r"
 
 expect "*:~# "
