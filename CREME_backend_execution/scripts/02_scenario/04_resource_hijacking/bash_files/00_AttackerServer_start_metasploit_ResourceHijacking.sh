@@ -18,10 +18,14 @@ expect " password: "
 send "$password\r"
 
 ## Configure Postgresql
-expect "$path# "
+expect "*:~# "
+send "su attacker-server\r"
+expect "attacker-server@attacker-server:/root$ "
 send "msfdb start\r"
-send "\r"
-
+expect " [no]: "
+send "no\r"
+expect "attacker-server@attacker-server:/root$ "
+send "exit\r"
 # Pymetasploit (Py3)
 expect "*:~# "
 send "msfrpcd -P kali -S \r"
