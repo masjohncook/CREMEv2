@@ -826,12 +826,12 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def disk_wipe_first_step(self):
-        filename_path = "02_scenario/02_disk_wipe/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/01_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def disk_wipe_second_step(self):
-        filename_path = "02_scenario/02_disk_wipe/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/02_disk_wipe/bash_files/02_step_AttackerServer_DiskWipe.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -862,12 +862,12 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def ransomware_first_step(self):
-        filename_path = "02_scenario/03_ransomware/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/03_ransomware/bash_files/01_step_AttackerServer_Ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def ransomware_second_step(self):
-        filename_path = "02_scenario/03_ransomware/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/03_ransomware/bash_files/02_step_AttackerServer_Ransomware.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -903,12 +903,12 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def resource_hijacking_first_step(self):
-        filename_path = "02_scenario/04_resource_hijacking/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/01_step_AttackerServer_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def resource_hijacking_second_step(self):
-        filename_path = "02_scenario/04_resource_hijacking/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/04_resource_hijacking/bash_files/02_step_AttackerServer_ResourceHijacking.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
@@ -945,12 +945,12 @@ class AttackerServer(Machine, implements(IConfiguration), implements(IConfigurat
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_first_step(self):
-        filename_path = "02_scenario/05_end_point_dos/bash_files/01_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/01_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
     def end_point_dos_second_step(self):
-        filename_path = "02_scenario/05_end_point_dos/bash_files/02_step_nonmirai_AttackerServer_PRE.sh"
+        filename_path = "02_scenario/05_end_point_dos/bash_files/02_step_AttackerServer_EndPointDos.sh"
         parameters = [self.ip, self.username, self.password, self.path, self.targeted_attack]
         ScriptHelper.execute_script(filename_path, parameters, self.show_cmd)
 
