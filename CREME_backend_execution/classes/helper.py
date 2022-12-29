@@ -845,10 +845,12 @@ class ProcessDataHelper:
                     if classes_num[key] > max_num:
                         max_num = classes_num[key]
                         max_label = key
+                        
+                sum_one_hot = pd.DataFrame(sum_one_hot).transpose()
                 sum_one_hot['Label'] = max_label
-                sum_one_hot['Timestamp'] = tmp_timestamp
-                df_count_vector = df_count_vector.append(sum_one_hot.transpose(), ignore_index=True)
-
+                sum_one_hot['Timestamp'] = tmp_timestamp            
+                df_count_vector = pd.concat([df_count_vector, sum_one_hot], ignore_index=True)
+  
         # try to save results
         try:
             full_output_file = os.path.join(folder, output_file)
