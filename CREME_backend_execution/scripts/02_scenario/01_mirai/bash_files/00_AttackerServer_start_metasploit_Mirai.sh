@@ -22,10 +22,11 @@ expect "*:~# "
 send "su attacker-server\r"
 expect "attacker-server@attacker-server:/root$ "
 send "msfdb start\r"
-expect " [no]: "
+expect "*: "
 send "no\r"
 expect "attacker-server@attacker-server:/root$ "
 send "exit\r"
+
 #start MSFRPCD
 expect "$path# "
 send "msfrpcd -P kali -S \r"
