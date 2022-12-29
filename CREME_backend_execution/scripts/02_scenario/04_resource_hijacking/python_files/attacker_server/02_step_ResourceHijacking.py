@@ -37,8 +37,6 @@ def main(argv):
 
     auxiliary.execute()
 
-    while client.jobs.list:
-        time.sleep(1)
 
     time.sleep(30)
     output_time_file_end = 'time_step_2_end.txt'

@@ -31,8 +31,7 @@ def main(argv):
 
     exploit.execute(payload=payload)
 
-    while client.jobs.list:
-        time.sleep(1)
+
 
     time.sleep(30)
     output_time_file_end = 'time_step_3_end.txt'

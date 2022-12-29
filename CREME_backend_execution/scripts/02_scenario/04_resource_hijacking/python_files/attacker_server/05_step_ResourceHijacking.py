@@ -17,10 +17,6 @@ def main(argv):
 
     client = MsfRpcClient('kali')
 
-    time.sleep(30)
-    output_time_file_end = 'time_step_4_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
 
     # start step 6
     output_time_file_start = 'time_step_5_start.txt'
@@ -34,8 +30,11 @@ def main(argv):
 
     exploit.execute(payload=payload)
 
-    while client.jobs.list:
-        time.sleep(1)
+        
+    time.sleep(30)
+    output_time_file_end = 'time_step_5_end.txt'
+    record_timestamp(folder, output_time_file_end)
+    time.sleep(30)
 
 
 
