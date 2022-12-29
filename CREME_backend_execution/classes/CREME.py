@@ -1338,8 +1338,8 @@ class Creme:
         # balance data and filter features
         ProcessDataHelper.balance_data(folder_atop, final_name_atop)
         ProcessDataHelper.balance_data(folder_traffic, final_name_traffic, balanced_label_zero = False)
-        # ProcessDataHelper.filter_features(folder_atop, final_name_atop, 0.1)
-        # ProcessDataHelper.filter_features(folder_traffic, final_name_traffic, 0.04)
+        ProcessDataHelper.filter_features(folder_atop, final_name_atop)
+        ProcessDataHelper.filter_features(folder_traffic, final_name_traffic)
         ProgressHelper.update_stage(stage, f"Finished processing the accounting and network packet data sources", 5,
                                     finished_task=True, override_pre_message=True)
 
@@ -1352,7 +1352,7 @@ class Creme:
                                         scenarios_techniques, scenarios_sub_techniques, dls_hostname,
                                         result_path_syslog, final_name_syslog, log_files)
         # filter features
-        # ProcessDataHelper.filter_features(result_path_syslog, final_name_syslog, 0.1)
+        ProcessDataHelper.filter_features(result_path_syslog, final_name_syslog)
         ProgressHelper.update_stage(stage, f"Finished processing the syslog data source", 5,
                                     finished_task=True, override_pre_message=True, finished_stage=True)
 

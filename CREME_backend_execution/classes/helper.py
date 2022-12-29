@@ -14,9 +14,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
 from sklearn import preprocessing
-from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import cross_validate
-from sklearn.feature_selection import RFECV
+from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.feature_selection import RFECV, VarianceThreshold
 import matplotlib.pyplot as plt
 import socket
 import time
@@ -994,24 +993,36 @@ class ProcessDataHelper:
         df.to_csv(os.path.join(folder, input_file), encoding='utf-8', index=False)
 
     @staticmethod
-    def filter_features(folder: str, filename: str, corr_threshold=0.1, label_field="Label"):
+    def filter_features(folder: str, filename: str, corr_threshold=0.9):
         """
         use to filter/remove features have correlation with Label less then the corr_threshold
         in the folder/filename
         """
         df = pd.read_csv(os.path.join(folder, filename))
 
-        # drop space character at the end of feature's name
-        column_names = df.columns.values
-        for i in range(len(column_names)):
-            column_names[i] = column_names[i].strip()
-        df.columns = column_names
+        y_tmp = df['Label']
+        # delete features with all the same value
+        df.drop('Label', axis=1, inplace=True)
+        selector = VarianceThreshold(threshold=0)
+        selector.fit(df)
+        print(selector.variances_)
+        constant_columns = [column for column in df.columns
+                            if column not in 
+                            df.columns[selector.get_support()]]
+        df.drop(labels=constant_columns, axis=1, inplace=True)
 
-        test = df.corr()
-        removed_features = test.index[abs(test[label_field]) < corr_threshold].tolist()
+        # delete similar features
+        df_tmp = df
+        corr_features = set()
+        corr_matrix = df_tmp.corr()
+        for i in range(len(corr_matrix.columns)):
+            for j in range(i):
+                if abs(corr_matrix.iloc[i, j]) > corr_threshold:
+                    colname = corr_matrix.columns[i]
+                    corr_features.add(colname)
+        df.drop(labels=corr_features, axis=1, inplace=True)
 
-        # update features and re-save the file
-        df.drop(removed_features, axis=1, inplace=True)
+        df = pd.concat([df, y_tmp], axis=1)
         df.to_csv(os.path.join(folder, filename), encoding='utf-8', index=False)
 
     @staticmethod
