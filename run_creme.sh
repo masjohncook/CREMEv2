@@ -32,6 +32,7 @@ tmux send-key -t 2 "python manage.py runserver 0.0.0.0:8000" Enter
 
 #terminal 3
 tmux send-key -t 3 "cd ~/CREMEv2" Enter
+tmux send-key -t 3 "sleep 20" Enter
 tmux send-key -t 3 "tail -f celery.log" Enter
 
 
