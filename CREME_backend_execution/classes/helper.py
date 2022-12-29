@@ -971,38 +971,25 @@ class ProcessDataHelper:
 
     # ----- Balance data and Filter features -----
     @staticmethod
-    def balance_data(folder: str, input_file: str, balanced_label_zero=True):
+    def balance_data(folder: str, input_file: str, sample_num=50000):
         """
-        use to balance the label 0 and label 1 data in folder/input_file,
-        store the balanced data to a output file and return that file name
+        data cleaning for each class
         """
         df = pd.read_csv(os.path.join(folder, input_file))
-
-        # print(len(df.columns.values))
-
-        df_0 = df[df['Label'] == 0]
-        df_1 = df[df['Label'] == 1]
-        # print('len(df): {0}'.format(len(df)))
-        # print('label_0: {0}'.format(len(df_0)))
-        # print('label_1: {0}'.format(len(df_1)))
         
-        if balanced_label_zero:
-            df_0.drop_duplicates(keep='last', inplace=True)
-            num_of_label_0 = len(df_0)
-            num_of_label_1 = len(df_1)
-            new_df_0 = pd.DataFrame()
-            for i in range(num_of_label_1//num_of_label_0 + 1):
-                new_df_0 = new_df_0.append(df_0)
-            df = new_df_0.append(df_1)
-            
-        else:
-            df_0.drop_duplicates(keep='last', inplace=True)
-            num_of_label_0 = len(df_0)
-            num_of_label_1 = len(df_1)
-            if "traffic" in input_file:
-                ind = df_0[(df_0['Sum'] == 0.0) | (df_0['Min'] == 0.0) | (df_0['Max'] == 0.0)].index
-                df_0.drop(ind, inplace=True)
-            df = df_1.append(df_0)
+        # data cleaning
+        for label in df['Label'].unique():
+            if len(df[df['Label'] == label]) > sample_num:
+                df_tmp = df.loc[df['Label'] == label].copy()
+                df_tmp.drop_duplicates(keep=False, inplace=True)
+                df_tmp = df_tmp.sample(n=sample_num, random_state=47)
+                df.drop(df[df['Label'] == label].index, inplace=True)
+                df = pd.concat([df, df_tmp])
+        
+        for class_label in df['Label'].unique():
+            while len(df[df['Label'] == class_label]) < 20:
+                tmp_df = df[df['Label'] == class_label]
+                df = pd.concat([df, tmp_df])
 
         df.to_csv(os.path.join(folder, input_file), encoding='utf-8', index=False)
 
@@ -1095,12 +1082,6 @@ class TrainMLHelper:
 
         csv_output_file = 'accuracy_for_{0}.csv'.format(data_source)
         label_field = 'Label'
-
-        # balancing extremly few class
-        for class_label in df['Label'].unique():
-            while len(df[df['Label'] == class_label]) < 10:
-                tmp_df = df[df['Label'] == class_label]
-                df = pd.concat([df, tmp_df])
         
         X = df.loc[:, df.columns != label_field]
         y = df.loc[:, df.columns == label_field]
@@ -1176,12 +1157,6 @@ class TrainMLHelper:
         df = pd.read_csv(filename)
 
         label_field = 'Label'
-
-        # balancing extremly few class
-        for class_label in df['Label'].unique():
-            while len(df[df['Label'] == class_label]) < 10:
-                tmp_df = df[df['Label'] == class_label]
-                df = pd.concat([df, tmp_df])
         
         X = df.loc[:, df.columns != label_field]
         y = df.loc[:, df.columns == label_field]
