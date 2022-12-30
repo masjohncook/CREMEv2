@@ -28,7 +28,7 @@ expect "attacker-server@attacker-server:/root$ "
 send "exit\r"
 
 #start MSFRPCD
-expect "$path# "
+expect "*:~# "
 send "msfrpcd -P kali -S \r"
 
 expect "*:~# "
