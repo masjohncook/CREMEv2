@@ -21,7 +21,7 @@ def main(argv):
     # start step 7
     output_time_file = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(2)
+    time.sleep(60)
 
     shell = client.sessions.session('4')
     shell.write('wget --no-check-certificate http://{0}/downloads/crypto.sh'.format(my_ip))

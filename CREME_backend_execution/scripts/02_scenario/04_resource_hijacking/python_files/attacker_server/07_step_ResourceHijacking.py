@@ -20,7 +20,7 @@ def main(argv):
     time.sleep(30)
     output_time_file_end = 'time_step_6_end.txt'
     record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
+    time.sleep(60)
     
     
     # start step 7
@@ -37,7 +37,7 @@ def main(argv):
                 '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
                 '-k --tls')
 
-    time.sleep(10)
+    time.sleep(60)
 
 
 main(sys.argv)
