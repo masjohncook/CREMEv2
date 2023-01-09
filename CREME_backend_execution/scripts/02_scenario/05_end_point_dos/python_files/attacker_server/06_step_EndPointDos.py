@@ -19,7 +19,7 @@ def main(argv):
     time.sleep(30)
     output_time_file_end = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file_end)
-    time.sleep(60)
+    time.sleep(30)
     
     time.sleep(2)
     output_time_file_start = 'time_step_6_start.txt'
@@ -29,12 +29,6 @@ def main(argv):
     download_the_app = 'wget --no-check-certificate https://raw.githubusercontent.com/masjohncook/local_slowloris/master/local_slowloris.py'
     subprocess.run(download_the_app.split(), stdout=subprocess.PIPE)
 
-    # print(client.sessions.list['4'])
-    time.sleep(60)
-    
-    output_time_file_end = 'time_step_6_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
 
 
 main(sys.argv)
