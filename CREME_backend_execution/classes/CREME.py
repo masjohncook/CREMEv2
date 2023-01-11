@@ -9,8 +9,6 @@ class Creme:
     disk_wipe = True
     end_point_dos = True
 
-    # data_theft = True
-    # rootkit_ransomware = True
 
     models_name = ["decision_tree", "naive_bayes", "extra_tree", "knn", "random_forest", "XGBoost"]
 
@@ -27,10 +25,6 @@ class Creme:
     def __init__(self, dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients,
                  attacker_server, malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos,
                  skip_configuration, skip_reproduction, skip_data_processing, skip_ML_training, skip_evaluation):
-    # def __init__(self, dls, target_server, benign_server, vulnerable_clients, non_vulnerable_clients,
-    #              attacker_server, malicious_client, mirai, ransomware, resource_hijacking, disk_wipe, end_point_dos,
-    #              data_theft, rootkit_ransomware, skip_configuration, skip_reproduction, skip_data_processing,
-    #              skip_ML_training, skip_evaluation):
 
         # self.stage = 0
         # self.status = 1
@@ -58,8 +52,7 @@ class Creme:
         Creme.resource_hijacking = resource_hijacking
         Creme.disk_wipe = disk_wipe
         Creme.end_point_dos = end_point_dos
-        # Creme.data_theft = data_theft
-        # Creme.rootkit_ransomware = rootkit_ransomware
+        
 
         # Skip 
         Creme.skip_configuration = skip_configuration
@@ -533,70 +526,6 @@ class Creme:
         ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished Step 7 - T1499 End Point Denial of Service",
                                     5, finished_task=True, override_pre_message=True, finished_stage=True)
 
-    # def attack_data_theft(self):
-    #     ProgressHelper.update_scenario("Data_Theft")
-    #     self.attacker_server.data_theft_start_metasploit()
-    #
-    #     stage = 2
-    #     ProgressHelper.update_stage(stage,
-    #                                 f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
-    #                                 5, new_stage=True)
-    #     self.attacker_server.data_theft_first_stage()
-    #     ProgressHelper.update_stage(stage,
-    #                                 f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
-    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
-    #
-    #     #stage += 1
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
-    #                                 5, new_stage=True)
-    #     self.attacker_server.data_theft_second_stage()
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
-    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
-    #
-    #     #stage += 1
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 07_data_theft",
-    #                                 5, new_stage=True)
-    #     self.attacker_server.data_theft_third_stage()
-    #     # wait and record timestamp
-    #     timestamp_folder = os.path.join("CREME_backend_execution", "logs", "07_data_theft", "times")
-    #     timestamp_file = "time_stage_3_end.txt"
-    #     OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-    #                                timestamp_file=timestamp_file)
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 07_data_theft",
-    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
-    #
-    # def attack_rootkit_ransomware(self):
-    #     ProgressHelper.update_scenario("Rootkit_Ransomware")
-    #     self.attacker_server.rootkit_ransomware_start_metasploit()
-    #
-    #     stage = 2
-    #     ProgressHelper.update_stage(stage,
-    #                                 f"{self.attacker_server.hostname} is exploiting rails_secret_deserialization",
-    #                                 5, new_stage=True)
-    #     self.attacker_server.rootkit_ransomware_first_stage()
-    #     ProgressHelper.update_stage(stage,
-    #                                 f"{self.attacker_server.hostname} finished exploiting rails_secret_deserialization",
-    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
-    #
-    #     #stage += 1
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing service_persistence",
-    #                                 5, new_stage=True)
-    #     self.attacker_server.rootkit_ransomware_second_stage()
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing service_persistence",
-    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
-    #
-    #     #stage += 1
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} is executing 08_rootkit_ransomware",
-    #                                 5, new_stage=True)
-    #     self.attacker_server.rootkit_ransomware_third_stage()
-    #     # wait and record timestamp
-    #     timestamp_folder = os.path.join("CREME_backend_execution", "logs", "08_rootkit_ransomware", "times")
-    #     timestamp_file = "time_stage_3_end.txt"
-    #     OtherHelper.wait_finishing(sleep_time=90, record_time=True, folder=timestamp_folder,
-    #                                timestamp_file=timestamp_file)
-    #     ProgressHelper.update_stage(stage, f"{self.attacker_server.hostname} finished executing 08_rootkit_ransomware",
-    #                                 5, finished_task=True, override_pre_message=True, finished_stage=True)
-
     # ---------- download data to controller ----------
     def download_data_to_controller(self, scenario_log_folder, time_filenames=[], other_files_flag=False,
                                     local_folders=[], remote_files=[]):
@@ -833,57 +762,7 @@ class Creme:
         self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
         self.download_data_to_controller(scenario, time_filenames=file_names)
 
-    # def run_data_theft(self):
-    #     scenario = "07_data_theft"
-    #     #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
-    #     # (Non-App Layer Protocol)","Attack Phase 3</br>(Exfiltration Over C2 Channel)")
-    #     ProgressHelper.update_scenario(scenario)
-    #     #ProgressHelper.update_attack_phase_data(attack_phases_name)
-    #
-    #     # restart the rsyslog at data logger server
-    #     self.restart_rsyslog_service()
-    #
-    #     self.start_reproduce_benign_behavior()
-    #     self.start_collect_data()
-    #     self.attack_data_theft()
-    #     self.stop_collect_data()
-    #     self.stop_reproduce_benign_behavior()
-    #     self.clean_data_collection()
-    #     self.attacker_server.clean_data_theft()
-    #     self.target_server.clean_data_theft()
-    #
-    #     # change later
-    #     self.centralize_data()
-    #     file_names = ["time_stage_1_start.txt", "time_stage_1_end.txt", "time_stage_2_start.txt",
-    #                   "time_stage_2_end.txt", "time_stage_3_start.txt"]
-    #     self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
-    #     self.download_data_to_controller(scenario, time_filenames=file_names)
-    #
-    # def run_rootkit_ransomware(self):
-    #     scenario = "08_rootkit_ransomware"
-    #     #attack_phases_name = ("Attack Phase 1<br>(Exploit Public Application)", "Attack Phase 2</br>
-    #     # (Non-App Layer Protocol)","Attack Phase 3</br>(Data Encrypted)")
-    #     ProgressHelper.update_scenario(scenario)
-    #     #ProgressHelper.update_attack_phase_data(attack_phases_name)
-    #
-    #     # restart the rsyslog at data logger server
-    #     self.restart_rsyslog_service()
-    #
-    #     self.start_reproduce_benign_behavior()
-    #     self.start_collect_data()
-    #     self.attack_rootkit_ransomware()
-    #     self.stop_collect_data()
-    #     self.stop_reproduce_benign_behavior()
-    #     self.clean_data_collection()
-    #     self.attacker_server.clean_rootkit_ransomware()
-    #     self.target_server.clean_rootkit_ransomware()
-    #
-    #     # change later
-    #     self.centralize_data()
-    #     file_names = ["time_stage_1_start.txt", "time_stage_1_end.txt", "time_stage_2_start.txt",
-    #                   "time_stage_2_end.txt", "time_stage_3_start.txt"]
-    #     self.centralize_time_files(remote_machine=self.attacker_server, time_files=file_names)
-    #     self.download_data_to_controller(scenario, time_filenames=file_names)
+    
 
     # ---------- process data ----------
     def process_data_mirai(self, log_folder):
@@ -1041,37 +920,6 @@ class Creme:
         return labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactic_names, \
             technique_names, sub_technique_names
 
-    # def process_data_data_theft(self, log_folder):
-    #     """
-    #     this function use to create labeling_file that contain information to label accounting and traffic data for
-    #     Data_Theft attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to process and
-    #     label syslog.
-    #     If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
-    #     """
-    #     labels = [1, 1, 1]  # only for syslog
-    #     tactic_names = ['Initial Access', 'Command and Control', 'Exfiltration']
-    #     technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
-    #                        'Exfiltration Over C2 Channel']
-    #     sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol',
-    #                            'Exfiltration Over C2 Channel']
-
-    #     return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-    #                                               sub_technique_names)
-
-    # def process_data_rootkit_ransomware(self, log_folder):
-    #     """
-    #     this function use to create labeling_file that contain information to label accounting and traffic data for
-    #     Rootkit_Ransomware attack scenario, also return abnormal_hostnames, normal_hostnames, timestamps_syslog to
-    #     process and label syslog.
-    #     If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
-    #     """
-    #     labels = [1, 1, 1]  # only for syslog
-    #     tactic_names = ['Initial Access', 'Command and Control', 'Impact']
-    #     technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-    #     sub_technique_names = ['Exploit Public-Facing Application', 'Non-Application Layer Protocol', 'Data Encrypted']
-
-    #     return self.process_data_general_scenario(log_folder, labels, tactic_names, technique_names,
-    #                                               sub_technique_names)
 
     def process_data(self):
         stage = 3
@@ -1264,67 +1112,7 @@ class Creme:
             ProgressHelper.update_stage(stage, f"Finished processing the data of 05_end_point_dos scenario", 5,
                                         finished_task=True, override_pre_message=True)
 
-        # if Creme.data_theft:
-        #     ProgressHelper.update_stage(stage, f"Processing the data of Data_Theft scenario", 5)
-
-        #     scenario = "07_data_theft"
-        #     log_folder_data_theft = os.path.join(log_folder, scenario)
-        #     labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactics,\
-        #         techniques, sub_techniques = self.process_data_data_theft(log_folder_data_theft)
-        #     accounting_folder = "accounting"
-        #     traffic_file = os.path.join("traffic", self.dls.tcp_file)
-        #     information = [labeling_file_path, log_folder_data_theft, accounting_folder, traffic_file]
-
-        #     big_list.append(information)
-        #     traffic_files.append("label_traffic_data_theft.csv")
-        #     atop_files.append("label_atop_data_theft.csv")
-
-        #     # syslog
-        #     syslog_file = os.path.join(log_folder_data_theft, "syslog")
-        #     syslog_file = os.path.join(syslog_file, "dataset_generation.log")
-        #     input_files.append(syslog_file)
-        #     scenarios_timestamps.append(timestamps_syslog)
-        #     scenarios_abnormal_hostnames.append(abnormal_hostnames)
-        #     scenarios_normal_hostnames.append(normal_hostnames)
-
-        #     scenarios_labels.append(labels)
-        #     scenarios_tactics.append(tactics)
-        #     scenarios_techniques.append(techniques)
-        #     scenarios_sub_techniques.append(sub_techniques)
-
-        #     ProgressHelper.update_stage(stage, f"Finished processing the data of 07_data_theft scenario", 5,
-        #                                 finished_task=True, override_pre_message=True)
-
-        # if Creme.rootkit_ransomware:
-        #     ProgressHelper.update_stage(stage, f"Processing the data of Rootkit_Ransomware scenario", 5)
-
-        #     scenario = "08_rootkit_ransomware"
-        #     log_folder_rootkit_ransomware = os.path.join(log_folder, scenario)
-        #     labeling_file_path, timestamps_syslog, abnormal_hostnames, normal_hostnames, labels, tactics,\
-        #         techniques, sub_techniques = self.process_data_rootkit_ransomware(log_folder_rootkit_ransomware)
-        #     accounting_folder = "accounting"
-        #     traffic_file = os.path.join("traffic", self.dls.tcp_file)
-        #     information = [labeling_file_path, log_folder_rootkit_ransomware, accounting_folder, traffic_file]
-
-        #     big_list.append(information)
-        #     traffic_files.append("label_traffic_rootkit_ransomware.csv")
-        #     atop_files.append("label_atop_rootkit_ransomware.csv")
-
-        #     # syslog
-        #     syslog_file = os.path.join(log_folder_rootkit_ransomware, "syslog")
-        #     syslog_file = os.path.join(syslog_file, "dataset_generation.log")
-        #     input_files.append(syslog_file)
-        #     scenarios_timestamps.append(timestamps_syslog)
-        #     scenarios_abnormal_hostnames.append(abnormal_hostnames)
-        #     scenarios_normal_hostnames.append(normal_hostnames)
-
-        #     scenarios_labels.append(labels)
-        #     scenarios_tactics.append(tactics)
-        #     scenarios_techniques.append(techniques)
-        #     scenarios_sub_techniques.append(sub_techniques)
-
-        #     ProgressHelper.update_stage(stage, f"Finished processing the data of 08_rootkit_ransomware scenario", 5,
-        #                                 finished_task=True, override_pre_message=True)
+        
 
         ProgressHelper.update_stage(stage, f"Processing the accounting and network packet data sources", 5)
         folder_traffic = os.path.join(log_folder, "label_traffic")
@@ -1438,13 +1226,7 @@ class Creme:
         if Creme.end_point_dos:
             attack_scenarios.append("End Point Dos")
             attack_types.extend(["vulnerability", "privilege_escalation", "backdoor", "05_end_point_dos"])
-        # if Creme.data_theft:
-        #     attack_scenarios.append("07_data_theft")
-        #     attack_types.extend(["vulnerability", "backdoor", "exfiltration"])
-        # if Creme.run_rootkit_ransomware:
-        #     attack_scenarios.append("run_rootkit_ransomware")
-        #     attack_types.extend(["vulnerability", "backdoor", "rootkit", "03_ransomware"])
-
+        
         return attack_scenarios, attack_types
 
     def coverage_evaluation(self, cov_result):
@@ -1483,10 +1265,7 @@ class Creme:
                 self.run_resource_hijacking()
             if Creme.end_point_dos:
                 self.run_end_point_dos()
-            # if Creme.data_theft:
-            #     self.run_data_theft()
-            # if Creme.rootkit_ransomware:
-            #     self.run_rootkit_ransomware()
+
         # process data
         if not Creme.skip_data_processing:
             data_sources = self.process_data()

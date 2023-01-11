@@ -37,7 +37,8 @@ def main(argv):
         # shell.write('useradd -p $(openssl passwd -1 password) test') # cremetest:password
         shell.write('useradd -p $(openssl passwd -1 {0}) {1}'.format(new_user_password, new_user_account))
     
-    except:
+    except Exception as e:
+        print(e)
         pass
     
     

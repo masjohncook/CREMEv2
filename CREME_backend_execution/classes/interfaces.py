@@ -305,41 +305,6 @@ class IEndPointDosAttackerServer(Interface):
     def end_point_dos_seventh_step(self):
         pass
 
-
-# class IDataTheftAttackerServer(Interface):
-#     """
-#     defining actions of Data Theft attack for the attacker server
-#     """
-#     def data_theft_start_metasploit(self):
-#         pass
-#
-#     def data_theft_first_stage(self):
-#         pass
-# 
-#     def data_theft_second_stage(self):
-#         pass
-#
-#     def data_theft_third_stage(self):
-#         pass
-
-
-# class IRootkitRansomwareAttackerServer(Interface):
-#     """
-#     defining actions of Rootkit Ransomware attack for the attacker server
-#     """
-#     def rootkit_ransomware_start_metasploit(self):
-#         pass
-#
-#     def rootkit_ransomware_first_stage(self):
-#         pass
-#
-#     def rootkit_ransomware_second_stage(self):
-#         pass
-# 
-#     def rootkit_ransomware_third_stage(self):
-#         pass
-
-
 # ---------- process cleaning ----------
 class ICleaningBenignReproduction(Interface):
     """
@@ -361,9 +326,6 @@ class ICleaningAttackReproduction(Interface):
     def clean_disk_wipe(self):
         pass
 
-    # def clean_data_theft(self):
-    #     pass
-    #
     def clean_ransomware(self):
         pass
 
@@ -373,9 +335,7 @@ class ICleaningAttackReproduction(Interface):
     def clean_end_point_dos(self):
         pass
 
-    # def clean_rootkit_ransomware(self):
-    #     pass
-
+    
 
 class ICleaningDataCollection(Interface):
     """

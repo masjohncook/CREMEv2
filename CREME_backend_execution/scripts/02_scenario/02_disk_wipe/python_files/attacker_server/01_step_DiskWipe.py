@@ -22,12 +22,15 @@ def main(argv):
     record_timestamp(folder, output_time_file_start)
     time.sleep(60)
     
+    try:
+        # put the attack launch command
+        nm = nmap.PortScanner()
+        nm.scan(hosts=target_ip, arguments='-O -A -p 0-65535')
+
+    except Exception as e:
+        print(e)
+        pass
     
-    # put the attack launch command
-    nm = nmap.PortScanner()
-    nm.scan(hosts=target_ip, arguments='-O -A -p 0-65535')
-
-
     time.sleep(30)
     output_time_file_end = 'time_step_1_end.txt'
     record_timestamp(folder, output_time_file_end)
