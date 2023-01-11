@@ -6,3 +6,7 @@
 !/03_ransomware
 !/04_resource_hijacking
 !/05_end_point_dos
+!/label_accounting
+!/label_syslog
+!/label_traffic
+
