@@ -970,7 +970,7 @@ class ProcessDataHelper:
 
     # ----- Balance data and Filter features -----
     @staticmethod
-    def balance_data(folder: str, input_file: str, sample_num=50000):
+    def balance_data(folder: str, input_file: str, max_threshold=50000, min_threshold=20):
         """
         data cleaning for each class
         """
@@ -979,15 +979,14 @@ class ProcessDataHelper:
         
         # data cleaning
         for label in df['Label'].unique():
-            if len(df[df['Label'] == label]) > sample_num:
+            if len(df[df['Label'] == label]) > max_threshold:
                 df_tmp = df.loc[df['Label'] == label].copy()
-                df_tmp = df_tmp.sample(n=sample_num, random_state=47)
+                df_tmp = df_tmp.sample(n=max_threshold, random_state=47)
                 df.drop(df[df['Label'] == label].index, inplace=True)
                 df = pd.concat([df, df_tmp])
         
-        for class_label in df['Label'].unique():
-            while len(df[df['Label'] == class_label]) < 20:
-                tmp_df = df[df['Label'] == class_label]
+            while len(df[df['Label'] == label]) < min_threshold:
+                tmp_df = df[df['Label'] == label]
                 df = pd.concat([df, tmp_df])
 
         df.to_csv(os.path.join(folder, input_file), encoding='utf-8', index=False)
