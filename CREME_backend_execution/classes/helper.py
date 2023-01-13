@@ -319,14 +319,14 @@ class ProcessDataHelper:
         return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
 
     @staticmethod
-    def get_labels_info(table_path, labels):
+    def get_labels_info(path_labels_technique, labels):
         """
         get label informations from labels_table.json
         """
         tactic_names = []
         technique_names = []
         sub_technique_names = []
-        with open(table_path, "r") as f:
+        with open(path_labels_technique, "r") as f:
             data = json.load(f)
             for i in range(len(labels)):
                 tactic_names.append(data[labels[i]][1])
@@ -1053,6 +1053,32 @@ class ProcessDataHelper:
         with open(syslog_file, 'a') as fa:
             for line in new_lines:
                 fa.write("{}\n".format(line))
+    
+    @staticmethod
+    def get_lifecycle(path_labels_lifecycle, traffic_files, atop_files, log_files,
+                      folder_traffic, folder_atop, result_path_syslog, log_folder, final_name_lifecycle):
+        '''
+        this function is used to collect lifecycle(technique sequences) from 3 data sources
+        '''
+        df = pd.DataFrame(columns=['lifecycle', 'Label'])
+        with open(path_labels_lifecycle, "r") as f:
+            data = json.load(f)
+            for i in range(len(data)):
+                lifecyele_name = data[i][1]
+                label = data[i][0]
+                filename_list = [traffic_files, atop_files, log_files]
+                folder_list = [folder_traffic, folder_atop, result_path_syslog]
+            
+                for i in range(3):
+                    for file_name in filename_list[i]:
+                        if lifecyele_name in file_name:
+                            df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
+                            df_tmp['Label'] = df_tmp['Label'].astype(str)
+                            tmp = df_tmp['Label'].str.cat()
+                            new_row = pd.DataFrame({'lifecycle': tmp, 'Label': label}, index = [0])
+                            df = pd.concat([df, new_row], ignore_index=True) 
+
+        df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 
 
 class TrainMLHelper:

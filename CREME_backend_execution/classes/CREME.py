@@ -34,8 +34,9 @@ class Creme:
         # self.finishedStageList = []
         # Helper.clearProgressData()
 
-        # labels_table.json path
-        self.table_path = os.path.join("labels_table.json")
+        # tables path definition
+        self.path_labels_technique = os.path.join("labels_technique.json")
+        self.path_labels_lifecycle = os.path.join("labels_lifecycle.json")
 
         # Machines
         self.dls = dls
@@ -773,7 +774,7 @@ class Creme:
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques
         """
         labels = [1, 2, 3, 5, 9, 11, 12, 13]
-        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.path_labels_technique, labels)
 
         folder_times = os.path.join(log_folder, "times")
         timestamps = ProcessDataHelper.get_time_stamps_mirai(folder_times, self.attacker_server.DDoS_duration, len(labels))
@@ -807,7 +808,7 @@ class Creme:
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 2, 4, 6, 8, 14]
-        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.path_labels_technique, labels)
         
         folder_times = os.path.join(log_folder, "times")
         timestamps = ProcessDataHelper.get_time_stamps(folder_times, len(labels))
@@ -835,7 +836,7 @@ class Creme:
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 2, 4, 6, 7, 12, 15]
-        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.path_labels_technique, labels)
 
 
         folder_times = os.path.join(log_folder, "times")
@@ -864,7 +865,7 @@ class Creme:
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 2, 4, 6, 8, 16]
-        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.path_labels_technique, labels)
 
 
         folder_times = os.path.join(log_folder, "times")
@@ -893,7 +894,7 @@ class Creme:
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
         labels = [1, 2, 4, 8, 10, 12, 17]
-        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.table_path, labels)
+        tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.path_labels_technique, labels)
 
 
         folder_times = os.path.join(log_folder, "times")
@@ -1128,8 +1129,8 @@ class Creme:
         # ProcessDataHelper.balance_data(folder_traffic, final_name_traffic)
         # ProcessDataHelper.filter_features(folder_atop, final_name_atop)
         # ProcessDataHelper.filter_features(folder_traffic, final_name_traffic)
-        # ProgressHelper.update_stage(stage, f"Finished processing the accounting and network packet data sources", 5,
-        #                             finished_task=True, override_pre_message=True)
+        ProgressHelper.update_stage(stage, f"Finished processing the accounting and network packet data sources", 5,
+                                    finished_task=True, override_pre_message=True)
 
         ProgressHelper.update_stage(stage, f"Processing the syslog data source", 5)
         dls_hostname = self.dls.hostname
@@ -1142,6 +1143,14 @@ class Creme:
         # filter features
         ProcessDataHelper.filter_features(result_path_syslog, final_name_syslog)
         ProgressHelper.update_stage(stage, f"Finished processing the syslog data source", 5,
+                                    finished_task=True, override_pre_message=True)
+
+        # collect lifecycle data
+        ProgressHelper.update_stage(stage, f"Collecting the lifecycle data", 5)
+        final_name_lifecycle = 'label_lifecycle.csv'
+        ProcessDataHelper.get_lifecycle(self.path_labels_lifecycle, traffic_files, atop_files, log_files,
+                                        folder_traffic, folder_atop, result_path_syslog, log_folder, final_name_lifecycle)
+        ProgressHelper.update_stage(stage, f"Finished collecting the lifecycle data", 5,
                                     finished_task=True, override_pre_message=True, finished_stage=True)
 
         data_sources = []
