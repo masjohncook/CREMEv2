@@ -14,14 +14,12 @@ set controller_path [lindex $argv 11]
 
 set startatop_file "startatop.sh"
 
-set timeout 900
+set timeout 1200
 
 # SSH connection
 spawn /bin/bash $delKnownHosts
 send "exit\r"
-
 spawn ssh $username@$client
-
 expect "*continue connecting (yes/no*)? "
 send "yes\r"
 expect " password: "
@@ -29,6 +27,10 @@ send "$password\r"
 
 expect "*:~# "
 send "rm $folder/$atop_file \r"
+expect "*:~# "
+
+#install gawk
+send "sudo apt install -y gawk\r"
 
 expect "*:~# "
 send "rm ~/.ssh/known_hosts\r"
@@ -42,12 +44,12 @@ send "$controller_password\r"
 expect "*:~# "
 send "chmod +x $folder/$startatop_file \r"
 expect "*:~# "
-send "nohup $folder/./$startatop_file $folder $atop_file $interval &\r"
+send "nohup $folder/$startatop_file $folder $atop_file $interval &\r"
 expect "output to 'nohup.out'"
 send "\r"
 
 expect "*:~# "
-send "ps -ef | grep './$startatop_file' | awk '{print \$2}' > $folder/$atop_pids_file\r"
+send "ps -ef | grep 'atop' | awk '{print \$2}' > $folder/$atop_pids_file\r"
 
 #expect "*:~# "
 #send "ps -ef | grep 'atop -a -w $folder' | awk '{print \$2}' >> $folder/$atop_pids_file\r"

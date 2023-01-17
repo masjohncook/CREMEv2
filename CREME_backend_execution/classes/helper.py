@@ -6,6 +6,7 @@ from dateutil.parser import parse
 from CREMEapplication.models import ProgressData
 from . import Drain
 import csv
+from sklearn.metrics import f1_score, precision_score, recall_score, make_scorer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import ExtraTreeClassifier
@@ -13,9 +14,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
 from sklearn import preprocessing
-from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import cross_validate
-from sklearn.feature_selection import RFECV
+from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.feature_selection import RFECV, VarianceThreshold
 import matplotlib.pyplot as plt
 import socket
 import time
@@ -310,7 +310,7 @@ class ProcessDataHelper:
         force_abnormal_cmd_list = []
         for i in range(lifecycle_len):
             src_ips.append(src_ip)
-            des_ips.append(src_ip)
+            des_ips.append(des_ip)
             normal_ips.append(normal_ip)
             normal_hostnames.append(normal_hostname)
             abnormal_hostnames.append(abnormal_hostname)
@@ -319,14 +319,14 @@ class ProcessDataHelper:
         return src_ips, des_ips, normal_ips, normal_hostnames, abnormal_hostnames, pattern_normal_cmd_list, force_abnormal_cmd_list
 
     @staticmethod
-    def get_labels_info(table_path, labels):
+    def get_labels_info(path_labels_technique, labels):
         """
         get label informations from labels_table.json
         """
         tactic_names = []
         technique_names = []
         sub_technique_names = []
-        with open(table_path, "r") as f:
+        with open(path_labels_technique, "r") as f:
             data = json.load(f)
             for i in range(len(labels)):
                 tactic_names.append(data[labels[i]][1])
@@ -516,8 +516,8 @@ class ProcessDataHelper:
 
         one_hot_fields = ['Flgs', 'Proto', 'State']
         # fields_with_hex_value = ['Sport', 'Dport']
-        removed_fields = ['Rank', 'StartTime', 'SrcAddr', 'DstAddr', 'LastTime', 'Tactic', 'Technique', 'SubTechnique']
-        # removed_fields = ['Rank', 'StartTime', 'SrcAddr', 'DstAddr', 'LastTime']
+        removed_fields = ['Rank', 'SrcAddr', 'DstAddr', 'Tactic', 'Technique', 'SubTechnique']
+        # removed_fields = ['Rank', 'StartTime', 'SrcAddr', 'DstAddr', 'LastTime', 'Tactic', 'Technique', 'SubTechnique']
         replace_strings = dict()
         remove_rows_with_str = dict()
         """
@@ -551,7 +551,7 @@ class ProcessDataHelper:
         # print(df.columns.values)
 
         # print(len(df))
-        # df.drop_duplicates(keep=False, inplace=True)
+        df.drop_duplicates(keep=False, inplace=True)
         # print(len(df))
 
         for field in removed_fields:
@@ -596,8 +596,8 @@ class ProcessDataHelper:
         # test_filename='UNSW_NB15_testing-set.csv'
 
         one_hot_fields = ['POLI', 'ST', 'EXC', 'S']
-        removed_fields = ['TIMESTAMP', 'PID', 'CMD', 'Hostname', 'Tactic', 'Technique', 'SubTechnique']
-        # removed_fields = ['TIMESTAMP', 'PID', 'CMD', 'Hostname']
+        removed_fields = ['PID', 'CMD', 'Hostname', 'Tactic', 'Technique', 'SubTechnique']
+        # removed_fields = ['TIMESTAMP', 'PID', 'CMD', 'Hostname', 'Tactic', 'Technique', 'SubTechnique']
         replace_strings = {'%': '', 'K': '000', 'M': '000000', 'G': '000000000'}
         remove_rows_with_str = {'-': '0'}
         """
@@ -779,8 +779,6 @@ class ProcessDataHelper:
 
     @staticmethod
     def label_filtered_syslog(df, timestamps, white_list, labels, tactics, techniques, sub_techniques):
-        # print('Begin label 0: {0}'.format(len(df[df['Label'] == 0])))
-        # print('Begin label 1: {0}'.format(len(df[df['Label'] == 1])))
         for i in range(len(labels)):
             t_start = float(timestamps[i*2])
             t_end = float(timestamps[i*2+1])
@@ -846,13 +844,12 @@ class ProcessDataHelper:
                     if classes_num[key] > max_num:
                         max_num = classes_num[key]
                         max_label = key
+                        
+                sum_one_hot = pd.DataFrame(sum_one_hot).transpose()
                 sum_one_hot['Label'] = max_label
-                sum_one_hot['Timestamp'] = tmp_timestamp
-                df_count_vector = pd.concat([df_count_vector, sum_one_hot.transpose()], ignore_index=True)
-
-        # df_count_vector.loc[df_count_vector['Label'] > 0, 'Label'] = 1
-        # all_df_count_vector = all_df_count_vector.append(df_count_vector)
-
+                sum_one_hot['Timestamp'] = tmp_timestamp            
+                df_count_vector = pd.concat([df_count_vector, sum_one_hot], ignore_index=True)
+  
         # try to save results
         try:
             full_output_file = os.path.join(folder, output_file)
@@ -864,7 +861,7 @@ class ProcessDataHelper:
     @staticmethod
     def handle_syslog(input_files, scenarios_timestamps, scenarios_abnormal_hostnames, scenarios_normal_hostnames,
                       scenarios_labels, scenarios_tactics, scenarios_techniques, scenarios_sub_techniques, dls_hostname,
-                      result_path, output_file):
+                      result_path, output_file, log_files):
         filtered_lines = []
         filtered_lines_apache = []
         remove_files = []
@@ -951,9 +948,13 @@ class ProcessDataHelper:
             # label
             ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, labels, tactics,
                                                     techniques, sub_techniques)
-            # print('label 0: {0}'.format(len(df[df['Label'] == 0])))
-            # print('label 1: {0}'.format(len(df[df['Label'] == 1])))
-            # print('\n')
+
+        # parsing log files for each scenario
+        for i, file_name_scenario in enumerate(log_files):
+            stage_timestamps = scenarios_timestamps[i]
+            df_parsed = df[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1])]
+            path_scenario = os.path.join(result_path, file_name_scenario)
+            df_parsed.to_csv(path_scenario, encoding='utf-8', index=False)
 
         del df['ComponentEventId']
         tmp_output = "{0}_{1}".format("original", output_file)
@@ -969,60 +970,58 @@ class ProcessDataHelper:
 
     # ----- Balance data and Filter features -----
     @staticmethod
-    def balance_data(folder: str, input_file: str, balanced_label_zero=True):
+    def balance_data(folder: str, input_file: str, max_threshold=50000, min_threshold=20):
         """
-        use to balance the label 0 and label 1 data in folder/input_file,
-        store the balanced data to a output file and return that file name
+        data cleaning for each class
         """
         df = pd.read_csv(os.path.join(folder, input_file))
-
-        # print(len(df.columns.values))
-
-        df_0 = df[df['Label'] == 0]
-        df_1 = df[df['Label'] == 1]
-        # print('len(df): {0}'.format(len(df)))
-        # print('label_0: {0}'.format(len(df_0)))
-        # print('label_1: {0}'.format(len(df_1)))
+        df.drop_duplicates(keep=False, inplace=True)
         
-        if balanced_label_zero:
-            df_0.drop_duplicates(keep='last', inplace=True)
-            num_of_label_0 = len(df_0)
-            num_of_label_1 = len(df_1)
-            new_df_0 = pd.DataFrame()
-            for i in range(num_of_label_1//num_of_label_0 + 1):
-                new_df_0 = new_df_0.append(df_0)
-            df = new_df_0.append(df_1)
-            
-        else:
-            df_0.drop_duplicates(keep='last', inplace=True)
-            num_of_label_0 = len(df_0)
-            num_of_label_1 = len(df_1)
-            if "traffic" in input_file:
-                ind = df_0[(df_0['Sum'] == 0.0) | (df_0['Min'] == 0.0) | (df_0['Max'] == 0.0)].index
-                df_0.drop(ind, inplace=True)
-            df = df_1.append(df_0)
+        # data cleaning
+        for label in df['Label'].unique():
+            if len(df[df['Label'] == label]) > max_threshold:
+                df_tmp = df.loc[df['Label'] == label].copy()
+                df_tmp = df_tmp.sample(n=max_threshold, random_state=47)
+                df.drop(df[df['Label'] == label].index, inplace=True)
+                df = pd.concat([df, df_tmp])
+        
+            while len(df[df['Label'] == label]) < min_threshold:
+                tmp_df = df[df['Label'] == label]
+                df = pd.concat([df, tmp_df])
 
         df.to_csv(os.path.join(folder, input_file), encoding='utf-8', index=False)
 
     @staticmethod
-    def filter_features(folder: str, filename: str, corr_threshold=0.1, label_field="Label"):
+    def filter_features(folder: str, filename: str, corr_threshold=0.9):
         """
         use to filter/remove features have correlation with Label less then the corr_threshold
         in the folder/filename
         """
         df = pd.read_csv(os.path.join(folder, filename))
 
-        # drop space character at the end of feature's name
-        column_names = df.columns.values
-        for i in range(len(column_names)):
-            column_names[i] = column_names[i].strip()
-        df.columns = column_names
+        y_tmp = df['Label']
+        # delete features with all the same value
+        df.drop('Label', axis=1, inplace=True)
+        selector = VarianceThreshold(threshold=0)
+        selector.fit(df)
+        print(selector.variances_)
+        constant_columns = [column for column in df.columns
+                            if column not in 
+                            df.columns[selector.get_support()]]
+        df.drop(labels=constant_columns, axis=1, inplace=True)
 
-        test = df.corr()
-        removed_features = test.index[abs(test[label_field]) < corr_threshold].tolist()
+        # delete similar features
+        df_tmp = df
+        corr_features = set()
+        corr_matrix = df_tmp.corr()
+        for i in range(len(corr_matrix.columns)):
+            for j in range(i):
+                if abs(corr_matrix.iloc[i, j]) > corr_threshold:
+                    colname = corr_matrix.columns[i]
+                    corr_features.add(colname)
+        df.drop(labels=corr_features, axis=1, inplace=True)
 
-        # update features and re-save the file
-        df.drop(removed_features, axis=1, inplace=True)
+        df = pd.concat([df, y_tmp], axis=1)
         df.to_csv(os.path.join(folder, filename), encoding='utf-8', index=False)
 
     @staticmethod
@@ -1054,6 +1053,32 @@ class ProcessDataHelper:
         with open(syslog_file, 'a') as fa:
             for line in new_lines:
                 fa.write("{}\n".format(line))
+    
+    @staticmethod
+    def get_lifecycle(path_labels_lifecycle, traffic_files, atop_files, log_files,
+                      folder_traffic, folder_atop, result_path_syslog, log_folder, final_name_lifecycle):
+        '''
+        this function is used to collect lifecycle(technique sequences) from 3 data sources
+        '''
+        df = pd.DataFrame(columns=['lifecycle', 'Label'])
+        with open(path_labels_lifecycle, "r") as f:
+            data = json.load(f)
+            for i in range(len(data)):
+                lifecyele_name = data[i][1]
+                label = data[i][0]
+                filename_list = [traffic_files, atop_files, log_files]
+                folder_list = [folder_traffic, folder_atop, result_path_syslog]
+            
+                for i in range(3):
+                    for file_name in filename_list[i]:
+                        if lifecyele_name in file_name:
+                            df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
+                            df_tmp['Label'] = df_tmp['Label'].astype(str)
+                            tmp = df_tmp['Label'].str.cat()
+                            new_row = pd.DataFrame({'lifecycle': tmp, 'Label': label}, index = [0])
+                            df = pd.concat([df, new_row], ignore_index=True) 
+
+        df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 
 
 class TrainMLHelper:
@@ -1079,7 +1104,12 @@ class TrainMLHelper:
             if 'random_forest' in models_name:
                 models['random_forest'] = RandomForestClassifier(n_jobs=-1, random_state=1)
             if 'XGBoost' in models_name:
-                models['XGBoost'] = XGBClassifier(n_jobs=-1, random_state=1)
+                models['XGBoost'] = XGBClassifier(
+                    n_jobs=-1, 
+                    random_state=1, 
+                    # use_label_encoder=False, 
+                    # eval_metric='merror'
+                )
             # print('Defined %d models' % len(models))
             return models
 
@@ -1088,10 +1118,12 @@ class TrainMLHelper:
 
         csv_output_file = 'accuracy_for_{0}.csv'.format(data_source)
         label_field = 'Label'
-
+        
         X = df.loc[:, df.columns != label_field]
         y = df.loc[:, df.columns == label_field]
-        # features_train = X.columns.values
+        y = y.values.flatten()
+        encoder = preprocessing.LabelEncoder()
+        y = encoder.fit_transform(y)
 
         if standard_scale:  # standard scale
             scaler = preprocessing.StandardScaler()
@@ -1104,9 +1136,14 @@ class TrainMLHelper:
         if num_of_folds < 2:
             num_of_folds = 5
         cv = StratifiedKFold(n_splits=num_of_folds, shuffle=True, random_state=1)
-        scoring = ['accuracy', 'f1', 'precision', 'recall']
+        scoring = {
+            'accuracy': 'accuracy',
+            'f1_weighted': make_scorer(f1_score, average='weighted', zero_division=0),
+            'precision': make_scorer(precision_score, average='weighted', zero_division=0),
+            'recall': make_scorer(recall_score, average='weighted', zero_division=0),
+        }
 
-        csv_columns = ['ML_algorithms', 'fit_time', 'score_time', 'test_accuracy', 'test_f1',
+        csv_columns = ['ML_algorithms', 'fit_time', 'score_time', 'test_accuracy', 'test_f1_weighted',
                        'test_precision', 'test_recall']
         csv_rows = []
 
@@ -1133,7 +1170,7 @@ class TrainMLHelper:
             # draw chart
             csv_file = os.path.join(output_folder, csv_output_file)
             df = pd.read_csv(csv_file)
-            ax = df.plot.barh(x='ML_algorithms', y=['test_accuracy', 'test_f1', 'test_precision', 'test_recall'],
+            ax = df.plot.barh(x='ML_algorithms', y=['test_accuracy', 'test_f1_weighted', 'test_precision', 'test_recall'],
                               width=0.8, figsize=(10, 10))
             ax.legend(bbox_to_anchor=(1.1, 1.1))
             for i in ax.patches:
@@ -1156,11 +1193,12 @@ class TrainMLHelper:
         df = pd.read_csv(filename)
 
         label_field = 'Label'
-
+        
         X = df.loc[:, df.columns != label_field]
         y = df.loc[:, df.columns == label_field]
-        # features_train = X.columns.values
-        # print(len(list(features_train)))
+        y = y.values.flatten()
+        encoder = preprocessing.LabelEncoder()
+        y = encoder.fit_transform(y)
 
         if standard_scale:  # standard scale
             scaler = preprocessing.StandardScaler()
@@ -1230,10 +1268,10 @@ class EvaluationHelper:
         grid_scores = rfecv.grid_scores_
         total_features = len(grid_scores)
         important_features = total_features
-        maximum = max(grid_scores)
+        maximum = max(grid_scores, key=lambda x:x[0])
         acceptable_accuracy = maximum - threshold
         for index, accuracy in enumerate(grid_scores):
-            if accuracy >= acceptable_accuracy:
+            if accuracy[0] >= acceptable_accuracy[0]:
                 important_features = index + 1
                 break
         return total_features, important_features

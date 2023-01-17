@@ -18,7 +18,7 @@ expect " password: "
 send "$password\r"
 
 expect "*:~# "
-send "python3 $path/03_step_EndPontDos.py $path $ip $target_server_ip\r"
+send "python3 $path/03_step_EndPointDos.py $path $ip $target_server_ip\r"
 
 expect "*:~# "
 send "exit\r"

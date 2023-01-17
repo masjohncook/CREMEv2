@@ -91,3 +91,6 @@ fabric.properties
 
 !/CREME_backend_execution/scripts/00_configuration/BenignClient/ConfigureFiles/certificates_192.168.56.181
 /run_vm.sh
+/.idea/CREMEv2.iml
+/.idea/csv-plugin.xml
+__pycache__/

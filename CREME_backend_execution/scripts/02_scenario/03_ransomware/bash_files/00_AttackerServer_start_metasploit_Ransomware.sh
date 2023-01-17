@@ -18,15 +18,21 @@ expect " password: "
 send "$password\r"
 
 ## Configure Postgresql
-expect "$path# "
-send "msfdb init \r"
+expect "*:~# "
+send "su attacker-server\r"
+expect "attacker-server@attacker-server:/root$ "
+send "msfdb start\r"
+expect "*: "
+send "no\r"
+expect "attacker-server@attacker-server:/root$ "
+send "exit\r"
 
 #start MSFRPCD
 expect "$path# "
 send "msfrpcd -P kali -S \r"
 
 expect "*:~# "
-send "ps -ef | grep 'msfrpcd' | awk '{print \$2}' > $path/$pids_file\r"
+send "ps -ef | grep 'msfrpcd' | awk 'NR == 1 {print \$2}' > $path/$pids_file\r"
 
 expect "*:~# "
 send "exit\r"

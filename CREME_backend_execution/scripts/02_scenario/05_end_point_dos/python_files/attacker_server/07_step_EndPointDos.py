@@ -11,27 +11,31 @@ def record_timestamp(folder, output_time_file):
 
 
 def main(argv):
-    if len(argv) != 4:
-        print("Usage: {} Folder local_ip target_ip".format(argv[0]))
-
     folder = argv[1]
     my_ip = argv[2]
     target_ip = argv[3]
 
-
-
+    # print(client.sessions.list['4'])
+    time.sleep(60)
+    
     time.sleep(2)
     output_time_file_start = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(2)
+    time.sleep(60)
+    
+    try:
+        change_mode = 'chmod +x local_slowloris.py'
+        launch_attack = 'timeout 60s ./local_slowloris &'
+        subprocess.run(change_mode.split(), stdout=subprocess.PIPE)
+        subprocess.run(launch_attack.split(), stdout=subprocess.PIPE)
+        
+        
+    except Exception as e:
+        print(e)
+        pass
 
-    change_mode = 'chmod +x local_slowloris.py'
-    launch_attack = 'timeout 60s ./local_slowloris &'
-    subprocess.run(change_mode.split(), stdout=subprocess.PIPE)
-    subprocess.run(launch_attack.split(), stdout=subprocess.PIPE)
 
-
-    time.sleep(30)
+    time.sleep(60)
 
 
 main(sys.argv)

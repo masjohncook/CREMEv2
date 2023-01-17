@@ -25,10 +25,6 @@ set timeout 60
 expect "*:~# "
 send "apt update\r"
 expect "*:~# "
-send "apt -y install ntp\r"
-expect "*:~# "
-send "apt -y install ntpdate\r"
-expect "*:~# "
 send "timedatectl set-timezone Asia/Taipei\r"
 
 # config new dns

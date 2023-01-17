@@ -27,7 +27,6 @@ set outputTimeFile [open $logs_path/$outputTime "w+"]
 puts $outputTimeFile $DATE
 close $outputTimeFile
 
-set timeout 120
 
 expect "*:~# "
 send "cat $path/$finishedPhaseFile\r"
