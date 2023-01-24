@@ -36,7 +36,7 @@ def main(argv):
     
     time.sleep(30)
     
-    client = MsfRpcClient('kali')
+    
     output_time_file_end = 'time_step_5_end.txt'
     record_timestamp(folder, output_time_file_end)
     time.sleep(60)

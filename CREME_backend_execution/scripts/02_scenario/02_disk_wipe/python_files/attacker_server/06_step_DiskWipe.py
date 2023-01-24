@@ -16,7 +16,7 @@ def main(argv):
     target_ip = argv[3]
     wipe_disk_folder = "/tmp"
 
-    
+    client = MsfRpcClient('kali')
 
     # start step 7
     output_time_file_start = 'time_step_6_start.txt'
