@@ -1123,7 +1123,8 @@ class Creme:
         time_window_traffic = self.dls.time_window_traffic  # second
         ProcessDataHelper.handle_accounting_packet_all_scenario(big_list, folder_traffic, traffic_files,
                                                                 final_name_traffic, folder_atop, atop_files,
-                                                                final_name_atop, time_window_traffic)
+                                                                final_name_atop, time_window_traffic,
+                                                                self.path_labels_lifecycle)
         # # balance data and filter features
         # ProcessDataHelper.balance_data(folder_atop, final_name_atop)
         # ProcessDataHelper.balance_data(folder_traffic, final_name_traffic)
@@ -1139,7 +1140,7 @@ class Creme:
         ProcessDataHelper.handle_syslog(input_files, scenarios_timestamps, scenarios_abnormal_hostnames,
                                         scenarios_normal_hostnames, scenarios_labels, scenarios_tactics,
                                         scenarios_techniques, scenarios_sub_techniques, dls_hostname,
-                                        result_path_syslog, final_name_syslog, log_files)
+                                        result_path_syslog, final_name_syslog, log_files, self.path_labels_lifecycle)
         # filter features
         ProcessDataHelper.filter_features(result_path_syslog, final_name_syslog)
         ProgressHelper.update_stage(stage, f"Finished processing the syslog data source", 5,
