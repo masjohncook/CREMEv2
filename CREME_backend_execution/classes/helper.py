@@ -1065,6 +1065,7 @@ class ProcessDataHelper:
         this function is used to collect lifecycle(technique sequences) from 3 data sources
         '''
         df = pd.DataFrame(columns=['lifecycle', 'Label'])
+        df['lifecycle'] = df['lifecycle'].astype('object')
         with open(path_labels_lifecycle, "r") as f:
             data = json.load(f)
             for i in range(len(data)):
@@ -1073,14 +1074,15 @@ class ProcessDataHelper:
                 filename_list = [traffic_files, atop_files, log_files]
                 folder_list = [folder_traffic, folder_atop, result_path_syslog]
             
-                for i in range(3):
-                    for file_name in filename_list[i]:
-                        if lifecyele_name in file_name:
-                            df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
-                            df_tmp['Label'] = df_tmp['Label'].astype(str)
-                            tmp = df_tmp['Label'].str.cat()
-                            new_row = pd.DataFrame({'lifecycle': tmp, 'Label': label}, index = [0])
-                            df = pd.concat([df, new_row], ignore_index=True) 
+        for i in range(3):
+            for file_name in filename_list[i]:
+                if lifecyele_name in file_name:
+                    df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
+                    tmp = df_tmp['Label'].tolist()
+                    new_row = pd.DataFrame(columns=['lifecycle', 'Label'])
+                    new_row.at[0, 'lifecycle'] = tmp
+                    new_row.at[0, 'Label'] = label
+                    df = pd.concat([df, new_row], ignore_index=True)
 
         df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 
