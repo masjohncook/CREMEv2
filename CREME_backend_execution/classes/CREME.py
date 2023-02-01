@@ -864,7 +864,7 @@ class Creme:
         process and label syslog.
         If technique and sub_technique are the same, it means that the technique doesn't have sub-techniques.
         """
-        labels = [1, 2, 4, 6, 8, 16]
+        labels = [1, 2, 4, 6, 8, 12, 16]
         tactic_names, technique_names, sub_technique_names = ProcessDataHelper.get_labels_info(self.path_labels_technique, labels)
 
 
