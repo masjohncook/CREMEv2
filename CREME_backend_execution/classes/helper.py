@@ -983,12 +983,21 @@ class ProcessDataHelper:
         
         # data cleaning
         for label in df['Label'].unique():
+            # if too much, try drop duplicated first
+            if len(df[df['Label'] == label]) > max_threshold:
+                df_tmp = df.loc[df['Label'] == label].copy()
+                df_tmp.drop_duplicates(keep='last', inplace=True)
+                df.drop(df[df['Label'] == label].index, inplace=True)
+                df = pd.concat([df, df_tmp])
+                
+            # if still too much, randomly picking some of them
             if len(df[df['Label'] == label]) > max_threshold:
                 df_tmp = df.loc[df['Label'] == label].copy()
                 df_tmp = df_tmp.sample(n=max_threshold, random_state=47)
                 df.drop(df[df['Label'] == label].index, inplace=True)
                 df = pd.concat([df, df_tmp])
         
+            # if too few, double their number until it's enough
             while len(df[df['Label'] == label]) < min_threshold:
                 tmp_df = df[df['Label'] == label]
                 df = pd.concat([df, tmp_df])
