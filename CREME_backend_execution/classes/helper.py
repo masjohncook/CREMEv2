@@ -979,7 +979,6 @@ class ProcessDataHelper:
         data cleaning for each class
         """
         df = pd.read_csv(os.path.join(folder, input_file))
-        df.drop_duplicates(keep=False, inplace=True)
         
         # data cleaning
         for label in df['Label'].unique():
