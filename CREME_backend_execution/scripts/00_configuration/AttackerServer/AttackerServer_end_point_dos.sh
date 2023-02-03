@@ -39,6 +39,8 @@ expect "*:~# "
 send "chmod +x $path/*.py \r"
 expect "*:~# "
 send "chmod +x $path/*.sh \r"
+expect "*:~# "
+send "cp $path/local_slowloris.py /var/www/html \r" 
 
 expect "*:~# "
 send "exit\r"
