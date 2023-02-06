@@ -26,7 +26,7 @@ This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Dow
 
 
 ### Recommand System Requirements
-* 6 Cores of CPU
+* at least 6 Cores of CPU
 * At least 32 GB of RAM
 * At least 200GB of storage spaces
 
