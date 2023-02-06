@@ -13,26 +13,22 @@
 This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environment. You need install the Virtualbox first. In pricipal, we need at least 10 VMs to be launched to run this tool. The VMs are:
 
 ### VMs_Links
-  * [Controller Machine](https://drive.google.com/file/d/1SKsLgNj-9fyTp854x1EwKyROSVqlUJXa/view?usp=sharing)
-  * [Data Logger Server](https://drive.google.com/file/d/1me4T5wy0Vtn1XE89S8PHIJqpq23yT7lG/view?usp=sharing)
-  * [Attacker Server](https://drive.google.com/file/d/1xrIjN2AYGRTewz1DuGxILgsEEclVpOtZ/view?usp=sharing)
-  * [Non Vulnerable Client-1](https://drive.google.com/file/d/1gFP1xIumpLdcwvSo_aTLaG1RFWPUJtCt/view?usp=sharing)
-  * [Non Vulnerable Client-2](https://drive.google.com/file/d/1NF6uL4lL1_QzP2i6JWF_JTLu9ebeVdqV/view?usp=sharing)
-  * [Vulnerable Client](https://drive.google.com/file/d/1jgrI87fCKzE17Ar0ZpqmvbjgYJ4n7Ddb/view?usp=sharing)
-  * [Malicious Client](https://drive.google.com/file/d/1d9kbB0IBYdukO2_ZL17ZM-vhbs-gHyRf/view?usp=sharing)
-  * [Benign Server](https://drive.google.com/file/d/1sGVZfg5WLbXkfdrQeiCMtywtlykwSQKt/view?usp=sharing)
-  * [Target Server](https://drive.google.com/file/d/1SLsuOdLY3gx9W38bnmsawqAuQZ5r_bwp/view?usp=sharing)
-  * [Router](https://drive.google.com/drive/folders/1IGquyUqcym9Mvd-9hWRIaQrEEhzt1y9M?usp=sharing)
-<!--   * [Attacker Server](https://drive.google.com/file/d/1zJa7NnR6H2pGFx0Q9ltlyAwFAp_yWXJo/view?usp=sharing)
-  * [Malicious Client](https://drive.google.com/file/d/1XNrXRrvk_iuqcQ2f0RLz9kHkoJ-vbnWs/view)
-  * [Target Server](https://drive.google.com/file/d/1dbUNo7AUhTCz18CiBB82nkYE-fh_UN3V/view)
-  * [Benign Server](https://drive.google.com/file/d/1JqF4WyBSz0L63DT6cHBargdjtqb7UHld/view)
-  * [Router](https://drive.google.com/file/d/14EuAsLdLqKamik_jdN1xt0-MNq474jwk/view?usp=sharing) -->
+  * [Controller Machine](https://drive.google.com/file/d/1aHisxaHL1JHYYLv4LvaStH49MnnuPRaM/view?usp=share_link)
+  * [Data Logger Server](https://drive.google.com/file/d/1Te956b7an7L5OZtw0ExVE4PTEV2SMS-b/view?usp=share_link)
+  * [Attacker Server](https://drive.google.com/file/d/1HOgcm4hlBVtY0Pm5k1FJqCQTl07xEa54/view?usp=share_link)
+  * [Non Vulnerable Client-1](https://drive.google.com/file/d/12-_wCz9WlQjNDIwZvszhRr3vXogQcAUb/view?usp=share_link)
+  * [Non Vulnerable Client-2](https://drive.google.com/file/d/1VdcCpduMuOxARObRdnU2k8WU5_IuQT_3/view?usp=share_link)
+  * [Vulnerable Client](https://drive.google.com/file/d/16s0dhsI-WhaT_wVgm6bTpj6ACIVjgM-a/view?usp=share_link)
+  * [Malicious Client](https://drive.google.com/file/d/16mna92JicmON-wnvM0aTLv0d88HAH1AP/view?usp=share_link)
+  * [Benign Server](https://drive.google.com/file/d/13YPXrt9gBUDPPJrltrA9G8bBL7Vhb86u/view?usp=share_link)
+  * [Target Server](https://drive.google.com/file/d/19D71afVxUCD6znmjp2pkLhbhmryVMYGz/view?usp=share_link)
+  * [Router](https://drive.google.com/file/d/1CDvmoykL0XVc5Kp4k43CLyGVmTQRuWZk/view?usp=share_link)
+
 
 ### Recommand System Requirements
 * 6 Cores of CPU
 * At least 32 GB of RAM
-* At 150GB of storage spaces
+* At least 200GB of storage spaces
 
 
 
