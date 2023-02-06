@@ -949,10 +949,10 @@ class ProcessDataHelper:
         for i, file_name_scenario in enumerate(log_files):
             with open(path_labels_lifecycle, "r") as f:
                 data = json.load(f)
-                for i in range(len(data)):
-                    lifecyele_name = data[i][1]
+                for j in range(len(data)):
+                    lifecyele_name = data[j][1]
                     if lifecyele_name in file_name_scenario:
-                        tmp_label = data[i][0]
+                        tmp_label = data[j][0]
 
             stage_timestamps = scenarios_timestamps[i]
             df.loc[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1]), 'Label_lifecycle'] = tmp_label
@@ -1087,10 +1087,8 @@ class ProcessDataHelper:
                 if lifecyele_name in file_name:
                     df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
                     tmp = df_tmp['Label'].tolist()
-                    new_row = pd.DataFrame(columns=['lifecycle', 'Label'])
-                    new_row.at[0, 'lifecycle'] = tmp
-                    new_row.at[0, 'Label'] = label
-                    df = pd.concat([df, new_row], ignore_index=True)
+                    new_row = pd.Series([tmp, label], index=['lifecycle', 'Label'])
+                    df.loc[len(df)] = new_row
 
         df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 
