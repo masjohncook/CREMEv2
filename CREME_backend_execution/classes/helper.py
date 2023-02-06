@@ -425,33 +425,21 @@ class ProcessDataHelper:
         return timestamps_syslog
 
     @staticmethod
-    def load_dataset_traffic(folder, filenames, finalname, one_hot_fields=[], removed_fields=[], replace_strings=dict(),
+    def load_dataset_traffic(folder, filenames, finalname, path_labels_lifecycle, one_hot_fields=[], removed_fields=[], replace_strings=dict(),
                              remove_rows_with_str=dict()):
         df = pd.DataFrame()
         for tmp_filename in filenames:
+            with open(path_labels_lifecycle, "r") as f:
+                data = json.load(f)
+                for i in range(len(data)):
+                    lifecyele_name = data[i][1]
+                    if lifecyele_name in tmp_filename:
+                        tmp_label = data[i][0]
+
             filename = os.path.join(folder, tmp_filename)
             tmp_df = pd.read_csv(filename)
             tmp_df = tmp_df.drop(tmp_df[tmp_df['Label'] == -1].index)
-
-            """
-            # balance benign and malicious traffic in Mirai scenario
-            if tmp_filename == 'label_traffic_mirai.csv':
-                drop_indexes = tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-3'].index
-                # print(len(drop_indexes))
-                num_of_keep = 150000
-                number_drop = len(drop_indexes) - num_of_keep
-                drop_indexes = random.sample(list(drop_indexes), number_drop)
-                tmp_df = tmp_df.drop(drop_indexes)
-
-            print('label uniques: {0}'.format(tmp_df['Label'].unique()))
-            print('len of SubTechnique-Stage-1: {0}'.format(
-                len(tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-1'])))
-            print('len of SubTechnique-Stage-2: {0}'.format(
-                len(tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-2'])))
-            print('len of SubTechnique-Stage-3: {0}'.format(
-                len(tmp_df[tmp_df['SubTechnique'] == 'SubTechnique-Stage-3'])))
-
-            """
+            tmp_df['Label_lifecycle'] = tmp_label
             df = pd.concat([df, tmp_df])
 
         # full_filename = os.path.join(folder, filename)
@@ -509,7 +497,7 @@ class ProcessDataHelper:
         return df
 
     @staticmethod
-    def execute_traffic(folder, train_filename, finalname):
+    def execute_traffic(folder, train_filename, finalname, path_labels_lifecycle):
         # folder = r'Data\\Traffic'
         # train_filename = ['label_traffic_mirai.csv', 'label_traffic_second.csv', 'label_traffic_third.csv',
         #                 'label_traffic_fourth.csv', 'label_traffic_fifth.csv']
@@ -527,7 +515,7 @@ class ProcessDataHelper:
         sub_technique_field = 'SubTechnique'
         threshold = 0.01
         """
-        ProcessDataHelper.load_dataset_traffic(folder, train_filename, finalname, one_hot_fields=one_hot_fields,
+        ProcessDataHelper.load_dataset_traffic(folder, train_filename, finalname, path_labels_lifecycle, one_hot_fields=one_hot_fields,
                                                removed_fields=removed_fields, replace_strings=replace_strings,
                                                remove_rows_with_str=remove_rows_with_str)
 
@@ -537,14 +525,20 @@ class ProcessDataHelper:
         # Helper.MLModel(folder, train_filename, test_filename)
 
     @staticmethod
-    def load_dataset_accounting(folder, filenames, finalname, one_hot_fields=[], removed_fields=[],
+    def load_dataset_accounting(folder, filenames, finalname, path_labels_lifecycle, one_hot_fields=[], removed_fields=[],
                                 replace_strings=dict(), remove_rows_with_str=dict()):
         df = pd.DataFrame()
         for tmp_filename in filenames:
+            with open(path_labels_lifecycle, "r") as f:
+                data = json.load(f)
+                for i in range(len(data)):
+                    lifecyele_name = data[i][1]
+                    if lifecyele_name in tmp_filename:
+                        tmp_label = data[i][0]
+
             filename = os.path.join(folder, tmp_filename)
             tmp_df = pd.read_csv(filename)
-            # print(len(tmp_df[tmp_df['Label'] == 0]))
-            # print(len(tmp_df[tmp_df['Label'] == 1]))
+            tmp_df['Label_lifecycle'] = tmp_label
             df = pd.concat([df, tmp_df])
 
         # print(len(df.columns.values))
@@ -589,7 +583,7 @@ class ProcessDataHelper:
         return df
 
     @staticmethod
-    def execute_accounting(folder, train_filenames, finalname):
+    def execute_accounting(folder, train_filenames, finalname, path_labels_lifecycle):
         # folder = r'Data\\Accounting'
         # train_filenames = ['label_atop_mirai.csv', 'new_label_atop_second.csv', 'new_label_atop_third.csv',
         #                 'new_label_atop_fourth.csv', 'new_label_atop_fifth.csv']
@@ -607,7 +601,7 @@ class ProcessDataHelper:
         sub_technique_field = 'SubTechnique'
         threshold = 0.01
         """
-        ProcessDataHelper.load_dataset_accounting(folder, train_filenames, finalname, one_hot_fields=one_hot_fields,
+        ProcessDataHelper.load_dataset_accounting(folder, train_filenames, finalname, path_labels_lifecycle, one_hot_fields=one_hot_fields,
                                                   removed_fields=removed_fields, replace_strings=replace_strings,
                                                   remove_rows_with_str=remove_rows_with_str)
 
@@ -655,7 +649,7 @@ class ProcessDataHelper:
 
     @staticmethod
     def handle_accounting_packet_all_scenario(biglist, folder_traffic, file_traffic, finalname_traffic, folder_atop,
-                                              file_atop, finalname_atop, time_window_traffic):
+                                              file_atop, finalname_atop, time_window_traffic, path_labels_lifecycle):
         """
         this function uses to process accounting and packet data of all scenarios
         :param biglist: list of information of scenarios; list=[[labeling_file_path, log_folder_scenario,
@@ -668,6 +662,7 @@ class ProcessDataHelper:
         :param file_atop: list of label atop files of scenarios
         :param finalname_atop: the final output file of atop
         :param time_window_traffic: use to to split traffic flow to sub-flow
+        :param path_labels_lifecycle: the path of the file that defined lifecycle labels
         :return:
         """
         for i, information in enumerate(biglist):
@@ -685,8 +680,8 @@ class ProcessDataHelper:
                                                              accounting_result_path, traffic_result_path,
                                                              time_window_traffic)
 
-        ProcessDataHelper.execute_traffic(folder_traffic, file_traffic, finalname_traffic)
-        ProcessDataHelper.execute_accounting(folder_atop, file_atop, finalname_atop)
+        ProcessDataHelper.execute_traffic(folder_traffic, file_traffic, finalname_traffic, path_labels_lifecycle)
+        ProcessDataHelper.execute_accounting(folder_atop, file_atop, finalname_atop, path_labels_lifecycle)
 
     # ----- Handle Syslog -----
     @staticmethod
@@ -861,7 +856,7 @@ class ProcessDataHelper:
     @staticmethod
     def handle_syslog(input_files, scenarios_timestamps, scenarios_abnormal_hostnames, scenarios_normal_hostnames,
                       scenarios_labels, scenarios_tactics, scenarios_techniques, scenarios_sub_techniques, dls_hostname,
-                      result_path, output_file, log_files):
+                      result_path, output_file, log_files, path_labels_lifecycle):
         filtered_lines = []
         filtered_lines_apache = []
         remove_files = []
@@ -949,9 +944,18 @@ class ProcessDataHelper:
             ProcessDataHelper.label_filtered_syslog(df, timestamps, white_list, labels, tactics,
                                                     techniques, sub_techniques)
 
-        # parsing log files for each scenario
+        # parsing log files for each scenario and label lifecycle
+        df['Label_lifecycle'] = 0
         for i, file_name_scenario in enumerate(log_files):
+            with open(path_labels_lifecycle, "r") as f:
+                data = json.load(f)
+                for i in range(len(data)):
+                    lifecyele_name = data[i][1]
+                    if lifecyele_name in file_name_scenario:
+                        tmp_label = data[i][0]
+
             stage_timestamps = scenarios_timestamps[i]
+            df.loc[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1]), 'Label_lifecycle'] = tmp_label
             df_parsed = df[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1])]
             path_scenario = os.path.join(result_path, file_name_scenario)
             df_parsed.to_csv(path_scenario, encoding='utf-8', index=False)
@@ -975,16 +979,24 @@ class ProcessDataHelper:
         data cleaning for each class
         """
         df = pd.read_csv(os.path.join(folder, input_file))
-        df.drop_duplicates(keep=False, inplace=True)
         
         # data cleaning
         for label in df['Label'].unique():
+            # if too much, try drop duplicated first
+            if len(df[df['Label'] == label]) > max_threshold:
+                df_tmp = df.loc[df['Label'] == label].copy()
+                df_tmp.drop_duplicates(keep='last', inplace=True)
+                df.drop(df[df['Label'] == label].index, inplace=True)
+                df = pd.concat([df, df_tmp])
+                
+            # if still too much, randomly picking some of them
             if len(df[df['Label'] == label]) > max_threshold:
                 df_tmp = df.loc[df['Label'] == label].copy()
                 df_tmp = df_tmp.sample(n=max_threshold, random_state=47)
                 df.drop(df[df['Label'] == label].index, inplace=True)
                 df = pd.concat([df, df_tmp])
         
+            # if too few, double their number until it's enough
             while len(df[df['Label'] == label]) < min_threshold:
                 tmp_df = df[df['Label'] == label]
                 df = pd.concat([df, tmp_df])
@@ -1061,6 +1073,7 @@ class ProcessDataHelper:
         this function is used to collect lifecycle(technique sequences) from 3 data sources
         '''
         df = pd.DataFrame(columns=['lifecycle', 'Label'])
+        df['lifecycle'] = df['lifecycle'].astype('object')
         with open(path_labels_lifecycle, "r") as f:
             data = json.load(f)
             for i in range(len(data)):
@@ -1069,14 +1082,15 @@ class ProcessDataHelper:
                 filename_list = [traffic_files, atop_files, log_files]
                 folder_list = [folder_traffic, folder_atop, result_path_syslog]
             
-                for i in range(3):
-                    for file_name in filename_list[i]:
-                        if lifecyele_name in file_name:
-                            df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
-                            df_tmp['Label'] = df_tmp['Label'].astype(str)
-                            tmp = df_tmp['Label'].str.cat()
-                            new_row = pd.DataFrame({'lifecycle': tmp, 'Label': label}, index = [0])
-                            df = pd.concat([df, new_row], ignore_index=True) 
+        for i in range(3):
+            for file_name in filename_list[i]:
+                if lifecyele_name in file_name:
+                    df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
+                    tmp = df_tmp['Label'].tolist()
+                    new_row = pd.DataFrame(columns=['lifecycle', 'Label'])
+                    new_row.at[0, 'lifecycle'] = tmp
+                    new_row.at[0, 'Label'] = label
+                    df = pd.concat([df, new_row], ignore_index=True)
 
         df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 

