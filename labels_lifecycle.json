@@ -1,9 +1,9 @@
 [
     ["label number", "lifecycle name"],
     
-    ["0",            "mirai"],
-    ["1",            "disk_wipe"],
-    ["2",            "ransomware"],
-    ["3",            "resource_hijacking"],
-    ["4",            "end_point_dos"]
+    ["1",            "mirai"],
+    ["2",            "disk_wipe"],
+    ["3",            "ransomware"],
+    ["4",            "resource_hijacking"],
+    ["5",            "end_point_dos"]
 ]
