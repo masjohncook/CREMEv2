@@ -439,7 +439,8 @@ class ProcessDataHelper:
             filename = os.path.join(folder, tmp_filename)
             tmp_df = pd.read_csv(filename)
             tmp_df = tmp_df.drop(tmp_df[tmp_df['Label'] == -1].index)
-            tmp_df['Label_lifecycle'] = tmp_label
+            tmp_df['Label_lifecycle'] = int(tmp_label)
+            tmp_df.loc[tmp_df.Label == 0, 'Label_lifecycle'] = 0
             df = pd.concat([df, tmp_df])
 
         # full_filename = os.path.join(folder, filename)
@@ -538,7 +539,8 @@ class ProcessDataHelper:
 
             filename = os.path.join(folder, tmp_filename)
             tmp_df = pd.read_csv(filename)
-            tmp_df['Label_lifecycle'] = tmp_label
+            tmp_df['Label_lifecycle'] = int(tmp_label)
+            tmp_df.loc[tmp_df.Label == 0, 'Label_lifecycle'] = 0
             df = pd.concat([df, tmp_df])
 
         # print(len(df.columns.values))
@@ -955,10 +957,12 @@ class ProcessDataHelper:
                         tmp_label = data[j][0]
 
             stage_timestamps = scenarios_timestamps[i]
-            df.loc[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1]), 'Label_lifecycle'] = tmp_label
+            df.loc[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1]), 'Label_lifecycle'] = int(tmp_label)
+            
             df_parsed = df[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1])]
             path_scenario = os.path.join(result_path, file_name_scenario)
             df_parsed.to_csv(path_scenario, encoding='utf-8', index=False)
+        df.loc[df.Label == 0, 'Label_lifecycle'] = 0
 
         del df['ComponentEventId']
         tmp_output = "{0}_{1}".format("original", output_file)
