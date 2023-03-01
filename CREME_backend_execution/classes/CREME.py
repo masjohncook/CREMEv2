@@ -1125,11 +1125,11 @@ class Creme:
                                                                 final_name_traffic, folder_atop, atop_files,
                                                                 final_name_atop, time_window_traffic,
                                                                 self.path_labels_lifecycle)
-        # # balance data and filter features
-        # ProcessDataHelper.balance_data(folder_atop, final_name_atop)
-        # ProcessDataHelper.balance_data(folder_traffic, final_name_traffic)
-        # ProcessDataHelper.filter_features(folder_atop, final_name_atop)
-        # ProcessDataHelper.filter_features(folder_traffic, final_name_traffic)
+        # balance data and filter features
+        ProcessDataHelper.balance_data(folder_atop, 'clean_' + final_name_atop)
+        ProcessDataHelper.balance_data(folder_traffic, 'clean_' + final_name_traffic)
+        ProcessDataHelper.filter_features(folder_atop, 'clean_' + final_name_atop)
+        ProcessDataHelper.filter_features(folder_traffic, 'clean_' + final_name_traffic)
         ProgressHelper.update_stage(stage, f"Finished processing the accounting and network packet data sources", 5,
                                     finished_task=True, override_pre_message=True)
 
