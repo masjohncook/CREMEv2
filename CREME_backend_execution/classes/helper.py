@@ -1048,20 +1048,20 @@ class ProcessDataHelper:
         df['lifecycle'] = df['lifecycle'].astype('object')
         filename_list = [traffic_files, atop_files, log_files]
         folder_list = [folder_traffic, folder_atop, result_path_syslog]
-        
+    
         with open(path_labels_lifecycle, "r") as f:
             data = json.load(f)
             for i in range(len(data)):
                 lifecyele_name = data[i][1]
                 label = data[i][0]
             
-        for i in range(3):
-            for file_name in filename_list[i]:
-                if lifecyele_name in file_name:
-                    df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
-                    tmp = df_tmp['Label'].tolist()
-                    new_row = pd.Series([tmp, label], index=['lifecycle', 'Label'])
-                    df.loc[len(df)] = new_row
+                for j in range(3):
+                    for file_name in filename_list[j]:
+                        if lifecyele_name in file_name:
+                            df_tmp = pd.read_csv(os.path.join(folder_list[j], file_name))
+                            tmp = df_tmp['Label'].tolist()
+                            new_row = pd.Series([tmp, label], index=['lifecycle', 'Label'])
+                            df.loc[len(df)] = new_row
 
         df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 
