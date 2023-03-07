@@ -882,7 +882,7 @@ class ProcessDataHelper:
         df.index = df.index.set_names(['Index'])
         tmp_output = os.path.join(result_path, syslog_structured)
         df.to_csv(tmp_output, encoding='utf-8', index=True)
-        # remove_files.append(tmp_output)
+        remove_files.append(tmp_output)
 
         # concatenate "Component" and "EventId" to new column and delete that column late
         df["ComponentEventId"] = df["Component"].astype(str) + "-" + df["EventId"].astype(str)
@@ -937,9 +937,9 @@ class ProcessDataHelper:
         full_tmp_output = os.path.join(result_path, tmp_output)
         df.to_csv(full_tmp_output, encoding='utf-8', index=False)
 
-        # # remove temporary files
-        # for remove_file in remove_files:
-        #     os.system("rm {0}".format(remove_file))
+        # remove temporary files
+        for remove_file in remove_files:
+            os.system("rm {0}".format(remove_file))
 
         output_file = ProcessDataHelper.counting_vector(result_path, tmp_output, output_file)
         return output_file
