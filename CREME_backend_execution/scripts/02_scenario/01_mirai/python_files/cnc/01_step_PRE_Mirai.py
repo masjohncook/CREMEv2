@@ -25,7 +25,7 @@ def main(argv):
 
     output_time_file_start = 'time_step_1_mirai_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(10)
+    time.sleep(120)
 
     try:
         # put the attack launch command
@@ -36,10 +36,10 @@ def main(argv):
         print(e)
         pass
     
-    time.sleep(10)
+    time.sleep(120)
     output_time_file_end = 'time_step_1_mirai_end.txt'
     record_timestamp(folder, output_time_file_end)
-    time.sleep(10)
+    time.sleep(120)
 
 
 main(sys.argv)

@@ -46,5 +46,6 @@ def main(argv):
         with open(input_file, 'w+') as fw:
             fw.writelines("{0}:{1}:{2}\n".format(ip, username, password))
 
+    time.sleep(120)
 
 main(sys.argv)
