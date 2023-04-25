@@ -21,7 +21,7 @@ def main(argv):
     # start step 7
     output_time_file = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file)
-    time.sleep(60)
+    time.sleep(90)
     
     try:
         shell = client.sessions.session('4')

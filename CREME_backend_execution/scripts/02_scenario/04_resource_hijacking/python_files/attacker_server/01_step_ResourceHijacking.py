@@ -20,7 +20,7 @@ def main(argv):
 
     output_time_file_start = 'time_step_1_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(60)
+    time.sleep(90)
     
     try:
         # put the attack launch command
@@ -31,10 +31,10 @@ def main(argv):
         print(e)
         pass
     
-    time.sleep(60)
+    time.sleep(90)
     output_time_file_end = 'time_step_1_end.txt'
     record_timestamp(folder, output_time_file_end)
-    time.sleep(60)
+    time.sleep(90)
 
 
 main(sys.argv)

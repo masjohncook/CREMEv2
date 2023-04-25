@@ -21,18 +21,18 @@ def main(argv):
     # start step 7
     output_time_file_start = 'time_step_6_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(60)
+    time.sleep(90)
 
     try:
         shell = client.sessions.session('3')
         shell.write('apt install wipe -y')
-        time.sleep(60)
+        time.sleep(90)
         shell.write("wipe -f {0}".format(wipe_disk_folder))
     except Exception as e:
         print(e)
         pass
 
-    time.sleep(60)
+    time.sleep(90)
 
 
 main(sys.argv)
