@@ -150,3 +150,5 @@ The dataset can be found at [here](https://drive.google.com/drive/folders/1bEsx6
 
 ## Publications
 * [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://www.sciencedirect.com/science/article/abs/pii/S1084804521002137)
+
+###### tags: `CREME``dataset``attack reproduction``mitre``metasploit`
