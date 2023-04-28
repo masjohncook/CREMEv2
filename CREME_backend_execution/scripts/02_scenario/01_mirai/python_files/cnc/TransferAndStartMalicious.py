@@ -11,7 +11,7 @@ def main(argv):
     input_bot = argv[2]
     scan_flag = argv[3]
     pids_file = argv[4]
-    time.sleep(90)
+    # time.sleep(30)
 
     try:
         single_load = "single_load"

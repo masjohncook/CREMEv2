@@ -16,12 +16,12 @@ def main(argv):
     target_ip = argv[3]
 
     # print(client.sessions.list['4'])
-    time.sleep(90)
+    time.sleep(60)
     
-    time.sleep(90)
+    time.sleep(2)
     output_time_file_start = 'time_step_7_start.txt'
     record_timestamp(folder, output_time_file_start)
-    time.sleep(90)
+    time.sleep(60)
     
     try:
         change_mode = 'chmod +x local_slowloris.py'
@@ -35,7 +35,7 @@ def main(argv):
         pass
 
 
-    time.sleep(90)
+    time.sleep(60)
 
 
 main(sys.argv)
