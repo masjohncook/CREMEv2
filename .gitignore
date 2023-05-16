@@ -94,3 +94,4 @@ fabric.properties
 /.idea/CREMEv2.iml
 /.idea/csv-plugin.xml
 __pycache__/
+/venv_CREMEv2
