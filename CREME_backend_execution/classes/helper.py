@@ -439,11 +439,9 @@ class ProcessDataHelper:
             filename = os.path.join(folder, tmp_filename)
             tmp_df = pd.read_csv(filename)
             tmp_df = tmp_df.drop(tmp_df[tmp_df['Label'] == -1].index)
-            tmp_df['Label_lifecycle'] = tmp_label
+            tmp_df['Label_lifecycle'] = int(tmp_label)
+            tmp_df.loc[tmp_df.Label == 0, 'Label_lifecycle'] = 0
             df = pd.concat([df, tmp_df])
-
-        # full_filename = os.path.join(folder, filename)
-        # df = pd.read_csv(full_filename)
 
         for field in removed_fields:
             del df[field]
@@ -459,12 +457,6 @@ class ProcessDataHelper:
         # for tmp_str in remove_rows_with_str:
         # df = df[(df.iloc[:, 0:] != tmp_str).all(axis=1)]
         # df = df[(df.iloc[:, 1:] != tmp_str).all(axis=1)]
-        # print('*******************************************************')
-        # print(df.dtypes)
-
-        # print(len(df.columns.values))
-        # print(df.dtypes)
-        # print(df.isnull().any())
 
         # preprocess_hex_value
         fields_with_hex_value = ['Sport', 'Dport']
@@ -480,10 +472,6 @@ class ProcessDataHelper:
 
         for field in fields_with_hex_value:
             df[field] = df[field].apply(lambda x: int(str(x), 0))
-
-        # print(len(df.columns.values))
-        # print(df.dtypes)
-        # print(df.isnull().any())
 
         column_names = df.columns.values
         for i in range(len(column_names)):
@@ -538,15 +526,11 @@ class ProcessDataHelper:
 
             filename = os.path.join(folder, tmp_filename)
             tmp_df = pd.read_csv(filename)
-            tmp_df['Label_lifecycle'] = tmp_label
+            tmp_df['Label_lifecycle'] = int(tmp_label)
+            tmp_df.loc[tmp_df.Label == 0, 'Label_lifecycle'] = 0
             df = pd.concat([df, tmp_df])
 
-        # print(len(df.columns.values))
-        # print(df.columns.values)
-
-        # print(len(df))
         df.drop_duplicates(keep=False, inplace=True)
-        # print(len(df))
 
         for field in removed_fields:
             del df[field]
@@ -558,23 +542,9 @@ class ProcessDataHelper:
             df = df.replace(to_replace=old_value, value=new_value, regex=True)
         for old_value, new_value in remove_rows_with_str.items():
             df = df.replace(to_replace=old_value, value=new_value)
-        # for tmp_str in remove_rows_with_str:
-        # df = df[(df.iloc[:, 0:] != tmp_str).all(axis=1)]
-        # df = df[(df.iloc[:, 1:] != tmp_str).all(axis=1)]
-        # print('*******************************************************')
-        # print(df.dtypes)
+        
         for k in list(df):
             df[k] = pd.to_numeric(df[k], errors='ignore')
-
-        """
-        print(len(df.columns.values))
-
-        print(df.dtypes)
-
-        print(df.isnull().any())
-
-        print(df['RDDSK'].unique())
-        """
 
         # output_filename = os.path.join(folder, 'preprocess_label_atop.csv')
         output_filename = os.path.join(folder, finalname)
@@ -955,10 +925,12 @@ class ProcessDataHelper:
                         tmp_label = data[j][0]
 
             stage_timestamps = scenarios_timestamps[i]
-            df.loc[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1]), 'Label_lifecycle'] = tmp_label
+            df.loc[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1]), 'Label_lifecycle'] = int(tmp_label)
+            
             df_parsed = df[(df['Timestamp']>=stage_timestamps[0][0]) & (df['Timestamp']<=stage_timestamps[-1][1])]
             path_scenario = os.path.join(result_path, file_name_scenario)
             df_parsed.to_csv(path_scenario, encoding='utf-8', index=False)
+        df.loc[df.Label == 0, 'Label_lifecycle'] = 0
 
         del df['ComponentEventId']
         tmp_output = "{0}_{1}".format("original", output_file)
@@ -974,7 +946,7 @@ class ProcessDataHelper:
 
     # ----- Balance data and Filter features -----
     @staticmethod
-    def balance_data(folder: str, input_file: str, max_threshold=50000, min_threshold=20):
+    def balance_data(folder: str, input_file: str, output_file: str, max_threshold=50000, min_threshold=20):
         """
         data cleaning for each class
         """
@@ -1004,12 +976,12 @@ class ProcessDataHelper:
         df.to_csv(os.path.join(folder, input_file), encoding='utf-8', index=False)
 
     @staticmethod
-    def filter_features(folder: str, filename: str, corr_threshold=0.9):
+    def filter_features(folder: str, input_file: str, output_file: str, corr_threshold=0.9):
         """
         use to filter/remove features have correlation with Label less then the corr_threshold
-        in the folder/filename
+        in the folder/input_file
         """
-        df = pd.read_csv(os.path.join(folder, filename))
+        df = pd.read_csv(os.path.join(folder, input_file))
 
         y_tmp = df['Label']
         # delete features with all the same value
@@ -1034,7 +1006,7 @@ class ProcessDataHelper:
         df.drop(labels=corr_features, axis=1, inplace=True)
 
         df = pd.concat([df, y_tmp], axis=1)
-        df.to_csv(os.path.join(folder, filename), encoding='utf-8', index=False)
+        df.to_csv(os.path.join(folder, output_file), encoding='utf-8', index=False)
 
     @staticmethod
     def merge_other_logs_2_syslog(other_log_files, syslog_file, timestamps_syslog, hostnames, time_zone="+08:00",
@@ -1074,21 +1046,22 @@ class ProcessDataHelper:
         '''
         df = pd.DataFrame(columns=['lifecycle', 'Label'])
         df['lifecycle'] = df['lifecycle'].astype('object')
+        filename_list = [traffic_files, atop_files, log_files]
+        folder_list = [folder_traffic, folder_atop, result_path_syslog]
+    
         with open(path_labels_lifecycle, "r") as f:
             data = json.load(f)
             for i in range(len(data)):
                 lifecyele_name = data[i][1]
                 label = data[i][0]
-                filename_list = [traffic_files, atop_files, log_files]
-                folder_list = [folder_traffic, folder_atop, result_path_syslog]
             
-        for i in range(3):
-            for file_name in filename_list[i]:
-                if lifecyele_name in file_name:
-                    df_tmp = pd.read_csv(os.path.join(folder_list[i], file_name))
-                    tmp = df_tmp['Label'].tolist()
-                    new_row = pd.Series([tmp, label], index=['lifecycle', 'Label'])
-                    df.loc[len(df)] = new_row
+                for j in range(3):
+                    for file_name in filename_list[j]:
+                        if lifecyele_name in file_name:
+                            df_tmp = pd.read_csv(os.path.join(folder_list[j], file_name))
+                            tmp = df_tmp['Label'].tolist()
+                            new_row = pd.Series([tmp, label], index=['lifecycle', 'Label'])
+                            df.loc[len(df)] = new_row
 
         df.to_csv(os.path.join(log_folder, final_name_lifecycle), encoding='utf-8', index=False)
 

@@ -6,7 +6,7 @@
 * This tool is an extended part of 1st version [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://github.com/buihuukhoi/CREME).
 * In this part we try to:
   1. improve the stages from original 3 stages into N stages (follow [MITRE ATT&CK](https://attack.mitre.org/))
-  2. improve the labeling --> the data will be labelled using MITRE technique
+  2. improve the labeling --> the data will be labelled using MITRE technique and lifecycle(to detect attack variant)
 
 
 ## Basic Info
@@ -150,3 +150,5 @@ The dataset can be found at [here](https://drive.google.com/drive/folders/1bEsx6
 
 ## Publications
 * [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://www.sciencedirect.com/science/article/abs/pii/S1084804521002137)
+
+###### tags: `CREME``dataset``attack reproduction``mitre``metasploit`

