@@ -8,6 +8,7 @@
   1. improve the stages from original 3 stages into N stages (follow [MITRE ATT&CK](https://attack.mitre.org/))
   2. improve the labeling --> the data will be labelled using MITRE techniques and lifecycles(to detect attack variant). Below is the lifecycle diagram of our work. It consist of 5 attack lifecycles.
   ![](https://i.imgur.com/s1eDHsA.png)
+  3. We also reproduce the benign behaviors during the dataset reproduction process which included services such as HTTP, FTP, and SMTP to mimic the behavior of real machines.
 * You can find the produced dataset in this [link](https://www.kaggle.com/datasets/masjohncook/cremev2-datasets)
 
 
