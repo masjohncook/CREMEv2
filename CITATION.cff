@@ -3,9 +3,10 @@ message: "If you use this software, please cite it as below."
 authors:
   - family-names: Yudha 
     given-names: Fietyata
+    orcid: https://orcid.org/0000-0002-4590-1780
 title: "CREMEv2"
 version: 2.0.0
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.1234
+    value: 10.5281/zenodo.13882312
 date-released: 2023-03-10
