@@ -1,4 +1,4 @@
-# CREMEv2: A toolchain of automatic dataset collection for machine learning in intrusion detection based on MITRE ATT&CK
+# CREMEv2: A framework of automatic dataset collection for machine learning in intrusion detection based on MITRE ATT&CK
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -13,22 +13,22 @@
 
 
 ## Basic Info
-This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environment. You need install the Virtualbox first. In pricipal, we need at least 10 VMs to be launched to run this tool. The VMs are:
+This tool need to be run at the [Virtualbox](https://www.virtualbox.org/wiki/Downloads) environment. You need install the Virtualbox first. In principle, we need at least 10 VMs to be launched to run this tool. The VMs are:
 
 ### VMs_Links
-  * [Controller Machine](https://drive.google.com/file/d/1aHisxaHL1JHYYLv4LvaStH49MnnuPRaM/view?usp=share_link)
-  * [Data Logger Server](https://drive.google.com/file/d/1Te956b7an7L5OZtw0ExVE4PTEV2SMS-b/view?usp=share_link)
-  * [Attacker Server](https://drive.google.com/file/d/1HOgcm4hlBVtY0Pm5k1FJqCQTl07xEa54/view?usp=share_link)
-  * [Non Vulnerable Client-1](https://drive.google.com/file/d/12-_wCz9WlQjNDIwZvszhRr3vXogQcAUb/view?usp=share_link)
-  * [Non Vulnerable Client-2](https://drive.google.com/file/d/1VdcCpduMuOxARObRdnU2k8WU5_IuQT_3/view?usp=share_link)
-  * [Vulnerable Client](https://drive.google.com/file/d/16s0dhsI-WhaT_wVgm6bTpj6ACIVjgM-a/view?usp=share_link)
-  * [Malicious Client](https://drive.google.com/file/d/16mna92JicmON-wnvM0aTLv0d88HAH1AP/view?usp=share_link)
-  * [Benign Server](https://drive.google.com/file/d/13YPXrt9gBUDPPJrltrA9G8bBL7Vhb86u/view?usp=share_link)
-  * [Target Server](https://drive.google.com/file/d/19D71afVxUCD6znmjp2pkLhbhmryVMYGz/view?usp=share_link)
-  * [Router](https://drive.google.com/file/d/1CDvmoykL0XVc5Kp4k43CLyGVmTQRuWZk/view?usp=share_link)
+  * [Controller Machine](https://drive.google.com/file/d/1vR3h1rPRxtNMTmqb9Ycui1F7mvgHMa4C/view?usp=sharing)
+  * [Data Logger Server]()
+  * [Attacker Server](https://mega.nz/file/TqZ01ZLQ#0Y9DkIyBlqJQ-Jpi1PQ1OClzehH_q2G4h7EchsTTXEs)
+  * [Non Vulnerable Client-1](https://drive.google.com/file/d/1-0nOmhQcexnJqgFYybA0UNjDv136irkw/view?usp=sharing)
+  * [Non Vulnerable Client-2](https://drive.google.com/file/d/1emBprabyoBch4F4YyWpEsJwf_MwgNnQN/view?usp=sharing)
+  * [Vulnerable Client]()
+  * [Malicious Client]()
+  * [Benign Server]()
+  * [Target Server]()
+  * [Router]()
 
 
-### Recommand System Requirements
+### Recommended System Requirements
 * at least 6 Cores of CPU
 * At least 32 GB of RAM
 * At least 200GB of storage spaces
@@ -104,17 +104,17 @@ You need to prepare follow [Setup](#Setup) tutorial:
     Import from [VMs_Links](#VMs_Links) and check the informations are all correct ([VMs_Information](#VMs_Information)).
 <!-- 2. **Install the 5 VMs we didn't provide**:\
     OS version should be [Ubuntu 20.04(server/desktop)](https://ubuntu.com/download). Create hostname and password follow [VMs_Information](#VMs_Information). -->
-2. **Check network adapter of each VM we provided** (follow [VMs_Information](#VMs_Information)):\
+2. **Check the network adapter of each VM we provided** (follow [VMs_Information](#VMs_Information)):\
     Right click on the VM 🡪 Setting 🡪 Network 🡪 Adapter 🡪 choose `Host-Only Ethernet Adapter`
 3. **Set Host-Only Ethernet Adapter on your host OS**: Open network adapter settings **on your host OS** 🡪 Right click **VirtualBox Host-Only Network** adapter 🡪 content 🡪 IPv4 content, then type in the following informations
     * IP Address: `192.168.56.1`
     * Netmask: 255.255.255.0/24
 4. **Check VMs we provided**: Startup VMs 🡪 Settings 🡪
-    * Network 🡪 Choose Ethernet wired botton 🡪 IPv4 🡪 Manual
+    * Network 🡪 Choose Ethernet wired button 🡪 IPv4 🡪 Manual
         * IP Address: follow [VMs_Information](#VMs_Information)
         * Netmask: 255.255.255.0/24
         * Gateway: `192.168.56.2`
-        * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic botton)
+        * DNS: 8.8.8.8, 8.8.4.4 (turn off Automatic button)
     * About 🡪 Software Updates 🡪 Updates 🡪 Automatically check for updates 🡪 Never
 <!-- 5. **Continue to set the 5 VMs you created**: Open terminal and type in the following commands\
     `sudo passwd root`, then set the password to **qsefthuk** 🡪\
@@ -147,11 +147,11 @@ You need to prepare follow [Setup](#Setup) tutorial:
 ![](https://i.imgur.com/5xTMXRn.png)
 
 <!-- Dataset -->
-<!--## Generated Dataset
+## Generated Dataset
 
-The dataset can be found at [here](https://drive.google.com/drive/folders/1bEsx64H2vogJKgI_OTVQ8n71VahtLxz5?usp=sharing)-->
+The dataset can be found at [here](https://www.kaggle.com/datasets/masjohncook/cremev2-datasets)
 
 ## Publications
-* [CREME: A toolchain of automatic dataset collection for machine learning in intrusion detection](https://www.sciencedirect.com/science/article/abs/pii/S1084804521002137)
+* [Reproducing ATT&CK Techniques and Lifecycles to Train Machine Learning Classifier](https://ieeexplore.ieee.org/abstract/document/10926543/)
 
 ###### tags: `CREME``dataset``attack reproduction``mitre``metasploit`
